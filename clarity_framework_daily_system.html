@@ -1,0 +1,739 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink-900:#0f2a2f;
+  --ink-800:#1f4248;
+  --ink-700:#355f66;
+  --ink-500:#5f8086;
+  --sky-100:#f2f9fb;
+  --sky-200:#e7f3f6;
+  --mint-100:#e7f8f2;
+  --mint-300:#b8e7d8;
+  --mint-700:#0b6b52;
+  --sun-100:#fff4de;
+  --sun-700:#8a5609;
+  --rose-100:#ffeceb;
+  --rose-700:#892320;
+  --panel:#ffffffd4;
+  --panel-solid:#ffffff;
+  --line:#d3e4e8;
+  --line-strong:#aac8cf;
+  --shadow-soft:0 14px 36px rgba(25, 70, 78, .14);
+  --shadow-card:0 8px 22px rgba(22, 66, 77, .12);
+  --radius-xl:24px;
+  --radius-lg:18px;
+  --radius-md:12px;
+  --radius-sm:10px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{min-height:100%}
+
+body{
+  font-family:'Manrope',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  color:var(--ink-900);
+  background:
+    radial-gradient(1200px 600px at 88% -120px, #c7edf5 0%, transparent 60%),
+    radial-gradient(900px 520px at -120px 120%, #d8f6ea 0%, transparent 60%),
+    linear-gradient(180deg,#f8fcfd 0%,#edf6f8 100%);
+  line-height:1.55;
+}
+
+.cf{
+  max-width:1180px;
+  margin:0 auto;
+  padding:34px 20px 48px;
+  position:relative;
+}
+
+.cf::before{
+  content:'';
+  position:absolute;
+  inset:6px;
+  z-index:-1;
+  border-radius:30px;
+  background:linear-gradient(145deg,#ffffff9e,#f4fbfdcc);
+  border:1px solid #ffffffa3;
+  box-shadow:var(--shadow-soft);
+}
+
+.cf-nav{
+  display:flex;
+  gap:10px;
+  margin:0 0 20px;
+  flex-wrap:wrap;
+  padding:10px;
+  border-radius:16px;
+  background:#ffffffc9;
+  border:1px solid var(--line);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:10px;
+  z-index:30;
+}
+
+.cf-nav button{
+  padding:10px 16px;
+  border:1px solid transparent;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.01em;
+  font-weight:700;
+  cursor:pointer;
+  background:transparent;
+  color:var(--ink-700);
+  font-family:'Space Grotesk',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  transition:all .24s ease;
+}
+
+.cf-nav button.on{
+  background:linear-gradient(135deg,#124d59 0%, #0f6777 100%);
+  color:#f6fdff;
+  border-color:#0d5f6f;
+  box-shadow:0 6px 14px rgba(16, 89, 102, .32);
+}
+
+.cf-nav button:hover:not(.on){
+  background:var(--sky-100);
+  border-color:var(--line-strong);
+  color:var(--ink-900);
+}
+
+.view{display:none;animation:reveal .28s ease}
+.view.on{display:block}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:18px 20px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow-card);
+  backdrop-filter:blur(4px);
+}
+
+.card-head{
+  font-family:'Space Grotesk',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  font-size:20px;
+  line-height:1.25;
+  letter-spacing:-.01em;
+  font-weight:700;
+  color:var(--ink-900);
+  margin-bottom:8px;
+}
+
+.card-sub{
+  font-size:14px;
+  color:var(--ink-700);
+  line-height:1.65;
+  margin-bottom:14px;
+}
+
+.pill{
+  display:inline-block;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:10px;
+}
+
+.pill-teal{background:#ddf6ee;color:#0b5e47;border:1px solid #bde8d9}
+.pill-amber{background:var(--sun-100);color:var(--sun-700);border:1px solid #f0d8a7}
+.pill-coral{background:var(--rose-100);color:var(--rose-700);border:1px solid #f8cbc6}
+.pill-purple{background:#e9ebff;color:#343c8f;border:1px solid #cfd4ff}
+.pill-blue{background:#e4f3fe;color:#0d4f85;border:1px solid #bddcf6}
+.pill-red{background:#ffe8e8;color:#7d2020;border:1px solid #f5c1c1}
+.pill-green{background:#ebf7e2;color:#2d6110;border:1px solid #cbe3b7}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.stat-card{
+  background:linear-gradient(180deg,#ffffff 0%,#f1f8fa 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:14px 12px;
+  text-align:center;
+}
+
+.stat-n{
+  font-family:'Space Grotesk',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  font-size:29px;
+  line-height:1;
+  letter-spacing:-.02em;
+  font-weight:700;
+  color:var(--ink-900);
+}
+
+.stat-l{font-size:11px;color:var(--ink-700);margin-top:4px;font-weight:600;letter-spacing:.01em}
+
+.divider{height:1px;background:var(--line);margin:14px 0}
+
+.vs-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+
+.vs-bad,.vs-good{
+  border-radius:var(--radius-md);
+  padding:12px 13px;
+  border:1px solid;
+}
+
+.vs-bad{background:#fff2f2;border-color:#f3b7b7}
+.vs-bad .vs-label{font-size:10px;font-weight:800;color:#7a2323;margin-bottom:4px;letter-spacing:.07em;text-transform:uppercase}
+.vs-bad .vs-text{font-size:13px;color:#7a2323;line-height:1.52}
+
+.vs-good{background:#effbe8;border-color:#badf9a}
+.vs-good .vs-label{font-size:10px;font-weight:800;color:#1f6123;margin-bottom:4px;letter-spacing:.07em;text-transform:uppercase}
+.vs-good .vs-text{font-size:13px;color:#1f6123;line-height:1.52}
+
+.check-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+
+.check-row:last-child{border-bottom:none}
+
+.check-row input{
+  width:16px;
+  height:16px;
+  margin-top:2px;
+  flex-shrink:0;
+  accent-color:#1d8f69;
+  cursor:pointer;
+}
+
+.check-row .ct{font-size:14px;font-weight:600;color:var(--ink-900);line-height:1.45}
+.check-row .cs{font-size:12px;color:var(--ink-700);margin-top:2px}
+.check-row.done .ct{text-decoration:line-through;color:var(--ink-500)}
+
+.log-area,.sel-box{
+  width:100%;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-sm);
+  padding:10px 12px;
+  font-size:13px;
+  font-family:'Manrope',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  color:var(--ink-900);
+  background:var(--panel-solid);
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+
+.log-area{
+  resize:vertical;
+  min-height:72px;
+  line-height:1.55;
+}
+
+.log-area::placeholder{color:#709098}
+.log-area:focus,.sel-box:focus{outline:none;border-color:#1e8ca3;box-shadow:0 0 0 3px rgba(30,140,163,.15)}
+
+.btn-sm{
+  padding:8px 16px;
+  border:1px solid #166f82;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.01em;
+  font-weight:700;
+  cursor:pointer;
+  background:linear-gradient(135deg,#14839b 0%,#0d6171 100%);
+  color:#f4feff;
+  font-family:'Space Grotesk',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  box-shadow:0 8px 18px rgba(15, 103, 119, .24);
+}
+
+.btn-sm:hover{transform:translateY(-1px);filter:brightness(1.03)}
+.btn-sm:active{transform:translateY(0)}
+
+.tag-block{
+  background:linear-gradient(180deg,#fcfeff 0%,#f2f8fa 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:12px 14px;
+  font-size:13px;
+  color:var(--ink-700);
+  line-height:1.65;
+  margin-bottom:8px;
+}
+
+.tag-block strong{color:var(--ink-900);font-weight:700}
+
+.filter-q{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  margin-bottom:9px;
+  cursor:pointer;
+  transition:all .2s ease;
+  background:var(--panel-solid);
+}
+
+.filter-q:hover{border-color:#9ac0c8;background:var(--sky-100)}
+.filter-q.open{background:#f7fcfd;border-color:#8db8c1}
+
+.filter-q .fq{
+  font-size:14px;
+  font-weight:700;
+  color:var(--ink-900);
+  padding-right:20px;
+}
+
+.filter-q .fa{
+  font-size:13px;
+  color:var(--ink-700);
+  margin-top:8px;
+  line-height:1.62;
+  display:none;
+}
+
+.filter-q.open .fa{display:block}
+
+.filter-q .ft{
+  font-size:10px;
+  color:var(--ink-500);
+  float:right;
+  font-weight:800;
+  transition:transform .2s ease;
+}
+
+.filter-q.open .ft{transform:rotate(180deg)}
+
+.week-step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.week-step:last-child{border-bottom:none}
+
+.week-num{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:800;
+  flex-shrink:0;
+  background:#edf6f8;
+  border:1px solid #cce0e5;
+  color:var(--ink-700);
+}
+
+.week-num.done-w{background:#dbf4e4;color:#0f664a;border-color:#a6dbbf}
+
+.week-body .wt{font-size:14px;font-weight:700;color:var(--ink-900)}
+.week-body .wd{font-size:13px;color:var(--ink-700);margin-top:3px;line-height:1.6}
+
+.log-entry{
+  padding:10px 11px;
+  background:linear-gradient(180deg,#ffffff 0%,#f3fafc 100%);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  margin-bottom:7px;
+  font-size:12px;
+  color:var(--ink-700);
+  line-height:1.5;
+}
+
+.log-entry strong{color:var(--ink-900);font-weight:700}
+
+.progress-mini{display:flex;align-items:center;gap:8px;margin-top:10px}
+
+.progress-mini-bar{
+  flex:1;
+  height:6px;
+  background:#d8e8ec;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-mini-fill{
+  height:100%;
+  background:linear-gradient(90deg,#2eb596 0%,#1d7dca 100%);
+  border-radius:999px;
+  transition:width .3s;
+}
+
+.progress-mini-label{font-size:11px;color:var(--ink-700);min-width:40px;text-align:right;font-weight:700}
+
+#identity-saved{font-weight:700;color:#137353}
+
+@keyframes reveal{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:980px){
+  .row3{grid-template-columns:1fr 1fr}
+  .card-head{font-size:18px}
+}
+
+@media (max-width:760px){
+  .cf{padding:18px 12px 26px}
+  .cf::before{inset:0;border-radius:20px}
+  .cf-nav{position:static;gap:8px;padding:8px}
+  .cf-nav button{padding:8px 12px;font-size:11px}
+  .row2,.row3,.vs-row{grid-template-columns:1fr}
+  .card{padding:14px 13px;border-radius:14px}
+  .card-head{font-size:17px}
+  .card-sub{font-size:13px}
+  .stat-n{font-size:25px}
+  .week-step{gap:10px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+
+<div class="cf">
+<div style="margin-bottom:18px;padding:18px 20px;border-radius:18px;background:linear-gradient(120deg,#0f4d59 0%,#117183 55%,#2596a8 100%);color:#ecfcff;box-shadow:0 12px 24px rgba(16,80,92,.28)">
+  <div style="font-family:'Space Grotesk',var(--font-sans,Segoe UI,Tahoma,Arial,sans-serif);font-size:26px;line-height:1.1;font-weight:700;letter-spacing:-.02em">Clarity Framework</div>
+  <div style="font-size:13px;opacity:.9;margin-top:6px;max-width:760px">Run your day with deliberate thinking, measurable execution, and AI sessions that create productive friction.</div>
+</div>
+<div class="cf-nav">
+  <button class="on" onclick="sv(0,this)">Daily practice</button>
+  <button onclick="sv(1,this)">Think with AI</button>
+  <button onclick="sv(2,this)">Build systems</button>
+  <button onclick="sv(3,this)">Learn clearly</button>
+  <button onclick="sv(4,this)">Identity check</button>
+  <button onclick="sv(5,this)">4-week plan</button>
+</div>
+
+<div class="view on" id="v0">
+  <div class="row3" style="margin-bottom:12px">
+    <div class="stat-card"><div class="stat-n" id="d-through">0</div><div class="stat-l">through AI today</div></div>
+    <div class="stat-card"><div class="stat-n" id="d-with">0</div><div class="stat-l">with AI today</div></div>
+    <div class="stat-card"><div class="stat-n" id="d-score">0%</div><div class="stat-l">clarity score</div></div>
+  </div>
+  <div class="card">
+    <div class="pill pill-teal">Morning brief — before you start</div>
+    <div class="card-head">Answer before opening any tool or AI today</div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">What is the ONE problem I'm solving today?</div>
+      <textarea class="log-area" id="q1" placeholder="e.g. Build the FastAPI audio ingestion endpoint for the Bengali speech API..." style="min-height:48px"></textarea>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Why does solving this matter to my leverage? (job hunt / Bengali API / GSoC)</div>
+      <textarea class="log-area" id="q2" placeholder="e.g. This moves my Bengali speech API closer to deployment — a live demo = interview differentiation..." style="min-height:48px"></textarea>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">What does success look like at end of today?</div>
+      <textarea class="log-area" id="q3" placeholder="e.g. FastAPI endpoint accepts audio, validates input, returns structured JSON — Dockerized and tested..." style="min-height:48px"></textarea>
+    </div>
+    <button class="btn-sm" onclick="saveMorning()">Save morning brief</button>
+  </div>
+  <div class="card">
+    <div class="pill pill-amber">AI session log — track every interaction</div>
+    <div class="card-head">Log each AI session as "through" or "with"</div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+      <textarea class="log-area" id="session-note" placeholder="What did I ask Claude? e.g. I gave Claude my API design hypothesis and asked it to find the flaws..." style="flex:1;min-height:48px"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <select class="sel-box" id="session-type" style="flex:1">
+        <option value="with">Thinking WITH AI — brought hypothesis, got friction</option>
+        <option value="through">Thinking THROUGH AI — asked for answer/template</option>
+      </select>
+      <button class="btn-sm" onclick="logSession()">Log it</button>
+    </div>
+    <div id="session-log"></div>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">Evening review</div>
+    <div class="card-head">End-of-day friction check</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Did at least one AI session feel uncomfortable (not comfortable)?</div><div class="cs">Good AI use = "I didn't think of that" / "That challenges my assumption"</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Did I ship one iteration today — however ugly?</div><div class="cs">Build → Test → Fail → Reflect → Refine. Not: Plan → Polish → Perfect → Never ship</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Did I run my time block without negotiation? (6–8 AM deep work)</div><div class="cs">Same time. Same structure. Zero negotiation. Not "when inspired."</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Did I pass the compounding filter for everything I added today?</div><div class="cs">Will this be more valuable in year 5? Does it build gravity? Does it make me irreplaceable?</div></div></div>
+    <div class="progress-mini"><div class="progress-mini-bar"><div class="progress-mini-fill" id="eve-bar" style="width:0%"></div></div><div class="progress-mini-label" id="eve-label">0/4</div></div>
+  </div>
+</div>
+
+<div class="view" id="v1">
+  <div class="card">
+    <div class="pill pill-coral">The core principle</div>
+    <div class="card-head">AI amplifies whatever thinking you already have</div>
+    <div class="card-sub">Shallow mind → shallow output faster. Clear thinking → clarity at scale. It's a mirror, not an upgrade.</div>
+    <div class="vs-row">
+      <div class="vs-bad"><div class="vs-label">Through AI (average)</div><div class="vs-text">"Give me a roadmap"<br>"Tell me what to learn"<br>"Create a routine for me"<br>"Write my cover letter"</div></div>
+      <div class="vs-good"><div class="vs-label">With AI (non-average)</div><div class="vs-text">"This is my plan — show me where it fails"<br>"This is my belief — attack it"<br>"I believe X — challenge this"</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-teal">Prompt rewriter — your real life</div>
+    <div class="card-head">Transform any "through" prompt into a "with" prompt</div>
+    <div class="card-sub">Click any example to see the transformation. These are real situations you face.</div>
+    <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">"What should I build for my ML portfolio?"</div><div class="fa">Rewrite: "I believe I should build a Bengali Speech-to-Transcript API next because it leverages my published research and targets the production engineering gap in my profile. Challenge this reasoning and show me blind spots I'm missing — what would a senior ML engineer at Realfy or Kaedim think about this choice?"</div></div>
+    <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">"Write me a cover letter for Kaedim"</div><div class="fa">Rewrite: "Here's my draft cover letter for Kaedim London. My hypothesis: leading with the 56% inference speedup and live Toolly deployment is stronger than leading with Kaggle rank. Challenge this ordering, find the 3 weakest sentences, and explain what a hiring manager sees vs what I intend them to see."</div></div>
+    <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">"Help me with my GSoC application to ML4Sci"</div><div class="fa">Rewrite: "I believe my strongest GSoC angle is the production pipeline experience from my Bengali diarization system, not the research paper itself. Here's my draft proposal summary. Attack it — what would an ML4Sci mentor reject this for? What's the weakest part of my technical proposal?"</div></div>
+    <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">"What should I learn next in ML?"</div><div class="fa">Rewrite: "I believe my next learning priority should be MLOps production monitoring (data drift detection, retraining pipelines) because it fills the biggest gap between my current skills and what Realfy/AideMeet need. My hypothesis: this matters more than learning more GenAI tools right now. Stress-test this and show me what I'm wrong about."</div></div>
+    <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">"Is my resume good enough for UK ML roles?"</div><div class="fa">Rewrite: "Here's my resume. I believe the biggest gap is that my projects are presented as outputs (accuracy scores, competition ranks) rather than constraint navigation and business impact. My hypothesis: fixing the framing of 3 bullets will matter more than adding new content. Find where I'm wrong about this — what does a UK ML hiring manager actually stop reading at?"</div></div>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">The clarity equation</div>
+    <div class="card-head">Before ANY AI interaction, answer these 3 questions</div>
+    <div class="card-sub">If you can't answer them clearly, you're outsourcing responsibility — not using AI.</div>
+    <div style="display:grid;gap:8px">
+      <div class="tag-block"><strong>1. What problem am I actually solving?</strong><br>Not "I want to improve my resume." Specifically: "The framing of my Bangla Diarizz project doesn't communicate the constraint navigation story — I need to fix that."</div>
+      <div class="tag-block"><strong>2. Why does solving this matter to my leverage?</strong><br>Not "it'll help." Specifically: "This is the one project that proves production thinking. Fixing its framing directly impacts my Kaedim and Realfy applications this week."</div>
+      <div class="tag-block"><strong>3. What would success look like?</strong><br>Not "better." Specifically: "Three bullets rewritten so that latency constraint, trade-off decision, and measurable impact are each visible in one sentence."</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-amber">The friction test — score your last session</div>
+    <div class="card-head">How did the last AI conversation feel?</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">"I didn't think of that"</div><div class="cs">Friction. Good.</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">"That challenges my assumption"</div><div class="cs">Friction. Good.</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">"I need to reconsider"</div><div class="cs">Friction. Good.</div></div></div>
+    <div class="divider"></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">"Perfect, exactly what I wanted"</div><div class="cs">Comfort. Bad — you got validation, not growth.</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">"Thanks for the template"</div><div class="cs">Comfort. Bad — outsourced thinking.</div></div></div>
+  </div>
+</div>
+
+<div class="view" id="v2">
+  <div class="card">
+    <div class="pill pill-teal">The brutal truth</div>
+    <div class="card-head">AI rewards consistency, not intensity</div>
+    <div class="card-sub">You don't need genius, motivation, or obsession. You need boring, repeatable systems. AI doesn't replace discipline — it punishes the absence of it.</div>
+    <div class="vs-row">
+      <div class="vs-bad"><div class="vs-label">Average process</div><div class="vs-text">Plan → Polish → Perfect → Never ship</div></div>
+      <div class="vs-good"><div class="vs-label">Non-average process</div><div class="vs-text">Build → Test → Fail → Reflect → Refine</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-amber">Level 1 — remove feelings from execution</div>
+    <div class="card-head">Your non-negotiable daily structure</div>
+    <div class="card-sub">Design your day to run when motivation dies. Same time. Same structure. Zero negotiation.</div>
+    <div style="display:grid;gap:8px">
+      <div class="tag-block"><strong>6:00–8:00 AM — deep work block (locked)</strong><br>Bengali speech API development. No social media. No messages. This block runs even when you don't feel like it. Especially when you don't feel like it.</div>
+      <div class="tag-block"><strong>8:00–9:00 AM — job applications (one per day)</strong><br>One tailored application. Not ten generic ones. Constraint thinking applied to job hunt.</div>
+      <div class="tag-block"><strong>Evening — one ugly ship</strong><br>A commit. A notebook cell. A README update. Something moved forward. Ugly is fine. Zero is not.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">Level 3 — the compounding filter</div>
+    <div class="card-head">Before adding ANYTHING to your system, answer all 3</div>
+    <div class="card-sub">If any answer is no — drop it immediately. Applied to your real decisions right now.</div>
+    <div style="display:grid;gap:8px">
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Does this compound? (more valuable in year 5 than year 1?)</div><div class="fa"><strong style="color:#27500A">YES:</strong> Deep Learning fundamentals, MLOps production skills, Bengali NLP domain depth, writing/communication, systems thinking, your GitHub commit history.<br><br><strong style="color:#791F1F">NO:</strong> Learning a new framework just because it's trending, adding another course certificate, switching to a new tool before mastering the current one, spending time on platforms that reset every cycle.</div></div>
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Does this build gravity? (pull opportunities vs chase them?)</div><div class="fa"><strong style="color:#27500A">YES:</strong> Publishing your Bengali speech API publicly (recruiters find you), writing a LinkedIn post about your 56% speedup technique (inbound from ML community), Toolly getting organic users (proof of product thinking).<br><br><strong style="color:#791F1F">NO:</strong> Cold-applying to 50 jobs without a portfolio to back it up, joining every Discord server, attending every webinar.</div></div>
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Does this make me irreplaceable? (rare combination?)</div><div class="fa"><strong style="color:#27500A">YOUR MOAT:</strong> Bengali NLP research + production engineering + product building (Toolly) + teaching ability. Nobody else has this exact stack. This is years in the making.<br><br><strong style="color:#791F1F">NOT A MOAT:</strong> Knowing PyTorch. Completing another Coursera course. Having a Kaggle notebook. These are table stakes — 1000 people have them.</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-coral">Level 4 — identity lock</div>
+    <div class="card-head">Your 5-year game (written down)</div>
+    <div class="card-sub">Most people drift because they have no spine. Pick your game and lock it.</div>
+    <div class="tag-block" style="border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0"><strong>Your locked game:</strong><br>ML Engineer who builds real AI products in Bengali NLP and speech → Senior ML Engineer at a Series A/B company → AI startup founder combining deep learning + robotics.<br><br>This is the game for the next 5 years. Everything else is noise or fuel for this game. Not: ML engineer one week, content creator the next, AI agents the week after. Direction beats perfection.</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:8px;line-height:1.5">Reality corrects bad direction. Reality cannot correct zero direction. Compounding requires time in the game.</div>
+  </div>
+</div>
+
+<div class="view" id="v3">
+  <div class="card">
+    <div class="pill pill-amber">The core problem</div>
+    <div class="card-head">You're confused because you know too much without hierarchy</div>
+    <div class="card-sub">Old power = knowing things. New power = knowing what to ignore. Everyone can learn anything now. Very few can decide what NOT to learn.</div>
+    <div class="vs-row">
+      <div class="vs-bad"><div class="vs-label">Horizontal (wrong)</div><div class="vs-text">Python → React → AWS → Docker → LangChain → Ollama → everything!</div></div>
+      <div class="vs-good"><div class="vs-label">Vertical (right)</div><div class="vs-text">Core ML → MLOps → GenAI → Agents. Each layer builds on previous. No jumping around.</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-teal">Filter 1 — the compound test</div>
+    <div class="card-head">Before learning anything: "does this skill compound?"</div>
+    <div class="row2">
+      <div>
+        <div style="font-size:11px;font-weight:500;color:#27500A;margin-bottom:6px">COMPOUNDS — learn these</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);line-height:2">Deep learning fundamentals<br>MLOps / production systems<br>Systems thinking<br>Bengali NLP domain depth<br>Writing and communication<br>Software engineering fundamentals<br>Statistical foundations</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:500;color:#791F1F;margin-bottom:6px">RESETS — ignore these</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);line-height:2">Specific framework versions<br>Platform-specific tools<br>Trending AI wrapper libraries<br>New LLM that launched this week<br>Course certificates<br>Prompt engineering "hacks"<br>Tool comparisons / reviews</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">Filter 2 — the leverage test</div>
+    <div class="card-head">Your leverage = rare combination that takes years to build</div>
+    <div class="card-sub">Not "ML engineer." Not "content creator." The combination is the moat.</div>
+    <div class="tag-block" style="border-left:3px solid #534AB7;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0"><strong>Your leverage stack (already built):</strong><br>Bengali NLP researcher (published, BUET CSE Fest 2026) + Production ML engineer (FastAPI, Docker, monitoring) + Product builder (Toolly: 400+ tools, live, 206+ commits) + Teacher (4-Month ML series, Bloom's Taxonomy approach)<br><br>Every new thing you learn must connect to this stack — or it doesn't get your time.</div>
+  </div>
+  <div class="card">
+    <div class="pill pill-coral">Filter 3 — the irreplaceability test</div>
+    <div class="card-head">Will this make me harder to replace?</div>
+    <div style="display:grid;gap:8px;margin-bottom:10px">
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Should I learn React / frontend right now?</div><div class="fa">Test: 1000 people can learn React in 3 months. It does NOT make you harder to replace. It dilutes your ML depth. Skip it unless you have a specific production reason for your Bengali speech demo. Use Streamlit instead — faster, good enough, stays in your stack.</div></div>
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Should I go deeper into Bengali speech / audio ML?</div><div class="fa">Test: How many ML engineers have published Bengali speaker diarization research AND have a production API? Near zero. This takes years to combine. This IS your moat. Go deeper, not wider.</div></div>
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Should I learn more LLM / agent frameworks?</div><div class="fa">Test: Depends on the depth. "Using LangChain" = 1000 people can do it in a week — not leverage. "Building production agent systems with monitoring, cost control, and fallback logic" = combines with your MLOps depth and IS leverage. Go deep or skip.</div></div>
+      <div class="filter-q" onclick="this.classList.toggle('open')"><span class="ft">▼</span><div class="fq">Should I learn Kubernetes / cloud infra right now?</div><div class="fa">Test: Not yet. Your current constraint is portfolio depth and job applications, not infra scaling. Docker + Railway/HuggingFace is enough for your demos. Kubernetes is year 2 of your ML Engineer role, not pre-hire. Drop it for now.</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pill-blue">The tolerance filter</div>
+    <div class="card-head">The real divide isn't intelligence — it's tolerance for discomfort</div>
+    <div class="vs-row">
+      <div class="vs-bad"><div class="vs-label">Escaping discomfort</div><div class="vs-text">Ask AI for the answer. Wait until "ready." Polish before shipping. Avoid being wrong.</div></div>
+      <div class="vs-good"><div class="vs-label">Compressing discomfort</div><div class="vs-text">Fail faster. Learn faster. Iterate faster. Launch ugly and let reality teach you.</div></div>
+    </div>
+    <div class="tag-block" style="margin-top:8px"><strong>Your ugly launch practice:</strong><br>Ship the Bengali speech demo when the endpoint works — not when it's perfect. Push to HuggingFace Spaces with basic Streamlit UI this week. Let real users find the bugs. Reality teaches faster than planning.</div>
+  </div>
+</div>
+
+<div class="view" id="v4">
+  <div class="card">
+    <div class="pill pill-coral">The question that reveals everything</div>
+    <div class="card-head">"If AI amplifies who you are... who are you becoming?"</div>
+    <div class="card-sub">Most people can't answer this. So they drift. Answer it below — your answer becomes your compass.</div>
+    <textarea class="log-area" id="identity-ans" placeholder="I am becoming..." style="min-height:80px"></textarea>
+    <button class="btn-sm" style="margin-top:8px" onclick="saveIdentity()">Save my answer</button>
+    <div id="identity-saved" style="margin-top:8px;font-size:12px;color:var(--color-text-success);display:none">Saved. Read this every morning.</div>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">The brutal checklist</div>
+    <div class="card-head">Before you blame tools, access, or luck</div>
+    <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Clarity</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I know what problem I'm solving? (specific, not vague)</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I know why it matters to my leverage?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I know where I want leverage in 5 years?</div></div></div>
+    <div class="divider"></div>
+    <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Systems</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I have a structure that runs without motivation?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Am I building feedback loops, not perfect plans?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Am I choosing direction over perfection?</div></div></div>
+    <div class="divider"></div>
+    <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Judgment</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I have filters for what NOT to learn?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Am I building depth, not collecting breadth?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Am I tolerating discomfort, not escaping it?</div></div></div>
+    <div class="divider"></div>
+    <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Identity</div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Do I know what game I'm playing? (written down, not vague)</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Have I committed to a 5-year direction?</div></div></div>
+    <div class="check-row" onclick="togCheck(this)"><input type="checkbox"><div><div class="ct">Am I becoming someone worth amplifying?</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pill-green">What's not free</div>
+    <div class="card-head">AI is free. Information is free. Access is free.</div>
+    <div class="row2" style="margin-top:8px">
+      <div class="stat-card"><div class="stat-n" style="font-size:16px;color:var(--color-text-success)">Clarity</div><div class="stat-l">knowing what problem, why it matters, what success looks like</div></div>
+      <div class="stat-card"><div class="stat-n" style="font-size:16px;color:var(--color-text-success)">Discipline</div><div class="stat-l">the system that runs when motivation dies</div></div>
+      <div class="stat-card"><div class="stat-n" style="font-size:16px;color:var(--color-text-success)">Courage</div><div class="stat-l">shipping ugly, being wrong, earning friction</div></div>
+      <div class="stat-card"><div class="stat-n" style="font-size:16px;color:var(--color-text-success)">Direction</div><div class="stat-l">the 5-year game you refuse to abandon</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:10px;line-height:1.5;padding:8px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)">You don't stop being average by using more AI. You stop being average by becoming someone worth amplifying.</div>
+  </div>
+</div>
+
+<div class="view" id="v5">
+  <div class="card">
+    <div class="pill pill-teal">Week 1 — audit your AI use</div>
+    <div class="week-step"><div class="week-num" id="wn1">1</div><div class="week-body"><div class="wt">Track every AI interaction for 7 days</div><div class="wd">After each session with Claude or any AI tool, immediately label it: "thinking with" (you brought a hypothesis and got friction) or "thinking through" (you asked for an answer, template, or roadmap). Use the Daily Practice tab to log these.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Kill all "through" habits</div><div class="wd">Every time you catch yourself typing "give me a...", "write me a...", or "what should I..." — stop. Rewrite the prompt as a hypothesis. Use the Prompt Rewriter in the "Think with AI" tab.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Your specific target this week</div><div class="wd">Bengali speech API project brief. Before writing one line of code — write the full brief: business problem, baseline, success metric, deployment scenario, failure mode, constraints. Use AI to attack your brief, not write it.</div></div></div>
+    <button class="btn-sm" style="margin-top:8px" onclick="markWeek(1)">Mark week 1 complete</button>
+  </div>
+  <div class="card">
+    <div class="pill pill-amber">Week 2 — build your filter</div>
+    <div class="week-step"><div class="week-num" id="wn2">2</div><div class="week-body"><div class="wt">Write your 3 compound skills</div><div class="wd">These are the skills that will be MORE valuable in year 5 than year 1. Yours: (1) Bengali NLP / speech ML domain depth. (2) Production ML engineering (MLOps, deployment, monitoring). (3) Product building and systems thinking. Write them down. These are your filter for everything.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Write your leverage thesis (one paragraph)</div><div class="wd">"I am an ML engineer with published Bengali NLP research, a live production AI product (Toolly), and demonstrated ability to go from research to deployment. My rare combination is Bengali speech + production engineering + product thinking. I am targeting ML Engineer roles at companies building real AI products, especially those serving non-English language markets."</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Write your 5-year game</div><div class="wd">The locked direction. Not aspirational — actual. "2026: ML Engineer (remote/UK/Canada). 2027–2028: Senior ML Engineer. 2029–2030: Lead ML / founding engineer at AI startup. 2031+: Found AI startup in deep learning + robotics." Even if wrong — direction beats perfection.</div></div></div>
+    <button class="btn-sm" style="margin-top:8px" onclick="markWeek(2)">Mark week 2 complete</button>
+  </div>
+  <div class="card">
+    <div class="pill pill-purple">Week 3 — system design</div>
+    <div class="week-step"><div class="week-num" id="wn3">3</div><div class="week-body"><div class="wt">Lock ONE non-negotiable time block</div><div class="wd">6–8 AM every day. Bengali speech API development. No negotiation. Not "when I feel ready." The block runs on Tuesday when you're tired and on Sunday when you have other plans. Same time. Same structure. Same constraint.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Ship ugly every day</div><div class="wd">One commit to the Bengali speech API repo every single day. It can be 5 lines. It can be a README update. It can be a failing test. The commit history is the proof — not your intentions.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Your target this week</div><div class="wd">FastAPI service running locally: POST /transcribe endpoint, input validation, basic audio processing. Dockerized. 7 commits minimum by end of week.</div></div></div>
+    <button class="btn-sm" style="margin-top:8px" onclick="markWeek(3)">Mark week 3 complete</button>
+  </div>
+  <div class="card">
+    <div class="pill pill-coral">Week 4 — the friction protocol</div>
+    <div class="week-step"><div class="week-num" id="wn4">4</div><div class="week-body"><div class="wt">Stop asking AI for answers</div><div class="wd">Every AI session this week starts with a hypothesis. No exceptions. Log every session in the Daily Practice tab. If you catch yourself writing a "through" prompt — close the tab, think for 10 minutes, then come back with a hypothesis.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Start asking AI to attack your thinking</div><div class="wd">Take your Bengali speech API design and ask Claude to find the 3 most likely failure modes you haven't considered. Take your job application strategy and ask Claude what a hiring manager at Kaedim would think when they read your CV. Embrace the discomfort.</div></div></div>
+    <div class="week-step"><div class="week-num">→</div><div class="week-body"><div class="wt">Embrace confusion as progress</div><div class="wd">If an AI session leaves you feeling certain and comfortable — it was wasted. If it leaves you with 3 new questions you hadn't thought of — that's the goal. Confusion is not a failure state. It's the entry point to clarity earned.</div></div></div>
+    <button class="btn-sm" style="margin-top:8px" onclick="markWeek(4)">Mark week 4 complete</button>
+  </div>
+  <div class="row3">
+    <div class="stat-card"><div class="stat-n" id="wc-done">0</div><div class="stat-l">weeks completed</div></div>
+    <div class="stat-card"><div class="stat-n">4</div><div class="stat-l">weeks total</div></div>
+    <div class="stat-card"><div class="stat-n" id="wc-pct">0%</div><div class="stat-l">framework applied</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function sv(n,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.cf-nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('v'+n).classList.add('on');
+  btn.classList.add('on');
+}
+function togCheck(row){
+  const cb=row.querySelector('input');
+  cb.checked=!cb.checked;
+  const ct=row.querySelector('.ct');
+  if(cb.checked){row.classList.add('done');if(ct)ct.classList.add('checked')}
+  else{row.classList.remove('done');if(ct)ct.classList.remove('checked')}
+  updateEveBar();
+}
+function updateEveBar(){
+  const eveChecks=document.querySelectorAll('#v0 .check-row input');
+  const done=[...eveChecks].filter(c=>c.checked).length;
+  const pct=Math.round(done/eveChecks.length*100);
+  const bar=document.getElementById('eve-bar');
+  const lbl=document.getElementById('eve-label');
+  if(bar)bar.style.width=pct+'%';
+  if(lbl)lbl.textContent=done+'/'+eveChecks.length;
+}
+var sessions=[];
+function logSession(){
+  const note=document.getElementById('session-note').value.trim();
+  const type=document.getElementById('session-type').value;
+  if(!note)return;
+  sessions.unshift({note,type,time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})});
+  document.getElementById('session-note').value='';
+  renderSessions();
+  updateDayStats();
+}
+function renderSessions(){
+  const el=document.getElementById('session-log');
+  if(!sessions.length){el.innerHTML='';return;}
+  el.innerHTML=sessions.slice(0,5).map(s=>`<div class="log-entry"><strong>${s.time} — ${s.type==='with'?'WITH (friction)':'THROUGH (comfort)'}</strong><br>${s.note}</div>`).join('');
+}
+function updateDayStats(){
+  const withCount=sessions.filter(s=>s.type==='with').length;
+  const throughCount=sessions.filter(s=>s.type==='through').length;
+  const total=sessions.length;
+  const score=total?Math.round(withCount/total*100):0;
+  document.getElementById('d-with').textContent=withCount;
+  document.getElementById('d-through').textContent=throughCount;
+  document.getElementById('d-score').textContent=score+'%';
+}
+function saveMorning(){
+  const q1=document.getElementById('q1').value;
+  const q2=document.getElementById('q2').value;
+  const q3=document.getElementById('q3').value;
+  if(!q1&&!q2&&!q3)return;
+  alert('Morning brief saved. Now open your tools — you have clarity on what you\'re doing and why.');
+}
+function saveIdentity(){
+  const ans=document.getElementById('identity-ans').value.trim();
+  if(!ans)return;
+  document.getElementById('identity-saved').style.display='block';
+}
+var weeksDone=0;
+function markWeek(n){
+  const el=document.getElementById('wn'+n);
+  if(el&&!el.classList.contains('done-w')){el.classList.add('done-w');el.textContent='✓';weeksDone++;}
+  document.getElementById('wc-done').textContent=weeksDone;
+  document.getElementById('wc-pct').textContent=Math.round(weeksDone/4*100)+'%';
+}
+</script>

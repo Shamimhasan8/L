@@ -1,0 +1,903 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-display:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  --color-background-primary:#fffdf7;
+  --color-background-secondary:#f7f4ea;
+  --color-background-tertiary:#ece6d5;
+
+  --color-surface:#ffffffcc;
+  --color-surface-strong:#fffef9;
+
+  --color-text-primary:#1f2e2a;
+  --color-text-secondary:#556562;
+
+  --color-text-info:#0f8572;
+  --color-text-success:#2a8c4a;
+  --color-text-warning:#9b6800;
+  --color-text-danger:#a5372e;
+
+  --color-border-secondary:#d8d2bf;
+  --color-border-tertiary:#e7e1cf;
+  --color-border-info:#91d7cb;
+  --color-border-warning:#f0cd87;
+  --color-border-danger:#e6afa9;
+
+  --color-background-info:#e9f8f4;
+  --color-background-warning:#fff7e7;
+  --color-background-danger:#fff2f0;
+  --color-background-success:#ecf8ef;
+
+  --border-radius-md:12px;
+  --border-radius-lg:18px;
+
+  --shadow-soft:0 10px 28px rgba(31,46,42,.08);
+  --shadow-focus:0 0 0 3px rgba(15,133,114,.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:var(--font-sans);
+  color:var(--color-text-primary);
+  background:
+    radial-gradient(1200px 500px at 5% -5%,#ffefb5 0%,transparent 50%),
+    radial-gradient(900px 480px at 95% 0%,#d8f6ef 0%,transparent 52%),
+    linear-gradient(180deg,#fffefb 0%,#fffaf1 100%);
+  min-height:100vh;
+}
+
+.app{
+  max-width:1280px;
+  margin:1.5rem auto;
+  padding:0 1rem 2.25rem;
+}
+
+.header{
+  padding:1.2rem 1.35rem;
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  background:var(--color-surface);
+  backdrop-filter:blur(8px);
+  box-shadow:var(--shadow-soft);
+}
+
+.header-left h1{
+  font-family:var(--font-display);
+  font-size:clamp(1rem,1.8vw,1.35rem);
+  font-weight:700;
+  letter-spacing:.01em;
+  color:var(--color-text-primary);
+}
+
+.header-left p{
+  font-size:.78rem;
+  color:var(--color-text-secondary);
+  margin-top:.25rem;
+}
+
+.progress-bar{
+  height:6px;
+  background:var(--color-background-tertiary);
+  border-radius:999px;
+  width:190px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#2ab37e,#0f8572);
+  border-radius:999px;
+  transition:width .45s ease;
+}
+
+.progress-label{
+  font-size:.71rem;
+  font-weight:500;
+  color:var(--color-text-secondary);
+  margin-top:5px;
+  text-align:right;
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  margin-top:.95rem;
+  padding:.45rem;
+  border:1px solid var(--color-border-tertiary);
+  border-radius:14px;
+  background:var(--color-surface);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.nav::-webkit-scrollbar{display:none}
+
+.nav-btn{
+  padding:8px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  font-size:.75rem;
+  font-weight:500;
+  cursor:pointer;
+  white-space:nowrap;
+  background:transparent;
+  color:var(--color-text-secondary);
+  transition:all .2s;
+}
+
+.nav-btn:hover{
+  color:var(--color-text-primary);
+  background:#f3efdf;
+}
+
+.nav-btn.active{
+  background:#ffffff;
+  border-color:#dcd5c3;
+  color:#114e43;
+  box-shadow:0 5px 16px rgba(17,78,67,.12);
+}
+
+.nav-btn .dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  margin-right:6px;
+  background:#c3c0b5;
+  vertical-align:middle;
+}
+
+.nav-btn.done .dot{background:var(--color-text-success)}
+.nav-btn.active .dot{background:var(--color-text-info)}
+
+.body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 295px;
+  gap:1rem;
+  min-height:530px;
+  margin-top:.95rem;
+}
+
+.main,
+.sidebar{
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  background:var(--color-surface-strong);
+  box-shadow:var(--shadow-soft);
+}
+
+.main{padding:1.3rem 1.35rem}
+
+.sidebar{
+  padding:1.1rem;
+  align-self:start;
+  position:sticky;
+  top:14px;
+}
+
+.phase-header{margin-bottom:1.35rem}
+
+.phase-tag{
+  font-size:.62rem;
+  font-weight:700;
+  color:var(--color-text-info);
+  background:var(--color-background-info);
+  border:1px solid var(--color-border-info);
+  padding:3px 9px;
+  border-radius:999px;
+  display:inline-block;
+  margin-bottom:8px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+.phase-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.05rem,1.8vw,1.4rem);
+  font-weight:700;
+  line-height:1.3;
+  margin-bottom:5px;
+}
+
+.phase-desc{
+  font-size:.86rem;
+  color:var(--color-text-secondary);
+  line-height:1.6;
+  max-width:75ch;
+}
+
+.phase-progress{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.phase-bar{
+  flex:1;
+  height:6px;
+  background:var(--color-background-tertiary);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.phase-fill{
+  height:100%;
+  background:linear-gradient(90deg,#19a78f,#0f8572);
+  border-radius:999px;
+  transition:width .35s;
+}
+
+.phase-count{
+  font-size:.72rem;
+  font-weight:600;
+  color:var(--color-text-secondary);
+  min-width:46px;
+  text-align:right;
+}
+
+.section{margin-bottom:1.4rem}
+
+.section-title{
+  font-size:.68rem;
+  font-weight:700;
+  color:var(--color-text-secondary);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.section-title::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--color-border-tertiary);
+}
+
+.check-item{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  padding:10px 11px;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:all .2s;
+}
+
+.check-item:hover{
+  background:#f6f3e8;
+  border-color:#ece4d1;
+  transform:translateY(-1px);
+}
+
+.check-item.checked{opacity:.62}
+
+.check-item input[type=checkbox]{
+  width:16px;
+  height:16px;
+  margin-top:2px;
+  flex-shrink:0;
+  cursor:pointer;
+  accent-color:var(--color-text-info);
+}
+
+.check-text{
+  font-size:.87rem;
+  color:var(--color-text-primary);
+  line-height:1.45;
+}
+
+.check-text.checked{
+  text-decoration:line-through;
+  color:var(--color-text-secondary);
+}
+
+.check-sub{
+  font-size:.73rem;
+  color:var(--color-text-secondary);
+  margin-top:3px;
+  line-height:1.5;
+}
+
+.warn-card,
+.info-card{
+  border-radius:12px;
+  padding:11px 13px;
+  margin-bottom:9px;
+}
+
+.warn-card{background:var(--color-background-warning);border:1px solid var(--color-border-warning)}
+.info-card{background:var(--color-background-info);border:1px solid var(--color-border-info)}
+
+.warn-title,
+.info-title{
+  font-size:.78rem;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.warn-title{color:var(--color-text-warning)}
+.info-title{color:var(--color-text-info)}
+
+.warn-body,
+.info-body{
+  font-size:.75rem;
+  color:var(--color-text-secondary);
+  line-height:1.45;
+}
+
+.sidebar-section{margin-bottom:1.25rem}
+
+.sidebar-title{
+  font-size:.66rem;
+  font-weight:700;
+  color:var(--color-text-secondary);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+
+.brief-grid{display:grid;gap:11px}
+
+.brief-field label{
+  font-size:.73rem;
+  color:var(--color-text-secondary);
+  font-weight:500;
+  display:block;
+  margin-bottom:4px;
+}
+
+.brief-field input,
+.brief-field textarea,
+.brief-field select{
+  width:100%;
+  font-size:.85rem;
+  border-radius:10px;
+  border:1px solid var(--color-border-secondary);
+  background:#fff;
+  color:var(--color-text-primary);
+  padding:8px 9px;
+  font-family:var(--font-sans);
+  transition:border-color .2s,box-shadow .2s;
+}
+
+.brief-field textarea{resize:vertical;min-height:74px;line-height:1.45}
+
+.brief-field input:focus,
+.brief-field textarea:focus,
+.brief-field select:focus{
+  outline:none;
+  border-color:#45bba7;
+  box-shadow:var(--shadow-focus);
+}
+
+.template-btn{
+  width:100%;
+  padding:9px 11px;
+  border:1px solid var(--color-border-secondary);
+  border-radius:11px;
+  background:linear-gradient(180deg,#fff,#f8f5ec);
+  color:var(--color-text-primary);
+  font-size:.77rem;
+  cursor:pointer;
+  text-align:left;
+  transition:all .2s;
+  margin-bottom:7px;
+  font-family:var(--font-sans);
+}
+
+.template-btn:hover{
+  background:linear-gradient(180deg,#fff,#f2ecdd);
+  border-color:#d3ccb9;
+  transform:translateY(-1px);
+}
+
+.template-btn strong{display:block;font-weight:700;margin-bottom:2px}
+
+.template-btn span{
+  color:var(--color-text-secondary);
+  font-size:.7rem;
+  line-height:1.45;
+}
+
+.interview-q{
+  padding:10px 11px;
+  border:1px solid var(--color-border-tertiary);
+  border-radius:11px;
+  margin-bottom:7px;
+  cursor:pointer;
+  transition:all .2s;
+}
+
+.interview-q:hover{background:#f6f3e8;border-color:#ddd6c5}
+
+.interview-q .q{
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--color-text-primary);
+  margin-bottom:3px;
+}
+
+.interview-q .a{
+  font-size:.74rem;
+  color:var(--color-text-secondary);
+  line-height:1.45;
+  display:none;
+}
+
+.interview-q.open .a{display:block}
+
+.interview-q .toggle{
+  font-size:.7rem;
+  color:var(--color-text-secondary);
+  float:right;
+}
+
+.mistake-item{
+  padding:8px 10px;
+  border-left:3px solid var(--color-border-danger);
+  margin-bottom:7px;
+  border-radius:0 10px 10px 0;
+  background:#fff7f6;
+}
+
+.mistake-item .m-title{
+  font-size:.79rem;
+  font-weight:700;
+  color:var(--color-text-danger);
+  margin-bottom:2px;
+}
+
+.mistake-item .m-fix{
+  font-size:.73rem;
+  color:var(--color-text-secondary);
+  line-height:1.45;
+}
+
+.tab-content{display:none;animation:rise .35s ease}
+.tab-content.active{display:block}
+
+.badge{
+  font-size:.62rem;
+  padding:2px 7px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.badge-warn{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-danger{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-success{background:var(--color-background-success);color:var(--color-text-success)}
+
+button{font-family:var(--font-sans)}
+
+button:focus-visible{
+  outline:none;
+  box-shadow:var(--shadow-focus);
+}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:1100px){
+  .body{grid-template-columns:minmax(0,1fr) 270px}
+  .app{padding:0 .8rem 2rem}
+}
+
+@media (max-width:900px){
+  .body{grid-template-columns:1fr}
+  .sidebar{position:static}
+}
+
+@media (max-width:680px){
+  .header{flex-direction:column;align-items:flex-start}
+  .header>div:last-child{width:100%}
+  .progress-bar{width:100%}
+  .main{padding:1rem}
+  .sidebar{padding:1rem}
+  .nav{padding:.35rem;gap:6px}
+  .nav-btn{padding:7px 10px;font-size:.72rem}
+}
+</style>
+
+<div class="app">
+<div class="header">
+  <div class="header-left">
+    <h1>Production ML Project Builder</h1>
+    <p>Your real-time guide for building projects that get you hired</p>
+  </div>
+  <div>
+    <div class="progress-bar"><div class="progress-fill" id="global-bar" style="width:0%"></div></div>
+    <div class="progress-label" id="global-label">0 / 60 tasks done</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" id="nb-0" onclick="showTab(0)"><span class="dot"></span>Project brief</button>
+  <button class="nav-btn" id="nb-1" onclick="showTab(1)"><span class="dot"></span>Phase 1 — Problem</button>
+  <button class="nav-btn" id="nb-2" onclick="showTab(2)"><span class="dot"></span>Phase 2 — Data</button>
+  <button class="nav-btn" id="nb-3" onclick="showTab(3)"><span class="dot"></span>Phase 3 — Experiments</button>
+  <button class="nav-btn" id="nb-4" onclick="showTab(4)"><span class="dot"></span>Phase 4 — Validation</button>
+  <button class="nav-btn" id="nb-5" onclick="showTab(5)"><span class="dot"></span>Phase 5 — Deploy</button>
+  <button class="nav-btn" id="nb-6" onclick="showTab(6)"><span class="dot"></span>Phase 6 — Monitor</button>
+  <button class="nav-btn" id="nb-7" onclick="showTab(7)"><span class="dot"></span>Mistakes & interview</button>
+</div>
+
+<div class="body">
+<div class="main">
+
+<!-- TAB 0: PROJECT BRIEF -->
+<div class="tab-content active" id="tab-0">
+  <div class="phase-header">
+    <div class="phase-tag">Start here</div>
+    <div class="phase-title">Define your project before writing a single line of code</div>
+    <div class="phase-desc">Production engineers brief before they code. Fill this in first. It becomes your README intro and your interview answer.</div>
+  </div>
+  <div class="brief-grid">
+    <div class="brief-field"><label>Project name</label><input type="text" id="pname" placeholder="e.g. Bengali speaker diarization system" oninput="updateBrief()"/></div>
+    <div class="brief-field"><label>Business problem (not "predict X" — say "reduce/increase/save X by doing Y")</label><textarea id="bproblem" placeholder="e.g. Reduce diarization error rate for Bengali speech, enabling faster transcription in call centers by 30%..." oninput="updateBrief()"></textarea></div>
+    <div class="brief-field"><label>Current baseline (how is it solved today? quantify it)</label><input type="text" id="baseline" placeholder="e.g. Manual labeling at 4hr per 1hr audio, 35% DER on existing tools" oninput="updateBrief()"/></div>
+    <div class="brief-field"><label>Primary success metric (business, not ML)</label><input type="text" id="success" placeholder="e.g. Reduce DER below 0.20, cutting human review time by 40%" oninput="updateBrief()"/></div>
+    <div class="brief-field"><label>Deployment scenario (batch daily / real-time API / streaming / edge)</label>
+      <select id="deploy-type" onchange="updateBrief()">
+        <option value="">Select type...</option>
+        <option>Batch predictions (daily/weekly)</option>
+        <option>Real-time REST API (&lt;100ms)</option>
+        <option>Streaming / event-driven</option>
+        <option>Edge deployment (on-device)</option>
+      </select>
+    </div>
+    <div class="brief-field"><label>Failure mode — what happens when model is wrong?</label><input type="text" id="failmode" placeholder="e.g. False speaker assignment causes wrong transcript attribution in legal records (high impact)" oninput="updateBrief()"/></div>
+    <div class="brief-field"><label>Constraints (latency / cost / model size / explainability)</label><input type="text" id="constraints" placeholder="e.g. Inference &lt;500ms per segment, model &lt;200MB, must run on CPU" oninput="updateBrief()"/></div>
+    <div class="brief-field"><label>Data refresh strategy</label><input type="text" id="refresh" placeholder="e.g. Retrain monthly or when DER degrades &gt;5% from baseline on monitoring set" oninput="updateBrief()"/></div>
+  </div>
+  <div style="margin-top:1.25rem;padding:12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-secondary)">
+    <div class="sidebar-title" style="margin-bottom:8px">Your elevator pitch (auto-generated)</div>
+    <div id="brief-preview" style="font-size:13px;color:var(--color-text-secondary);line-height:1.6;font-style:italic">Fill in the fields above — your README intro will appear here.</div>
+  </div>
+  <div style="margin-top:1rem">
+    <div class="sidebar-title" style="margin-bottom:8px">Quick-start templates</div>
+    <button class="template-btn" onclick="loadTemplate('demand')"><strong>Demand forecasting (batch)</strong><span>Restaurant / retail demand, daily batch predictions, reduce waste</span></button>
+    <button class="template-btn" onclick="loadTemplate('fraud')"><strong>Real-time fraud detection (API)</strong><span>Serve predictions in &lt;50ms, class imbalance handling, monitoring</span></button>
+    <button class="template-btn" onclick="loadTemplate('nlp')"><strong>NLP / speech system (domain)</strong><span>Bengali ASR, diarization, or multilingual NLP — your strongest area</span></button>
+    <button class="template-btn" onclick="loadTemplate('recommend')"><strong>Recommendation engine (end-to-end)</strong><span>Cold-start handling, FastAPI + Redis, latency + cost documented</span></button>
+  </div>
+</div>
+
+<!-- TAB 1: PHASE 1 -->
+<div class="tab-content" id="tab-1">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 1</div>
+    <div class="phase-title">Problem definition & business context</div>
+    <div class="phase-desc">Everything before you open a notebook. This is what separates production engineers from tutorial followers.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-1" style="width:0%"></div></div><div class="phase-count" id="count-1">0/10</div></div>
+  </div>
+  <div class="section"><div class="section-title">Project brief <span class="badge badge-info">write before coding</span></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Write the business problem (not "predict X" — "reduce/increase X by doing Y")</div><div class="check-sub">e.g. "Reduce food waste 25% by predicting demand 24h ahead for restaurants"</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Document the current baseline — how is the problem solved today?</div><div class="check-sub">Quantify it: manual process = X hours/week, existing tool = Y% error rate</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Define why this needs ML — can a SQL query or 3-line heuristic solve it?</div><div class="check-sub">If yes, don't use ML. Justify the complexity before adding it.</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Success metrics hierarchy</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Define the primary business metric (revenue, cost, time saved — not accuracy)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Define secondary ML metrics (precision, recall, RMSE — chosen from business context)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Define guardrail metrics you cannot sacrifice (fairness, latency, interpretability)</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Stakeholders & risk</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Map stakeholders: end users, decision makers, maintainers, data providers</div><div class="check-sub">Each group needs something different. Address all of them.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Document deployment scenario: batch / real-time API / streaming / edge</div><div class="check-sub">This determines your entire architecture. Decide now.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Write the failure mode — what happens when predictions are wrong?</div><div class="check-sub">Healthcare: false negative = catastrophic. Spam filter: false positive = annoying.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="1"><div><div class="check-text">Risk assessment: data risks, model risks, system risks, business risks — with mitigation</div></div></div>
+  </div>
+  <div class="warn-card"><div class="warn-title">Recruiter question you must answer</div><div class="warn-body">"What could go wrong with this system?" — You need a prepared, detailed answer before your first commit.</div></div>
+</div>
+
+<!-- TAB 2: PHASE 2 -->
+<div class="tab-content" id="tab-2">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 2</div>
+    <div class="phase-title">Data strategy & pipeline design</div>
+    <div class="phase-desc">Raw data is sacred. Never modify originals. Every stage versioned, reproducible, documented.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-2" style="width:0%"></div></div><div class="phase-count" id="count-2">0/12</div></div>
+  </div>
+  <div class="section"><div class="section-title">Data acquisition <span class="badge badge-warn">ethics check required</span></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Identify all data sources — primary + supplementary (weather, holidays, etc.)</div><div class="check-sub">For each: access method, update frequency, cost, reliability, legal constraints</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Ethics check: robots.txt, terms of service, GDPR/CCPA, rate limits, attribution</div><div class="check-sub">Recruiters will ask about data ethics. Many candidates fail here.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Data is messy — not from a clean Kaggle dataset. Collect your own or use real APIs.</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Data quality framework — 5 dimensions</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Completeness: what % missing is acceptable? Which fields are critical vs optional?</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Validity: valid ranges, acceptable formats, consistency rules</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Consistency, accuracy, and timeliness checks built into the pipeline</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Data versioning with DVC — version raw snapshots, features, train/test splits</div><div class="check-sub">Goal: reproduce any experiment exactly 6 months from now</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Feature engineering (hypothesis-driven)</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Every feature has a written hypothesis: "I believe X will help because Y"</div><div class="check-sub">Not random features hoping something works. Each one justified.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Temporal features (trends, seasonality, recency), aggregations, interactions, encodings</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Every feature is explainable AND monitorable for drift</div><div class="check-sub">If you can't explain it — remove it. If you can't monitor it — it's a risk.</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Pipeline architecture</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Modular pipeline: Raw → Validated → Processed → Features → Model-ready (each testable separately)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="2"><div><div class="check-text">Pipeline is automated, scheduled, monitored, and documented — zero manual steps</div></div></div>
+  </div>
+</div>
+
+<!-- TAB 3: PHASE 3 -->
+<div class="tab-content" id="tab-3">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 3</div>
+    <div class="phase-title">Experimentation framework</div>
+    <div class="phase-desc">Random hyperparameter tuning is not experimentation. Form a hypothesis, design the experiment, analyze, repeat.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-3" style="width:0%"></div></div><div class="phase-count" id="count-3">0/10</div></div>
+  </div>
+  <div class="section"><div class="section-title">Baseline first — always</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Statistical baseline: mean/median prediction, last value, moving average, simple heuristics</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Simple ML baseline: linear regression, logistic regression, decision tree (default params)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Document baseline performance on ALL metrics — not just accuracy</div><div class="check-sub">If complex model beats linear by 2%, question whether complexity is worth it.</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Hypothesis-driven experiments</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Every experiment has: Hypothesis → Prediction → Design → Results → Conclusion</div><div class="check-sub">e.g. "Adding weather features will reduce RMSE by 10% because customer behavior changes with weather"</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Feature experiments (add/remove groups), model experiments (families, complexity), data experiments</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Track every experiment: git hash, data version, ALL config, results, compute cost, artifacts</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Model selection criteria</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Choose the SIMPLEST model that meets business requirements (not highest accuracy)</div><div class="check-sub">Simpler = easier to debug, explain, retrain, and more robust to distribution shifts</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Document models tried, performance comparison, and trade-off reasoning in README</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Error analysis</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Identify failure patterns: where does model perform worst? Random or systematic?</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="3"><div><div class="check-text">Investigate root causes and generate improvement hypotheses from error patterns</div><div class="check-sub">This shows you don't just tune hyperparameters — you think about problems</div></div></div>
+  </div>
+</div>
+
+<!-- TAB 4: PHASE 4 -->
+<div class="tab-content" id="tab-4">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 4</div>
+    <div class="phase-title">Model development & validation</div>
+    <div class="phase-desc">Test set accuracy is not enough. Multiple validation approaches to actually trust your model.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-4" style="width:0%"></div></div><div class="phase-count" id="count-4">0/10</div></div>
+  </div>
+  <div class="section"><div class="section-title">Train/validation/test strategy <span class="badge badge-danger">time-series critical</span></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Time-series data: NEVER random split. Time-based: oldest 60% train / next 20% val / recent 20% test</div><div class="check-sub">Random split = data leakage = model fails in production. This is an instant rejection signal.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Non-temporal: stratified K-fold CV, group splits if data has clusters (same user/location)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Validation strategy must simulate production reality — validate across the same dimensions you'll serve</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Metrics suite (never just one metric)</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Choose metrics based on business context — not default metrics from the library docs</div><div class="check-sub">Imbalanced: AUC-ROC, Precision/Recall/F1. Regression: RMSE vs MAE vs MAPE decision documented.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Check CV variance — wildly different fold scores = unstable model or data heterogeneity</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Statistical significance — is improvement over baseline real or random noise?</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Robustness & interpretation</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Robustness: test with missing features, distribution shift, adversarial inputs, data corruption</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Global interpretation: feature importance, partial dependence plots — what drives predictions?</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Local interpretation: SHAP values or LIME — why this specific prediction?</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="4"><div><div class="check-text">Document interpretation findings: "Model primarily relies on X features (Y% importance)..."</div><div class="check-sub">Shows you don't train models blindly.</div></div></div>
+  </div>
+</div>
+
+<!-- TAB 5: PHASE 5 -->
+<div class="tab-content" id="tab-5">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 5</div>
+    <div class="phase-title">Deployment architecture</div>
+    <div class="phase-desc">Model working in Jupyter notebook means nothing. Production = reliable, scalable, maintainable, observable.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-5" style="width:0%"></div></div><div class="phase-count" id="count-5">0/10</div></div>
+  </div>
+  <div class="section"><div class="section-title">Deployment pattern decision</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Chose deployment pattern based on latency — batch / real-time API / streaming / edge</div><div class="check-sub">Default for most student projects: batch or simple API. Don't overcomplicate.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Architecture documented: User → API → Input validation → Feature engineering → Model → Response</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">API design (if serving real-time)</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Input schema: clear required/optional fields, data type validation, range validation</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Output schema: prediction value, confidence/probability, model version, timestamp</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Error handling: 400 bad input, 500 server error, 429 rate limit — with helpful messages</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Authentication, rate limiting, input sanitization in place</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Containerization & deployment checklist <span class="badge badge-info">critical for hiring</span></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Dockerized — works on any machine, dependencies at exact versions, health check included</div><div class="check-sub">Do not include training data, dev tools, or secrets in container.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Live demo deployed: Streamlit Cloud / Hugging Face Spaces / Railway / Heroku</div><div class="check-sub">Working demo is 10x more valuable than perfect code nobody can run.</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Rollback plan defined — what if this deployment breaks things?</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="5"><div><div class="check-text">Cost estimated — know what it costs to run (compute, storage, API calls)</div></div></div>
+  </div>
+</div>
+
+<!-- TAB 6: PHASE 6 -->
+<div class="tab-content" id="tab-6">
+  <div class="phase-header">
+    <div class="phase-tag">Phase 6</div>
+    <div class="phase-title">Monitoring & maintenance strategy</div>
+    <div class="phase-desc">If you don't monitor it, it will break silently. This is where 80% of candidates fail at the interview.</div>
+    <div class="phase-progress"><div class="phase-bar"><div class="phase-fill" id="fill-6" style="width:0%"></div></div><div class="phase-count" id="count-6">0/8</div></div>
+  </div>
+  <div class="section"><div class="section-title">What to monitor — 4 categories</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Business metrics: revenue impact, cost savings, user satisfaction, conversion rates</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Model performance: accuracy, precision/recall, RMSE — tracked over time</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Data quality: missing value rates, out-of-range values, feature distributions, schema violations</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">System health: request latency, error rates, throughput, resource utilization</div></div></div>
+  </div>
+  <div class="section"><div class="section-title">Drift detection & retraining</div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Detect all 3 drift types: covariate shift (feature distributions), concept drift (target relationship), label shift</div><div class="check-sub">Alert if feature mean shifts &gt;2 std devs or error rate increases &gt;10%</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Retraining strategy defined: scheduled / triggered / hybrid — with staged rollout (small % first)</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Alert conditions defined: Critical (&gt;5% error rate, &gt;500ms latency), Warning (accuracy drop &gt;5%), Info</div></div></div>
+    <div class="check-item" onclick="tog(this)"><input type="checkbox" class="task" data-phase="6"><div><div class="check-text">Incident response plan written: data pipeline failure / model degradation / system outage / security</div></div></div>
+  </div>
+  <div class="info-card"><div class="info-title">The interview answer that separates you</div><div class="info-body">When asked "your model's accuracy drops from 85% to 62% in production — walk me through your debugging process", you now answer: check monitoring dashboards for drift type → inspect feature distributions → segment errors → check upstream pipelines → only then retrain → A/B test before full rollout.</div></div>
+</div>
+
+<!-- TAB 7: MISTAKES & INTERVIEW -->
+<div class="tab-content" id="tab-7">
+  <div class="phase-header">
+    <div class="phase-tag">Final check</div>
+    <div class="phase-title">Fatal mistakes & interview prep</div>
+    <div class="phase-desc">15 mistakes that get you rejected + your project IS your interview prep. Every decision needs a ready answer.</div>
+  </div>
+  <div class="section"><div class="section-title">The 15 fatal mistakes — confirm you've avoided all</div>
+    <div class="mistake-item"><div class="m-title">1. No business context</div><div class="m-fix">Fix: Always frame as "solves [problem] by [approach], delivering [quantified value]"</div></div>
+    <div class="mistake-item"><div class="m-title">2. Only accuracy reported</div><div class="m-fix">Fix: Report multiple metrics, confusion matrix, precision/recall trade-off, business impact</div></div>
+    <div class="mistake-item"><div class="m-title">3. No baseline comparison</div><div class="m-fix">Fix: Start with simple baseline, show ML's improvement justifies the complexity</div></div>
+    <div class="mistake-item"><div class="m-title">4. Random split for time-series data</div><div class="m-fix">Fix: ALWAYS time-based splits. Never use sklearn's train_test_split on temporal data.</div></div>
+    <div class="mistake-item"><div class="m-title">5. Data leakage</div><div class="m-fix">Fix: Split data FIRST. Fit preprocessing on train only. Ask: "Can I know this feature before prediction?"</div></div>
+    <div class="mistake-item"><div class="m-title">6. Hardcoded paths & parameters</div><div class="m-fix">Fix: Config files, environment variables, command-line arguments — no hardcoded values</div></div>
+    <div class="mistake-item"><div class="m-title">7. No error handling</div><div class="m-fix">Fix: Validate all inputs, catch exceptions gracefully, informative error messages, log everything</div></div>
+    <div class="mistake-item"><div class="m-title">8. No documentation</div><div class="m-fix">Fix: 7-section README, docstrings, code comments, architecture diagrams</div></div>
+    <div class="mistake-item"><div class="m-title">9. Dataset too clean</div><div class="m-fix">Fix: Collect your own messy data from real APIs — handle quality issues and document them</div></div>
+    <div class="mistake-item"><div class="m-title">10. No deployment</div><div class="m-fix">Fix: Deploy as API or batch pipeline, Dockerize, add monitoring dashboard</div></div>
+    <div class="mistake-item"><div class="m-title">11. Overfitting to test set</div><div class="m-fix">Fix: Use separate validation set for tuning. Test set touched ONCE at the very end.</div></div>
+    <div class="mistake-item"><div class="m-title">12. No version control history</div><div class="m-fix">Fix: Commit regularly with meaningful messages. Commit history = proof of sustained work.</div></div>
+    <div class="mistake-item"><div class="m-title">13. Ignoring class imbalance</div><div class="m-fix">Fix: 99% accuracy on imbalanced = predicting majority. Use AUC, F1. Try resampling/weighting.</div></div>
+    <div class="mistake-item"><div class="m-title">14. No tests</div><div class="m-fix">Fix: Unit tests for critical functions, integration tests for pipelines, API endpoint tests</div></div>
+    <div class="mistake-item"><div class="m-title">15. Copying without understanding</div><div class="m-fix">Fix: Understand every line. Document why you made each choice. Ready to explain in interviews.</div></div>
+  </div>
+  <div class="section"><div class="section-title">Interview Q&A (click to expand your answer)</div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"Walk me through your most complex ML project"</div><div class="a">Structure: Business problem (30 sec) → Data challenges (30 sec) → Approach + model selection with trade-offs (30 sec) → Results and business impact (30 sec) → Deployment + monitoring (30 sec). Total: 2.5 min. Never lead with tools or accuracy. Lead with the PROBLEM.</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"Why didn't you use [obvious approach X]?"</div><div class="a">Answer format: "I considered X, but given [constraint 1] and [constraint 2], it would have caused [specific problem]. Instead I chose Y because [production reasoning]." — This shows constraint thinking, not tutorial following.</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"Your model drops from 85% to 62% accuracy in production. Debug it."</div><div class="a">Step 1: Check monitoring dashboards — data drift, concept drift, or label drift? Step 2: Inspect feature distributions — out-of-distribution inputs? Step 3: Segment errors — uniform or specific subgroups? Step 4: Check upstream data pipelines. Step 5: ONLY THEN consider retraining — with A/B test before full rollout.</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"How did you handle missing data?"</div><div class="a">Answer format: "Weather data had 5% missing values. Tried: dropping rows (loses too much), mean imputation (ignores temporal patterns), forward fill (propagates errors). Chose: interpolation for short gaps, API backfill for longer. Validated: model performance consistent on non-missing holdout."</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"Build me a customer support agent (refunds, questions, escalations)"</div><div class="a">Don't say "I'd use GPT-4 with a system prompt." Say: First — latency req, cost per query, failure tolerance? Then: intent classification layer before LLM. Refunds: deterministic logic (cheaper, reliable). Questions: RAG + vector DB. Escalations: confidence thresholding + human-in-loop. Monitoring: intent accuracy, response quality, escalation rate.</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"What would you improve with more time?"</div><div class="a">Answer from your documented future improvements: "Three priorities: 1) Add [specific external data] — likely X% improvement. 2) Implement [specific technique] for [specific reason]. 3) Build [specific infra enhancement]. Would A/B test each to quantify value before committing."</div></div>
+    <div class="interview-q" onclick="toggleQ(this)"><span class="toggle">▼</span><div class="q">"What's something in ML you've been obsessing over lately?"</div><div class="a">Never say "I've been doing Andrew Ng's course." Say something specific you've actually experimented with: a quantization technique, a paper you reimplemented, an agent system you built, a benchmark you reproduced. Show you create problems for yourself beyond courses.</div></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Current project</div>
+    <div id="sidebar-brief" style="font-size:12px;color:var(--color-text-secondary);line-height:1.5;padding:8px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)">Fill in the project brief to see a summary here.</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">Phase progress</div>
+    <div id="phase-summary" style="font-size:12px;color:var(--color-text-secondary)">
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary)"><span>1 — Problem</span><span id="ps-1">0/10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary)"><span>2 — Data</span><span id="ps-2">0/12</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary)"><span>3 — Experiments</span><span id="ps-3">0/10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary)"><span>4 — Validation</span><span id="ps-4">0/10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary)"><span>5 — Deploy</span><span id="ps-5">0/10</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>6 — Monitor</span><span id="ps-6">0/8</span></div>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">Hiring formula</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.6">
+      <div style="padding:5px 8px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:4px"><strong style="color:var(--color-text-primary);font-size:12px">Tier 1 (must-have)</strong><br>Software eng fundamentals · Constraint thinking · End-to-end ownership · Communication</div>
+      <div style="padding:5px 8px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);margin-bottom:4px"><strong style="color:var(--color-text-primary);font-size:12px">Tier 2 (differentiators)</strong><br>Domain expertise · Production battle scars · Research awareness · System design</div>
+      <div style="padding:5px 8px;border-radius:var(--border-radius-md);background:var(--color-background-info)"><strong style="color:var(--color-text-info);font-size:12px">Tier 3 — you already have these</strong><br>Teaching ability · Entrepreneurial mindset · Tool building (Toolly, LangGraph repo)</div>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">README checklist</div>
+    <div style="font-size:11px;color:var(--color-text-secondary);line-height:2">
+      <div>□ Section 1: Project overview (30 sec hook)</div>
+      <div>□ Section 2: Problem definition</div>
+      <div>□ Section 3: Technical approach</div>
+      <div>□ Section 4: Results vs baseline</div>
+      <div>□ Section 5: How to run (5 min to test)</div>
+      <div>□ Section 6: Project structure</div>
+      <div>□ Section 7: Future improvements</div>
+    </div>
+  </div>
+  <button onclick="sendPrompt('I want to start building my next production ML project. Based on my background in Bengali NLP and speaker diarization, what specific project should I build next that maximizes my hiring chances?')" style="width:100%;padding:8px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:12px;cursor:pointer;font-family:var(--font-sans)">Ask Claude what to build next ↗</button>
+</div>
+</div>
+</div>
+
+<script>
+const totals={1:10,2:12,3:10,4:10,5:10,6:8};
+const TOTAL=60;
+
+function tog(item){
+  const cb=item.querySelector('input[type=checkbox]');
+  cb.checked=!cb.checked;
+  const txt=item.querySelector('.check-text');
+  if(cb.checked){item.classList.add('checked');txt.classList.add('checked')}
+  else{item.classList.remove('checked');txt.classList.remove('checked')}
+  updateProgress();
+}
+
+function updateProgress(){
+  let total=0;
+  for(let p=1;p<=6;p++){
+    const tasks=document.querySelectorAll('.task[data-phase="'+p+'"]');
+    const done=[...tasks].filter(t=>t.checked).length;
+    const tot=totals[p];
+    const pct=tot?Math.round(done/tot*100):0;
+    document.getElementById('fill-'+p).style.width=pct+'%';
+    document.getElementById('count-'+p).textContent=done+'/'+tot;
+    document.getElementById('ps-'+p).textContent=done+'/'+tot;
+    document.getElementById('ps-'+p).style.color=done===tot?'var(--color-text-success)':'var(--color-text-secondary)';
+    total+=done;
+    const nb=document.getElementById('nb-'+p);
+    if(done===tot)nb.classList.add('done');else nb.classList.remove('done');
+  }
+  const pct=Math.round(total/TOTAL*100);
+  document.getElementById('global-bar').style.width=pct+'%';
+  document.getElementById('global-label').textContent=total+' / '+TOTAL+' tasks done';
+}
+
+function showTab(n){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  document.getElementById('nb-'+n).classList.add('active');
+}
+
+function toggleQ(el){el.classList.toggle('open')}
+
+function updateBrief(){
+  const name=document.getElementById('pname').value;
+  const prob=document.getElementById('bproblem').value;
+  const base=document.getElementById('baseline').value;
+  const succ=document.getElementById('success').value;
+  const dep=document.getElementById('deploy-type').value;
+  const fail=document.getElementById('failmode').value;
+  const cons=document.getElementById('constraints').value;
+  let preview='';
+  if(name)preview+='<strong style="color:var(--color-text-primary)">'+name+'</strong> — ';
+  if(prob)preview+=prob+' ';
+  if(base)preview+='Current baseline: '+base+'. ';
+  if(succ)preview+='Success: '+succ+'. ';
+  if(dep)preview+='Deployment: '+dep+'. ';
+  if(fail)preview+='Failure mode: '+fail+'. ';
+  if(cons)preview+='Constraints: '+cons+'.';
+  document.getElementById('brief-preview').innerHTML=preview||'Fill in the fields above — your README intro will appear here.';
+  const short=name?(name+(prob?' — '+prob.slice(0,60)+'...':'')):'Fill in the project brief to see a summary here.';
+  document.getElementById('sidebar-brief').textContent=short;
+}
+
+function loadTemplate(t){
+  const tpls={
+    demand:{name:'Restaurant demand forecasting system',bproblem:'Reduce food waste by 25% and cut inventory costs by predicting daily demand for 50+ menu items, deployed as automated morning batch reports for restaurant managers.',baseline:'Manual ordering based on last week\'s same day: 30% MAPE, ~$50K/month wasted inventory per restaurant.',success:'Achieve <20% MAPE on demand prediction, reduce waste to <8%, save $12K/month per restaurant.',dep:'Batch predictions (daily/weekly)',fail:'Over-prediction = wasted inventory (moderate). Under-prediction = stockouts = lost revenue (high impact).',cons:'Daily predictions ready by 7 AM for 10 AM ordering. Model must run on CPU in under 2 minutes for 50 items.',refresh:'Retrain weekly or when MAPE degrades >5% from monitored baseline on holdout set.'},
+    fraud:{name:'Real-time fraud detection API',bproblem:'Reduce fraudulent transaction losses by 40% by flagging suspicious transactions in <50ms before payment clears, deployed as a real-time REST API integrated into checkout flow.',baseline:'Rule-based system: 60% recall on fraud, 15% false positive rate blocking legitimate transactions and costing goodwill.',success:'Achieve >85% recall on fraud with <5% false positive rate. Serve predictions in <50ms p95 latency.',dep:'Real-time REST API (<100ms)',fail:'False negative = fraudulent transaction approved = direct financial loss. False positive = legitimate user blocked = lost customer.',cons:'Inference <50ms p95, model <500MB, must handle 1000 req/sec burst, explainable predictions required for dispute resolution.',refresh:'Triggered retraining when recall drops >3% on monitored labeled holdout. Emergency retrain on new fraud pattern detection.'},
+    nlp:{name:'Bengali speaker diarization system',bproblem:'Reduce manual transcription review time by 50% by automatically separating speakers in Bengali audio with DER below 0.20, enabling call centers to process 10x more recordings per day.',baseline:'Manual labeling: 4 hours per 1 hour of audio. Best existing tool: 35% DER on Bengali speech. No automated Bengali diarization exists.',success:'Achieve DER <0.20 on Bengali benchmark. 56% inference speedup over baseline transformer. Process 1hr audio in <5 minutes.',dep:'Batch predictions (daily/weekly)',fail:'Wrong speaker attribution in legal or medical transcripts = serious downstream errors. Requires human review flag for low-confidence segments.',cons:'Inference <5min per 1hr audio on CPU. Model <1GB. Must handle code-switching and Bengali dialects.',refresh:'Retrain quarterly or when DER degrades >3% on held-out Bengali evaluation set.'},
+    recommend:{name:'Hybrid recommendation engine with cold-start handling',bproblem:'Increase user click-through rate by 20% and session depth by 30% by serving personalized content recommendations, with a verified business impact similar to the +10% sales lift already achieved.',baseline:'Popularity-based recommendations: same items shown to all users. CTR 8%, no personalization, no cold-start handling.',success:'Achieve >15% CTR improvement over popularity baseline. Cold-start: recommendations for new users within first 3 interactions. Latency <45ms p95.',dep:'Real-time REST API (<100ms)',fail:'Bad recommendations = user ignores and churns. Cold-start failure = new users see irrelevant content immediately = first-session churn.',cons:'Inference <45ms p95, Redis caching for hot items, model retrain without downtime, cost <$0.003 per 1000 requests.',refresh:'Retrain weekly on new interaction data. Triggered retrain if CTR drops >5% on A/B test control group.'}
+  };
+  const tp=tpls[t];
+  if(!tp)return;
+  document.getElementById('pname').value=tp.name;
+  document.getElementById('bproblem').value=tp.bproblem;
+  document.getElementById('baseline').value=tp.baseline;
+  document.getElementById('success').value=tp.success;
+  document.getElementById('deploy-type').value=tp.dep;
+  document.getElementById('failmode').value=tp.fail;
+  document.getElementById('constraints').value=tp.cons;
+  document.getElementById('refresh').value=tp.refresh;
+  updateBrief();
+}
+</script>

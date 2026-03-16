@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Home</title>
+  <style>
+    :root {
+      --bg-1: #f5f7ff;
+      --bg-2: #e7f5ff;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #0ea5e9;
+      --accent-2: #0284c7;
+      --ring: rgba(14, 165, 233, 0.25);
+      --shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, #dbeafe 0, transparent 40%),
+        radial-gradient(circle at 100% 100%, #cffafe 0, transparent 45%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .home {
+      width: min(760px, 100%);
+      background: color-mix(in srgb, var(--card) 92%, #ffffff 8%);
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      animation: fade-in 550ms ease-out;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      letter-spacing: 0.2px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .grid {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .link-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .link-card:hover,
+    .link-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 22px var(--ring);
+      outline: none;
+    }
+
+    .title {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .file {
+      color: var(--muted);
+      font-size: 0.93rem;
+      word-break: break-word;
+    }
+
+    @media (max-width: 680px) {
+      .home {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="home">
+    <h1>Project Home</h1>
+    <p>Select a page below to open it with one click.</p>
+
+    <section class="grid" aria-label="Website links">
+      <a class="link-card" href="ai_placement_sprint_v1.html">
+        <div class="title">AI Placement Sprint</div>
+        <div class="file">ai_placement_sprint_v1.html</div>
+      </a>
+
+      <a class="link-card" href="clarity_framework_daily_system.html">
+        <div class="title">Clarity Framework Daily System</div>
+        <div class="file">clarity_framework_daily_system.html</div>
+      </a>
+
+      <a class="link-card" href="production_ml_project_builder.html">
+        <div class="title">Production ML Project Builder</div>
+        <div class="file">production_ml_project_builder.html</div>
+      </a>
+
+      <a class="link-card" href="senior_ml_engineer_v2.html">
+        <div class="title">Senior ML Engineer V2</div>
+        <div class="file">senior_ml_engineer_v2.html</div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

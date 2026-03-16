@@ -1,0 +1,573 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+.se{
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f6f2e8;
+  --color-background-danger:#fdf0eb;
+  --color-background-success:#e9f6ef;
+  --color-background-warning:#fff4df;
+  --color-background-info:#eaf4fb;
+
+  --color-border-secondary:#d8cfbf;
+  --color-border-tertiary:#e7dece;
+  --color-border-danger:#efb4a4;
+  --color-border-success:#9fd0b2;
+  --color-border-warning:#e5c67d;
+
+  --color-text-primary:#1f2a37;
+  --color-text-secondary:#5f6775;
+  --color-text-danger:#97321e;
+  --color-text-success:#17613f;
+  --color-text-warning:#7f4d00;
+  --color-text-info:#0f4f8a;
+
+  --border-radius-md:14px;
+  --border-radius-lg:20px;
+  --font-sans:'Plus Jakarta Sans',sans-serif;
+
+  max-width:1120px;
+  margin:18px auto 24px;
+  padding:26px 18px 36px;
+  font-family:var(--font-sans);
+  color:var(--color-text-primary);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(45,137,188,.12), transparent 34%),
+    radial-gradient(circle at 0% 90%, rgba(47,153,118,.10), transparent 30%),
+    linear-gradient(180deg, #fbfaf6 0%, #f4efe4 100%);
+  border:1px solid #e6dcc8;
+  border-radius:24px;
+  box-shadow:0 20px 50px rgba(67,73,89,.12);
+  position:relative;
+  overflow:hidden;
+  padding-bottom:2rem;
+}
+.se::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.46) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.42) 1px, transparent 1px);
+  background-size:28px 28px;
+  opacity:.3;
+  pointer-events:none;
+}
+.se>*{position:relative;z-index:1}
+
+.nav{
+  position:sticky;
+  top:8px;
+  z-index:15;
+  display:flex;
+  gap:8px;
+  margin-bottom:1.4rem;
+  flex-wrap:wrap;
+  padding:10px;
+  border:1px solid #e4dac8;
+  border-radius:16px;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(8px);
+}
+.nav button{
+  padding:8px 14px;
+  border:1px solid var(--color-border-secondary);
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.01em;
+  cursor:pointer;
+  background:linear-gradient(180deg, #fff 0%, #f7f4ec 100%);
+  color:var(--color-text-secondary);
+  font-family:'Space Grotesk',sans-serif;
+  transition:all .2s ease;
+}
+.nav button.on{
+  background:linear-gradient(135deg, #1f7d8f 0%, #23617f 100%);
+  color:#fff;
+  border-color:#23617f;
+  box-shadow:0 8px 20px rgba(36,98,128,.3);
+}
+.nav button:hover:not(.on){
+  transform:translateY(-1px);
+  background:linear-gradient(180deg, #fffefb 0%, #ede7d8 100%);
+  color:var(--color-text-primary);
+}
+.nav button:focus-visible,
+.btn:focus-visible,
+.inp:focus-visible{
+  outline:2px solid #2f7ea3;
+  outline-offset:2px;
+}
+.view{display:none}.view.on{display:block}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(253,251,246,.95) 100%);
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  padding:1rem 1.25rem;
+  margin-bottom:12px;
+  box-shadow:0 10px 28px rgba(32,45,57,.06);
+  animation:card-in .45s ease both;
+}
+.card:nth-child(2){animation-delay:.05s}
+.card:nth-child(3){animation-delay:.1s}
+.card:nth-child(4){animation-delay:.15s}
+.pill{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:99px;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+.pt{background:#dff3e8;color:#145a3a}
+.pa{background:#fef1dc;color:#875005}
+.pc{background:#fdebe2;color:#8b2e1a}
+.pp{background:#e8efff;color:#1f4a9b}
+.pb{background:#e6f3ff;color:#0f4f8a}
+.pr{background:#fde8e8;color:#912727}
+.pg{background:#e8f2df;color:#2f5f1e}
+.h{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--color-text-primary);margin-bottom:7px;line-height:1.35}
+.sub{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:10px}
+.vb{background:linear-gradient(180deg, #fff4f0 0%, #fdebe5 100%);border:1px solid var(--color-border-danger);border-radius:var(--border-radius-md);padding:10px 12px}
+.vb .vl{font-size:10px;font-weight:500;color:var(--color-text-danger);margin-bottom:4px;text-transform:uppercase}
+.vb .vt{font-size:12px;color:var(--color-text-danger);line-height:1.5}
+.vg{background:linear-gradient(180deg, #f1fbf5 0%, #e7f5ee 100%);border:1px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:10px 12px}
+.vg .vl{font-size:10px;font-weight:500;color:var(--color-text-success);margin-bottom:4px;text-transform:uppercase}
+.vg .vt{font-size:12px;color:var(--color-text-success);line-height:1.5}
+.tg{background:linear-gradient(180deg, #faf8f2 0%, #f4efe5 100%);border:1px solid #e7dece;border-radius:var(--border-radius-md);padding:10px 12px;font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:8px}
+.tg strong{color:var(--color-text-primary);font-weight:500;display:block;margin-bottom:3px}
+.tg.bt{border-left:2px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.tg.bc{border-left:2px solid #D85A30;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.tg.bp{border-left:2px solid #7F77DD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.r2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.r3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sc{background:linear-gradient(180deg, #faf8f2 0%, #f2ecdf 100%);border:1px solid #e5dbc8;border-radius:var(--border-radius-md);padding:10px 12px;text-align:center}
+.sc .sn{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.sc .sl{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.div{height:1px;background:var(--color-border-tertiary);margin:10px 0}
+.cr{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--color-border-tertiary);cursor:pointer;-webkit-user-select:none;user-select:none;transition:background .2s ease, padding-left .2s ease}
+.cr:hover{background:rgba(244,239,229,.45);padding-left:4px}
+.cr:last-child{border-bottom:none}
+.cr input[type=checkbox]{width:15px;height:15px;margin-top:1px;flex-shrink:0;accent-color:var(--color-text-success);cursor:pointer}
+.cr .ct{font-size:13px;color:var(--color-text-primary);line-height:1.4}
+.cr .cs{font-size:11px;color:var(--color-text-secondary);margin-top:2px;line-height:1.4}
+.cr.done .ct{text-decoration:line-through;color:var(--color-text-secondary)}
+.pbar{height:6px;background:var(--color-border-tertiary);border-radius:99px;overflow:hidden;margin-top:8px}
+.pf{height:100%;border-radius:2px;background:var(--color-text-success);transition:width .4s}
+.pl{font-size:11px;color:var(--color-text-secondary);margin-top:4px;text-align:right}
+.qa{padding:10px 12px;border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:8px;cursor:pointer;transition:background .2s ease, border-color .2s ease}
+.qa:hover{background:var(--color-background-secondary);border-color:#dacfb7}
+.qa .qq{font-size:13px;font-weight:500;color:var(--color-text-primary);padding-right:24px;position:relative}
+.qa .qq::after{content:"▼";font-size:10px;color:var(--color-text-secondary);position:absolute;right:0;top:1px}
+.qa.open .qq::after{content:"▲"}
+.qa .qa-bd{font-size:12px;color:var(--color-text-secondary);margin-top:8px;line-height:1.6;display:none}
+.qa.open .qa-bd{display:block}
+.bdr{display:inline-block;font-size:10px;padding:1px 7px;border-radius:99px;font-weight:500;margin-bottom:4px}
+.bdr-r{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bdr-g{background:var(--color-background-success);color:var(--color-text-success)}
+.inp{width:100%;border:1px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:9px 11px;font-size:13px;font-family:var(--font-sans);color:var(--color-text-primary);background:#fff;line-height:1.5;transition:border-color .2s ease,box-shadow .2s ease}
+textarea.inp{resize:vertical;min-height:72px}
+.inp::placeholder{color:var(--color-text-secondary)}
+.inp:focus{border-color:#2f7ea3;box-shadow:0 0 0 3px rgba(47,126,163,.14)}
+.btn{padding:8px 16px;border:1px solid #215d79;border-radius:var(--border-radius-md);font-size:12px;font-weight:600;cursor:pointer;background:linear-gradient(135deg, #2f7ea3 0%, #215d79 100%);color:#fff;font-family:'Space Grotesk',sans-serif;transition:transform .2s ease, box-shadow .2s ease;margin-top:8px;display:inline-block}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(33,93,121,.32)}
+.tr{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--color-border-tertiary)}
+.tr:last-child{border-bottom:none}
+.tb{font-size:10px;font-weight:500;padding:3px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.t1b{background:var(--color-background-success);color:var(--color-text-success)}
+.t2b{background:var(--color-background-info);color:var(--color-text-info)}
+.t3b{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.tr .tt{font-size:12px;color:var(--color-text-primary);line-height:1.4}
+.tr .ts{font-size:11px;color:var(--color-text-secondary);margin-top:2px;line-height:1.4}
+.sr{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--color-border-tertiary)}
+.sr:last-child{border-bottom:none}
+.sn{width:26px;height:26px;border-radius:50%;background:var(--color-background-secondary);color:var(--color-text-secondary);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.sn.act{background:var(--color-background-success);color:var(--color-text-success)}
+.sb .st{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.sb .sd{font-size:12px;color:var(--color-text-secondary);margin-top:3px;line-height:1.5}
+.rb{padding:12px;border-radius:var(--border-radius-md);font-size:12px;line-height:1.6;margin-top:10px;display:none;box-shadow:0 6px 16px rgba(30,39,54,.08)}
+.rb.show{display:block}
+.rb-ok{background:var(--color-background-success);border:1px solid var(--color-border-success);color:var(--color-text-success)}
+.rb-no{background:var(--color-background-danger);border:1px solid var(--color-border-danger);color:var(--color-text-danger)}
+.rb-mid{background:var(--color-background-warning);border:1px solid var(--color-border-warning);color:var(--color-text-warning)}
+.rb strong{font-weight:500}
+.fl{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 6px}
+
+@keyframes card-in{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:900px){
+  .se{margin:0;border-radius:0;max-width:none;padding:14px 12px 30px;border-left:none;border-right:none}
+  .nav{top:0;border-radius:12px}
+  .vs,.r2{grid-template-columns:1fr}
+  .r3{grid-template-columns:1fr 1fr}
+}
+
+@media (max-width:640px){
+  .pill{font-size:9px}
+  .h{font-size:15px}
+  .sub,.tg,.tr .tt,.sb .sd,.qa .qa-bd{font-size:12px}
+  .nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav button{width:100%;padding:9px 10px}
+  .card{padding:12px}
+  .r3{grid-template-columns:1fr}
+}
+</style>
+
+<div class="se">
+<div class="nav">
+  <button class="on" onclick="sv(0,this)">Senior mindset</button>
+  <button onclick="sv(1,this)">Interview simulator</button>
+  <button onclick="sv(2,this)">GitHub audit</button>
+  <button onclick="sv(3,this)">Resume surgeon</button>
+  <button onclick="sv(4,this)">Hiring tiers</button>
+  <button onclick="sv(5,this)">Live problem test</button>
+  <button onclick="sv(6,this)">Action plan</button>
+</div>
+
+<div class="view on" id="v0">
+  <div class="card">
+    <div class="pill pc">The one sentence that changes everything</div>
+    <div class="h">We don't hire ML engineers. We hire software engineers who can think in ML.</div>
+    <div class="sub">60–70% of your job IS software engineering. Not model training. Not Kaggle. Not accuracy scores. Production systems that don't break.</div>
+    <div class="vs">
+      <div class="vb"><div class="vl">Tutorial engineer — rejected</div><div class="vt">Shows output, tools, metrics.<br><br>"I built X with 94% accuracy using BERT on the IMDB dataset."</div></div>
+      <div class="vg"><div class="vl">Senior engineer — hired</div><div class="vt">Shows process, constraints, decisions.<br><br>"I was solving X. Constraint was Y. Tried Z, hit limitation A. Pivoted to B. Here's the production impact."</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pt">The 3-level senior thinking model</div>
+    <div class="h">Senior engineers ask 3 questions juniors never ask</div>
+    <div class="tg bt"><strong>Level 1: Why this algorithm for this problem?</strong>Not "which algorithm gets best accuracy." What are the constraints? Latency budget? What happens when data distribution shifts? Cost to retrain? Your Bengali diarization: why pyannote over simpler clustering? Because overlapping speech requires learned embeddings, not distance-based methods. That reasoning IS the interview answer.</div>
+    <div class="tg bt"><strong>Level 2: What happens when this breaks?</strong>Junior: "The model has 85% accuracy." Senior: "When accuracy drops to 62% in production, here's my 5-step debugging: drift type → feature distributions → error segmentation → upstream pipeline → only then retrain with A/B validation." This question shows production scars.</div>
+    <div class="tg bt"><strong>Level 3: What does this cost and who cares?</strong>Senior engineers connect everything to business outcomes. Not just latency — cost per request. Not just recall — what does a false negative cost the business? Your recommendation system: "+10% sales lift" is what matters, not "collaborative filtering with matrix factorization."</div>
+  </div>
+  <div class="card">
+    <div class="pill pp">How senior engineers answer differently — click each</div>
+    <div class="h">The same question, two completely different brains</div>
+    <div class="qa" onclick="this.classList.toggle('open')"><div class="qq">"What model did you use and why?"</div><div class="qa-bd"><span class="bdr bdr-r">Junior answer</span> "I used XGBoost because it's fast and works well on tabular data."<br><br><span class="bdr bdr-g">Senior answer</span> "Started with logistic regression as baseline — 72% recall. Tried random forest: 78% but 180ms inference — too slow for our 100ms SLA. XGBoost hit 81% recall at 45ms. That accuracy-latency trade-off made it the obvious choice. With a 500ms budget I'd have tried a stacked ensemble."</div></div>
+    <div class="qa" onclick="this.classList.toggle('open')"><div class="qq">"How did you handle the data?"</div><div class="qa-bd"><span class="bdr bdr-r">Junior answer</span> "I cleaned it, removed nulls, and normalized the features."<br><br><span class="bdr bdr-g">Senior answer</span> "The dataset had 18% missing values in the key feature. Dropping rows would have eliminated weekend data — exactly when fraud spikes. Tried mean imputation: model learned 'mean = no fraud pattern', which was wrong. Used forward-fill with a 24-hour window — preserved the temporal pattern. Validated: no performance difference on non-missing holdout."</div></div>
+    <div class="qa" onclick="this.classList.toggle('open')"><div class="qq">"What would you improve?"</div><div class="qa-bd"><span class="bdr bdr-r">Junior answer</span> "I'd try a neural network to see if it gets better accuracy."<br><br><span class="bdr bdr-g">Senior answer</span> "Three priorities ranked by expected ROI: (1) Content-based fallback for cold-start users — currently 40% higher error on new users. (2) Drift detection — no alerting when input distributions shift, one pipeline failure silently degrades the model. (3) A/B testing infra — can't safely compare model versions. I'd tackle in that order."</div></div>
+    <div class="qa" onclick="this.classList.toggle('open')"><div class="qq">"Walk me through your Bengali diarization system" — your actual answer</div><div class="qa-bd"><span class="bdr bdr-g">Your senior answer</span> "I was solving Bengali speaker attribution for call center audio. Constraint: every existing diarization tool is trained on English/European speech — off-the-shelf tools gave 35% DER on Bengali, unusable.<br><br>Initial approach: fine-tune pyannote on Bengali data. Blocker: only 4 hours labeled audio. Pivoted to domain adaptation — kept pre-trained speaker embeddings, retrained the clustering head on Bengali-specific data.<br><br>Second constraint: latency. Client needed near-real-time. Initial pipeline was 8x real-time — too slow. Applied knowledge distillation: 56% inference speedup, no DER degradation. Published at BUET CSE Fest 2026.<br><br>Final system: DER 0.19 on held-out Bengali test set. Deployed as FastAPI service returning speaker-labeled JSON with timestamps and confidence scores. Monitoring tracks DER proxy and latency in production."</div></div>
+  </div>
+  <div class="card">
+    <div class="pill pa">Your passion answer — ready to use</div>
+    <div class="h">"What are you obsessing over in ML right now?"</div>
+    <div class="sub">Never say courses. Say experiments you ran yourself. This is the X-factor that separates good from "hell yes, hire."</div>
+    <div class="tg bc"><strong>Your ready answer:</strong>"I've been obsessing over the production gap in Bengali speech ML. Most research stops at DER scores on clean datasets — real call center audio has background noise, code-switching between Bengali and English, and multi-speaker overlaps. I've been experimenting with overlap detection as a preprocessing step before diarization — if I detect overlap segments first, I can apply different clustering logic there. Early results show 12% DER improvement on overlapping speech specifically. The challenge is keeping it under 50ms additional latency so the full pipeline stays within budget."</div>
+  </div>
+</div>
+
+<div class="view" id="v1">
+  <div class="card">
+    <div class="pill pc">Interview simulator</div>
+    <div class="h">Real questions from senior ML engineers. Write your answer first — then reveal.</div>
+    <div class="sub">The structure that works every time: Constraint → Decision → Trade-off → Impact. Never lead with tools or accuracy.</div>
+  </div>
+  <div class="card">
+    <div class="pill pr">Q1 — the hardest question</div>
+    <div class="h">"Walk me through your most complex ML project"</div>
+    <div class="sub">2.5 minutes max. Problem (30s) → Data challenges (30s) → Model decision (30s) → Results (30s) → Deployment + monitoring (30s).</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Write your answer first:</label>
+    <textarea class="inp" placeholder="I was solving... The constraint was... I initially tried... but discovered... So I pivoted to... The trade-off was... The production impact was..."></textarea>
+    <button class="btn" onclick="reveal('q1r')">Reveal model answer</button>
+    <div class="rb rb-ok" id="q1r"><strong>Model answer — Bengali speech API:</strong><br><br>"I was solving Bengali speaker diarization for call center analytics. The constraint: every existing tool is trained on English speech — off-the-shelf gave 35% DER on Bengali, unusable for the client.<br><br>Initial approach: fine-tune pyannote directly on Bengali data. Blocker immediately — only 4 hours labeled audio, severe overfitting. Pivoted to domain adaptation: kept pre-trained speaker embeddings, retrained only the clustering head on Bengali-specific data.<br><br>Second constraint: latency — client needed near-real-time output for live monitoring. Initial pipeline ran 8x real-time. Too slow. Applied knowledge distillation, achieved 56% inference speedup with no DER degradation. Published this technique at BUET CSE Fest 2026.<br><br>Final system: DER 0.19 on held-out test set. Deployed as FastAPI service — POST /transcribe returns speaker-labeled JSON with timestamps and confidence scores. Monitoring tracks inference latency and confidence distribution as a drift proxy."</div>
+  </div>
+  <div class="card">
+    <div class="pill pa">Q2 — the trap question</div>
+    <div class="h">"Why didn't you just use OpenAI Whisper for the full pipeline?"</div>
+    <div class="sub">They know Whisper exists. They want to see if YOU know why it wouldn't work in YOUR context. Wrong: "I didn't think of that."</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Your answer:</label>
+    <textarea class="inp" placeholder="I considered Whisper and benchmarked it. Two blockers..."></textarea>
+    <button class="btn" onclick="reveal('q2r')">Reveal model answer</button>
+    <div class="rb rb-ok" id="q2r"><strong>Model answer:</strong><br><br>"I considered Whisper and actually benchmarked it. Two blockers.<br><br>First: Whisper doesn't do speaker diarization — it transcribes but doesn't attribute who said what, which was the core requirement. I'd need a separate diarization system regardless.<br><br>Second: Whisper-large on long audio without quantization runs at 12x real-time on CPU — our constraint was under 500ms per 30-second segment. I did test Whisper-medium with quantization and got WER 0.37 at acceptable latency — that's what I use for the ASR component. But for speaker attribution specifically, I needed a purpose-built speaker embedding model, not a transcription model."</div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Q3 — the MLOps filter (80% of candidates fail here)</div>
+    <div class="h">"Model in production. 3 months later, accuracy drops 85% → 62%. Walk me through your debugging."</div>
+    <div class="sub">Wrong answer: "I'd retrain the model." Right answer: structured root-cause analysis BEFORE any retraining.</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Your 5-step answer:</label>
+    <textarea class="inp" placeholder="Step 1: I'd check... Step 2: I'd look at... Step 3: I'd segment... Step 4: I'd check... Step 5: Only then..."></textarea>
+    <button class="btn" onclick="reveal('q3r')">Reveal the 5-step senior answer</button>
+    <div class="rb rb-ok" id="q3r"><strong>The exact 5 steps that pass this filter:</strong><br><br><strong>Step 1:</strong> Check monitoring dashboards — what TYPE of degradation? Data drift (input distribution changed)? Concept drift (relationship between features and target changed)? Label drift (class distribution shifted)? The type determines the solution.<br><br><strong>Step 2:</strong> Inspect feature distributions — compare production statistics vs training statistics. Look for schema changes, new null patterns, range violations. Out-of-distribution inputs?<br><br><strong>Step 3:</strong> Segment the errors — is accuracy dropping uniformly or only for specific subgroups? If only new users or only certain audio lengths are degrading, that's a different root cause than uniform degradation.<br><br><strong>Step 4:</strong> Check upstream data pipelines — has anything changed in data collection? A logging bug, schema migration, new data source? 40% of production "model failures" are actually pipeline failures.<br><br><strong>Step 5:</strong> Only then consider retraining. And even then: train a challenger model, run A/B test on 10% traffic, validate before full rollout. Never blind retrain and replace.</div>
+  </div>
+  <div class="card">
+    <div class="pill pb">Q4 — system design question</div>
+    <div class="h">"Build a real-time Bengali speech transcription system for 1000 concurrent calls."</div>
+    <div class="sub">Don't jump to model selection. Ask constraints first. The model is the last decision, not the first.</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Your system design answer:</label>
+    <textarea class="inp" placeholder="First I'd ask: ... Then I'd design: ... Key trade-offs: ..."></textarea>
+    <button class="btn" onclick="reveal('q4r')">Reveal senior system design answer</button>
+    <div class="rb rb-ok" id="q4r"><strong>How a senior engineer structures this:</strong><br><br><strong>Clarifying questions first (5 minutes):</strong> Latency requirement — real-time streaming or async within 30 seconds? Acceptable WER for this use case? Speaker attribution required or just transcription? Cost per call budget? Bengali-only or code-switching? On-premise or cloud?<br><br><strong>Architecture based on answers:</strong><br>Hot path: Audio ingestion → VAD (lightweight) → 30s chunk buffer → ASR inference → streaming output.<br>Diarization path (parallel): Speaker embedding extraction → clustering → attribution merge with transcript.<br>Scale: Horizontal pod autoscaling on GPU nodes. Kafka queue to decouple ingestion from inference. Model loaded once per pod, not per request.<br><br><strong>Trade-offs I'd name explicitly:</strong><br>— Whisper-medium (1.5GB) vs small (244MB): accuracy vs memory trade-off<br>— GPU at $0.90/hr handles ~40 concurrent streams vs CPU at $0.10/hr handles ~4<br>— Streaming adds complexity but reduces perceived latency by 60%<br><br><strong>Monitoring I'd set up:</strong> Per-stream confidence score distribution, latency p50/p95/p99, queue depth, GPU utilization, error rate by audio quality band.</div>
+  </div>
+  <div class="card">
+    <div class="pill pt">Q5 — the live 30-minute problem test</div>
+    <div class="h">What interviewers actually evaluate in a live test</div>
+    <div class="sub">They don't care if the solution is perfect. They care about HOW you think — what questions you ask, what you prioritize, how you handle uncertainty.</div>
+    <div class="tg"><strong>Best candidates (hire):</strong> Spend first 10 minutes asking questions and clarifying constraints. Sketch 2–3 approaches with explicit trade-offs. Pick one with clear reasoning. Build something simple that works. Explain what they'd add with more time.</div>
+    <div class="tg"><strong>Worst candidates (reject):</strong> Jump straight to coding. Try to build the perfect solution. Get stuck debugging. Have nothing working at the end. Never asked a single clarifying question.</div>
+  </div>
+</div>
+
+<div class="view" id="v2">
+  <div class="card">
+    <div class="pill pc">The truth about GitHub</div>
+    <div class="h">Star count = vanity. Commit history = evidence.</div>
+    <div class="sub">When a senior engineer opens your GitHub, they're not looking at your most impressive repo. They're looking at the commit graph. One year of consistent daily commits beats 10 impressive one-day projects.</div>
+  </div>
+  <div class="card">
+    <div class="pill pr">Red flags — check what your GitHub currently has</div>
+    <div class="h">Each one is a screen-out signal. Check honestly.</div>
+    <div class="cr" onclick="tc(this,'rf')"><input type="checkbox"><div><div class="ct">50+ repos, mostly forked, zero original commits</div><div class="cs">Fix: Delete the forks. 5 strong original repos beats 50 empty ones every time.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf')"><input type="checkbox"><div><div class="ct">Repos with only Jupyter notebooks — no production code</div><div class="cs">Fix: Port your best notebook to a modular Python package with functions, classes, type hints.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf')"><input type="checkbox"><div><div class="ct">Projects that stop at model.py — no deployment, tests, or monitoring</div><div class="cs">Fix: Bengali speech API needs FastAPI endpoint, Dockerfile, and at least 3 unit tests.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf')"><input type="checkbox"><div><div class="ct">READMEs that say "94% accuracy" with no discussion of trade-offs</div><div class="cs">Fix: Every README needs: problem, baseline, constraint faced, trade-off made, measurable impact.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf')"><input type="checkbox"><div><div class="ct">Commit burst right before applying — then nothing for months</div><div class="cs">Fix: Commit every day. Even 5 lines. The graph proves sustained work, not interview cramming.</div></div></div>
+    <div class="pbar"><div class="pf" id="rf-pf" style="width:0%"></div></div>
+    <div class="pl" id="rf-pl">0 / 5 red flags found</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">Green flags — your evidence already exists</div>
+    <div class="h">Check what you already have — these are hiring signals</div>
+    <div class="cr" onclick="tc(this,'gf')"><input type="checkbox"><div><div class="ct">Consistent commit history — sustained work visible in the graph</div><div class="cs">Toolly has 206+ commits. This is already a confirmed green flag. Keep it daily.</div></div></div>
+    <div class="cr" onclick="tc(this,'gf')"><input type="checkbox"><div><div class="ct">Evolution of a project — iterations, pivots, experiments visible over time</div><div class="cs">Your Bangla Diarizz work shows research iterations. Document this evolution explicitly in the README.</div></div></div>
+    <div class="cr" onclick="tc(this,'gf')"><input type="checkbox"><div><div class="ct">Production-ready code — Dockerfiles, tests, logging, error handling</div><div class="cs">Bengali speech API target: all four of these before you share the link with recruiters.</div></div></div>
+    <div class="cr" onclick="tc(this,'gf')"><input type="checkbox"><div><div class="ct">Trade-off documentation — "Tried X, failed because Y, switched to Z"</div><div class="cs">One sentence in a README worth more than 10 accuracy metrics to a senior engineer.</div></div></div>
+    <div class="cr" onclick="tc(this,'gf')"><input type="checkbox"><div><div class="ct">End-to-end ownership — data pipeline → model → deployment → monitoring all visible</div><div class="cs">Your recommendation system has this. Make the README trace all 4 stages explicitly.</div></div></div>
+    <div class="pbar"><div class="pf" id="gf-pf" style="width:0%"></div></div>
+    <div class="pl" id="gf-pl">0 / 5 green flags confirmed</div>
+  </div>
+  <div class="card">
+    <div class="pill pt">The README that gets attention — your template</div>
+    <div class="h">Exact structure for your Bengali speech API repo</div>
+    <div class="tg bt"><strong>Opening hook (3 sentences, 30 seconds to read):</strong>"Production Bengali speaker diarization + ASR API achieving DER 0.19 and WER 0.37 on held-out Bengali evaluation set. Built on a 56% inference speedup technique published at BUET CSE Fest 2026. Deployed as FastAPI service: POST /transcribe returns speaker-labeled JSON with confidence scores and latency metadata."</div>
+    <div class="tg bt"><strong>The constraint story (what gets you interviews):</strong>"Initial approach: fine-tune pyannote directly on Bengali. Problem: only 4 hours labeled data — severe overfitting. Pivot: domain adaptation on speaker embedding layer only. Baseline DER: 35% (off-the-shelf). Post-adaptation: 0.19 DER. Inference: 8x real-time initially → 56% speedup via knowledge distillation → 3.4x real-time on CPU."</div>
+    <div class="tg bt"><strong>Production numbers (what hirers screenshot and share):</strong>"Latency: p50 380ms / p95 490ms per 30-second segment. Cost: $0.002 per minute of audio on CPU. Model size: 420MB. Throughput: 12 concurrent streams per instance."</div>
+  </div>
+</div>
+
+<div class="view" id="v3">
+  <div class="card">
+    <div class="pill pr">Resume red flags — instant rejection signals</div>
+    <div class="h">Check your resume against these. Each one is a screen-out.</div>
+    <div class="cr" onclick="tc(this,'rf2')"><input type="checkbox"><div><div class="ct">Library list: "Proficient in Python, TensorFlow, PyTorch, Keras, Scikit-learn..."</div><div class="cs">Everyone has this. Replace with: "Built production ML pipelines serving X requests/day with Y ms p95 latency"</div></div></div>
+    <div class="cr" onclick="tc(this,'rf2')"><input type="checkbox"><div><div class="ct">Courses listed as experience: "Completed 15 ML courses from Coursera, Udemy..."</div><div class="cs">Courses are learning, not experience. Replace with the project you built after the course.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf2')"><input type="checkbox"><div><div class="ct">Accuracy on toy datasets: "Achieved 96% accuracy on MNIST"</div><div class="cs">Meaningless. Replace with: "Improved Bengali speaker diarization from 35% DER to 0.19 DER"</div></div></div>
+    <div class="cr" onclick="tc(this,'rf2')"><input type="checkbox"><div><div class="ct">No mention of constraints, trade-offs, or latency/cost anywhere</div><div class="cs">Every bullet needs: what constraint you faced AND what you traded off to solve it.</div></div></div>
+    <div class="cr" onclick="tc(this,'rf2')"><input type="checkbox"><div><div class="ct">Kaggle rank as the headline credential instead of live projects</div><div class="cs">Kaggle rank is supporting evidence. Your published paper and live Toolly are the leads.</div></div></div>
+    <div class="pbar"><div class="pf" id="rf2-pf" style="width:0%"></div></div>
+    <div class="pl" id="rf2-pl">0 / 5 red flags found</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">Bullet rewriter — before vs after, your real projects</div>
+    <div class="h">The formula: [Action] + [Constraint] + [Decision] + [Measurable impact]</div>
+    <div class="vs" style="margin-bottom:8px">
+      <div class="vb"><div class="vl">Before</div><div class="vt">"Built Bengali diarization model achieving DER 0.28 using pyannote"</div></div>
+      <div class="vg"><div class="vl">After</div><div class="vt">"Reduced Bengali speaker diarization error 46% (35%→0.19 DER) via domain adaptation; 56% inference speedup via knowledge distillation — published at BUET CSE Fest 2026"</div></div>
+    </div>
+    <div class="vs" style="margin-bottom:8px">
+      <div class="vb"><div class="vl">Before</div><div class="vt">"Built Toolly — AI tools platform with 400+ tools using Flask and LLM APIs"</div></div>
+      <div class="vg"><div class="vl">After</div><div class="vt">"Built and deployed Toolly (toolly.tech) solo — 400+ AI tools, 206+ commits, live production traffic; full stack: LLM integration, user auth, API design, and monitoring"</div></div>
+    </div>
+    <div class="vs" style="margin-bottom:8px">
+      <div class="vb"><div class="vl">Before</div><div class="vt">"Built recommendation system using collaborative and content-based filtering"</div></div>
+      <div class="vg"><div class="vl">After</div><div class="vt">"Deployed hybrid recommendation system for e-commerce client; solved cold-start via content fallback — verified +10% sales lift on 30-day A/B test with 2K users"</div></div>
+    </div>
+    <div class="vs">
+      <div class="vb"><div class="vl">Before</div><div class="vt">"Kaggle Master, Top 1%, 22+ competitions"</div></div>
+      <div class="vg"><div class="vl">After</div><div class="vt">"Kaggle Master (rank 29/4,082, Top 1%) — constraint-driven thinking across 22+ competitions, not just accuracy optimization"</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Bullet checker — paste yours and get instant feedback</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Write or paste a resume bullet:</label>
+    <textarea class="inp" id="bullet-in" placeholder="e.g. Built a model that achieved 94% accuracy on the test set using BERT..."></textarea>
+    <button class="btn" onclick="checkBullet()">Check this bullet</button>
+    <div class="rb" id="bullet-out"></div>
+  </div>
+</div>
+
+<div class="view" id="v4">
+  <div class="card">
+    <div class="pill pc">The real hiring formula</div>
+    <div class="h">Tier 1 only = maybe an interview. Tier 1 + 2–3 of Tier 2 = strong candidate. All tiers = competitive offer.</div>
+    <div class="sub">Rate yourself honestly. This is your gap analysis for the next 4 weeks.</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">Tier 1 — non-negotiables (all 4 required)</div>
+    <div class="h">Without all 4, nothing else matters</div>
+    <div class="tr"><span class="tb t1b">T1</span><div><div class="tt">Software engineering fundamentals — production-quality code</div><div class="ts">Modular code, type hints, tests, logging, Docker, CI/CD basics. Toolly (206+ commits) proves this partially. Bengali speech API must demonstrate it fully.</div></div></div>
+    <div class="tr"><span class="tb t1b">T1</span><div><div class="tt">Constraint thinking — accuracy vs latency vs cost vs complexity</div><div class="ts">Your 56% inference speedup IS this. The key is communicating it as a trade-off story, not just a performance number.</div></div></div>
+    <div class="tr"><span class="tb t1b">T1</span><div><div class="tt">End-to-end ownership — data → model → deployment → monitoring</div><div class="ts">Your recommendation system has this. Bengali speech API will complete it. Make your README trace all 4 stages explicitly.</div></div></div>
+    <div class="tr"><span class="tb t1b">T1</span><div><div class="tt">Communication — explain decisions to engineers AND business stakeholders</div><div class="ts">Your teaching series and conference paper prove this. In interviews: always give the business reason BEFORE the technical reason.</div></div></div>
+    <div class="div"></div>
+    <div class="fl">Rate yourself honestly on Tier 1:</div>
+    <div class="cr" onclick="tc(this,'t1')"><input type="checkbox"><div><div class="ct">T1-1: I can write production-quality Python (tests, type hints, Docker, logging)</div></div></div>
+    <div class="cr" onclick="tc(this,'t1')"><input type="checkbox"><div><div class="ct">T1-2: I can discuss latency / cost / accuracy trade-offs for my own projects</div></div></div>
+    <div class="cr" onclick="tc(this,'t1')"><input type="checkbox"><div><div class="ct">T1-3: I have one project covering data pipeline → model → deployment → monitoring</div></div></div>
+    <div class="cr" onclick="tc(this,'t1')"><input type="checkbox"><div><div class="ct">T1-4: I can explain my Bengali speech work in 2.5 minutes to a non-technical person</div></div></div>
+    <div class="pbar"><div class="pf" id="t1-pf" style="width:0%"></div></div>
+    <div class="pl" id="t1-pl">0 / 4 Tier 1 ready</div>
+  </div>
+  <div class="card">
+    <div class="pill pb">Tier 2 — strong differentiators</div>
+    <div class="h">2–3 of these = strong candidate. All 4 = competitive offer territory.</div>
+    <div class="tr"><span class="tb t2b">T2</span><div><div class="tt">Domain expertise — Bengali NLP / speech ML</div><div class="ts">You have this. Published paper + production system. This is your strongest differentiator. Always lead with it in introductions.</div></div></div>
+    <div class="tr"><span class="tb t2b">T2</span><div><div class="tt">Production battle scars — drift, data quality, scalability problems</div><div class="ts">Competition experience (DER 0.28 private, rank 19) shows distribution shift. Bengali speech API deployment adds latency and monitoring experience.</div></div></div>
+    <div class="tr"><span class="tb t2b">T2</span><div><div class="tt">Research awareness — read papers, understand SOTA, evaluate techniques</div><div class="ts">Conference paper + Kaggle Top 1% prove this. Be ready to discuss 2–3 recent Bengali NLP or speech papers in interviews.</div></div></div>
+    <div class="tr"><span class="tb t2b">T2</span><div><div class="tt">System design — architect ML systems, not just models</div><div class="ts">This is your current gap. The Bengali speech API project specifically builds this. Practice the 30-minute system design test in the "Live problem test" tab.</div></div></div>
+    <div class="div"></div>
+    <div class="fl">Rate yourself honestly on Tier 2:</div>
+    <div class="cr" onclick="tc(this,'t2')"><input type="checkbox"><div><div class="ct">T2-1: Bengali NLP domain expertise confirmed — paper + production system</div></div></div>
+    <div class="cr" onclick="tc(this,'t2')"><input type="checkbox"><div><div class="ct">T2-2: I can discuss production failures and drift handling from my own experience</div></div></div>
+    <div class="cr" onclick="tc(this,'t2')"><input type="checkbox"><div><div class="ct">T2-3: I can discuss 2–3 recent papers in my domain and when to apply them</div></div></div>
+    <div class="cr" onclick="tc(this,'t2')"><input type="checkbox"><div><div class="ct">T2-4: I can design an end-to-end ML system architecture in 30 minutes</div></div></div>
+    <div class="pbar"><div class="pf" id="t2-pf" style="width:0%"></div></div>
+    <div class="pl" id="t2-pl">0 / 4 Tier 2 ready</div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Tier 3 — multipliers (you already have all 3)</div>
+    <div class="h">Most candidates have zero of these. You have all three.</div>
+    <div class="tr"><span class="tb t3b">T3</span><div><div class="tt">Teaching ability — explain complex ML simply</div><div class="ts">Your 4-Month ML Teaching Series and Bloom's Taxonomy approach prove this. Say it in interviews: "I write and teach ML — it forces deep understanding."</div></div></div>
+    <div class="tr"><span class="tb t3b">T3</span><div><div class="tt">Entrepreneurial mindset — connect ML to business outcomes</div><div class="ts">Toolly is live with real users. Your recommendation system has a verified +10% sales lift. You're a builder, not just an engineer. This is rare at 21.</div></div></div>
+    <div class="tr"><span class="tb t3b">T3</span><div><div class="tt">Tool building — built internal tools, frameworks, or infrastructure</div><div class="ts">Toolly (400+ tools, 206+ commits, solo-built), MCP server repo, LangGraph project. This is literally the definition of Tier 3.</div></div></div>
+    <div class="div"></div>
+    <div class="tg bp">You have all 3 Tier 3 multipliers. Most candidates have zero. Your gap is Tier 1-3 (end-to-end with monitoring visible) and Tier 1-4 (communicating system design clearly). The Bengali speech API project closes both gaps at once.</div>
+  </div>
+</div>
+
+<div class="view" id="v5">
+  <div class="card">
+    <div class="pill pa">The live 30-minute problem test</div>
+    <div class="h">Senior engineers don't care if your solution is perfect. They care how you think.</div>
+    <div class="sub">They're watching: how you break down the problem, what questions you ask, what assumptions you state, how you prioritize, how you think about validation. Always start with clarifying questions — never with code.</div>
+  </div>
+  <div class="card">
+    <div class="pill pc">Problem: build a Bengali content moderation system</div>
+    <div class="h">"Design an ML system that detects harmful content in Bengali social media posts in real-time. 30 minutes. Go."</div>
+    <div class="sub">Senior move: spend the first 10 minutes on clarifying questions. Write yours below before looking at the model answer.</div>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Step 1 — Clarifying questions I'd ask (10 min):</label>
+    <textarea class="inp" style="margin-bottom:10px" placeholder="What's the latency requirement? False positive tolerance? Posts per second? Bengali-only or code-switching? What harm categories? Is there labeled Bengali training data?"></textarea>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Step 2 — 2–3 approaches with trade-offs (10 min):</label>
+    <textarea class="inp" style="margin-bottom:10px" placeholder="Approach A: ... Trade-off: ... Approach B: ... Trade-off: ..."></textarea>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Step 3 — My chosen approach and why (5 min):</label>
+    <textarea class="inp" style="margin-bottom:10px" placeholder="I'd choose... because given [constraint], [approach] delivers [outcome]..."></textarea>
+    <label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:4px">Step 4 — What I'd add with more time:</label>
+    <textarea class="inp" style="margin-bottom:8px" placeholder="With more time I'd add..."></textarea>
+    <button class="btn" onclick="reveal('pmr')">Reveal model senior answer</button>
+    <div class="rb rb-ok" id="pmr"><strong>How a senior engineer structures this:</strong><br><br><strong>Clarifying questions that matter:</strong> Latency — real-time under 200ms or async within 5 seconds? False positive cost — is blocking a legitimate post worse than missing harmful content for this client? Do we have labeled Bengali harmful content data, and how much? Multi-label (violence + hate speech + spam) or binary? Bengali script only or Romanized Bengali too?<br><br><strong>Approach A — Rule-based + lightweight classifier:</strong> Keyword matching → mBERT binary classifier for ambiguous cases. Latency: ~30ms. Cost: $0.0001/post. Weakness: misses nuanced content, high false negatives on new patterns.<br><br><strong>Approach B — Fine-tuned multilingual LLM:</strong> XLM-R fine-tuned on Bengali hate speech. Latency: ~150ms. Cost: $0.001/post. Weakness: 10x cost, needs labeled Bengali training data we may not have.<br><br><strong>My choice:</strong> Two-stage pipeline. Stage 1: fast rule-based filter (30ms) routes 60% of posts. Stage 2: fine-tuned classifier only for ambiguous posts. Net latency: ~65ms average. Net cost: 40% of full LLM approach. Human review queue for high-confidence harmful content before action is taken.<br><br><strong>With more time:</strong> Active learning loop — human reviewers label edge cases that go back into training. Per-script calibration (Bengali script vs Roman Bengali have different patterns). Monitoring: false positive rate by content category and user demographic.</div>
+  </div>
+</div>
+
+<div class="view" id="v6">
+  <div class="card">
+    <div class="pill pt">Your action plan — what to do right now</div>
+    <div class="h">The path is clear. 95% won't follow it. That's the opportunity.</div>
+    <div class="sub">Stop doing more courses. Start building production-quality systems. 60–70% of the job is software engineering — that's where you invest your time now.</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">Month 1–2 — software engineering foundation</div>
+    <div class="sr"><div class="sn act">1</div><div class="sb"><div class="st">Refactor Bangla Diarizz into a proper Python package</div><div class="sd">Type hints on every function. Docstrings. Modularize into: audio_processor.py, diarizer.py, evaluator.py. Add pytest tests for the 3 most critical functions. This alone signals software engineering maturity to any reviewer.</div></div></div>
+    <div class="sr"><div class="sn act">2</div><div class="sb"><div class="st">Build and Dockerize the Bengali speech API</div><div class="sd">FastAPI endpoint. Dockerfile with exact dependency versions. Health check endpoint. Input validation (file size, format, duration limits). Proper error responses (400/422/500 with helpful messages). Highest ROI task for hiring chances right now.</div></div></div>
+    <div class="sr"><div class="sn act">3</div><div class="sb"><div class="st">Add logging and monitoring to Toolly</div><div class="sd">Request logging (latency, status codes, tool type). Error rate tracking. These 20 lines of code transform Toolly from "a project" to "a production system." Mention it in every interview.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pa">Month 3–4 — constraint-based learning</div>
+    <div class="sr"><div class="sn">4</div><div class="sb"><div class="st">Deploy with real constraints documented</div><div class="sd">Deploy Bengali speech API to HuggingFace Spaces. Run load tests. Measure p50/p95 latency. Calculate cost per 1-minute audio segment. These numbers become your interview answers: "Our p95 is 490ms. Here's what I tried to get it under 500ms and why."</div></div></div>
+    <div class="sr"><div class="sn">5</div><div class="sb"><div class="st">Build one constraint-first project</div><div class="sd">"Build a Bengali sentence similarity API with under 20ms latency and under $0.0001 per query." Constraint comes first. Model choice follows. Document every trade-off. This type of project gets interviews at Realfy and AideMeet.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Month 5–6 — production MLOps</div>
+    <div class="sr"><div class="sn">6</div><div class="sb"><div class="st">Set up monitoring on your Bengali speech API</div><div class="sd">Track: inference latency per request, confidence score distribution (proxy for drift), error rate by audio quality, request volume. When confidence distribution shifts — that's your drift alert. This answers the "model degraded in production" interview question from your own real system.</div></div></div>
+    <div class="sr"><div class="sn">7</div><div class="sb"><div class="st">Build a retraining trigger</div><div class="sd">When confidence scores drop more than 10% from baseline distribution over a 7-day window, trigger a notification to retrain. Even a simple cron job with an email alert is infinitely better than nothing — it proves you think about model lifecycle, not just model training.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pb">Daily habits — check these off today</div>
+    <div class="cr" onclick="tc(this,'da')"><input type="checkbox"><div><div class="ct">Practice the 2.5-minute project pitch out loud</div><div class="cs">Say it out loud, not in your head. Record yourself. Constraint → decision → trade-off → impact. 30 seconds each. Every day.</div></div></div>
+    <div class="cr" onclick="tc(this,'da')"><input type="checkbox"><div><div class="ct">For every technical decision made today, write the trade-off reasoning</div><div class="cs">"I chose X over Y because given constraint Z, the trade-off of A for B was worth it because C." One sentence per decision. This builds your interview answer bank.</div></div></div>
+    <div class="cr" onclick="tc(this,'da')"><input type="checkbox"><div><div class="ct">Read one ML paper this week in Bengali NLP or speech processing</div><div class="cs">Not to implement — to have an opinion on. "I read X. My view: their approach to Y is strong but their evaluation ignores Z which matters in production." That's the passion answer.</div></div></div>
+    <div class="cr" onclick="tc(this,'da')"><input type="checkbox"><div><div class="ct">Commit to the Bengali speech API repo today</div><div class="cs">The commit graph is the evidence. 5 lines on a bad day. A full feature on a good day. History proves sustained work.</div></div></div>
+    <div class="pbar"><div class="pf" id="da-pf" style="width:0%"></div></div>
+    <div class="pl" id="da-pl">0 / 4 done today</div>
+  </div>
+  <div class="r3" style="margin-top:12px">
+    <div class="sc"><div class="sn" id="tot-n">0</div><div class="sl">total items checked</div></div>
+    <div class="sc"><div class="sn" id="t1-s">0/4</div><div class="sl">Tier 1 confirmed</div></div>
+    <div class="sc"><div class="sn" id="t2-s">0/4</div><div class="sl">Tier 2 confirmed</div></div>
+  </div>
+</div>
+</div>
+
+<script>
+var C={rf:0,gf:0,rf2:0,t1:0,t2:0,da:0};
+var T={rf:5,gf:5,rf2:5,t1:4,t2:4,da:4};
+var total=0;
+
+function sv(n,b){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));
+  document.getElementById('v'+n).classList.add('on');
+  b.classList.add('on');
+}
+
+function tc(row,grp){
+  var cb=row.querySelector('input[type=checkbox]');
+  cb.checked=!cb.checked;
+  var ct=row.querySelector('.ct');
+  if(cb.checked){
+    row.classList.add('done');
+    if(ct)ct.classList.add('done');
+    if(grp)C[grp]=(C[grp]||0)+1;
+    total++;
+  } else {
+    row.classList.remove('done');
+    if(ct)ct.classList.remove('done');
+    if(grp&&C[grp])C[grp]--;
+    if(total>0)total--;
+  }
+  upd();
+}
+
+function upd(){
+  Object.keys(C).forEach(function(g){
+    var pf=document.getElementById(g+'-pf');
+    var pl=document.getElementById(g+'-pl');
+    if(!pf)return;
+    var c=C[g]||0;
+    var t=T[g]||1;
+    pf.style.width=Math.round(c/t*100)+'%';
+    if(g==='rf'||g==='rf2')pl.textContent=c+' / '+t+' red flags found';
+    else if(g==='gf')pl.textContent=c+' / '+t+' green flags confirmed';
+    else if(g==='t1'){pl.textContent=c+' / '+t+' Tier 1 ready';document.getElementById('t1-s').textContent=c+'/'+t;}
+    else if(g==='t2'){pl.textContent=c+' / '+t+' Tier 2 ready';document.getElementById('t2-s').textContent=c+'/'+t;}
+    else if(g==='da')pl.textContent=c+' / '+t+' done today';
+  });
+  document.getElementById('tot-n').textContent=total;
+}
+
+function reveal(id){
+  var el=document.getElementById(id);
+  if(el)el.classList.add('show');
+}
+
+function checkBullet(){
+  var txt=(document.getElementById('bullet-in').value||'').trim();
+  var el=document.getElementById('bullet-out');
+  if(!txt){el.className='rb rb-mid show';el.innerHTML='<strong>Write a bullet first</strong> — paste one from your resume and click check.';return;}
+  var hasNum=/\d/.test(txt);
+  var hasConstraint=/(constraint|latency|limit|budget|requirement|without|despite|given|under|despite|ms|mb|gb|x real)/i.test(txt);
+  var hasImpact=/(improve|reduc|increas|achiev|deliver|result|impact|lift|saving|faster|%|p95|p50)/i.test(txt);
+  var hasAction=/^[A-Z]/.test(txt);
+  var score=[hasNum,hasConstraint,hasImpact,hasAction].filter(Boolean).length;
+  var missing=[];
+  if(!hasNum)missing.push('a specific number or metric');
+  if(!hasConstraint)missing.push('the constraint you worked under');
+  if(!hasImpact)missing.push('the measurable business or technical impact');
+  if(score>=3){
+    el.className='rb rb-ok show';
+    el.innerHTML='<strong>Strong bullet.</strong> Has action, numbers, and impact. '+(hasConstraint?'The constraint is visible — good.':'Consider adding what made this hard: the constraint you faced.');
+  } else if(score===2){
+    el.className='rb rb-mid show';
+    el.innerHTML='<strong>Getting there.</strong> Missing: '+missing.join(' and ')+'. Rewrite with those and it becomes interview-ready.';
+  } else {
+    el.className='rb rb-no show';
+    el.innerHTML='<strong>Needs a full rewrite.</strong> This reads like a task description. Ask yourself: What constraint did I face? What did I measure? What changed because of this work? Start your rewrite with those answers.';
+  }
+}
+</script>

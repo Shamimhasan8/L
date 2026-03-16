@@ -1,0 +1,791 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root{
+  --font-sans:'DM Sans',sans-serif;
+  --font-display:'Space Grotesk',sans-serif;
+
+  --color-background-primary:#fffef8;
+  --color-background-secondary:#f8f4e8;
+  --color-background-info:#e9f4ff;
+  --color-background-warning:#fff2de;
+  --color-background-danger:#ffe8e3;
+  --color-background-success:#e8f7ef;
+
+  --color-text-primary:#0f2438;
+  --color-text-secondary:#4c5a69;
+  --color-text-info:#1b5d8f;
+  --color-text-warning:#8a5c12;
+  --color-text-danger:#8d2d24;
+  --color-text-success:#1c7047;
+
+  --color-border-secondary:#c7d6e6;
+  --color-border-tertiary:#dbe4ef;
+  --color-border-info:#b9d9f5;
+
+  --border-radius-md:12px;
+  --border-radius-lg:18px;
+  --shadow-soft:0 14px 35px rgba(20,53,86,.10);
+  --shadow-card:0 12px 24px rgba(18,48,75,.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  font-family:var(--font-sans);
+  color:var(--color-text-primary);
+  background:
+    radial-gradient(900px 420px at -10% -10%,rgba(189,223,255,.5),transparent 60%),
+    radial-gradient(780px 360px at 110% 8%,rgba(255,208,155,.45),transparent 55%),
+    linear-gradient(165deg,#f7fbff 0%,#fffdf6 55%,#fff8e8 100%);
+  line-height:1.45;
+}
+
+.w{
+  max-width:1120px;
+  margin:0 auto;
+  padding:1.2rem 1rem 2.5rem;
+  font-family:var(--font-sans);
+  animation:fadeUp .5s ease both;
+}
+
+.nav{
+  position:sticky;
+  top:10px;
+  z-index:30;
+  display:flex;
+  gap:8px;
+  margin-bottom:1.1rem;
+  flex-wrap:wrap;
+  padding:8px;
+  border:1px solid var(--color-border-tertiary);
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  box-shadow:var(--shadow-soft);
+}
+
+.nav button{
+  padding:9px 16px;
+  border:1px solid transparent;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.01em;
+  cursor:pointer;
+  background:transparent;
+  color:var(--color-text-secondary);
+  font-family:var(--font-display);
+  transition:all .2s ease;
+}
+
+.nav button.on{
+  background:linear-gradient(135deg,#13395d,#1f5f96);
+  color:#fff;
+  border-color:#13395d;
+  box-shadow:0 8px 18px rgba(19,57,93,.24);
+}
+
+.nav button:hover:not(.on){
+  background:rgba(19,57,93,.07);
+  color:var(--color-text-primary);
+  border-color:var(--color-border-secondary);
+}
+
+.view{display:none}
+
+.view.on{
+  display:block;
+  animation:fadeUp .35s ease both;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.88);
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  padding:1.05rem 1.2rem;
+  margin-bottom:12px;
+  box-shadow:var(--shadow-card);
+}
+
+.card::before{
+  content:'';
+  position:absolute;
+  inset:0 auto auto 0;
+  width:100%;
+  height:4px;
+  background:linear-gradient(90deg,#1f5f96,#f4a447,#2f9460);
+  opacity:.4;
+}
+
+.pill{
+  display:inline-block;
+  font-size:10px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:9px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-family:var(--font-display);
+}
+
+.pt{background:var(--color-background-info);color:var(--color-text-info)}
+.pa{background:var(--color-background-warning);color:var(--color-text-warning)}
+.pc{background:var(--color-background-danger);color:var(--color-text-danger)}
+.pp{background:#efe9ff;color:#403388}
+.pg{background:var(--color-background-success);color:var(--color-text-success)}
+
+.h{
+  font-size:16px;
+  font-weight:700;
+  font-family:var(--font-display);
+  color:var(--color-text-primary);
+  margin-bottom:6px;
+  line-height:1.35;
+}
+
+.sub{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px}
+.div{height:0.5px;background:var(--color-border-tertiary);margin:10px 0}
+
+.tg{
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  padding:10px 12px;
+  font-size:12px;
+  color:var(--color-text-secondary);
+  line-height:1.65;
+  margin-bottom:8px;
+}
+
+.tg strong{
+  color:var(--color-text-primary);
+  font-weight:700;
+  font-family:var(--font-display);
+  display:block;
+  margin-bottom:3px;
+}
+
+.tg.bt{border-left:3px solid #2f9460;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.tg.ba{border-left:3px solid #c37e1f;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.tg.bb{border-left:3px solid #1d6dad;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.tg.bp{border-left:3px solid #5b4bba;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+
+.r2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.r3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.r4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+
+.sc{
+  background:linear-gradient(180deg,#ffffff 0%,#f9f5ec 100%);
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-md);
+  padding:10px 12px;
+  text-align:center;
+}
+
+.sc .sn{font-size:21px;font-weight:700;font-family:var(--font-display);color:var(--color-text-primary)}
+.sc .sl{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+
+.cr{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px dashed var(--color-border-tertiary);
+  cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
+  transition:transform .12s ease;
+}
+
+.cr:last-child{border-bottom:none}
+.cr:hover{transform:translateX(2px)}
+
+.cr input[type=checkbox]{
+  width:16px;
+  height:16px;
+  margin-top:2px;
+  flex-shrink:0;
+  accent-color:var(--color-text-success);
+  cursor:pointer;
+}
+
+.cr .ct{font-size:13px;color:var(--color-text-primary);line-height:1.45}
+.cr .cs{font-size:11px;color:var(--color-text-secondary);margin-top:2px;line-height:1.45}
+.cr.done .ct{text-decoration:line-through;color:var(--color-text-secondary)}
+
+.pbar{height:6px;background:var(--color-border-tertiary);border-radius:999px;overflow:hidden;margin-top:8px}
+.pf{height:100%;border-radius:999px;transition:width .45s ease}
+.pf-ok{background:linear-gradient(90deg,#35a76a,#2f9460)}
+.pf-info{background:linear-gradient(90deg,#3788d3,#1d6dad)}
+.pl{font-size:11px;color:var(--color-text-secondary);margin-top:4px}
+
+.wk-row{
+  border:1px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  margin-bottom:10px;
+  overflow:hidden;
+  background:rgba(255,255,255,.86);
+  box-shadow:var(--shadow-card);
+}
+
+.wk-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  transition:background .2s ease;
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+.wk-head:hover{background:rgba(241,248,255,.9)}
+
+.wk-num{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+  font-family:var(--font-display);
+  flex-shrink:0;
+}
+
+.wk-info{flex:1;min-width:0}
+.wk-title{font-size:13px;font-weight:700;font-family:var(--font-display);color:var(--color-text-primary)}
+.wk-phase{font-size:11px;color:var(--color-text-secondary);margin-top:1px}
+.wk-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+
+.prob-badge{
+  font-size:11px;
+  font-weight:700;
+  padding:3px 8px;
+  border-radius:999px;
+  background:var(--color-background-success);
+  color:var(--color-text-success);
+}
+
+.wk-arrow{font-size:10px;color:var(--color-text-secondary)}
+.wk-body{display:none;padding:0 14px 14px}
+.wk-body.open{display:block;animation:fadeUp .3s ease both}
+
+.section-label{font-size:10px;font-weight:700;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 6px}
+.session-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:10px}
+
+.sess-card{
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  border:1px solid #eadfc7;
+  padding:9px 11px;
+}
+
+.sess-day{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-family:var(--font-display)}
+.sess-sat{color:var(--color-text-info)}
+.sess-sun{color:#5442b0}
+.sess-title{font-size:12px;font-weight:700;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-display)}
+.sess-items{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+
+.del-list{display:grid;gap:5px}
+
+.del-item{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:7px 8px;
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  border:1px solid #ece2ce;
+  cursor:pointer;
+  -webkit-user-select:none;
+  user-select:none;
+  transition:opacity .15s ease,transform .12s ease;
+}
+
+.del-item:hover{transform:translateX(2px)}
+.del-item.done{opacity:.56}
+
+.del-item input{
+  width:13px;
+  height:13px;
+  margin-top:1px;
+  flex-shrink:0;
+  accent-color:var(--color-text-success);
+  cursor:pointer;
+}
+
+.del-item .dt{font-size:12px;color:var(--color-text-primary);line-height:1.45}
+.del-item.done .dt{text-decoration:line-through;color:var(--color-text-secondary)}
+
+.outreach-tag{
+  display:inline-block;
+  font-size:11px;
+  color:var(--color-text-secondary);
+  background:var(--color-background-secondary);
+  border:1px solid #ece2ce;
+  border-radius:999px;
+  padding:4px 9px;
+  margin:2px;
+}
+
+.why-box{
+  background:var(--color-background-info);
+  border:1px solid var(--color-border-info);
+  border-radius:var(--border-radius-md);
+  padding:10px 12px;
+  font-size:12px;
+  color:var(--color-text-info);
+  line-height:1.58;
+  margin-top:8px;
+}
+
+.prob-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--color-border-tertiary)}
+.prob-row:last-child{border-bottom:none}
+.prob-wk{font-size:12px;font-weight:700;font-family:var(--font-display);color:var(--color-text-primary);min-width:52px}
+.prob-bar-wrap{flex:1;min-width:0}
+.prob-bar-bg{height:10px;background:var(--color-border-tertiary);border-radius:999px;overflow:hidden}
+.prob-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2f9460,#3aaa73);transition:width .55s ease}
+.prob-val{font-size:12px;font-weight:700;color:var(--color-text-success);min-width:44px;text-align:right}
+.prob-driver{font-size:11px;color:var(--color-text-secondary);margin-top:3px}
+
+.phase-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;margin-left:4px}
+.phase-1{background:var(--color-background-info);color:var(--color-text-info)}
+.phase-2{background:#efe9ff;color:#403388}
+.phase-3{background:var(--color-background-warning);color:var(--color-text-warning)}
+.phase-js{background:var(--color-background-success);color:var(--color-text-success)}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:960px){
+  .r4{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .session-row{grid-template-columns:1fr}
+  .w{padding:1rem .85rem 2rem}
+}
+
+@media (max-width:640px){
+  .nav{top:6px;padding:6px;border-radius:20px}
+  .nav button{font-size:11px;padding:8px 12px}
+  .card{padding:.95rem .9rem}
+  .h{font-size:15px}
+  .sub{font-size:12px}
+  .r2,.r3,.r4{grid-template-columns:1fr}
+  .prob-row{align-items:flex-start;gap:8px;flex-wrap:wrap}
+  .prob-wk{min-width:auto}
+  .prob-val{min-width:auto}
+}
+</style>
+
+<div class="w">
+<div class="nav">
+  <button class="on" onclick="sv(0,this)">Daily checklist</button>
+  <button onclick="sv(1,this)">16-week roadmap</button>
+  <button onclick="sv(2,this)">Probability tracker</button>
+  <button onclick="sv(3,this)">Your week now</button>
+</div>
+
+<div class="view on" id="v0">
+  <div class="card">
+    <div class="pill pg">Daily actions — every weekday, no exceptions</div>
+    <div class="h">10 tasks. ~3.5 hours. This is what separates candidates who get hired from those who wonder why nothing is happening.</div>
+    <div class="sub">Check each one off as you complete it today. The discipline of doing this daily is the entire system.</div>
+    <div class="r4" style="margin-bottom:12px">
+      <div class="sc"><div class="sn" id="dc-done">0</div><div class="sl">done today</div></div>
+      <div class="sc"><div class="sn">10</div><div class="sl">total tasks</div></div>
+      <div class="sc"><div class="sn">3.5h</div><div class="sl">time needed</div></div>
+      <div class="sc"><div class="sn" id="dc-pct">0%</div><div class="sl">complete</div></div>
+    </div>
+    <div class="pbar" style="margin-bottom:12px"><div class="pf pf-ok" id="dc-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="pill pt">Morning block — outreach (70 min)</div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Send 25 LinkedIn connection requests (targeted — ML engineers, hiring managers, tech leads)</div><div class="cs">20 min — Builds your pipeline. More connections = more people seeing your content and outreach. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Comment on 10 posts with substantive value (not just "great post!")</div><div class="cs">30 min — Algorithm boost + hiring managers see your name repeatedly. Substantive comments beat likes every time. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Send 5 personalized DMs (value-first, not "please hire me")</div><div class="cs">20 min — Direct conversations convert better than mass outreach. Quality over quantity for actual calls. Start Week 1.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="pill pa">Mid-morning block — system management (25 min)</div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Check SBL automation dashboard — ensure 40 messages/day running</div><div class="cs">10 min — Monitor reply rates. Pause flagged sequences. If automation stops, your pipeline dries up. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Respond to ALL messages received — within 4 hours</div><div class="cs">15 min — Speed signals interest. A delayed reply to a warm lead is a dead lead. Block time for this daily. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Update CRM (Notion) with all interactions from yesterday and today</div><div class="cs">10 min — If it is not tracked, it did not happen. Your data drives which sequences are working and which to kill. Start Week 1.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="pill pp">Deep work block — project building (90 min)</div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Work on current week's production ML project (minimum 90 minutes of focused building)</div><div class="cs">90 min — Portfolio is your proof. Daily progress compounds. Weekend cramming produces messy code. Consistent daily work produces production-ready systems. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Publish or draft LinkedIn content (one post published, or two posts drafted for later)</div><div class="cs">20 min — Authority compounds. 30 posts over 16 weeks = recruiters who search your name find thought leadership, not an empty profile. Start Week 2.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="pill pg">Community + multi-channel (35 min)</div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Review and engage with the SBL Slack community (peer accountability + job leads)</div><div class="cs">15 min — Accountability keeps you consistent. Peers share live job leads. Mentors answer questions. The community is a resource, not a distraction. Start Week 1.</div></div></div>
+    <div class="cr" onclick="tc(this,'dc')"><input type="checkbox"><div><div class="ct">Send cold emails — 10 per day (only when Week 6+ is active)</div><div class="cs">20 min — Multi-channel = higher probability. Email reaches people who missed your LinkedIn messages. LinkedIn + Email + Twitter = you are everywhere. Starts Week 6.</div></div></div>
+  </div>
+
+  <div class="card" style="background:var(--color-background-secondary)">
+    <div class="h">Why 3.5 hours a day is enough — and why missing one day matters</div>
+    <div class="sub">Total weekly commitment: ~3.5 hours/weekday + 6 hours on weekends (2 × 3-hour sessions). That is 23–25 hours per week. The system compounds — every message sent today becomes a warm lead in 3 days, a reply in 7, a call in 14. Missing one day does not just lose that day. It breaks the follow-up chain for the leads who would have replied 7 days later.</div>
+  </div>
+</div>
+
+<div class="view" id="v1">
+  <div class="card">
+    <div class="pill pg">16-week execution roadmap</div>
+    <div class="h">Click any week to expand the full plan. Check off deliverables as you complete them.</div>
+    <div class="r4" style="margin-bottom:12px">
+      <div class="sc"><div class="sn" id="wk-done">0</div><div class="sl">weeks done</div></div>
+      <div class="sc"><div class="sn" id="wk-del">0</div><div class="sl">deliverables checked</div></div>
+      <div class="sc"><div class="sn" id="wk-prob">5%</div><div class="sl">current probability</div></div>
+      <div class="sc"><div class="sn" id="wk-msgs">0</div><div class="sl">msgs sent</div></div>
+    </div>
+  </div>
+  <div id="weeks-container"></div>
+</div>
+
+<div class="view" id="v2">
+  <div class="card">
+    <div class="pill pg">Hire probability — what drives it up each week</div>
+    <div class="h">Probability is not luck. It is the output of outreach volume × portfolio quality × positioning strength.</div>
+    <div class="sub">Each bar shows your cumulative probability at the end of that week. Click a week to see what specifically drives the jump.</div>
+  </div>
+  <div class="card">
+    <div id="prob-rows"></div>
+  </div>
+  <div class="card">
+    <div class="pill pt">The 4 levers that move probability</div>
+    <div class="r2">
+      <div class="tg bt"><strong>Portfolio score (0–100)</strong>Goes from 5 at Week 1 to 100 at Week 16. Each deployed project adds roughly 15 points. The jump from 72 to 90 (Week 7→8) is when your 6th project lands — that is your full arsenal.</div>
+      <div class="tg bb"><strong>Outreach volume (cumulative)</strong>4,200 total messages over 16 weeks. The automation sends 40/day. You send 25 manual + 5 DMs/day. At 3,000 messages (Week 8) you statistically have multiple conversations live.</div>
+      <div class="tg ba"><strong>Positioning strength</strong>Goes: Weak → Forming → Clear → Weaponized → Authority → Multi-Channel → Interview-Ready → Full Arsenal. Each stage unlocks a new lever. Optimizing LinkedIn at Week 4 causes a 2–3x jump in reply rates on the same outreach volume.</div>
+      <div class="tg bp"><strong>Network activation</strong>Weeks 9–16 add Ayush's personal 10K/month outreach on your behalf + warm intros to 10 companies + SBL client referrals. This is the multiplier layer on top of everything you built in Weeks 1–8.</div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v3">
+  <div class="card">
+    <div class="pill pa">Your current position — thinking like a senior engineer</div>
+    <div class="h">You are not at Week 1. You are at Week 3–4 equivalent. Here is your honest gap analysis.</div>
+    <div class="sub">Senior engineers assess where they are before deciding what to do next. This is your current-state audit mapped to the roadmap.</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">What you already have (ahead of schedule)</div>
+    <div class="tg bt"><strong>Portfolio: 4–5 projects already exist</strong>Bangla Diarizz (research paper + DER 0.19), Toolly (live, 206+ commits, 400+ tools), recommendation system (+10% verified sales lift), Bengali ASR (WER 0.37), LangGraph agentic system. That is Week 7–8 portfolio level. Most candidates at Week 8 have 6 tutorial projects. You have 4 production-grade ones.</div>
+    <div class="tg bt"><strong>Research credential no one else has</strong>Published at BUET CSE Fest 2026 (1st author, 56% inference speedup). This is a Tier 3 multiplier the roadmap does not even account for — it is not in the 16-week plan because most candidates cannot get it in 16 weeks.</div>
+    <div class="tg bt"><strong>Kaggle Master rank</strong>Top 1%, rank 29/4,082 across 22+ competitions. Portfolio score boost that most candidates spend months trying to build.</div>
+  </div>
+  <div class="card">
+    <div class="pill pc">Your actual gaps (honest, fixable)</div>
+    <div class="tg ba"><strong>Gap 1: Outreach system not running</strong>The roadmap expects 200 messages sent by end of Week 1. If your LinkedIn automation is not running and you are not sending 25 manual connection requests daily, your pipeline is at zero. This is the highest-leverage gap to close today.</div>
+    <div class="tg ba"><strong>Gap 2: Projects not deployed as APIs</strong>Your research and Toolly exist, but the Bengali speech system is not yet deployed as a production FastAPI with Docker, monitoring, and a live Streamlit demo. The roadmap calls this Week 3. You need this done this week.</div>
+    <div class="tg ba"><strong>Gap 3: LinkedIn profile not weaponized</strong>The roadmap's Week 4 session ("LinkedIn profile weaponization") directly causes a 2–3x jump in reply rates. If your headline still says "ML Student" or "Looking for opportunities," you are getting a fraction of the replies you could be getting on the same outreach volume.</div>
+    <div class="tg ba"><strong>Gap 4: No CRM tracking</strong>You cannot optimize what you do not measure. Without a Notion CRM tracking every message sent, reply received, and follow-up needed, your outreach is a black box.</div>
+  </div>
+  <div class="card">
+    <div class="pill pt">Your exact next 7 days — senior engineer's Monday-Sunday plan</div>
+    <div class="tg bb"><strong>Monday: Deploy the Bengali speech API</strong>FastAPI endpoint. Docker. Input validation. Structured JSON response. Push to HuggingFace Spaces. Write the production README with constraint story, latency numbers, and cost per request. This moves you from Week 3 to Week 4 portfolio level in one day.</div>
+    <div class="tg bb"><strong>Tuesday: LinkedIn weaponization</strong>Rewrite your headline from a job title to a value statement. Example: "ML Engineer building Bengali speech AI | Kaggle Master | Published researcher | Toolly.tech". Rewrite your About section using the constraint → decision → impact structure. Add your 5 best projects to Featured.</div>
+    <div class="tg bb"><strong>Wednesday: Set up Notion CRM + start 25/day connection requests</strong>Create a simple Notion database: Name, Company, Date contacted, Status (Connected/Replied/Call booked), Notes. Begin your first 25 targeted connection requests to ML engineers and hiring managers at target companies.</div>
+    <div class="tg bb"><strong>Thursday: Value stack document + 2-minute pitch</strong>Write down every reason someone should hire you specifically. Map each credential to a specific business outcome. Record yourself delivering the 2-minute pitch. Watch it back. The discomfort of watching yourself is where the improvement happens.</div>
+    <div class="tg bb"><strong>Friday: First LinkedIn post</strong>Write about the constraint you solved in your Bengali speech system. Not "I built a diarization model." Write: "Off-the-shelf tools gave 35% DER on Bengali audio. Here is why that happens and what I did about it." 300 words. Technical enough to show depth, accessible enough to share. Publish it.</div>
+    <div class="tg bb"><strong>Weekend: Complete the MLOps refactor of Bangla Diarizz</strong>Add type hints to every function. Add pytest tests for the 3 critical functions. Modularize into audio_processor.py, diarizer.py, evaluator.py. This is the Week 2 Sunday session from the roadmap — it signals software engineering maturity that changes how senior engineers evaluate your GitHub.</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">The probability math for your situation</div>
+    <div class="sub">Standard roadmap starts at 5% Week 1. You start higher because of existing proof points. Here is your adjusted estimate.</div>
+    <div class="r2">
+      <div class="sc"><div class="sn" style="color:var(--color-text-success)">~30%</div><div class="sl">your current actual probability</div></div>
+      <div class="sc"><div class="sn" style="color:var(--color-text-info)">~65%</div><div class="sl">after Bengali API deployed + LinkedIn fixed + 4 weeks outreach</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:10px;line-height:1.6;padding:8px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)">The 95% by Week 16 is achievable because the roadmap compounds. But your starting position at 30% (vs the roadmap's 5% at Week 1) means you can reach 65% in 4 weeks instead of 8 — if you close the outreach and deployment gaps this week.</div>
+  </div>
+</div>
+</div>
+
+<script>
+var WEEKS=[
+  {w:1,phase:'Phase 1: Build the Offer',prob:'5%',msgs:200,
+   sat:'Session 1: Build Yourself as an Irresistible Offer\n• Pick your 3 target markets (who specifically needs Bengali NLP + production ML?)\n• Define their dream outcome\n• Map your value drivers (score 1-10)\n• List every hiring friction point',
+   sun:'Session 9: ML System Design Masterclass\n• Clarify → Architecture → Deep-dive → Trade-offs framework\n• Deep-dive: Recommendation Systems, Fraud Detection, Search/Ranking\n• Practice: solve fraud detection for 10M txn/day',
+   dels:['Positioning exercises completed','3 target markets identified','Value driver scorecard written','Hiring friction list documented','System design question bank (20 scenarios)','3 system designs practiced'],
+   outreach:'Set up LinkedIn Premium · Install SBL automation · Import first lead list (200 leads) · Send 25 manual connection requests · Start SBL automation (40/day)',
+   why:"You go from 'I need a job' to 'I know exactly who needs me and why.' Foundation of all positioning. System design thinking begins."},
+  {w:2,phase:'Phase 1: Build the Offer',prob:'8%',msgs:480,
+   sat:'Session 2: Package Your Offer\n• Solutions to every hiring friction point\n• Trim and stack your value\n• Add bonuses and create scarcity\n• Build complete value stack document',
+   sun:'Session 10: MLOps Fundamentals\n• Production gap: Notebook → Production\n• 7 MLOps components: Git, Docker, MLflow, FastAPI, etc.\n• Code structure best practices\n• Learning through failure modes',
+   dels:['Complete value stack document','Bonuses list and scarcity plan','MLOps checklist completed','Deployment runbook template','First LinkedIn post published','Docker hello-world running locally'],
+   outreach:'New lead list loaded (200) · Automation running · 25 manual messages sent · Comment on 10 posts daily · First content piece published',
+   why:"You can now articulate WHY someone should hire you, not just list skills. MLOps knowledge means you speak 'production' language in interviews."},
+  {w:3,phase:'Phase 1: Build the Offer',prob:'12%',msgs:760,
+   sat:'Session 3: Name Your Offer and Build Guarantee\n• Draft 10 intro variations\n• Risk reversal strategies\n• Final package assembly\n• Practice 2-minute pitch (recorded)',
+   sun:'Session 11: Project 1 — Supervised Learning\n• Churn Prediction or Demand Forecasting\n• End-to-end pipeline with MLOps\n• Production deployment (FastAPI)\n• 90-min rapid prototype demo',
+   dels:['Final offer document written','2-minute pitch video recorded','10 intro variations written','Project 1 deployed (FastAPI + monitoring)','Rapid prototype starter kit ready','2 LinkedIn posts published'],
+   outreach:'New lead list (200) · SBL automation continues · 25 manual/week · 5 personalized DMs to hiring managers · Daily commenting (10/day)',
+   why:'Your pitch is sharp. Project 1 deployed = first real proof you can build production systems. First real portfolio piece.'},
+  {w:4,phase:'Phase 2: Generate Leads',prob:'18%',msgs:1100,
+   sat:'Session 4: LinkedIn Authority and Lead Gen System\n• LinkedIn profile weaponization\n• Headline → About → Featured optimization\n• Daily lead gen system (25+10+5+1)\n• Content strategy: 4 pillars\n• Notion CRM setup',
+   sun:'Session 12: Project 2 — Unsupervised Learning\n• Customer Segmentation pipeline\n• Interactive exploration dashboard\n• Segment profiling with insights\n• 90-min cluster explorer demo',
+   dels:['LinkedIn profile fully optimized','Notion CRM tracking active','Content calendar created','Project 2 deployed with dashboard','4 LinkedIn posts total','First 5 personalized outreach results tracked'],
+   outreach:'New lead list (200) · LinkedIn now optimized (higher reply rates) · 40 automated/day + 25 manual/week · Daily system: 25 connects + 10 comments + 5 DMs + 1 post · All tracked in Notion CRM',
+   why:'LinkedIn is now a weapon, not a resume. Optimized profile = 2–3x more replies on the same outreach volume. 2 projects deployed. Content building authority.'},
+  {w:5,phase:'Phase 2: Generate Leads',prob:'25%',msgs:1500,
+   sat:'Session 5: Outreach That Gets 30% Reply Rates\n• The SBL Outreach Formula\n• Callout + Value + Micro-Commitment\n• Message sequencing (3-touch)\n• Live SBL automation walkthrough\n• Personalization at scale',
+   sun:'Session 13: Project 3 — EDA Mastery\n• Complete EDA on real dataset\n• Hypothesis-driven analysis\n• Automated insight generation\n• Publishable analysis report\n• 2-hr rapid analysis with Claude',
+   dels:['SBL automation upgraded with new sequences','800+ leads imported to date','Message sequences A/B tested','Project 3: Publication-quality EDA report','Automated EDA toolkit built','6 LinkedIn posts total'],
+   outreach:'New lead list (200) · SBL sequences upgraded with 30% formula · A/B testing message variants · Manual outreach now uses SBL formula · First follow-up sequences triggering',
+   why:'Outreach quality jumps. SBL formula = 3–6x better reply rates. 3 projects = portfolio getting serious. EDA report is shareable content that proves analytical depth.'},
+  {w:6,phase:'Phase 2: Generate Leads',prob:'35%',msgs:2000,
+   sat:'Session 6: Cold Email and Multi-Channel Outreach\n• When email beats LinkedIn\n• Email structure: Problem → Agitate → Solution → CTA\n• Multi-channel: LinkedIn + Email + Twitter\n• Twitter/X threading strategy',
+   sun:'Session 14: Project 4 — GenAI Hybrid System\n• Customer Support Classifier (Rules → BERT → LLM)\n• 3-tier hybrid architecture\n• Cost optimization through smart routing\n• 2-hr Streamlit demo build',
+   dels:['Cold email campaign launched (50 emails)','Twitter/X profile optimized','Multi-channel tracking in CRM','Project 4 deployed: Hybrid AI system','Cost analysis document written','8 LinkedIn posts total'],
+   outreach:'New lead list (200) · Cold email campaign running (50/week) · Twitter cross-posting active · 3 channels now: LinkedIn + Email + Twitter · ~300 messages/week total',
+   why:"MULTI-CHANNEL = you're everywhere. Hiring managers see you on LinkedIn, get your email, see your tweets. 4 production projects. GenAI project = hot market skill."},
+  {w:7,phase:'Phase 3: Close Deals',prob:'48%',msgs:2500,
+   sat:'Session 7: Interview Mastery\n• STAR method for behavioral interviews\n• 10 most common questions answered\n• System design interview framework\n• Objection handling scripts\n• Live demo: Recommendation system design',
+   sun:'Session 15: Project 5 — RAG System\n• Document Q&A with RAG\n• Hybrid search (BM25 + semantic)\n• Re-ranking layer\n• Evaluation framework\n• 2-hr rapid Q&A bot build',
+   dels:['STAR answers for 10 behavioral questions','1 system design solved and recorded','Objection handling scripts written','Project 5 deployed: RAG system','RAG evaluation metrics documented','10 LinkedIn posts total'],
+   outreach:'New lead list (200) · All channels running at full capacity · Follow-up sequences on all prior contacts · First interview requests likely arriving · ~350 messages/week',
+   why:'You can now CLOSE. Interview prep = confidence. RAG system = most in-demand project in 2026. 5 projects = portfolio rivals 2-year experienced engineers. Conversations converting.'},
+  {w:8,phase:'Phase 3: Close Deals',prob:'58%',msgs:3000,
+   sat:'Session 8: Live Mock Interviews and Persuasion\n• Mock interview marathon (6–8 students)\n• Behavioral + System Design + Technical rounds\n• Advanced persuasion and sales psychology\n• De-risk yourself framework\n• Creating FOMO with multiple offer loops',
+   sun:'Session 16: Project 6 — MLOps: Kaggle to Production\n• Refactor notebook → production code\n• Testing, Docker, CI/CD pipeline\n• Cloud deployment\n• Monitoring and alerting\n• 2-hr rapid deployment with Claude Code',
+   dels:['Mock interview recorded and reviewed','Persuasion scripts written','Project 6 deployed: Full CI/CD system','ALL 6 projects in portfolio','12 LinkedIn posts total','Portfolio README polished'],
+   outreach:'Final lead list loaded (200) · 1,600 total leads contacted via lists · All automation sequences completing · Interview scheduling active · Salary negotiation prep begins',
+   why:"FULL ARSENAL. 6 production projects. Mock interviews done. Persuasion mastered. 3,000+ messages sent. You're now in active interview loops. Multiple conversations happening."},
+  {w:9,phase:'Job Sprint',prob:'65%',msgs:3400,
+   sat:'Portfolio Polish and Case Study Creation\n• Convert best 2 projects into detailed case studies\n• Architecture diagrams finalized\n• Cost analysis for each project\n• GitHub READMEs production-grade',
+   sun:'Mock Interview Round 1\n• Peer mock interviews (2 rounds)\n• System design deep practice\n• Technical debugging under pressure\n• Record and review performance',
+   dels:['2 case studies written','All GitHub repos polished','Architecture diagrams complete','2 mock interviews completed','14 LinkedIn posts total','Performance review notes written'],
+   outreach:"SBL automation continues · Follow-up all warm leads · Ayush's 10K/month outreach begins · Schedule pending interviews · New manual outreach to warm connections",
+   why:"Portfolio is INTERVIEW-READY. Case studies = you can walk through real systems in detail. Ayush's 10K monthly outreach begins amplifying your reach massively."},
+  {w:10,phase:'Job Sprint',prob:'72%',msgs:3600,
+   sat:"LinkedIn Authority Push\n• Publish 2 'Build in Public' deep-dives\n• Engage with 50 posts in target market\n• Publish contrarian take on trending ML topic\n• Cross-post winning content to Twitter",
+   sun:'Mock Interview Round 2\n• Focus: Weak areas identified from Week 9\n• Behavioral storytelling refinement\n• Offer negotiation role-play\n• System design under time pressure',
+   dels:['2 deep-dive posts published','1 contrarian take published','2 more mock interviews done','Negotiation scripts refined','17 LinkedIn posts total'],
+   outreach:"SBL automation running · Ayush's 10K outreach ongoing · Re-engage all 'viewed but no reply' · Convert warm leads to calls · Email follow-ups on all channels",
+   why:'Content authority COMPOUNDS. 17 posts = recruiters searching your name find thought leadership. Mock interviews sharpen closing ability. Multiple active conversations.'},
+  {w:11,phase:'Job Sprint',prob:'78%',msgs:3750,
+   sat:'Interview Intensive Week\n• Schedule maximum interviews this week\n• Pre-interview research for each company\n• Customize pitch per company\n• Debrief after each interview',
+   sun:'Technical Deep-Dive Prep\n• Prepare for company-specific technical rounds\n• System design practice (3 new scenarios)\n• Live coding practice\n• Review common ML trivia questions',
+   dels:['2–4 interviews completed','Interview debrief notes written','3 new system designs practiced','Company-specific prep docs created','19 LinkedIn posts total'],
+   outreach:"Pause cold outreach on companies in interview loop · Double down on warm leads · Ayush warm intros for target companies · SBL automation on new leads only · Track all interviews in CRM",
+   why:"ACTIVE INTERVIEW LOOPS. Real conversations with real companies. Each interview = learning + higher probability. Ayush's warm intros opening doors at target companies."},
+  {w:12,phase:'Job Sprint',prob:'83%',msgs:3850,
+   sat:'Offer Strategy and Negotiation Prep\n• Salary benchmarking research\n• Multiple offer strategy\n• Counter-offer scripts\n• Timeline management across loops',
+   sun:'Technical Follow-up\n• Send thank-you + technical addendum to interviewers\n• Build mini-demo for top-choice company\n• Prepare take-home if assigned\n• Continue system design practice',
+   dels:['Salary research document completed','Negotiation strategy per company written','Thank-you messages sent to all interviewers','Mini-demo built for top company','21 LinkedIn posts total'],
+   outreach:"Focus shifts to conversion · Ayush personal outreach for top 3 targets · SBL automation maintaining pipeline · New leads as backup · Follow up on all pending responses",
+   why:"You're NEGOTIATING, not searching. Multiple loops = leverage. Thank-you demos = you're the candidate who goes above and beyond. Employers feel urgency."},
+  {w:13,phase:'Job Sprint',prob:'87%',msgs:3950,
+   sat:"Content Flywheel and Authority Building\n• Publish interview experience posts (anonymized)\n• 'What I learned building X' series\n• Engage with hiring managers' content\n• Build-in-public update on your journey",
+   sun:'Rapid Prototyping for Contract Bids\n• Practice 90-min demo for contract work\n• Build sample project for freelance pitch\n• Datawars-style platform exploration\n• Contract proposal template',
+   dels:['2 interview experience posts published','Contract proposal template created','90-min demo practiced','Freelance profile set up','23 LinkedIn posts total'],
+   outreach:"SBL automation + Ayush's outreach · Apply to contract opportunities · Freelance platforms active · Maintain all interview loops · Follow up on all outstanding leads",
+   why:"THREE INCOME PATHS active: full-time interviews + contract bids + freelance. Content flywheel means inbound interest starting. You're no longer chasing — people come to you."},
+  {w:14,phase:'Job Sprint',prob:'90%',msgs:4050,
+   sat:"Final Push: Warm Network Activation\n• Ask all connections for referrals\n• Alumni network activation\n• Ayush's direct intros (SBL clients)\n• Community engagement for visibility",
+   sun:'Final Technical Prep\n• Prepare for any pending final rounds\n• Review all 6 projects for walkthrough\n• System design speed runs\n• Behavioral answer refinement',
+   dels:['10+ referral requests sent','Ayush warm intros received','All projects walkthrough-ready','Final round prep complete','25 LinkedIn posts total'],
+   outreach:"Ayush activates personal network (10 companies) · SBL client warm introductions · All automation channels at peak · Referral requests to alumni network · Maximum conversion focus",
+   why:"FULL NETWORK ACTIVATED. Ayush's personal intros + your 4,000+ messages + optimized profile + 6 projects + 25 posts = maximum visibility. Statistical probability heavily in your favor."},
+  {w:15,phase:'Job Sprint',prob:'93%',msgs:4100,
+   sat:'Offer Evaluation and Decision Framework\n• Compare offers: comp, growth, learning\n• Negotiate using multiple-offer leverage\n• Consult with Ayush on decisions\n• Timeline management',
+   sun:'Continuous Improvement\n• Address technical gaps from interviews\n• Build supplementary demos if needed\n• Continue system design practice\n• Fill knowledge gaps from feedback',
+   dels:['Offer comparison matrix built','Negotiation rounds executed','Decision framework applied','27 LinkedIn posts total','Technical gaps addressed'],
+   outreach:"Conversion-focused only · Follow up on all pending offers · Maintain backup pipeline · Continue Ayush's monthly outreach · Final push on warm leads",
+   why:"OFFERS ON TABLE. You're choosing between options, not hoping for one. 27 posts + 4,100 messages + 6 projects + network = you're a known quantity in the market."},
+  {w:16,phase:'Job Sprint',prob:'95%+',msgs:4200,
+   sat:'Graduation and Future Strategy\n• Final offer acceptance strategy\n• 90-day plan for new role\n• Build ongoing content strategy\n• Set up passive income streams',
+   sun:'Portfolio Handoff and Ongoing Growth\n• Final portfolio polish for public showcase\n• Document everything for future reference\n• Set up continuous learning plan\n• Alumni network onboarding',
+   dels:['Offer accepted or 5+ active conversations','90-day plan for new role written','Final portfolio live','Alumni network joined','30+ LinkedIn posts total','Continuous strategy documented'],
+   outreach:"Maintain relationships built · Transition to 'giving back' mode · Refer others in alumni network · Continue content for authority · Passive opportunities flowing",
+   why:"MISSION COMPLETE. 4,200+ messages, 6 production projects, 30+ posts, network activated, interview skills sharp. Offer accepted, or guarantee kicks in."}
+];
+
+var PROBS=[
+  {w:1,p:'5%',port:5,msgs:200,pos:'Weak',driver:'Just starting — no positioning, no portfolio, no outreach traction yet'},
+  {w:2,p:'8%',port:10,msgs:480,pos:'Forming',driver:'MLOps vocabulary acquired — can talk production. Value stack articulated.'},
+  {w:3,p:'12%',port:20,msgs:760,pos:'Clear',driver:'First deployed project + pitch video = first real proof point'},
+  {w:4,p:'18%',port:30,msgs:1100,pos:'Weaponized',driver:'LinkedIn optimized → reply rates jump 2–3x. 2 projects live.'},
+  {w:5,p:'25%',port:42,msgs:1500,pos:'Authority',driver:'SBL outreach formula = quality messages. 3 projects. Content building.'},
+  {w:6,p:'35%',port:55,msgs:2000,pos:'Multi-Channel',driver:"3 channels active. 4 projects including GenAI. You're everywhere."},
+  {w:7,p:'48%',port:72,msgs:2500,pos:'Interview-Ready',driver:'RAG system (hottest skill) + interview prep = ready to close'},
+  {w:8,p:'58%',port:90,msgs:3000,pos:'Full Arsenal',driver:'6 projects + mock interviews + 3K messages = serious candidate'},
+  {w:9,p:'65%',port:93,msgs:3400,pos:'Polished',driver:"Case studies + Ayush's 10K outreach = massive amplification"},
+  {w:10,p:'72%',port:95,msgs:3600,pos:'Compounding',driver:'17 posts = inbound interest. Mock interviews sharpened.'},
+  {w:11,p:'78%',port:96,msgs:3750,pos:'In Loops',driver:'Active interviews happening. Each one builds skill and probability.'},
+  {w:12,p:'83%',port:97,msgs:3850,pos:'Negotiating',driver:'Thank-you demos + multiple loops = employers competing for you'},
+  {w:13,p:'87%',port:98,msgs:3950,pos:'3 Paths Active',driver:'Full-time + contracts + freelance all running simultaneously'},
+  {w:14,p:'90%',port:99,msgs:4050,pos:'Network Peak',driver:"Ayush's personal intros + full network activated"},
+  {w:15,p:'93%',port:99,msgs:4100,pos:'Choosing',driver:'Multiple offers. You pick. Negotiation leverage.'},
+  {w:16,p:'95%+',port:100,msgs:4200,pos:'Complete',driver:'4,200 msgs + 6 projects + 30 posts + network. If not hired → guarantee.'}
+];
+
+var phaseColors={
+  'Phase 1: Build the Offer':'phase-1',
+  'Phase 2: Generate Leads':'phase-2',
+  'Phase 3: Close Deals':'phase-3',
+  'Job Sprint':'phase-js'
+};
+
+var weekColors=[
+  '#E6F1FB','#E1F5EE','#FAEEDA','#EEEDFE','#FAECE7','#EAF3DE','#E6F1FB','#EEEDFE',
+  '#EAF3DE','#E1F5EE','#FAEEDA','#EEEDFE','#FAECE7','#EAF3DE','#E6F1FB','#EAF3DE'
+];
+var weekTextColors=[
+  '#0C447C','#085041','#633806','#3C3489','#712B13','#27500A','#0C447C','#3C3489',
+  '#27500A','#085041','#633806','#3C3489','#712B13','#27500A','#0C447C','#27500A'
+];
+
+var delCounts={};
+var dcCount=0;
+var dcTotal=0;
+
+function buildWeeks(){
+  var c=document.getElementById('weeks-container');
+  WEEKS.forEach(function(wk,i){
+    var div=document.createElement('div');
+    div.className='wk-row';
+    var pclass=phaseColors[wk.phase]||'phase-js';
+    var satLines=wk.sat.split('\n');
+    var sunLines=wk.sun.split('\n');
+    var satTitle=satLines[0];
+    var satItems=satLines.slice(1).filter(function(l){return l.trim()});
+    var sunTitle=sunLines[0];
+    var sunItems=sunLines.slice(1).filter(function(l){return l.trim()});
+    var delHtml=wk.dels.map(function(d,di){
+      return '<div class="del-item" onclick="togDel(this,\'w'+i+'\')" data-wi="'+i+'" data-di="'+di+'">' +
+        '<input type="checkbox">' +
+        '<div class="dt">'+d+'</div></div>';
+    }).join('');
+    var outReach=wk.outreach.split('·').map(function(s){return s.trim()}).filter(Boolean);
+    var outHtml=outReach.map(function(s){return '<span class="outreach-tag">'+s+'</span>'}).join('');
+    div.innerHTML=
+      '<div class="wk-head" onclick="toggleWk(this)">' +
+        '<div class="wk-num" style="background:'+weekColors[i]+';color:'+weekTextColors[i]+'">'+wk.w+'</div>' +
+        '<div class="wk-info">' +
+          '<div class="wk-title">Week '+wk.w+' <span class="phase-tag '+pclass+'">'+wk.phase+'</span></div>' +
+          '<div class="wk-phase">'+wk.dels.length+' deliverables · '+wk.msgs.toLocaleString()+' cumulative messages</div>' +
+        '</div>' +
+        '<div class="wk-right">' +
+          '<span class="prob-badge">'+wk.prob+'</span>' +
+          '<span class="wk-arrow" id="arrow'+i+'">▼</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="wk-body" id="body'+i+'">' +
+        '<div class="section-label">Saturday + Sunday sessions</div>' +
+        '<div class="session-row">' +
+          '<div class="sess-card">' +
+            '<div class="sess-day sess-sat">Saturday — soft skills</div>' +
+            '<div class="sess-title">'+satTitle+'</div>' +
+            '<div class="sess-items">'+satItems.join('<br>')+'</div>' +
+          '</div>' +
+          '<div class="sess-card">' +
+            '<div class="sess-day sess-sun">Sunday — technical</div>' +
+            '<div class="sess-title">'+sunTitle+'</div>' +
+            '<div class="sess-items">'+sunItems.join('<br>')+'</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="section-label">Weekly deliverables — check each off</div>' +
+        '<div class="del-list" id="dels'+i+'">'+delHtml+'</div>' +
+        '<div class="pbar" style="margin:8px 0"><div class="pf pf-ok" id="delbar'+i+'" style="width:0%"></div></div>' +
+        '<div class="section-label">Daily outreach actions this week</div>' +
+        '<div style="margin-bottom:8px">'+outHtml+'</div>' +
+        '<div class="why-box">'+wk.why+'</div>' +
+      '</div>';
+    c.appendChild(div);
+    delCounts['w'+i]={done:0,total:wk.dels.length};
+  });
+}
+
+function toggleWk(head){
+  var body=head.nextElementSibling;
+  var arrow=head.querySelector('.wk-arrow');
+  var isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arrow.textContent=isOpen?'▼':'▲';
+}
+
+var totalDels=0;
+var doneDels=0;
+
+function togDel(item,grp){
+  var cb=item.querySelector('input');
+  cb.checked=!cb.checked;
+  var dt=item.querySelector('.dt');
+  if(cb.checked){
+    item.classList.add('done');
+    if(dt)dt.classList.add('done');
+    delCounts[grp].done++;
+    doneDels++;
+  } else {
+    item.classList.remove('done');
+    if(dt)dt.classList.remove('done');
+    if(delCounts[grp].done>0)delCounts[grp].done--;
+    if(doneDels>0)doneDels--;
+  }
+  var wi=parseInt(item.getAttribute('data-wi'));
+  var bar=document.getElementById('delbar'+wi);
+  var dc=delCounts[grp];
+  if(bar)bar.style.width=Math.round(dc.done/dc.total*100)+'%';
+  document.getElementById('wk-del').textContent=doneDels;
+}
+
+function tc(row,grp){
+  var cb=row.querySelector('input[type=checkbox]');
+  cb.checked=!cb.checked;
+  var ct=row.querySelector('.ct');
+  if(cb.checked){
+    row.classList.add('done');
+    if(ct)ct.classList.add('done');
+    dcCount++;
+  } else {
+    row.classList.remove('done');
+    if(ct)ct.classList.remove('done');
+    if(dcCount>0)dcCount--;
+  }
+  var total=document.querySelectorAll('#v0 .cr').length;
+  document.getElementById('dc-done').textContent=dcCount;
+  document.getElementById('dc-pct').textContent=Math.round(dcCount/total*100)+'%';
+  document.getElementById('dc-bar').style.width=Math.round(dcCount/total*100)+'%';
+}
+
+function buildProbs(){
+  var c=document.getElementById('prob-rows');
+  PROBS.forEach(function(p){
+    var num=parseInt(p.p);
+    var pct=isNaN(num)?95:num;
+    var div=document.createElement('div');
+    div.className='prob-row';
+    div.innerHTML=
+      '<div class="prob-wk">Week '+p.w+'</div>' +
+      '<div class="prob-bar-wrap">' +
+        '<div class="prob-bar-bg"><div class="prob-bar-fill" style="width:'+pct+'%"></div></div>' +
+        '<div class="prob-driver">'+p.driver+'</div>' +
+      '</div>' +
+      '<div class="prob-val">'+p.p+'</div>';
+    c.appendChild(div);
+  });
+}
+
+function sv(n,btn){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+  document.querySelectorAll('.nav button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById('v'+n).classList.add('on');
+  btn.classList.add('on');
+}
+
+buildWeeks();
+buildProbs();
+</script>
