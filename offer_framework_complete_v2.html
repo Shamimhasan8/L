@@ -1,0 +1,736 @@
+<style>
+:root{
+  --fw-shadow-sm:0 1px 2px rgba(17,24,39,.06);
+  --fw-shadow-md:0 6px 18px rgba(17,24,39,.08);
+  --fw-ring:0 0 0 2px color-mix(in srgb,var(--color-text-info,#1d4ed8) 22%,transparent);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+.fw{font-family:var(--font-sans,Segoe UI,Arial,sans-serif);padding:0 0 2rem;max-width:1120px;margin:0 auto;line-height:1.35}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1.25rem;padding:2px}
+.nb{padding:8px 15px;border:1px solid var(--color-border-secondary,#d1d5db);border-radius:999px;font-size:12px;cursor:pointer;background:var(--color-background-primary,#fff);color:var(--color-text-secondary,#4b5563);font-family:var(--font-sans,Segoe UI,Arial,sans-serif);font-weight:500;letter-spacing:.01em;transition:background-color .18s,color .18s,border-color .18s,transform .18s,box-shadow .18s}
+.nb.on{background:var(--color-text-primary,#111827);color:var(--color-background-primary,#fff);border-color:var(--color-text-primary,#111827);box-shadow:var(--fw-shadow-sm)}
+.nb:hover:not(.on){background:var(--color-background-secondary,#f3f4f6);color:var(--color-text-primary,#111827);transform:translateY(-1px)}
+.nb:focus-visible{outline:none;box-shadow:var(--fw-ring)}
+.view{display:none;animation:fadeIn .22s ease}.view.on{display:block}
+.card{background:var(--color-background-primary,#fff);border:1px solid var(--color-border-tertiary,#e5e7eb);border-radius:var(--border-radius-lg,14px);padding:1.05rem 1.2rem;margin-bottom:12px;box-shadow:var(--fw-shadow-sm)}
+.h1{font-size:16px;font-weight:600;color:var(--color-text-primary,#111827);margin-bottom:6px;line-height:1.35}
+.h2{font-size:13px;font-weight:600;color:var(--color-text-primary,#111827);margin-bottom:4px;line-height:1.35}
+.sub{font-size:12px;color:var(--color-text-secondary,#4b5563);line-height:1.65;margin-bottom:10px}
+.pill{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase}
+.pt{background:var(--color-background-info,#dbeafe);color:var(--color-text-info,#1e40af)}
+.pa{background:var(--color-background-warning,#fef3c7);color:var(--color-text-warning,#92400e)}
+.pc{background:var(--color-background-danger,#fee2e2);color:var(--color-text-danger,#b91c1c)}
+.pp{background:#EEEDFE;color:#3C3489}
+.pg{background:var(--color-background-success,#dcfce7);color:var(--color-text-success,#166534)}
+.tg{background:var(--color-background-secondary,#f3f4f6);border-radius:var(--border-radius-md,10px);padding:10px 12px;font-size:12px;color:var(--color-text-secondary,#4b5563);line-height:1.63;margin-bottom:6px;border:1px solid color-mix(in srgb,var(--color-border-tertiary,#e5e7eb) 80%,transparent)}
+.tg strong{color:var(--color-text-primary,#111827);font-weight:600;display:block;margin-bottom:2px}
+.tg.bt{border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-md,10px) var(--border-radius-md,10px) 0}
+.tg.ba{border-left:3px solid #BA7517;border-radius:0 var(--border-radius-md,10px) var(--border-radius-md,10px) 0}
+.tg.bb{border-left:3px solid #185FA5;border-radius:0 var(--border-radius-md,10px) var(--border-radius-md,10px) 0}
+.tg.bp{border-left:3px solid #534AB7;border-radius:0 var(--border-radius-md,10px) var(--border-radius-md,10px) 0}
+.tg.br{border-left:3px solid #E24B4A;border-radius:0 var(--border-radius-md,10px) var(--border-radius-md,10px) 0}
+.r2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.r3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.r4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.sc{background:var(--color-background-secondary,#f3f4f6);border-radius:var(--border-radius-md,10px);padding:11px 12px;text-align:center;border:1px solid var(--color-border-tertiary,#e5e7eb)}
+.sc .sn{font-size:20px;font-weight:700;color:var(--color-text-primary,#111827)}
+.sc .sl{font-size:11px;color:var(--color-text-secondary,#4b5563);margin-top:2px}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:10px}
+.vb{background:var(--color-background-danger,#fee2e2);border:1px solid var(--color-border-danger,#fecaca);border-radius:var(--border-radius-md,10px);padding:9px 11px}
+.vb .vl{font-size:10px;font-weight:700;color:var(--color-text-danger,#b91c1c);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.vb .vt{font-size:12px;color:var(--color-text-danger,#b91c1c);line-height:1.5}
+.vg{background:var(--color-background-success,#dcfce7);border:1px solid var(--color-border-success,#bbf7d0);border-radius:var(--border-radius-md,10px);padding:9px 11px}
+.vg .vl{font-size:10px;font-weight:700;color:var(--color-text-success,#166534);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.vg .vt{font-size:12px;color:var(--color-text-success,#166534);line-height:1.5}
+.ex-row{border:1px solid var(--color-border-tertiary,#e5e7eb);border-radius:var(--border-radius-lg,14px);margin-bottom:10px;overflow:hidden;background:var(--color-background-primary,#fff);box-shadow:var(--fw-shadow-sm)}
+.ex-head{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:background-color .18s,box-shadow .18s}
+.ex-head:hover{background:var(--color-background-secondary,#f3f4f6)}
+.ex-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.ex-info{flex:1;min-width:0}
+.ex-title{font-size:13px;font-weight:600;color:var(--color-text-primary,#111827)}
+.ex-sub{font-size:11px;color:var(--color-text-secondary,#4b5563);margin-top:1px}
+.ex-arr{font-size:10px;color:var(--color-text-secondary,#4b5563);flex-shrink:0;transition:transform .2s}
+.ex-body{display:none;padding:0 14px 14px}
+.ex-body.open{display:block}
+.ex-head:has(+ .ex-body.open) .ex-arr{transform:rotate(180deg)}
+.sl{font-size:10px;font-weight:700;color:var(--color-text-secondary,#4b5563);text-transform:uppercase;letter-spacing:.07em;margin:10px 0 5px}
+.inp{width:100%;border:1px solid var(--color-border-secondary,#d1d5db);border-radius:var(--border-radius-md,10px);padding:8px 10px;font-size:12px;font-family:var(--font-sans,Segoe UI,Arial,sans-serif);color:var(--color-text-primary,#111827);background:var(--color-background-primary,#fff);line-height:1.5;transition:border-color .18s,box-shadow .18s,background-color .18s}
+textarea.inp{resize:vertical;min-height:56px}
+.inp::placeholder{color:color-mix(in srgb,var(--color-text-secondary,#4b5563) 80%,transparent)}
+.inp:focus{outline:none;border-color:var(--color-text-info,#1d4ed8);box-shadow:var(--fw-ring)}
+.cr{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--color-border-tertiary,#e5e7eb);cursor:pointer;-webkit-user-select:none;user-select:none}
+.cr:last-child{border-bottom:none}
+.cr input[type=checkbox]{width:14px;height:14px;margin-top:2px;flex-shrink:0;accent-color:var(--color-text-success,#166534);cursor:pointer}
+.cr .ct{font-size:12px;color:var(--color-text-primary,#111827);line-height:1.4}
+.cr .cs{font-size:11px;color:var(--color-text-secondary,#4b5563);margin-top:2px;line-height:1.3}
+.cr.done .ct{text-decoration:line-through;color:var(--color-text-secondary,#4b5563)}
+.pbar{height:5px;background:var(--color-border-tertiary,#e5e7eb);border-radius:999px;overflow:hidden;margin-top:6px}
+.pf{height:100%;border-radius:999px;transition:width .4s;background:linear-gradient(90deg,var(--color-text-success,#166534),color-mix(in srgb,var(--color-text-success,#166534) 60%,#34d399))}
+.pl{font-size:11px;color:var(--color-text-secondary,#4b5563);margin-top:3px}
+.fbox{border:1px solid var(--color-border-info,#bfdbfe);border-radius:var(--border-radius-md,10px);background:var(--color-background-info,#dbeafe);padding:11px 14px;margin-bottom:8px;text-align:center}
+.fbox .ft{font-size:13px;font-weight:700;color:var(--color-text-info,#1e40af)}
+.fbox .fs{font-size:11px;color:var(--color-text-info,#1e40af);margin-top:3px;opacity:.88}
+.table-wrap{overflow-x:auto;margin-bottom:10px;border-radius:var(--border-radius-md,10px);border:1px solid var(--color-border-tertiary,#e5e7eb)}
+table.cmp{width:100%;border-collapse:collapse;font-size:12px}
+table.cmp th{background:var(--color-background-secondary,#f3f4f6);color:var(--color-text-secondary,#4b5563);font-weight:700;padding:8px 10px;border:1px solid var(--color-border-tertiary,#e5e7eb);text-align:left;font-size:11px;position:sticky;top:0;z-index:1}
+table.cmp td{padding:8px 10px;border:1px solid var(--color-border-tertiary,#e5e7eb);color:var(--color-text-primary,#111827);vertical-align:top;line-height:1.5}
+table.cmp tr:nth-child(even) td{background:var(--color-background-secondary,#f3f4f6)}
+.srow{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--color-border-tertiary,#e5e7eb)}
+.srow:last-child{border-bottom:none}
+.srow .sl2{font-size:12px;color:var(--color-text-primary,#111827);min-width:150px;flex-shrink:0}
+.srow .sbg{flex:1;height:7px;background:var(--color-border-tertiary,#e5e7eb);border-radius:999px;overflow:hidden}
+.srow .sfill{height:100%;border-radius:999px;transition:width .4s}
+.srow .sval{font-size:12px;font-weight:700;min-width:32px;text-align:right}
+.btn{padding:7px 14px;border:1px solid var(--color-border-secondary,#d1d5db);border-radius:var(--border-radius-md,10px);font-size:12px;cursor:pointer;background:var(--color-background-primary,#fff);color:var(--color-text-primary,#111827);font-family:var(--font-sans,Segoe UI,Arial,sans-serif);font-weight:600;transition:background-color .18s,border-color .18s,transform .18s,box-shadow .18s;margin-top:6px;display:inline-block}
+.btn:hover{background:var(--color-background-secondary,#f3f4f6);transform:translateY(-1px);box-shadow:var(--fw-shadow-sm)}
+.btn:focus-visible{outline:none;box-shadow:var(--fw-ring)}
+.rbox{display:none;margin-top:8px;padding:10px 12px;background:var(--color-background-success,#dcfce7);border:1px solid var(--color-border-success,#bbf7d0);border-radius:var(--border-radius-md,10px);font-size:12px;color:var(--color-text-success,#166534);line-height:1.6}
+.rbox.show{display:block}
+.rbox strong{font-weight:700;display:block;margin-bottom:2px;font-size:12px}
+.frow{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--color-border-tertiary,#e5e7eb)}
+.frow:last-child{border-bottom:none}
+.fi{font-size:11px;font-weight:700;padding:1px 6px;border-radius:999px;flex-shrink:0;margin-top:2px}
+.fi-d{background:var(--color-background-danger,#fee2e2);color:var(--color-text-danger,#b91c1c)}
+.fi-s{background:var(--color-background-success,#dcfce7);color:var(--color-text-success,#166534)}
+.frow .ft2{font-size:12px;color:var(--color-text-primary,#111827);line-height:1.4}
+.frow .fs2{font-size:11px;color:var(--color-text-secondary,#4b5563);margin-top:2px;line-height:1.3}
+.pitch-block{background:var(--color-background-secondary,#f3f4f6);border-radius:var(--border-radius-md,10px);padding:12px 14px;font-size:12px;color:var(--color-text-primary,#111827);line-height:1.7;margin-bottom:8px;border:1px solid var(--color-border-tertiary,#e5e7eb)}
+.pbl{font-size:10px;font-weight:700;color:var(--color-text-secondary,#4b5563);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.div{height:1px;background:var(--color-border-tertiary,#e5e7eb);margin:10px 0}
+.note{font-size:11px;color:var(--color-text-secondary,#4b5563);line-height:1.5;padding:8px 10px;background:var(--color-background-secondary,#f3f4f6);border-radius:var(--border-radius-md,10px);margin-bottom:8px;border:1px solid var(--color-border-tertiary,#e5e7eb)}
+
+@keyframes fadeIn{
+  from{opacity:.2;transform:translateY(2px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width:980px){
+  .r4{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .r3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:740px){
+  .fw{padding:0 0 1.5rem}
+  .card{padding:1rem}
+  .r2,.r3,.r4,.vs{grid-template-columns:1fr}
+  .srow{flex-wrap:wrap;gap:6px}
+  .srow .sl2{min-width:unset;width:100%}
+  .nav{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--color-background-primary,#fff) 70%,transparent);padding:6px 2px 10px}
+}
+</style>
+
+<div class="fw">
+<div class="nav">
+  <button class="nb on" onclick="sv(0,this)">Overview</button>
+  <button class="nb" onclick="sv(1,this)">Phase 1 — Foundation</button>
+  <button class="nb" onclick="sv(2,this)">Phase 2 — Compression</button>
+  <button class="nb" onclick="sv(3,this)">Phase 3 — Ownership</button>
+  <button class="nb" onclick="sv(4,this)">Your final offer</button>
+  <button class="nb" onclick="sv(5,this)">Daily tasks</button>
+</div>
+
+<!-- VIEW 0: OVERVIEW (📋 Overview sheet — all rows) -->
+<div class="view on" id="v0">
+  <div class="card">
+    <div class="pill pt">The Offer Framework</div>
+    <div class="h1">Package Yourself for US-Funded Startups</div>
+    <div class="sub">Complete 13-Exercise Workbook: Students &amp; Working Professionals Edition</div>
+    <div class="fbox">
+      <div class="ft">Technical Skills × Soft Skills × Offer Development = Obvious Choice</div>
+      <div class="fs">Most people only build the first track. This framework builds all three.</div>
+    </div>
+    <div class="tg br"><strong>Why this framework? (from the Overview sheet)</strong>Most people focus ONLY on technical skills. This framework teaches THREE TRACKS that actually get offers:<br>✓ TECHNICAL SKILLS: What you can build<br>✓ SOFT SKILLS: How you get in front of hiring managers<br>✓ OFFER DEVELOPMENT: How you package yourself so NOT hiring you feels like a risk<br><br>13 exercises transforming you from "another applicant" to "the obvious choice" for US-funded startups.</div>
+  </div>
+  <div class="card">
+    <div class="pill pg">13 exercises — exact list from the Overview sheet</div>
+    <div class="sl">Phase 1: Foundation (Ex 1–6)</div>
+    <div style="display:grid;gap:5px;margin-bottom:10px">
+      <div class="tg bb"><strong>Exercise 1</strong>Pick Your Starving Crowd — Define your specific target market</div>
+      <div class="tg bb"><strong>Exercise 2</strong>Define THEIR Dream Outcome — What do THEY want (not you)?</div>
+      <div class="tg bb"><strong>Exercise 3</strong>Map Your Value Drivers — The formula determining your value</div>
+      <div class="tg bb"><strong>Exercise 4</strong>List Every Hiring Friction — Why don't they hire you?</div>
+      <div class="tg bb"><strong>Exercise 5</strong>Turn Frictions into Solutions — Convert friction to deliverables</div>
+      <div class="tg bb"><strong>Exercise 6</strong>Define Your Delivery Model — How they get you</div>
+    </div>
+    <div class="sl">Phase 2: Compression (Ex 7–10)</div>
+    <div style="display:grid;gap:5px;margin-bottom:10px">
+      <div class="tg ba"><strong>Exercise 7</strong>Trim and Stack Your Offer — Keep only what matters</div>
+      <div class="tg ba"><strong>Exercise 8</strong>Build Your Value Stack — Complete offering structure</div>
+      <div class="tg ba"><strong>Exercise 9</strong>Add Bonuses — Extras that increase perceived value</div>
+      <div class="tg ba"><strong>Exercise 10</strong>Create Ethical Scarcity — Make hiring time-sensitive</div>
+    </div>
+    <div class="sl">Phase 3: Ownership (Ex 11–13)</div>
+    <div style="display:grid;gap:5px;margin-bottom:10px">
+      <div class="tg bp"><strong>Exercise 11</strong>Choose Your Guarantee — Risk reversal strategy</div>
+      <div class="tg bp"><strong>Exercise 12</strong>Name Your Offer — 10 variations of your intro</div>
+      <div class="tg bp"><strong>Exercise 13</strong>Perfect Your Value Stack Presentation — Final pitch script</div>
+    </div>
+    <div class="sl">How to use this workbook (exact from Overview sheet)</div>
+    <div class="tg">1. Complete exercises IN ORDER — each builds on previous<br>2. Be SPECIFIC — vague answers produce vague results<br>3. Use EXAMPLES as templates<br>4. Fill in YOUR WORKSHEET sections (yellow highlighted in original)<br>5. Revisit and refine throughout your journey<br>6. By Exercise 13, you'll have a complete pitch ready</div>
+  </div>
+  <div class="card">
+    <div class="pill pc">Progress tracker</div>
+    <div class="r4">
+      <div class="sc"><div class="sn" id="ov-ex">0</div><div class="sl">exercises saved</div></div>
+      <div class="sc"><div class="sn">13</div><div class="sl">total exercises</div></div>
+      <div class="sc"><div class="sn" id="ov-dt">0</div><div class="sl">daily tasks done</div></div>
+      <div class="sc"><div class="sn" id="ov-pct">0%</div><div class="sl">offer complete</div></div>
+    </div>
+    <div class="pbar" style="margin-top:8px"><div class="pf" id="ov-bar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- VIEW 1: PHASE 1 FOUNDATION (Ex1–Ex6 sheets — every field) -->
+<div class="view" id="v1">
+  <div class="card">
+    <div class="pill pt">Phase 1 — Foundation (Exercises 1–6)</div>
+    <div class="h1">Define who you target, what they want, your value, their frictions, your solutions, and delivery</div>
+    <div class="sub">Click each exercise number to expand. Fill every worksheet field before moving to the next. Every field comes directly from the workbook sheets.</div>
+  </div>
+
+  <!-- EX 1: Ex1️⃣ Target Market — all rows used -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-info);color:var(--color-text-info)">1</div>
+      <div class="ex-info"><div class="ex-title">Pick Your Starving Crowd</div><div class="ex-sub">Define your specific target market · 5 worksheet fields</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="sl">Principle (from sheet)</div>
+      <div class="tg br">You MUST choose a SPECIFIC target market. Not "companies that need ML" — too vague. The more specific your target, the more your positioning resonates. For US-funded startups: Focus on Series A–C companies (50–500 employees) who are scaling fast and need ML talent but cannot afford $200K+ senior engineers.</div>
+      <div class="sl">6 target market options (from sheet — all 6 rows)</div>
+      <div class="table-wrap">
+        <table class="cmp">
+          <tr><th>#</th><th>Target Market Option</th><th>Why Demand Is Strong</th></tr>
+          <tr><td>1</td><td>Early-stage B2B SaaS (Series A-B, 50-200 employees)</td><td>Competing with bigger companies · Need AI to differentiate · Cannot afford $200K senior engineers · Move fast · Actively hiring to scale</td></tr>
+          <tr><td>2</td><td>Mid-size E-commerce/D2C (Series B-C)</td><td>Losing to AI-powered competitors · Sitting on unused customer data · Need personalization · Board pressure to "use AI" · Easier entry than FAANG</td></tr>
+          <tr><td>3</td><td>Fintech startups (Series B-C, 100-400 employees)</td><td>Fraud detection critical · Large datasets exist · High pay · Strong growth trajectory · Complex problems to solve</td></tr>
+          <tr><td>4</td><td>Healthtech companies (Series A-C)</td><td>FDA/regulatory pressure · Need explainable models · Shortage of ML + healthcare knowledge · Mission-driven · Growing fast</td></tr>
+          <tr><td>5</td><td>AI-first startups building ML products</td><td>Core product IS ML · Ship fast mentality · Hire junior if you demonstrate capability · Equity upside · Learn from best</td></tr>
+          <tr><td>6</td><td>Data infrastructure / MLOps startups</td><td>Need people who understand production ML · Growing category · Close to cutting edge · Good for systems thinking</td></tr>
+        </table>
+      </div>
+      <div class="sl">Your worksheet — all 5 fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">My chosen target market:</label><textarea class="inp" placeholder="Be specific: company type, size, funding stage, industry. Example: Early-stage B2B SaaS companies (Series A-B, 50-200 employees, US-funded) building AI features"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Why demand is strong (3 specific reasons):</label><textarea class="inp" placeholder="1.&#10;2.&#10;3."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Urgency trigger (why hire NOW, not in 6 months):</label><textarea class="inp" placeholder="Need to ship AI features before next funding round / meet customer commitments / competitors launching AI"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Social proof (LinkedIn job postings):</label><textarea class="inp" placeholder="LinkedIn search returned X open ML positions this week. AngelList shows Y companies actively hiring."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">How I'll find these companies:</label><textarea class="inp" placeholder="• LinkedIn advanced search: Company size 50-200, Series A/B, job title ML Engineer&#10;• AngelList: Filter by funding stage + ML tag&#10;• Y Combinator batch lists&#10;• TechCrunch funding announcements + CrunchBase filters&#10;• Twitter/X: Follow VCs in this space, see portfolio companies"></textarea></div>
+      </div>
+      <button class="btn" onclick="showR(this,'r1')">See example completed (from sheet)</button>
+      <div class="rbox" id="r1"><strong>Example from sheet:</strong>My target market: Early-stage B2B SaaS companies (Series A-B, 50-200 employees, US-funded) building AI features<br><br>Why demand is strong:<br>1. They're competing with larger, well-funded competitors and need AI features to differentiate their product<br>2. They can't afford $200K senior ML engineers but desperately need ML capability<br>3. They're in hypergrowth (Series A/B) — aggressive hiring to scale quickly<br><br>Urgency trigger: Need to ship AI features before next funding round / meet customer commitments / competitors launching AI<br><br>Social proof: LinkedIn search "Series A SaaS ML engineer" returned 47 open positions this week. AngelList shows 120+ B2B SaaS companies actively hiring ML roles.<br><br>How I'll find them: LinkedIn advanced search · AngelList filter by funding stage + ML tag · Y Combinator batch lists · TechCrunch funding announcements + CrunchBase filters · Twitter/X: Follow VCs, see portfolio companies</div>
+    </div>
+  </div>
+
+  <!-- EX 2: Ex2️⃣ Dream Outcome — all rows -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-warning);color:var(--color-text-warning)">2</div>
+      <div class="ex-info"><div class="ex-title">Define THEIR Dream Outcome (Not Yours)</div><div class="ex-sub">The formula: Get [Result] in [Time] without [Pain] · 6 worksheet fields</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="sl">Principle (from sheet)</div>
+      <div class="tg br">CRITICAL REALITY CHECK: What YOU want: Cool ML projects, learning opportunities, work-life balance, good salary. What THEY want: Someone who reduces costs, ships without hand-holding, solves problems independently. This is the #1 mistake people make. The formula: "Get [Result] in [Time] without [Pain]" — this becomes your value proposition.</div>
+      <div class="sl">Your wants vs their wants (exact table from sheet — all 5 rows)</div>
+      <div class="table-wrap">
+        <table class="cmp">
+          <tr><th>Category</th><th>❌ What YOU Want</th><th>✅ What THEY Want</th></tr>
+          <tr><td>Career</td><td>ML job, resume building, learning</td><td>Someone who ships features fast</td></tr>
+          <tr><td>Projects</td><td>Interesting ML problems</td><td>Business impact, revenue, cost savings</td></tr>
+          <tr><td>Work Style</td><td>Mentorship, structured onboarding</td><td>Self-directed, minimal supervision</td></tr>
+          <tr><td>Technology</td><td>Latest LLMs, cutting-edge research</td><td>Whatever solves the problem cheaply</td></tr>
+          <tr><td>Success</td><td>Building cool models</td><td>Models in production generating value</td></tr>
+        </table>
+      </div>
+      <div class="sl">Dream outcome examples by market (from sheet — all 5)</div>
+      <div style="display:grid;gap:5px;margin-bottom:10px">
+        <div class="tg bb"><strong>B2B SaaS (Early-stage):</strong>"Get production-ready ML features deployed in 60 days without hiring a $200K senior engineer"</div>
+        <div class="tg bb"><strong>E-commerce/D2C:</strong>"Get recommendation system increasing conversion 15%+ in 90 days without building ML team from scratch"</div>
+        <div class="tg bb"><strong>Fintech:</strong>"Get compliant fraud detection model deployed in 90 days without navigating regulatory requirements alone"</div>
+        <div class="tg bb"><strong>Healthtech:</strong>"Get FDA-ready ML model with full documentation in 120 days without hiring someone who understands both ML and healthcare"</div>
+        <div class="tg bb"><strong>AI-first startup:</strong>"Get production ML pipeline handling 100K requests/day in 60 days without senior oversight"</div>
+      </div>
+      <div class="sl">Your worksheet — all 6 fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">My target market (from Exercise 1):</label><input class="inp" placeholder="Paste your answer from Exercise 1 here"></div>
+        <div class="fbox"><div class="ft">Their dream outcome formula: Get [RESULT] in [TIME] without [PAIN]</div></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">RESULT (what they actually want — not "an ML engineer", the business outcome):</label><textarea class="inp" placeholder="Production-ready ML features that differentiate their product and increase conversion"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">TIME (how fast — before next board meeting / funding round / customer deadline):</label><input class="inp" placeholder="60-90 days (before next board meeting or customer commitment deadline)"></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">PAIN (what they're currently suffering — cost, time, expertise gap):</label><textarea class="inp" placeholder="Can't afford senior ML engineers, don't have time to build team from scratch, need to ship fast to compete"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Complete one-sentence promise (this goes in EVERY cold message and cover letter):</label><textarea class="inp" placeholder="Get production-ready ML features deployed and generating measurable business impact in 60-90 days without hiring a $200K senior engineer or building an ML team from scratch"></textarea></div>
+        <div class="tg ba"><strong>Test (from the sheet):</strong>Does this make a hiring manager lean forward? YES / NO — if NO, rewrite above. It must address actual pain (cost + time + expertise gap) and promise a specific outcome they care about.</div>
+      </div>
+      <button class="btn" onclick="showR(this,'r2')">See example completed (from sheet)</button>
+      <div class="rbox" id="r2"><strong>Example from sheet:</strong>Target: Early-stage B2B SaaS (Series A-B, 50-200 employees) building AI features<br><br>RESULT: Production-ready ML features that differentiate their product and increase conversion<br>TIME: 60-90 days (before next board meeting / customer deadline)<br>PAIN: Can't afford senior ML engineers, don't have time to build team from scratch, need to ship fast to compete<br><br>Complete promise: "Get production-ready ML features deployed and generating measurable business impact in 60-90 days without hiring a $200K senior engineer or building an ML team from scratch"<br><br>Test: YES — this addresses their actual pain (cost + time + expertise gap) and promises specific outcome they care about</div>
+    </div>
+  </div>
+
+  <!-- EX 3: Ex3️⃣ Value Drivers — all rows -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:#EEEDFE;color:#3C3489">3</div>
+      <div class="ex-info"><div class="ex-title">Map Your Value Drivers</div><div class="ex-sub">VALUE = (Dream Outcome × Perceived Likelihood) / (Time Delay × Effort &amp; Sacrifice) · 8 worksheet fields</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="fbox"><div class="ft">VALUE = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort &amp; Sacrifice)</div><div class="fs">Maximize the top two numbers. Minimize the bottom two. Your score = your chance of getting interviewed.</div></div>
+      <div class="sl">4 components — what lowers vs raises each (exact from sheet)</div>
+      <div class="table-wrap">
+        <table class="cmp">
+          <tr><th>Component</th><th>What Lowers Your Score</th><th>What Raises Your Score</th></tr>
+          <tr><td><strong>Dream Outcome</strong><br>(higher = better)</td><td>• Generic portfolio projects<br>• No production experience<br>• Can't explain business impact</td><td>• Deployed systems with metrics<br>• Production ML systems running<br>• Business outcomes you drove</td></tr>
+          <tr><td><strong>Perceived Likelihood</strong><br>(higher = better)</td><td>• No proof, just coursework<br>• Can't explain decisions<br>• No public GitHub/content</td><td>• Public GitHub with quality code<br>• Case studies with analysis<br>• Technical blog posts<br>• Testimonials</td></tr>
+          <tr><td><strong>Time Delay</strong><br>(lower = better)</td><td>• "Need 3 months onboarding"<br>• Have to learn everything<br>• Long notice period</td><td>• "I can deploy infrastructure Week 1"<br>• Already built similar systems<br>• Immediately available<br>• Pre-built templates</td></tr>
+          <tr><td><strong>Effort &amp; Sacrifice</strong><br>(lower = better)</td><td>• Need constant supervision<br>• Can't work independently<br>• Poor communication</td><td>• Self-directed learner<br>• Strong documentation<br>• Clear communication<br>• Proactive updates</td></tr>
+        </table>
+      </div>
+      <div class="sl">Your current scores for Adil</div>
+      <div style="margin-bottom:10px">
+        <div class="srow"><div class="sl2">Dream Outcome (max it)</div><div class="sbg"><div class="sfill" style="width:80%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">8/10</div></div>
+        <div class="srow"><div class="sl2">Perceived Likelihood (max it)</div><div class="sbg"><div class="sfill" style="width:80%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">8/10</div></div>
+        <div class="srow"><div class="sl2">Time Delay (minimize it)</div><div class="sbg"><div class="sfill" style="width:25%;background:var(--color-text-warning)"></div></div><div class="sval" style="color:var(--color-text-warning)">2/10</div></div>
+        <div class="srow"><div class="sl2">Effort &amp; Sacrifice (minimize it)</div><div class="sbg"><div class="sfill" style="width:20%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">2/10</div></div>
+      </div>
+      <div class="sl">Your worksheet — all 8 fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div class="r2">
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Current Dream Outcome score (1–10):</label><input class="inp" placeholder="e.g. 8"></div>
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">How I'll increase it:</label><textarea class="inp" placeholder="Deploy Bengali speech API with latency + cost metrics. Add verified sales lift case study."></textarea></div>
+        </div>
+        <div class="r2">
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Current Perceived Likelihood score (1–10):</label><input class="inp" placeholder="e.g. 7"></div>
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">How I'll increase it (proof assets):</label><textarea class="inp" placeholder="Publish conference paper on LinkedIn. Write constraint-navigation case study. Add monitoring screenshots."></textarea></div>
+        </div>
+        <div class="r2">
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Current Time Delay score (1–10, lower = better):</label><input class="inp" placeholder="e.g. 2 (low = fast to contribute)"></div>
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">How I'll decrease it:</label><textarea class="inp" placeholder="'I can audit your ML stack in Week 1.' Pre-built FastAPI templates from Toolly. Available immediately."></textarea></div>
+        </div>
+        <div class="r2">
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Current Effort &amp; Sacrifice score (1–10, lower = better):</label><input class="inp" placeholder="e.g. 2 (low = easy to work with)"></div>
+          <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">How I'll decrease it:</label><textarea class="inp" placeholder="Respond within 4 hours. Strong documentation on every project. Proactive weekly updates."></textarea></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 4: Ex4️⃣ Hiring Frictions — all 20 frictions + both worksheet fields -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-danger);color:var(--color-text-danger)">4</div>
+      <div class="ex-info"><div class="ex-title">List Every Hiring Friction</div><div class="ex-sub">Why don't they hire you? · 20 common frictions from sheet · 2 worksheet fields</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg br">WHY don't companies hire people like you? This is the most important question. For every friction point, you'll create a solution (Exercise 5). Think from THEIR perspective: what makes hiring you risky, difficult, or slow?</div>
+      <div class="sl">All 20 common hiring frictions (exact from sheet)</div>
+      <div style="display:grid;gap:3px;margin-bottom:10px">
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Cannot verify ML skills from portfolio alone</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Unclear if you understand business tradeoffs (cost, speed, quality)</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Resume looks like every other bootcamp graduate</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">No proof of production thinking — just notebooks</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Uncertain if you can work without hand-holding</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Don't know if you can ship under pressure</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Takes 6 interviews to assess competence</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Long notice period (if currently employed)</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Asking about salary too early</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Cannot explain technical decisions clearly to non-technical stakeholders</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Need 3 months onboarding before productive</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Don't know how to work in a team</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Cannot handle ambiguity — needs spec for everything</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Visa sponsorship required (H1B lottery risk)</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Location mismatch (if not remote)</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Salary expectations misaligned with budget</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Portfolio shows tutorials, not real problem-solving</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">No evidence of learning from failures</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Communication style unclear</div></div>
+        <div class="frow"><div class="fi fi-d">!</div><div class="ft2">Cultural fit unknown</div></div>
+      </div>
+      <div class="sl">Your worksheet — both fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">List EVERY friction that applies to YOU (fields 1–10):</label><textarea class="inp" style="min-height:100px" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5.&#10;6.&#10;7.&#10;8.&#10;9.&#10;10."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Which 3 are MOST critical? (these become your top Exercise 5 priorities)</label><textarea class="inp" placeholder="1.&#10;2.&#10;3."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 5: Ex5️⃣ Friction Solutions — all 8 examples + all 5 friction pairs -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-success);color:var(--color-text-success)">5</div>
+      <div class="ex-info"><div class="ex-title">Turn Frictions into Solutions</div><div class="ex-sub">For EVERY friction: create a DELIVERABLE that removes it · 5 friction-solution pairs</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bt">For EVERY friction you identified in Exercise 4, create a DELIVERABLE that removes it. These deliverables become your portfolio, case studies, and proof assets.</div>
+      <div class="sl">8 friction-to-solution examples (exact from sheet)</div>
+      <div style="display:grid;gap:5px;margin-bottom:10px">
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Cannot verify ML skills</div><div class="fs2 " style="color:var(--color-text-success)">→ Public GitHub: Production ML system handling 50K requests/day with monitoring dashboard, metrics, cost analysis</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Don't know if you understand cost</div><div class="fs2" style="color:var(--color-text-success)">→ Case study: "How I reduced inference cost 70% with hybrid routing" — before/after numbers, architecture decisions</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Long onboarding time</div><div class="fs2" style="color:var(--color-text-success)">→ Pre-built templates for common ML pipelines. Document: "I can deploy infrastructure Week 1 — here's how"</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Cannot explain to non-technical</div><div class="fs2" style="color:var(--color-text-success)">→ YouTube video explaining your architecture to beginners. Blog post breaking down technical decisions in plain language</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Unclear if independent</div><div class="fs2" style="color:var(--color-text-success)">→ Deployed side project solo: 99.2% uptime for 3 months. Incident reports showing how you handled failures independently</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">No production thinking</div><div class="fs2" style="color:var(--color-text-success)">→ Portfolio includes: monitoring setup, drift detection, cost tracking, fallback chains, incident runbooks</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Cannot handle ambiguity</div><div class="fs2" style="color:var(--color-text-success)">→ Case study of building something with unclear requirements. Show how you made decisions, documented tradeoffs</div></div></div>
+        <div class="frow"><div class="fi fi-d">F</div><div><div class="ft2">Takes 6 interviews to assess competence</div><div class="fs2" style="color:var(--color-text-success)">→ Offer to complete paid trial project first. "Assess my work, not my interview performance"</div></div></div>
+      </div>
+      <div class="sl">Your worksheet — all 5 friction-solution pairs from the sheet</div>
+      <div style="display:grid;gap:10px">
+        <div class="r2"><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Friction #1:</label><input class="inp" placeholder="Paste from Exercise 4"></div><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Solution (deliverable):</label><textarea class="inp" placeholder="What you will build/write/record to remove this friction"></textarea></div></div>
+        <div class="r2"><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Friction #2:</label><input class="inp" placeholder="Paste from Exercise 4"></div><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Solution (deliverable):</label><textarea class="inp" placeholder="..."></textarea></div></div>
+        <div class="r2"><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Friction #3:</label><input class="inp" placeholder="Paste from Exercise 4"></div><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Solution (deliverable):</label><textarea class="inp" placeholder="..."></textarea></div></div>
+        <div class="r2"><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Friction #4:</label><input class="inp" placeholder="Paste from Exercise 4"></div><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Solution (deliverable):</label><textarea class="inp" placeholder="..."></textarea></div></div>
+        <div class="r2"><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Friction #5:</label><input class="inp" placeholder="Paste from Exercise 4"></div><div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Solution (deliverable):</label><textarea class="inp" placeholder="..."></textarea></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 6: Ex6️⃣ Delivery Model — all 6 fields exactly -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-secondary);color:var(--color-text-secondary)">6</div>
+      <div class="ex-info"><div class="ex-title">Define Your Delivery Model</div><div class="ex-sub">HOW DO THEY GET YOU? · All 6 fields from the sheet</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="note">HOW DO THEY GET YOU? Make the logistics of hiring you completely frictionless. Every field below comes directly from the sheet.</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Availability:</label><input class="inp" placeholder="Full-time immediately / Full-time in X weeks / Contract-to-hire"></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Work style:</label><input class="inp" placeholder="Remote / Hybrid / On-site / Flexible"></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Week 1 contribution:</label><textarea class="inp" placeholder="I can audit ML stack, propose 3 cost optimizations, and deliver a written report — before any onboarding document is written for me."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Communication:</label><input class="inp" placeholder="Response within 4 hours during business hours. Proactive weekly updates. Async-first."></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Working hours:</label><input class="inp" placeholder="Most productive 9 AM-6 PM EST, flexible for meetings"></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Trial offer:</label><textarea class="inp" placeholder="Paid trial project (48-72 hours) / 30-day trial with early exit option"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 2: PHASE 2 COMPRESSION (Ex7–Ex10 — all fields) -->
+<div class="view" id="v2">
+  <div class="card">
+    <div class="pill pa">Phase 2 — Compression (Exercises 7–10)</div>
+    <div class="h1">Trim, stack, add bonuses, create ethical scarcity</div>
+    <div class="sub">Phase 1 built your raw materials. Phase 2 compresses them into an offer so clear and specific that a hiring manager understands your value in 30 seconds.</div>
+  </div>
+
+  <!-- EX 7: Ex7️⃣ Trim & Stack — exact fields: KEEP (5) + REMOVE (3) -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-warning);color:var(--color-text-warning)">7</div>
+      <div class="ex-info"><div class="ex-title">Trim and Stack Your Offer</div><div class="ex-sub">Phase 2: Compression · KEEP (5 items) + REMOVE (3 items) — exact from sheet</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg br"><strong>The rule:</strong>If you cannot prove it with a GitHub link, a metric, a case study, or a deployed system — cut it. Every line must have evidence. Vague claims are noise.</div>
+      <div class="vs">
+        <div class="vg"><div class="vl">Keep (5 items — provable)</div><div class="vt">Must have a link or metric behind each one</div></div>
+        <div class="vb"><div class="vl">Remove (3 items — fluff)</div><div class="vt">Cannot be proven with evidence</div></div>
+      </div>
+      <div class="sl">Adil's completed trim (example)</div>
+      <div class="vs">
+        <div class="vg"><div class="vl">Adil keeps:</div><div class="vt">1. Bengali diarization DER 0.19 + paper<br>2. 56% inference speedup — BUET CSE Fest<br>3. Toolly: 400+ tools, 206+ commits, live<br>4. Rec system: +10% verified sales lift<br>5. Kaggle Master Top 1% (29/4,082)</div></div>
+        <div class="vb"><div class="vl">Adil removes:</div><div class="vt">1. "Passionate about AI"<br>2. "Fast learner / eager to contribute"<br>3. "Strong ML background"</div></div>
+      </div>
+      <div class="sl">Your worksheet — exactly 5 KEEP + 3 REMOVE from the sheet</div>
+      <div class="r2">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">KEEP (provable — 5 items, each with a proof link or metric):</label><textarea class="inp" style="min-height:100px" placeholder="1. [credential] — [proof link or metric]&#10;2.&#10;3.&#10;4.&#10;5."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">REMOVE (fluff — 3 items with no evidence):</label><textarea class="inp" style="min-height:100px" placeholder="1.&#10;2.&#10;3."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 8: Ex8️⃣ Value Stack — exactly 3 fields: TECHNICAL CAPABILITIES, SOFT SKILLS, IMMEDIATE VALUE (Day 1) -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-info);color:var(--color-text-info)">8</div>
+      <div class="ex-info"><div class="ex-title">Build Your Value Stack</div><div class="ex-sub">Phase 2: Compression · 3 fields: Technical Capabilities + Soft Skills + Immediate Value (Day 1)</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bb"><strong>A value stack is not a resume.</strong>It is an organized presentation of WHAT THEY GET when they hire you — organized into exactly 3 layers as specified in the sheet: Technical Capabilities, Soft Skills, and Immediate Value Day 1.</div>
+      <div class="sl">Adil's completed value stack (example)</div>
+      <div style="display:grid;gap:6px;margin-bottom:10px">
+        <div class="tg bt"><strong>Technical Capabilities:</strong>Bengali speaker diarization (DER 0.19, 56% inference speedup, published paper) · Bengali ASR (WER 0.37, Whisper-Medium) · Recommendation system (+10% verified sales lift) · Toolly: 400+ tools, live, 206+ commits · FastAPI + Docker + CI/CD + monitoring + drift detection · Kaggle Master Top 1% (29/4,082) · LangGraph multi-agent systems</div>
+        <div class="tg ba"><strong>Soft Skills:</strong>Independent execution (Toolly solo, months of production operation) · Teaching ability (4-Month ML series + conference paper) · Constraint navigation (56% speedup under latency budget) · Proactive communication (responds within 4 hours) · Documents every project with production metrics</div>
+        <div class="tg bp"><strong>Immediate Value (Day 1):</strong>Week 1: Audit ML infrastructure + 3 cost/latency optimization recommendations in writing · Week 2: Pre-built FastAPI template deployed on their infrastructure · Week 3: First model endpoint in production with monitoring dashboard</div>
+      </div>
+      <div class="sl">Your worksheet — exactly the 3 fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">TECHNICAL CAPABILITIES (from the sheet — each item with a proof link):</label><textarea class="inp" placeholder="List each proven technical skill with its metric or GitHub link"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">SOFT SKILLS (from the sheet — provable, not just adjectives):</label><textarea class="inp" placeholder="List each soft skill with the specific evidence that proves it"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">IMMEDIATE VALUE (Day 1) — from the sheet:</label><textarea class="inp" placeholder="Week 1: ...&#10;Week 2: ...&#10;Week 3: ..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 9: Ex9️⃣ Bonuses — exactly 3 bonus fields from the sheet -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-success);color:var(--color-text-success)">9</div>
+      <div class="ex-info"><div class="ex-title">Add Bonuses</div><div class="ex-sub">Phase 2: Compression · Exactly 3 bonus fields from the sheet</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bt">Bonuses are deliverables you give on top of your core role — things that cost you time but cost them nothing extra. They increase perceived value dramatically and make your offer feel like more than a job application.</div>
+      <div class="sl">Adil's completed bonuses (example)</div>
+      <div style="display:grid;gap:6px;margin-bottom:10px">
+        <div class="tg bt"><strong>Bonus 1:</strong>Pre-deployment ML audit report — I audit the existing ML infrastructure before the first sprint begins, identify top 3 performance issues, and deliver a cost/latency optimization plan in writing. Value: $500–2,000 of consulting work, delivered free in Week 1.</div>
+        <div class="tg bt"><strong>Bonus 2:</strong>Bengali NLP evaluation dataset (from my BUET paper) — months to curate, free to any company I join working on Bengali language AI. Saves weeks of dataset preparation work.</div>
+        <div class="tg bt"><strong>Bonus 3:</strong>Production deployment templates — pre-built FastAPI + Docker + monitoring templates from Toolly. Any team I join gets production-ready scaffolding on Day 1. Reduces first deployment time from days to hours.</div>
+      </div>
+      <div class="sl">Your worksheet — all 3 bonus fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Bonus 1:</label><textarea class="inp" placeholder="Name the bonus + its value in dollars or time saved for the company"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Bonus 2:</label><textarea class="inp" placeholder="..."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Bonus 3:</label><textarea class="inp" placeholder="..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 10: Ex🔟 Scarcity — exactly 2 fields from the sheet -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:#EEEDFE;color:#3C3489">10</div>
+      <div class="ex-info"><div class="ex-title">Create Ethical Scarcity</div><div class="ex-sub">Phase 2: Compression · 2 fields: My scarcity statement + Why it's ethical and true</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg ba">Scarcity works only when it is REAL. Never manufacture urgency. Use true scarcity: you are talking to multiple companies, you have a hard deadline, or your unique skill combination is genuinely rare.</div>
+      <div class="sl">Adil's completed scarcity (example)</div>
+      <div class="tg ba"><strong>My scarcity statement:</strong>"There are fewer than 5 ML engineers globally with published Bengali speaker diarization research AND a live production AI product. This combination is not hireable twice. I am currently in final conversations with 2 other companies and making my decision by end of March."<br><br><strong>Why it's ethical and true:</strong>The skill rarity claim is verifiable — search Google Scholar for "Bengali speaker diarization production deployment." The timeline is true — GSoC application closes March 31, and other applications are live.</div>
+      <div class="sl">Your worksheet — both fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">My scarcity statement:</label><textarea class="inp" placeholder="Write a scarcity statement based on REAL constraints (other offers, deadlines, unique skills)"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Why it's ethical and true:</label><textarea class="inp" placeholder="Explain exactly why this is a real constraint — not manufactured pressure"></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 3: PHASE 3 OWNERSHIP (Ex11–Ex13 — all fields exactly) -->
+<div class="view" id="v3">
+  <div class="card">
+    <div class="pill pp">Phase 3 — Ownership (Exercises 11–13)</div>
+    <div class="h1">Guarantee, name your offer, and perfect the final pitch script</div>
+    <div class="sub">Phase 3 is where your offer becomes a complete, deliverable pitch script. By Exercise 13, you have one script usable in any conversation — message, call, or interview.</div>
+  </div>
+
+  <!-- EX 11: Ex1️⃣1️⃣ Guarantee — exactly 2 fields + the 3 options from the sheet -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:#EEEDFE;color:#3C3489">11</div>
+      <div class="ex-info"><div class="ex-title">Choose Your Guarantee</div><div class="ex-sub">Phase 3: Ownership · Risk reversal strategy · 2 fields: My guarantee + Why it reduces their risk</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bp">A guarantee reverses the hiring risk. Instead of THEM taking a risk on you, YOU take on the risk. This flips the power dynamic completely.</div>
+      <div class="sl">3 options from the sheet (pick one)</div>
+      <div style="display:grid;gap:6px;margin-bottom:10px">
+        <div class="tg bt"><strong>30-day trial:</strong>"Start me for 30 days. If I have not delivered measurable value by day 30, you can exit with 2 weeks notice. No long-term commitment until proof exists."</div>
+        <div class="tg bt"><strong>Paid project:</strong>"Give me a real problem. I will solve it in 48–72 hours. You pay a fixed fee. If you like the quality, we continue. If not, you have the solution and owe nothing more."</div>
+        <div class="tg bt"><strong>Performance-based:</strong>"Tie my first raise to a specific production metric. If the system achieves under 500ms p95 latency and DER under 0.20 on your data within 60 days — milestone reached."</div>
+      </div>
+      <div class="sl">Your worksheet — both fields exactly as in the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">My guarantee (choose one: 30-day trial / Paid project / Performance-based):</label><textarea class="inp" placeholder="Write the exact guarantee statement — the words you will actually say to a hiring manager"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Why it reduces their risk (what specifically are you removing from their side):</label><textarea class="inp" placeholder="This removes the risk of a bad hire because they assess my actual work output before any long-term commitment..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 12: Ex1️⃣2️⃣ Name Offer — EXACTLY 3 variations + Best one (as in the sheet) -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-info);color:var(--color-text-info)">12</div>
+      <div class="ex-info"><div class="ex-title">Name Your Offer (10 Variations)</div><div class="ex-sub">Phase 3: Ownership · Sheet has exactly: Variation 1, Variation 2, Variation 3, Best one</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bb">Write 10 variations of your intro across different contexts. Different framings for different situations — LinkedIn headline is different from a DM opening, which is different from a verbal pitch. The sheet worksheet has Variation 1, 2, 3, and Best one.</div>
+      <div class="sl">Adil's completed 3 variations + best one (example)</div>
+      <div style="display:grid;gap:5px;margin-bottom:10px">
+        <div class="tg bb"><strong>Variation 1 (LinkedIn headline):</strong>"ML Engineer building Bengali speech AI | Kaggle Master | Published researcher | Toolly.tech"</div>
+        <div class="tg bb"><strong>Variation 2 (Cold DM opening):</strong>"I build production ML APIs for early-stage startups — Bengali speech, recommendation systems, GenAI pipelines. I have a live system and a published paper. Open to seeing what I've built?"</div>
+        <div class="tg bb"><strong>Variation 3 (Warm DM opening):</strong>"I noticed you're scaling your ML team. I deploy production-ready ML features in 30–60 days — no senior engineer overhead. My Bengali speech API has DER 0.19 with a 56% inference speedup published at BUET CSE Fest 2026."</div>
+        <div class="tg bt"><strong>Best one (for most contexts):</strong>Variation 3 — it names a specific outcome (30–60 days), removes a specific cost ($200K engineer), and leads with a proof point (DER 0.19 + published paper). It makes a hiring manager want to ask "what else?"</div>
+      </div>
+      <div class="sl">Your worksheet — exactly the 4 fields from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Variation 1:</label><textarea class="inp" placeholder="Your first framing of who you are and what you offer"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Variation 2:</label><textarea class="inp" placeholder="A different framing — different context or audience"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Variation 3:</label><textarea class="inp" placeholder="A third framing"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Best one (which variation and why):</label><textarea class="inp" placeholder="Variation X — because it leads with [specific outcome], removes [specific pain], and ends with [proof point]"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EX 13: Ex1️⃣3️⃣ Final Pitch — exact 7-part structure from the sheet -->
+  <div class="ex-row">
+    <div class="ex-head" onclick="tEx(this)">
+      <div class="ex-num" style="background:var(--color-background-success);color:var(--color-text-success)">13</div>
+      <div class="ex-info"><div class="ex-title">Perfect Your Value Stack Presentation</div><div class="ex-sub">Phase 3: Ownership · Final pitch script · Exact 7 parts from the sheet: What you get / Technical / Soft Skills / Immediate Value / Proof / Risk Reversal / Timeline</div></div>
+      <div class="ex-arr">▼</div>
+    </div>
+    <div class="ex-body">
+      <div class="tg bp">The final deliverable. One complete script you can use in any conversation — message, call, or interview. The sheet specifies exactly 7 parts: What you get / Technical / Soft Skills / Immediate Value / Proof / Risk Reversal / Timeline.</div>
+      <div class="sl">Adil's completed final pitch (example — all 7 parts)</div>
+      <div class="pitch-block">
+        <div class="pbl">Complete value stack — all 7 parts from the sheet</div>
+        <strong>What you get:</strong> An ML engineer who deploys production Bengali speech and NLP systems in 30–60 days — with monitoring, API, and live demo — without the $200K senior engineer cost or 6-month ramp-up.<br><br>
+        <strong>Technical:</strong> Bengali diarization DER 0.19 (56% speedup, published BUET CSE Fest 2026) · Bengali ASR WER 0.37 · Recommendation system +10% verified sales lift · Toolly 400+ tools 206+ commits live · FastAPI + Docker + CI/CD + monitoring · Kaggle Master Top 1% (29/4,082) · LangGraph agents<br><br>
+        <strong>Soft Skills:</strong> Independent execution (Toolly solo, sustained production) · Teaching ability (4-Month ML series + paper) · Constraint navigation (56% speedup under latency budget) · Proactive communicator (4-hour response, weekly updates) · Documents everything<br><br>
+        <strong>Immediate Value:</strong> Week 1: ML stack audit + 3 written cost/latency optimizations · Week 2: Pre-built FastAPI deployment template running · Week 3: First model endpoint in production with monitoring<br><br>
+        <strong>Proof:</strong> toolly.tech (live) · github.com/adilshamim8 · BUET CSE Fest 2026 paper · Bengali speech API on HuggingFace Spaces (live demo)<br><br>
+        <strong>Risk Reversal:</strong> Paid 48–72 hour trial project. Assess my work before any full commitment. You keep the deliverable regardless of outcome.<br><br>
+        <strong>Timeline:</strong> Available immediately. First production contribution in 7 days. Full system deployed in 30–60 days.
+      </div>
+      <div class="sl">Your worksheet — the exact 7-part structure from the sheet</div>
+      <div style="display:grid;gap:8px">
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">What you get:</label><textarea class="inp" placeholder="One sentence summary of what they get when they hire you"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Technical:</label><textarea class="inp" placeholder="All technical capabilities (from Exercise 8, trimmed in Exercise 7)"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Soft Skills:</label><textarea class="inp" placeholder="All provable soft skills (from Exercise 8)"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Immediate Value:</label><textarea class="inp" placeholder="Week 1: ...&#10;Week 2: ...&#10;Week 3: ..."></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Proof:</label><textarea class="inp" placeholder="Live links: GitHub, deployed products, published papers, demos"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Risk Reversal:</label><textarea class="inp" placeholder="Your guarantee from Exercise 11"></textarea></div>
+        <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Timeline:</label><textarea class="inp" placeholder="When available. First contribution by day X. Full system deployed by day Y."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 4: FINAL OFFER (synthesis of all 13 exercises) -->
+<div class="view" id="v4">
+  <div class="card">
+    <div class="pill pg">Your final offer — all 13 exercises synthesized</div>
+    <div class="h1">This is what you send. This is what you say. This is who you are to hiring managers.</div>
+  </div>
+  <div class="card">
+    <div class="pill pt">Ex1 + Ex2: Target market + dream outcome promise</div>
+    <div class="tg bb"><strong>Target (Ex1):</strong>AI-first startups and early-stage B2B SaaS (Series A–B, 50–200 employees, US-funded, remote-everywhere) building Bengali NLP / multilingual speech products — or any team needing production ML deployed fast without a $200K senior ML engineer budget.<br><br><strong>Promise (Ex2):</strong>"Get a production Bengali speech or NLP system deployed — with monitoring, API, and live demo — in 30–60 days without hiring a $200K senior ML engineer or waiting 6 months for a team to ramp up."</div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Ex3: Value formula scores</div>
+    <div style="margin-bottom:8px">
+      <div class="srow"><div class="sl2">Dream Outcome (maximize)</div><div class="sbg"><div class="sfill" style="width:80%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">8/10</div></div>
+      <div class="srow"><div class="sl2">Perceived Likelihood (maximize)</div><div class="sbg"><div class="sfill" style="width:80%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">8/10</div></div>
+      <div class="srow"><div class="sl2">Time Delay (minimize)</div><div class="sbg"><div class="sfill" style="width:20%;background:var(--color-text-warning)"></div></div><div class="sval" style="color:var(--color-text-warning)">2/10 ✓</div></div>
+      <div class="srow"><div class="sl2">Effort &amp; Sacrifice (minimize)</div><div class="sbg"><div class="sfill" style="width:20%;background:var(--color-text-success)"></div></div><div class="sval" style="color:var(--color-text-success)">2/10 ✓</div></div>
+    </div>
+    <div class="note">Formula: (8 × 8) ÷ (2 × 2) = 64 ÷ 4 = 16. Target is above 8. Your value score is strong — deploy the Bengali API to maximize it further.</div>
+  </div>
+  <div class="card">
+    <div class="pill pa">Ex7 + Ex8 + Ex9 + Ex10: Complete trimmed value stack + bonuses + scarcity</div>
+    <div style="display:grid;gap:6px">
+      <div class="tg bt"><strong>Technical (Ex7 — keep, all provable):</strong>Bengali diarization DER 0.19 + 56% speedup (paper) · Bengali ASR WER 0.37 · Toolly 400+ tools 206+ commits live · Rec system +10% sales lift · Kaggle Master Top 1% · FastAPI + Docker + monitoring</div>
+      <div class="tg ba"><strong>Soft skills (Ex8 — provable):</strong>Independent (Toolly solo production) · Teacher (4-Month ML series + paper) · Constraint navigator · Proactive communicator · Documents everything</div>
+      <div class="tg bt"><strong>Bonuses (Ex9 — all 3):</strong>1. Free ML audit report Week 1 (value: $500–2K) · 2. Bengali NLP evaluation dataset (months to curate) · 3. Pre-built FastAPI + Docker templates from Toolly</div>
+      <div class="tg ba"><strong>Scarcity (Ex10):</strong>"Fewer than 5 ML engineers globally have published Bengali NLP research AND a live production AI product. This combination is not hireable twice. Decision by end of March."</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Ex11 + Ex12 + Ex13: Guarantee + best variation + final pitch</div>
+    <div class="pitch-block">
+      <div class="pbl">Complete final pitch (Ex13 — all 7 parts)</div>
+      <strong>What you get:</strong> An ML engineer who deploys production Bengali speech and NLP systems in 30–60 days with monitoring, API, and live demo — without $200K senior engineer cost.<br><br>
+      <strong>Technical:</strong> Bengali diarization (DER 0.19, 56% speedup, BUET paper) · ASR (WER 0.37) · Toolly (live, 400+ tools) · Rec system (+10% sales lift) · Kaggle Master Top 1%<br><br>
+      <strong>Soft Skills:</strong> Independent (Toolly solo) · Teaches ML clearly · Constraint navigator · Proactive · Documents everything<br><br>
+      <strong>Immediate Value:</strong> Week 1: ML audit + 3 optimizations in writing. Week 2: FastAPI template deployed. Week 3: Model in production with monitoring.<br><br>
+      <strong>Proof:</strong> toolly.tech · github.com/adilshamim8 · BUET CSE Fest 2026 paper · HuggingFace demo<br><br>
+      <strong>Risk Reversal (Ex11 — Paid project):</strong> 48–72 hour paid trial project. Assess work before commitment. You keep the deliverable regardless.<br><br>
+      <strong>Timeline:</strong> Available immediately. First contribution in 7 days. Full system in 30–60 days.
+    </div>
+    <div class="tg bb"><strong>Best variation to lead with (Ex12 — Variation 3):</strong>"I noticed you're scaling your ML team. I deploy production-ready ML features in 30–60 days — no senior engineer overhead. My Bengali speech API has DER 0.19 with a 56% inference speedup published at BUET CSE Fest 2026."</div>
+  </div>
+</div>
+
+<!-- VIEW 5: DAILY TASKS -->
+<div class="view" id="v5">
+  <div class="card">
+    <div class="pill pg">Daily tasks — use the offer framework every day</div>
+    <div class="h1">The framework only works if you execute it. Check off tasks as you complete them today.</div>
+    <div class="r3" style="margin-bottom:10px">
+      <div class="sc"><div class="sn" id="dt-n">0</div><div class="sl">done today</div></div>
+      <div class="sc"><div class="sn">15</div><div class="sl">total tasks</div></div>
+      <div class="sc"><div class="sn" id="dt-p">0%</div><div class="sl">complete</div></div>
+    </div>
+    <div class="pbar"><div class="pf" id="dt-bar" style="width:0%"></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pt">Foundation — complete once, revisit weekly (Ex 1–6)</div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete Exercise 1 worksheet — all 5 fields: target market, 3 demand reasons, urgency trigger, social proof, how you'll find them</div><div class="cs">Vague target = vague offer = zero replies. Name the company type, size, funding stage, and location.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete Exercise 2 worksheet — all 6 fields including the complete one-sentence promise "Get [RESULT] in [TIME] without [PAIN]"</div><div class="cs">This sentence goes in every cold message, every cover letter, and your LinkedIn About section. Write it today.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Score yourself on all 4 value drivers (Ex 3) and identify which 2 to improve this week</div><div class="cs">Dream Outcome and Perceived Likelihood: maximize. Time Delay and Effort: minimize. Your lowest scores are your highest-priority tasks.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">List all 10 hiring frictions that apply to you (Ex 4) and circle the 3 most critical</div><div class="cs">The frictions you ignore become the rejections you do not understand.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Map all 5 friction-solution pairs (Ex 5) — for each friction, name the exact deliverable that removes it</div><div class="cs">These deliverables become your daily build targets. Every project, case study, and post starts here.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Fill all 6 delivery model fields (Ex 6) — availability, work style, Week 1 contribution, communication, working hours, trial offer</div><div class="cs">Make the logistics of hiring you frictionless. A hiring manager should know exactly how they get you before they even ask.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pa">Compression — complete once, refine weekly (Ex 7–10)</div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete Exercise 7 — fill 5 KEEP items (each with proof link or metric) and 3 REMOVE items (fluff with no evidence)</div><div class="cs">If you cannot prove it — cut it. Every word in your offer must have evidence behind it.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete Exercise 8 value stack — all 3 fields: Technical Capabilities, Soft Skills, Immediate Value Day 1</div><div class="cs">This is not a resume. It is an organized presentation of what they get in all three dimensions they care about.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete Exercise 9 — write all 3 bonuses with their dollar or time-saved value</div><div class="cs">Bonuses are deliverables you give on top of your core role. They cost you time but cost them nothing extra — and dramatically increase perceived value.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Write your scarcity statement (Ex 10) and confirm it is true — not manufactured pressure</div><div class="cs">Real scarcity: other offers, hard deadlines, genuinely rare skill combination. Never manufacture urgency you cannot back up.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pp">Ownership — complete once, deliver every day (Ex 11–13)</div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Choose your guarantee (Ex 11) — pick one: 30-day trial / Paid project / Performance-based — and write exactly what you will say</div><div class="cs">Paid trial project is strongest. "Give me a real problem, 48 hours, fixed fee. Assess my work, not my interview performance."</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Write all 3 variations + best one (Ex 12) — Variation 1, 2, 3, and identify which is best and why</div><div class="cs">Different framings for different contexts. Best one should: name a specific outcome, remove a specific pain, and end with a proof point.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Complete the full 7-part pitch script (Ex 13) — What you get / Technical / Soft Skills / Immediate Value / Proof / Risk Reversal / Timeline</div><div class="cs">This is the final deliverable of all 13 exercises. One script, every conversation. Memorize it and say it until it sounds natural.</div></div></div>
+  </div>
+  <div class="card">
+    <div class="pill pc">Execution — do these every working day</div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Send 5 personalized DMs using your best variation from Exercise 12 — not "I'm looking for a job", but your value promise</div><div class="cs">"I deploy production ML features in 30–60 days. Open to seeing what I've built?" — this is the opening, not "please consider my application".</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Work 90 minutes on the friction deliverable that removes your #1 hiring blocker (from Exercise 5)</div><div class="cs">Today: if your biggest friction is "no deployed production API" — spend 90 minutes on the Bengali speech FastAPI. Repeat until it is live.</div></div></div>
+    <div class="cr" onclick="tc(this)"><input type="checkbox"><div><div class="ct">Practice your Exercise 13 pitch out loud — 2.5 minutes — record yourself and watch it back</div><div class="cs">The discomfort of watching yourself is where the improvement happens. Do this until it sounds natural, not rehearsed.</div></div></div>
+  </div>
+  <div class="card" style="background:var(--color-background-secondary)">
+    <div class="h2">Why this framework makes you the obvious choice, not just a better candidate</div>
+    <div class="sub">Most candidates compete on qualifications. This framework makes you compete on a different dimension entirely. When a hiring manager reads your Exercise 13 pitch, they are not asking "is this person qualified?" — they are asking "can I afford NOT to hire this person?" That is the goal of all 13 exercises: make not hiring you feel like a risk.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+var dtCount=0;
+var DT_TOTAL=15;
+
+function sv(n,btn){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on')});
+  document.getElementById('v'+n).classList.add('on');
+  btn.classList.add('on');
+}
+
+function tEx(head){
+  var body=head.nextElementSibling;
+  var arr=head.querySelector('.ex-arr');
+  var open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  arr.textContent=open?'▼':'▲';
+}
+
+function showR(btn,id){
+  var el=document.getElementById(id);
+  if(el)el.classList.add('show');
+  btn.style.display='none';
+}
+
+function tc(row){
+  var cb=row.querySelector('input[type=checkbox]');
+  cb.checked=!cb.checked;
+  var ct=row.querySelector('.ct');
+  if(cb.checked){row.classList.add('done');if(ct)ct.classList.add('done');dtCount++;}
+  else{row.classList.remove('done');if(ct)ct.classList.remove('done');if(dtCount>0)dtCount--;}
+  var pct=Math.round(dtCount/DT_TOTAL*100);
+  document.getElementById('dt-n').textContent=dtCount;
+  document.getElementById('dt-p').textContent=pct+'%';
+  document.getElementById('dt-bar').style.width=pct+'%';
+  document.getElementById('ov-dt').textContent=dtCount;
+  document.getElementById('ov-pct').textContent=pct+'%';
+  document.getElementById('ov-bar').style.width=pct+'%';
+}
+</script>
