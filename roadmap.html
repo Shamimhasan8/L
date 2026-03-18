@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adil Shamim — ML Engineer Roadmap</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #ffffff;
+    --bg3: #f7f9fe;
+    --border: #dbe4f1;
+    --border2: #8eb1ee;
+    --amber: #ff9f0a;
+    --amber-dim: #d28008;
+    --green: #34c759;
+    --green-dim: #22a744;
+    --red: #ff3b30;
+    --blue: #007aff;
+    --purple: #5856d6;
+    --text: #2f4f72;
+    --text2: #5f7898;
+    --text3: #8aa0bc;
+    --white: #2f4f72;
+    --shadow-soft: 0 4px 14px rgba(47, 79, 114, 0.08);
+    --shadow-press: 0 3px 10px rgba(0, 122, 255, 0.12);
+    --radius-lg: 22px;
+    --radius-md: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before,
+  body::after { display: none; }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0 24px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(15, 23, 41, 0.08);
+  }
+
+  .header-left { display: flex; align-items: center; gap: 16px; }
+
+  .logo-mark {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+    flex-shrink: 0;
+    background: linear-gradient(160deg, #0a84ff 0%, #5e5ce6 100%);
+    box-shadow: 0 8px 18px rgba(10, 132, 255, 0.3);
+  }
+
+  .header-name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--blue); }
+
+  .header-sub {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--blue);
+    margin-top: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  .header-right { display: flex; align-items: center; gap: 12px; }
+
+  .live-badge,
+  .date-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .live-badge {
+    gap: 7px;
+    color: #148f35;
+    background: rgba(52, 199, 89, 0.18);
+    border: 1px solid rgba(52, 199, 89, 0.32);
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.9s infinite;
+    box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.2);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.88); opacity: 0.55; }
+  }
+
+  .date-badge {
+    color: var(--text2);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid var(--border);
+  }
+
+  .mission {
+    background: #edf3ff;
+    border: 1px solid #ceddf7;
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mission-icon { font-size: 30px; flex-shrink: 0; }
+  .mission-text { font-size: 17px; font-weight: 650; color: #2b4f8f; line-height: 1.45; letter-spacing: -0.01em; }
+  .mission-sub { font-size: 13px; color: var(--text2); margin-top: 6px; }
+
+  .section-label {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(122, 135, 158, 0.4), rgba(122, 135, 158, 0.05));
+  }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    box-shadow: 0 6px 16px rgba(47, 79, 114, 0.12);
+  }
+
+  .card-title {
+    font-weight: 680;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-title .icon { font-size: 16px; }
+
+  .top-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+  .today-card {
+    border-color: #c7daf8;
+    background: #f7faff;
+  }
+
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    background: rgba(0, 122, 255, 0.12);
+    color: #0a5ec0;
+    border: 1px solid rgba(0, 122, 255, 0.28);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    letter-spacing: 0.08em;
+  }
+
+  .today-header { font-size: 22px; font-weight: 700; color: var(--blue); margin-bottom: 5px; letter-spacing: -0.02em; }
+  .today-sub { font-size: 13px; color: var(--text2); margin-bottom: 18px; }
+
+  .task-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #dbe4f1;
+    border-radius: 13px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: box-shadow 0.16s ease, border-color 0.16s ease;
+    user-select: none;
+  }
+
+  .task-item:hover {
+    border-color: var(--border2);
+    box-shadow: var(--shadow-press);
+  }
+
+  .task-item.done { opacity: 0.66; }
+  .task-item.done .task-text { text-decoration: line-through; color: var(--text3); }
+
+  .task-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid rgba(0, 122, 255, 0.5);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.16s;
+  }
+
+  .task-item.done .task-check {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .task-check-inner { font-size: 10px; color: #fff; display: none; }
+  .task-item.done .task-check-inner { display: block; }
+  .task-text { font-size: 13px; color: var(--text); line-height: 1.45; }
+
+  .task-time {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    color: #0a5ec0;
+    margin-top: 2px;
+  }
+
+  .task-group-label {
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 6px 2px 4px;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  .gap-item { margin-bottom: 18px; }
+  .gap-item:last-child { margin-bottom: 0; }
+  .gap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .gap-name { font-size: 13px; font-weight: 550; color: var(--text); }
+  .gap-pct { font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace; font-size: 11px; color: #0a5ec0; }
+  .gap-dates { font-size: 11px; color: var(--text3); margin-bottom: 8px; font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace; }
+  .progress-bar { height: 7px; background: rgba(15, 23, 41, 0.1); border-radius: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 8px; transition: width 0.5s ease; }
+  .fill-amber { background: linear-gradient(90deg, var(--amber-dim), var(--amber)); }
+  .fill-green { background: linear-gradient(90deg, var(--green-dim), var(--green)); }
+  .fill-blue { background: linear-gradient(90deg, #3b82f6, var(--blue)); }
+  .fill-gray { background: #9ca6bb; }
+  .gap-resource { font-size: 11px; color: var(--text3); margin-top: 6px; }
+  .gap-proof { font-size: 11px; margin-top: 4px; }
+  .gap-active { border-left: 3px solid var(--blue); padding-left: 12px; }
+
+  .job-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+    background: #ffffff;
+    border: 1px solid #dbe4f1;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: border-color 0.16s ease;
+  }
+
+  .job-item:hover {
+    border-color: var(--border2);
+  }
+
+  .job-priority {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .p1 { background: rgba(255, 159, 10, 0.18); color: #a76100; }
+  .p2 { background: rgba(52, 199, 89, 0.16); color: #1d8a3b; }
+  .p3 { background: rgba(0, 122, 255, 0.14); color: #0a5ec0; }
+  .job-info { flex: 1; min-width: 0; }
+  .job-company { font-size: 13px; font-weight: 560; color: var(--text); }
+  .job-role { font-size: 11px; color: var(--text3); }
+
+  .job-tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    flex-shrink: 0;
+  }
+
+  .tag-equity { background: rgba(255, 159, 10, 0.14); color: #a76100; border: 1px solid rgba(255, 159, 10, 0.28); }
+  .tag-remote { background: rgba(52, 199, 89, 0.14); color: #1d8a3b; border: 1px solid rgba(52, 199, 89, 0.26); }
+  .tag-visa { background: rgba(88, 86, 214, 0.14); color: #4a49b5; border: 1px solid rgba(88, 86, 214, 0.24); }
+
+  .skill-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .skill-combo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+  .combo-chip {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .chip-ai { background: rgba(255, 159, 10, 0.14); color: #a76100; border: 1px solid rgba(255, 159, 10, 0.24); }
+  .chip-b { background: rgba(52, 199, 89, 0.13); color: #1d8a3b; border: 1px solid rgba(52, 199, 89, 0.22); }
+  .chip-c { background: rgba(88, 86, 214, 0.13); color: #4a49b5; border: 1px solid rgba(88, 86, 214, 0.22); }
+  .combo-plus { color: var(--text3); font-size: 16px; font-weight: 300; }
+
+  .rarity-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(52, 199, 89, 0.08);
+    border: 1px solid rgba(52, 199, 89, 0.18);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  .skill-bar-row { margin-bottom: 10px; }
+  .skill-bar-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .skill-bar-name { font-size: 12px; color: var(--text); }
+  .skill-bar-level { font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace; font-size: 10px; }
+  .lvl-adv { color: #a76100; }
+  .lvl-int { color: #1d8a3b; }
+  .lvl-beg { color: #0a5ec0; }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 160px repeat(6, minmax(120px, 1fr));
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .sch-head {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--text3);
+    padding: 8px 10px;
+    text-align: center;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .sch-row-label,
+  .sch-cell {
+    border-radius: 8px;
+    border: 1px solid #dbe4f1;
+    background: #ffffff;
+  }
+
+  .sch-row-label {
+    font-size: 11px;
+    color: var(--text2);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    font-weight: 550;
+  }
+
+  .sch-cell { font-size: 10px; color: var(--text2); padding: 8px 10px; line-height: 1.4; }
+  .sch-amber { color: #a76100; background: rgba(255, 159, 10, 0.1); border: 1px solid rgba(255, 159, 10, 0.18); }
+  .sch-green { color: #1d8a3b; background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.18); }
+  .sch-blue { color: #0a5ec0; background: rgba(0, 122, 255, 0.1); border: 1px solid rgba(0, 122, 255, 0.18); }
+  .sch-dim { color: var(--text3); }
+
+  .timeline { margin-top: 4px; }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 90px 200px 1fr 140px 90px 120px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e9f4;
+    transition: background-color 0.18s ease;
+  }
+
+  .timeline-row:hover { background: #f3f8ff; }
+  .timeline-row.header { padding: 8px 16px; border-bottom: 1px solid #dbe4f1; }
+
+  .tl-num,
+  .tl-header-label,
+  .tl-date,
+  .status-badge {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  .tl-num { font-size: 11px; color: var(--text3); }
+  .tl-date { font-size: 11px; color: #0a5ec0; }
+  .tl-name { font-size: 12px; color: var(--text); font-weight: 540; }
+  .tl-skill, .tl-share { font-size: 11px; color: var(--text3); }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+  }
+
+  .status-active { background: rgba(0, 122, 255, 0.13); color: #0a5ec0; border: 1px solid rgba(0, 122, 255, 0.24); }
+  .status-planned { background: rgba(122, 135, 158, 0.13); color: #52607c; border: 1px solid rgba(122, 135, 158, 0.24); }
+  .status-ongoing { background: rgba(88, 86, 214, 0.14); color: #4a49b5; border: 1px solid rgba(88, 86, 214, 0.25); }
+
+  .tl-header-label {
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+
+  .filter-item {
+    padding: 16px 18px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .filter-q { font-weight: 560; font-size: 12px; color: var(--text); margin-bottom: 6px; }
+  .filter-q span { font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace; font-size: 10px; color: #0a5ec0; margin-right: 8px; }
+  .filter-a { font-size: 12px; color: var(--text3); font-style: italic; }
+
+  .nn-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #dbe4f1;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .nn-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: rgba(0, 122, 255, 0.12);
+    border: 1px solid rgba(0, 122, 255, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0a5ec0;
+    flex-shrink: 0;
+  }
+
+  .nn-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .stat-num { font-weight: 760; font-size: 29px; color: #0a5ec0; line-height: 1; letter-spacing: -0.03em; }
+  .stat-label { font-size: 11px; color: var(--text3); margin-top: 7px; letter-spacing: 0.03em; }
+
+  .mental-model {
+    background: linear-gradient(135deg, rgba(88, 86, 214, 0.08), rgba(255, 255, 255, 0.72));
+    border: 1px solid rgba(88, 86, 214, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+  }
+
+  .mm-title { font-weight: 700; font-size: 15px; color: #4a49b5; margin-bottom: 16px; }
+  .mm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .mm-item {
+    padding: 14px 16px;
+    background: rgba(88, 86, 214, 0.08);
+    border: 1px solid rgba(88, 86, 214, 0.16);
+    border-radius: 12px;
+  }
+
+  .mm-q { font-size: 11px; font-weight: 620; color: #4a49b5; margin-bottom: 6px; }
+  .mm-a { font-size: 11px; color: var(--text2); line-height: 1.5; }
+
+  .footer {
+    border-top: 1px solid rgba(20, 30, 55, 0.1);
+    margin-top: 48px;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left,
+  .footer-link {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  .footer-links { display: flex; gap: 20px; }
+  .footer-link { text-decoration: none; transition: color 0.15s; }
+  .footer-link:hover { color: #0a5ec0; }
+
+  @media (max-width: 1100px) {
+    .top-row { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .timeline-row { grid-template-columns: 70px 140px 1fr 100px; }
+    .timeline-row > *:nth-child(5), .timeline-row > *:nth-child(6) { display: none; }
+  }
+
+  @media (max-width: 768px) {
+    .top-row,
+    .skill-row,
+    .filter-grid,
+    .mm-grid,
+    .timeline-row { grid-template-columns: 1fr; }
+
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+
+    .schedule-grid {
+      grid-template-columns: 120px repeat(2, minmax(130px, 1fr));
+      min-width: 400px;
+    }
+
+    .schedule-grid > *:nth-child(n + 5):not(.sch-row-label) { display: none; }
+
+    .header {
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tl-num,
+    .tl-skill,
+    .tl-share { display: none; }
+
+    .wrap { padding: 0 14px 48px; }
+    .card { border-radius: 18px; }
+  }
+
+  /* Keep static light theme for maximum readability. */
+
+  .fade-up { animation: fadeUp 0.45s ease forwards; opacity: 0; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up:nth-child(1) { animation-delay: 0.05s; }
+  .fade-up:nth-child(2) { animation-delay: 0.1s; }
+  .fade-up:nth-child(3) { animation-delay: 0.15s; }
+  .fade-up:nth-child(4) { animation-delay: 0.2s; }
+  .fade-up:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="header fade-up">
+    <div class="header-left">
+      <div class="logo-mark">AS</div>
+      <div>
+        <div class="header-name">Adil Shamim</div>
+        <div class="header-sub">// ML_ENGINEER_ROADMAP · MISSION_CONTROL · v1.0</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-badge"><div class="live-dot"></div>ACTIVE SPRINT</div>
+      <div class="date-badge" id="current-date">Loading...</div>
+    </div>
+  </header>
+
+  <!-- MISSION -->
+  <div class="mission fade-up">
+    <div class="mission-icon">🎯</div>
+    <div>
+      <div class="mission-text">Land a full-time ML/AI Engineer role by shipping real systems — not following courses.</div>
+      <div class="mission-sub">Built from Worksheets 1–6 · Market-validated gaps · 12-month shipping plan · Weekly operating system · Starting 18 March 2026</div>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row fade-up">
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Active Gaps to Close</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Projects to Ship</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">90</div>
+      <div class="stat-label">Days in Sprint</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)">Top 1%</div>
+      <div class="stat-label">Kaggle Rank (29/4082)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--purple)">5</div>
+      <div class="stat-label">Active Applications</div>
+    </div>
+  </div>
+
+  <!-- TOP ROW: Today + 90-Day Sprint + Job Hunt -->
+  <div class="section-label fade-up">Daily Command Center</div>
+  <div class="top-row fade-up">
+
+    <!-- TODAY PANEL -->
+    <div class="card today-card">
+      <div class="phase-badge">📅 MONTH 1 · WEEK 1 · MAR 18 – APR 18</div>
+      <div class="today-header">Today's Mission</div>
+      <div class="today-sub">Gap #1: MLOps — Docker · FastAPI · CI/CD · Prometheus</div>
+      <div class="task-list" id="task-list">
+        <div class="task-group-label">🌅 Deep Work Block · 6:00 – 9:00 AM</div>
+        <div class="task-item" data-id="t1" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Write Dockerfile for a PyTorch FastAPI inference server</div><div class="task-time">6:00 AM · SHIP IT — no tutorial, from scratch</div></div>
+        </div>
+        <div class="task-item" data-id="t2" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Run docker build + docker run locally, test the /predict endpoint</div><div class="task-time">7:30 AM · Verify it actually works</div></div>
+        </div>
+        <div class="task-item" data-id="t3" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Push to GitHub with a proper README (problem, solution, how to run)</div><div class="task-time">8:30 AM · Evidence trail starts here</div></div>
+        </div>
+        <div class="task-group-label">📖 Learning Block · 9:00 – 10:00 AM</div>
+        <div class="task-item" data-id="t4" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Read FSDI Lecture 6 (ML Infrastructure) — 1 chapter, take notes</div><div class="task-time">9:00 AM · No video courses. Read → Implement.</div></div>
+        </div>
+        <div class="task-item" data-id="t5" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Implement one concept learned — connect to today's Docker project</div><div class="task-time">9:45 AM · Theory without code doesn't count</div></div>
+        </div>
+        <div class="task-group-label">📢 Sharing (Wednesday only)</div>
+        <div class="task-item" data-id="t6" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Write LinkedIn post: "What I built today and why it matters"</div><div class="task-time">10:00 AM · 200 words max · Ship it before 10:30 AM</div></div>
+        </div>
+        <div class="task-group-label">📝 Job Hunt (30 min/day)</div>
+        <div class="task-item" data-id="t7" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Send 1 tailored application (today: AideMeet or Realfy)</div><div class="task-time">10:30 AM · Custom cover message only. No mass apply.</div></div>
+        </div>
+        <div class="task-item" data-id="t8" onclick="toggleTask(this)">
+          <div class="task-check"><div class="task-check-inner">✓</div></div>
+          <div><div class="task-text">Evening: 30-min walk. No screens after 9 PM.</div><div class="task-time">Recovery is non-negotiable. Consistency requires it.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 90 DAY SPRINT -->
+    <div class="card">
+      <div class="card-title"><span class="icon">⚡</span>90-Day Gap Sprint</div>
+
+      <div class="gap-item gap-active">
+        <div class="gap-header">
+          <div class="gap-name">Gap 1 · MLOps</div>
+          <div class="gap-pct" id="pct1">0%</div>
+        </div>
+        <div class="gap-dates">Mar 18 → Apr 18, 2026</div>
+        <div class="progress-bar"><div class="progress-fill fill-amber" id="bar1" style="width:0%"></div></div>
+        <div class="gap-resource">📚 FSDI Lectures 6–8 · Docker docs · Chip Huyen Ch.7–9</div>
+        <div class="gap-proof" style="color:var(--amber)">✓ Proof: Dockerized ML API + CI/CD on GitHub</div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-header">
+          <div class="gap-name">Gap 2 · LLMs + RAG</div>
+          <div class="gap-pct">0%</div>
+        </div>
+        <div class="gap-dates">Apr 18 → May 18, 2026</div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:0%"></div></div>
+        <div class="gap-resource">📚 LangChain RAG from scratch · RAGAS paper arXiv:2309.15217</div>
+        <div class="gap-proof" style="color:var(--green)">✓ Proof: Live RAG endpoint + RAGAS eval scores</div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-header">
+          <div class="gap-name">Gap 3 · PyTorch Internals</div>
+          <div class="gap-pct">0%</div>
+        </div>
+        <div class="gap-dates">May 18 → Jun 18, 2026</div>
+        <div class="progress-bar"><div class="progress-fill fill-blue" style="width:0%"></div></div>
+        <div class="gap-resource">📚 Andrej Karpathy micrograd (GitHub + YouTube)</div>
+        <div class="gap-proof" style="color:var(--blue)">✓ Proof: 5-min YouTube explainer + NumPy backprop</div>
+      </div>
+
+      <div style="margin-top:18px; padding:14px; background:rgba(255,255,255,0.02); border-radius:10px; border:1px solid var(--border)">
+        <div style="font-size:11px; color:var(--text3); font-family:'JetBrains Mono',monospace; margin-bottom:6px">DECISION FILTER</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6">
+          Before any new task: <span style="color:var(--amber)">does this close a WS2 gap?</span><br>
+          If no — skip it. No exceptions.
+        </div>
+      </div>
+    </div>
+
+    <!-- JOB HUNT STACK -->
+    <div class="card">
+      <div class="card-title"><span class="icon">💼</span>Job Hunt Priority Stack</div>
+
+      <div class="job-item">
+        <div class="job-priority p1">1</div>
+        <div class="job-info">
+          <div class="job-company">AideMeet</div>
+          <div class="job-role">Co-founder · Equity</div>
+        </div>
+        <div class="job-tag tag-equity">EQUITY</div>
+      </div>
+      <div class="job-item">
+        <div class="job-priority p1">2</div>
+        <div class="job-info">
+          <div class="job-company">Realfy</div>
+          <div class="job-role">Agentic Workflow Match</div>
+        </div>
+        <div class="job-tag tag-remote">REMOTE</div>
+      </div>
+      <div class="job-item">
+        <div class="job-priority p2">3</div>
+        <div class="job-info">
+          <div class="job-company">Kaedim · London</div>
+          <div class="job-role">Series A · Graduate Visa</div>
+        </div>
+        <div class="job-tag tag-visa">VISA</div>
+      </div>
+      <div class="job-item">
+        <div class="job-priority p2">4</div>
+        <div class="job-info">
+          <div class="job-company">Dresslife</div>
+          <div class="job-role">Remote · Recommendation System</div>
+        </div>
+        <div class="job-tag tag-remote">REMOTE</div>
+      </div>
+      <div class="job-item">
+        <div class="job-priority p3">5</div>
+        <div class="job-info">
+          <div class="job-company">PranaTree</div>
+          <div class="job-role">ML Engineer</div>
+        </div>
+        <div class="job-tag tag-remote">REMOTE</div>
+      </div>
+
+      <div style="margin-top:16px; padding:12px 14px; background:rgba(245,166,35,0.06); border:1px solid rgba(245,166,35,0.15); border-radius:10px;">
+        <div style="font-size:10px; color:var(--amber); font-family:'JetBrains Mono',monospace; margin-bottom:6px">APPLICATION RULE</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.5">
+          1 tailored application/day max.<br>
+          Custom message only. No mass apply.<br>
+          <span style="color:var(--amber)">Your GitHub must show work before you apply.</span>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; padding:12px 14px; background:var(--bg3); border-radius:10px; border:1px solid var(--border);">
+        <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; margin-bottom:4px">TOP 3 SKILLS MARKET NEEDS (WS1)</div>
+        <div style="font-size:11px; color:var(--text2); line-height:1.7">
+          1. Python + PyTorch<br>
+          2. LLMs + RAG + Prompt Engineering<br>
+          3. MLOps (Docker, K8s, CI/CD, monitoring)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILL STACK + NON-NEGOTIABLES -->
+  <div class="section-label fade-up">Your Unfair Combination · WS4</div>
+  <div class="skill-row fade-up">
+
+    <!-- SKILL COMBO -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🧬</span>The Rare Combination</div>
+      <div class="skill-combo">
+        <div class="combo-chip chip-ai">⚡ AI + ML Engineering</div>
+        <div class="combo-plus">+</div>
+        <div class="combo-chip chip-b">🗣 Bengali NLP + Speech AI</div>
+        <div class="combo-plus">+</div>
+        <div class="combo-chip chip-c">✍️ Technical Writing</div>
+      </div>
+      <div class="rarity-note">
+        Most ML engineers who can ship production systems <strong style="color:var(--white)">cannot write</strong>. Most who can write <strong style="color:var(--white)">have never shipped anything</strong>. The overlap is nearly zero.<br><br>
+        You add Bengali NLP — a severely low-resource language — making you globally rare. <span style="color:var(--green)">This combination targets a market that doesn't yet exist at scale.</span>
+      </div>
+      <div style="margin-top:16px">
+        <div style="font-size:10px; color:var(--text3); font-family:'JetBrains Mono',monospace; margin-bottom:10px">SKILL LEVELS (WS4 PART B)</div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">Python + PyTorch</span><span class="skill-bar-level lvl-adv">ADVANCED</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:90%"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">Bengali Language (Native)</span><span class="skill-bar-level lvl-adv">ADVANCED</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:95%"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">Applied ML / Deep Learning</span><span class="skill-bar-level lvl-adv">ADVANCED</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:88%"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">NLP + Speech Processing</span><span class="skill-bar-level lvl-int">INTERMEDIATE</span></div><div class="progress-bar"><div class="progress-fill fill-green" style="width:72%"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">LLMs + RAG</span><span class="skill-bar-level lvl-int">INTERMEDIATE</span></div><div class="progress-bar"><div class="progress-fill fill-green" style="width:65%"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">MLOps (Docker, K8s, CI/CD)</span><span class="skill-bar-level" style="color:var(--red)">BEGINNER → CLOSING</span></div><div class="progress-bar"><div class="progress-fill" style="width:20%;background:var(--red)"></div></div></div>
+        <div class="skill-bar-row"><div class="skill-bar-label"><span class="skill-bar-name">Technical Writing</span><span class="skill-bar-level" style="color:var(--blue)">BUILDING</span></div><div class="progress-bar"><div class="progress-fill fill-blue" style="width:35%"></div></div></div>
+      </div>
+    </div>
+
+    <!-- NON-NEGOTIABLES -->
+    <div class="card">
+      <div class="card-title"><span class="icon">🔒</span>3 Non-Negotiables · WS6</div>
+      <div class="nn-item">
+        <div class="nn-num">1</div>
+        <div class="nn-text">2 hours of deep coding on the WS5 monthly project <strong style="color:var(--amber)">EVERY morning</strong> (6–8 AM) — no email, no social, no news until this block is done.</div>
+      </div>
+      <div class="nn-item">
+        <div class="nn-num">2</div>
+        <div class="nn-text"><strong style="color:var(--amber)">1 public share per week minimum</strong> — LinkedIn post, GitHub commit with real README, or blog article. Sharing is part of the work, not optional.</div>
+      </div>
+      <div class="nn-item">
+        <div class="nn-num">3</div>
+        <div class="nn-text"><strong style="color:var(--amber)">Sunday 30-min weekly review</strong> — did I ship what I committed to? What broke? What changes on Monday?</div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="card-title" style="font-size:13px"><span class="icon">🧠</span>Mental Model (Senior Engineer OS)</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="padding:12px 14px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:10px;">
+            <div style="font-size:11px;font-weight:600;color:var(--purple);margin-bottom:5px">Why does this algorithm work?</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5">Before using any tool: trace it to first principles. What assumptions does it make? When does it break?</div>
+          </div>
+          <div style="padding:12px 14px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:10px;">
+            <div style="font-size:11px;font-weight:600;color:var(--purple);margin-bottom:5px">Market first, then learn</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5">Every skill must map back to a real problem companies pay to solve (WS1). If it doesn't — it's a hobby, not a career move.</div>
+          </div>
+          <div style="padding:12px 14px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:10px;">
+            <div style="font-size:11px;font-weight:600;color:var(--purple);margin-bottom:5px">Ship → Learn → Repeat</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5">Building Toolly solo (206+ commits) proves this works. The next 12 months are the same loop — faster, more focused, more public.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY SCHEDULE -->
+  <div class="section-label fade-up">Weekly Operating System · WS6 Part B</div>
+  <div class="card fade-up" style="overflow-x:auto">
+    <div class="card-title"><span class="icon">📅</span>Ideal Week — Peak Window: 6 AM–10 AM Daily</div>
+    <div class="schedule-grid">
+      <div class="sch-head" style="text-align:left;color:var(--text2)">Time Block</div>
+      <div class="sch-head">MON</div>
+      <div class="sch-head">TUE</div>
+      <div class="sch-head">WED</div>
+      <div class="sch-head">THU</div>
+      <div class="sch-head">FRI</div>
+      <div class="sch-head">SAT / SUN</div>
+
+      <div class="sch-row-label">⚙️ Deep Work<br><span style="font-size:10px;color:var(--text3);font-weight:400">Build · Code · Ship</span></div>
+      <div class="sch-cell sch-amber">6–9 AM<br>WS5 project build</div>
+      <div class="sch-cell sch-amber">6–9 AM<br>Continue from Mon</div>
+      <div class="sch-cell sch-amber">6–9 AM<br>Push GitHub milestone</div>
+      <div class="sch-cell sch-amber">6–9 AM<br>Debug + test</div>
+      <div class="sch-cell sch-amber">6–9 AM<br>Wrap weekly deliverable</div>
+      <div class="sch-cell sch-amber">8 AM–12 PM<br>Extended build session</div>
+
+      <div class="sch-row-label">📖 Learning<br><span style="font-size:10px;color:var(--text3);font-weight:400">Close WS3 Gaps</span></div>
+      <div class="sch-cell sch-green">9–10 AM<br>Read 1 chapter</div>
+      <div class="sch-cell sch-green">9–10 AM<br>Read + annotate</div>
+      <div class="sch-cell sch-green">9–10 AM<br>Implement concept</div>
+      <div class="sch-cell sch-green">9–10 AM<br>Review week's learning</div>
+      <div class="sch-cell sch-green">9–10 AM<br>Apply to project</div>
+      <div class="sch-cell sch-dim">Flex: catch-up or 1 targeted video (30 min max)</div>
+
+      <div class="sch-row-label">📢 Sharing<br><span style="font-size:10px;color:var(--text3);font-weight:400">3× / week</span></div>
+      <div class="sch-cell sch-dim">—</div>
+      <div class="sch-cell sch-dim">—</div>
+      <div class="sch-cell sch-blue">10–10:30 AM<br>LinkedIn post</div>
+      <div class="sch-cell sch-dim">—</div>
+      <div class="sch-cell sch-blue">10–10:30 AM<br>GitHub README update</div>
+      <div class="sch-cell sch-blue">2–4 PM<br>Blog article (adilshamim.me)</div>
+
+      <div class="sch-row-label">💤 Recovery<br><span style="font-size:10px;color:var(--text3);font-weight:400">No screens after 9 PM</span></div>
+      <div class="sch-cell sch-dim">Evening walk 30 min</div>
+      <div class="sch-cell sch-dim">Evening walk 30 min</div>
+      <div class="sch-cell sch-dim">Evening, no screens</div>
+      <div class="sch-cell sch-dim">Evening walk 30 min</div>
+      <div class="sch-cell sch-dim">Evening, no screens</div>
+      <div class="sch-cell sch-green">Sunday PM: full rest + non-tech reading. Sunday review 30 min.</div>
+    </div>
+  </div>
+
+  <!-- 12 MONTH TIMELINE -->
+  <div class="section-label fade-up">12-Month Shipping Calendar · WS5</div>
+  <div class="card fade-up" style="padding:0;overflow:hidden">
+    <div class="timeline">
+      <div class="timeline-row header">
+        <div class="tl-header-label">#</div>
+        <div class="tl-header-label">Date</div>
+        <div class="tl-header-label">What I'll Ship</div>
+        <div class="tl-header-label">Skill Proved</div>
+        <div class="tl-header-label">Share On</div>
+        <div class="tl-header-label">Status</div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">01</div>
+        <div class="tl-date">Apr 2026</div>
+        <div class="tl-name">Dockerized FastAPI ML inference server + GitHub Actions CI/CD + Prometheus monitoring</div>
+        <div class="tl-skill">MLOps — Gap #1</div>
+        <div class="tl-share">GitHub + LinkedIn</div>
+        <div><span class="status-badge status-active">● In Progress</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">02</div>
+        <div class="tl-date">May 2026</div>
+        <div class="tl-name">Production RAG pipeline: FAISS + reranker + RAGAS eval, deployed as FastAPI endpoint</div>
+        <div class="tl-skill">LLMs + RAG — Gap #2</div>
+        <div class="tl-share">GitHub + Blog + Demo</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">03</div>
+        <div class="tl-date">Jun 2026</div>
+        <div class="tl-name">Micrograd re-implementation (NumPy only) + 5-min YouTube backprop explainer</div>
+        <div class="tl-skill">PyTorch Internals — Gap #3</div>
+        <div class="tl-share">GitHub + YouTube</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">04</div>
+        <div class="tl-date">Jul 2026</div>
+        <div class="tl-name">Bengali document QA system: RAG on Bengali text corpus with low-resource chunking</div>
+        <div class="tl-skill">Bengali NLP + RAG</div>
+        <div class="tl-share">GitHub + HF Spaces</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">05</div>
+        <div class="tl-date">Aug 2026</div>
+        <div class="tl-name">Multi-agent LangGraph pipeline: autonomous research agent → structured reports</div>
+        <div class="tl-skill">Agentic AI, LangGraph</div>
+        <div class="tl-share">GitHub + LinkedIn</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">06</div>
+        <div class="tl-date">Sep 2026</div>
+        <div class="tl-name">Bengali ASR fine-tune (Whisper) → evaluate → deploy on Hugging Face</div>
+        <div class="tl-skill">Speech + MLOps + Bengali</div>
+        <div class="tl-share">HF Model Card + GitHub</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">07</div>
+        <div class="tl-date">Oct 2026</div>
+        <div class="tl-name">Recommendation system v2: real-time collab filtering API + A/B testing + drift monitoring</div>
+        <div class="tl-skill">RecSys + MLOps + A/B</div>
+        <div class="tl-share">GitHub + Blog</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">08</div>
+        <div class="tl-date">Nov 2026</div>
+        <div class="tl-name">LLM evaluation framework: automated benchmark for RAG faithfulness + hallucination rate</div>
+        <div class="tl-skill">LLM Eval + Open Source</div>
+        <div class="tl-share">GitHub + HN</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">09</div>
+        <div class="tl-date">Jul–Nov 2026</div>
+        <div class="tl-name">8 published technical posts — each explaining a real project in plain English</div>
+        <div class="tl-skill">Technical Writing</div>
+        <div class="tl-share">adilshamim.me + LinkedIn</div>
+        <div><span class="status-badge status-ongoing">◑ Ongoing</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">10</div>
+        <div class="tl-date">Dec 2026</div>
+        <div class="tl-name">Kaggle competition: Top-10 finish in NLP/tabular using custom PyTorch pipeline</div>
+        <div class="tl-skill">Applied ML, Competition</div>
+        <div class="tl-share">Kaggle + LinkedIn</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">11</div>
+        <div class="tl-date">Jan 2027</div>
+        <div class="tl-name">Open-source MCP server for Bengali NLP tasks — pluggable into Claude/GPT</div>
+        <div class="tl-skill">MCP + Bengali NLP (rare)</div>
+        <div class="tl-share">GitHub + HN + LinkedIn</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+      <div class="timeline-row">
+        <div class="tl-num">12</div>
+        <div class="tl-date">Feb 2027</div>
+        <div class="tl-name">Toolly v2: rebuild with full MLOps stack (Docker, K8s, monitoring, RAG backend)</div>
+        <div class="tl-skill">All 3 gaps proven. Full stack.</div>
+        <div class="tl-share">toolly.tech + GitHub</div>
+        <div><span class="status-badge status-planned">○ Planned</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISION FILTER -->
+  <div class="section-label fade-up">Decision Filter · WS6 Part D — Run Every Task Through This</div>
+  <div class="card fade-up">
+    <div class="card-title"><span class="icon">🔍</span>When Confused About What To Do Next</div>
+    <div class="filter-grid">
+      <div class="filter-item">
+        <div class="filter-q"><span>Q1</span>Is this closing a gap from WS2?</div>
+        <div class="filter-a">If no — skip it. Immediately. No exceptions. Gaps 1–3 are the only things that matter right now.</div>
+      </div>
+      <div class="filter-item">
+        <div class="filter-q"><span>Q2</span>Does this help ship this month's WS5 project?</div>
+        <div class="filter-a">If no — deprioritize it. Every hour should move the April deliverable forward.</div>
+      </div>
+      <div class="filter-item">
+        <div class="filter-q"><span>Q3</span>Am I doing this because a course told me to, or because WS1 market needs it?</div>
+        <div class="filter-a">Be honest. Courses are not the market. The 5 job postings you researched are the market.</div>
+      </div>
+      <div class="filter-item">
+        <div class="filter-q"><span>Q4</span>Would I still do this if nobody gave me a certificate?</div>
+        <div class="filter-a">That's your answer. Build for GitHub, not for credentials. Real systems speak louder.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENTAL MODEL: SENIOR ENGINEER THINKING -->
+  <div class="section-label fade-up">Senior Engineer Mental Model · WS6 Step 6</div>
+  <div class="mental-model fade-up">
+    <div class="mm-title">🧠 How a Senior ML Engineer Thinks (Build This Into Your OS)</div>
+    <div class="mm-grid">
+      <div class="mm-item">
+        <div class="mm-q">Why does this algorithm work?</div>
+        <div class="mm-a">Trace every tool to first principles. Gradient descent: why does it converge? When does it fail? What's the loss landscape assumption? Never use something you can't explain from scratch.</div>
+      </div>
+      <div class="mm-item">
+        <div class="mm-q">When does this system break?</div>
+        <div class="mm-a">Before building, ask: what's the failure mode? Docker → what if the model grows to 10GB? RAG → what if the query is ambiguous? Thinking in failure modes = production-readiness.</div>
+      </div>
+      <div class="mm-item">
+        <div class="mm-q">What assumptions are baked in?</div>
+        <div class="mm-a">Every model assumes something about the data distribution. Every MLOps pipeline assumes certain hardware. State the assumptions explicitly — this is how senior engineers communicate.</div>
+      </div>
+      <div class="mm-item">
+        <div class="mm-q">What's the end-to-end system?</div>
+        <div class="mm-a">Never think in components. Think: data pipeline → feature store → training → serving → monitoring → feedback loop. Where is the bottleneck? That's where to focus.</div>
+      </div>
+      <div class="mm-item">
+        <div class="mm-q">How does this create business value?</div>
+        <div class="mm-a">Your recommender gave +10% sales lift. Your Bengali diarizer achieved DER 0.286. Always attach a metric. Engineers who speak in business impact get hired first.</div>
+      </div>
+      <div class="mm-item">
+        <div class="mm-q">Could I explain this to a non-engineer?</div>
+        <div class="mm-a">If you can't explain RAG to a product manager in 2 minutes, you don't fully understand it. Technical writing forces this clarity — it's why it's Gap #4 in your skill plan.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDENTIALS PROOF STRIP -->
+  <div class="section-label fade-up">Your Proof of Work — What You Already Have</div>
+  <div class="card fade-up" style="background:linear-gradient(160deg,rgba(16,185,129,0.05) 0%,var(--bg2) 100%);border-color:rgba(16,185,129,0.2)">
+    <div class="card-title"><span class="icon">🏆</span>Verified Credentials (Real Proof, Not Certificates)</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px">
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">KAGGLE MASTER</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">Top 1% · Rank 29/4,082</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">22+ competitions · Applied ML depth</div>
+      </div>
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">RESEARCH PAPER</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">1st Author · BUET CSE Fest 2026</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">56% inference speedup · Bengali speaker diarization</div>
+      </div>
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">LIVE PRODUCT</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">Toolly.tech — Built Solo</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">400+ AI tools · 206+ commits · Live</div>
+      </div>
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">DEPLOYED IMPACT</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">+10% Client Sales Lift</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">Recommendation system in production</div>
+      </div>
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">DL COMPETITION</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">DL Sprint 4.0 · Team EnviSage</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">Bengali ASR: WER 0.379 · Rank #28</div>
+      </div>
+      <div style="padding:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px">
+        <div style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-bottom:6px">PROFILES</div>
+        <div style="font-size:13px;color:var(--white);font-weight:500">adilshamim8 · adilshamim.me</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">GitHub · LinkedIn · Kaggle · Website</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer fade-up">
+    <div class="footer-left">// Adil Shamim · ML Engineer Roadmap · Built 18 March 2026 · All 6 Worksheets Synthesised</div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://adilshamim.me" target="_blank">adilshamim.me</a>
+      <a class="footer-link" href="https://github.com/adilshamim8" target="_blank">github</a>
+      <a class="footer-link" href="https://linkedin.com/in/adilshamim8" target="_blank">linkedin</a>
+      <a class="footer-link" href="https://kaggle.com/adilshamim8" target="_blank">kaggle</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Date
+  const d = new Date();
+  document.getElementById('current-date').textContent =
+    d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+
+  // Progress bar: Gap 1 based on days since Mar 18
+  const start = new Date('2026-03-18');
+  const end1 = new Date('2026-04-18');
+  const now = new Date();
+  const totalDays = (end1 - start) / 86400000;
+  const elapsed = Math.max(0, Math.min((now - start) / 86400000, totalDays));
+  const pct = Math.round((elapsed / totalDays) * 100);
+  document.getElementById('bar1').style.width = pct + '%';
+  document.getElementById('pct1').textContent = pct + '%';
+
+  // Task persistence
+  const STORAGE_KEY = 'adil_tasks_' + new Date().toDateString();
+
+  async function loadTasks() {
+    try {
+      const result = await window.storage.get(STORAGE_KEY);
+      if (result && result.value) {
+        const done = JSON.parse(result.value);
+        done.forEach(id => {
+          const el = document.querySelector('[data-id="' + id + '"]');
+          if (el) el.classList.add('done');
+        });
+      }
+    } catch(e) { /* new day or no storage */ }
+  }
+
+  async function saveTasks() {
+    const done = Array.from(document.querySelectorAll('.task-item.done'))
+      .map(el => el.dataset.id);
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(done));
+    } catch(e) {}
+  }
+
+  window.toggleTask = function(el) {
+    el.classList.toggle('done');
+    saveTasks();
+    // Progress indicator
+    const total = document.querySelectorAll('.task-item').length;
+    const done = document.querySelectorAll('.task-item.done').length;
+    if (done === total) {
+      document.querySelector('.today-sub').textContent =
+        '✅ All done for today. Rest. You earned it.';
+    }
+  };
+
+  loadTasks();
+</script>
+</body>
+</html>
