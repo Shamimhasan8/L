@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI/ML Interview Mastery — First Principles Edition</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --amber: #BA7517;
+  --amber-bg: #FAEEDA;
+  --amber-text: #854F0B;
+  --teal: #0F6E56;
+  --teal-bg: #E1F5EE;
+  --teal-text: #085041;
+  --blue: #185FA5;
+  --blue-bg: #E6F1FB;
+  --blue-text: #0C447C;
+  --purple: #3C3489;
+  --purple-bg: #EEEDFE;
+  --purple-text: #26215C;
+  --gray-bg: #F1EFE8;
+  --gray-text: #444441;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --amber: #FAC775;
+    --amber-bg: #412402;
+    --amber-text: #FAC775;
+    --teal: #9FE1CB;
+    --teal-bg: #04342C;
+    --teal-text: #9FE1CB;
+    --blue: #B5D4F4;
+    --blue-bg: #042C53;
+    --blue-text: #B5D4F4;
+    --purple: #CCC8F2;
+    --purple-bg: #26215C;
+    --purple-text: #CCC8F2;
+    --gray-bg: #2C2C2A;
+    --gray-text: #D3D1C7;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { color: #e4e2d8; background: #1a1a18; }
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: inherit;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .nav { border-bottom-color: rgba(255,255,255,0.08); }
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  user-select: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-item:hover { color: #555; }
+.nav-item.active { color: #1a1a1a; border-bottom-color: var(--amber); }
+@media (prefers-color-scheme: dark) {
+  .nav-item { color: #666; }
+  .nav-item:hover { color: #999; }
+  .nav-item.active { color: #e4e2d8; }
+}
+
+/* SECTIONS */
+.sec { padding: 32px 20px; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+@media (prefers-color-scheme: dark) { .sec { border-bottom-color: rgba(255,255,255,0.06); } }
+
+.sec-label {
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.sec-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+.sec-sub { font-size: 13px; color: #666; margin-bottom: 22px; line-height: 1.65; max-width: 640px; }
+@media (prefers-color-scheme: dark) { .sec-sub { color: #888; } }
+
+/* BARS */
+.bar-row { display: grid; grid-template-columns: 150px 1fr 44px; align-items: center; gap: 10px; margin-bottom: 9px; }
+.bar-label { font-size: 12px; color: #666; font-weight: 500; text-align: right; }
+@media (prefers-color-scheme: dark) { .bar-label { color: #888; } }
+.bar-track { height: 7px; background: rgba(0,0,0,0.06); border-radius: 4px; overflow: hidden; }
+@media (prefers-color-scheme: dark) { .bar-track { background: rgba(255,255,255,0.06); } }
+.bar-fill { height: 100%; border-radius: 4px; }
+.bar-pct { font-family: monospace; font-size: 11px; color: #999; }
+
+/* CALLOUTS */
+.tip { border-left: 3px solid #EF9F27; padding: 10px 14px; background: rgba(239,159,39,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.edge { border-left: 3px solid #1D9E75; padding: 10px 14px; background: rgba(29,158,117,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.danger { border-left: 3px solid #E24B4A; padding: 10px 14px; background: rgba(226,75,74,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.tip b, .edge b, .danger b { font-weight: 600; }
+
+/* ACCORDION */
+.acc { border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; }
+@media (prefers-color-scheme: dark) { .acc { border-color: rgba(255,255,255,0.08); } }
+.acc-item { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
+@media (prefers-color-scheme: dark) { .acc-item { border-bottom-color: rgba(255,255,255,0.06); } }
+.acc-item:last-child { border-bottom: none; }
+.acc-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.acc-hd:hover { background: rgba(0,0,0,0.025); }
+@media (prefers-color-scheme: dark) { .acc-hd:hover { background: rgba(255,255,255,0.03); } }
+.acc-icon {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: monospace; font-size: 11px; font-weight: 600; flex-shrink: 0;
+}
+.acc-title { font-size: 14px; font-weight: 500; flex: 1; line-height: 1.35; }
+.acc-sub { font-size: 11px; color: #999; flex-shrink: 0; font-family: monospace; }
+.acc-ch { font-size: 9px; color: #bbb; flex-shrink: 0; transition: transform 0.2s; }
+.acc-item.open .acc-ch { transform: rotate(180deg); }
+.acc-bd { display: none; padding: 2px 15px 16px 51px; font-size: 13px; color: #666; line-height: 1.65; }
+@media (prefers-color-scheme: dark) { .acc-bd { color: #888; } }
+.acc-item.open .acc-bd { display: block; }
+
+/* CODE BLOCK */
+.code {
+  font-family: monospace; font-size: 12px;
+  background: rgba(0,0,0,0.04); border: 0.5px solid rgba(0,0,0,0.08);
+  padding: 10px 14px; border-radius: 6px; margin: 8px 0;
+  color: #333; overflow-x: auto; white-space: pre; display: block;
+}
+@media (prefers-color-scheme: dark) {
+  .code { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.07); color: #ccc; }
+}
+
+/* ROUND CARDS */
+.rounds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 16px; }
+.round-card { border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 15px; cursor: pointer; transition: border-color 0.15s; }
+@media (prefers-color-scheme: dark) { .round-card { border-color: rgba(255,255,255,0.08); } }
+.round-card:hover { border-color: rgba(0,0,0,0.25); }
+@media (prefers-color-scheme: dark) { .round-card:hover { border-color: rgba(255,255,255,0.2); } }
+.round-card.open { border-color: var(--amber) !important; }
+.round-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+.round-badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 11px; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+.round-info { flex: 1; }
+.round-name { font-size: 14px; font-weight: 500; line-height: 1.3; }
+.round-dur { font-size: 11px; color: #999; font-family: monospace; }
+.round-wt { font-family: monospace; font-size: 15px; font-weight: 600; color: var(--amber); }
+.round-preview { font-size: 12px; color: #888; line-height: 1.5; }
+.round-body { display: none; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid rgba(0,0,0,0.07); font-size: 13px; color: #666; line-height: 1.6; }
+@media (prefers-color-scheme: dark) { .round-body { border-top-color: rgba(255,255,255,0.06); color: #888; } }
+.round-card.open .round-body { display: block; }
+.rh3 { font-size: 12px; font-weight: 600; color: #444; margin: 11px 0 5px; letter-spacing: 0.02em; }
+@media (prefers-color-scheme: dark) { .rh3 { color: #bbb; } }
+
+/* ICON COLORS */
+.ic-amber { background: var(--amber-bg); color: var(--amber-text); }
+.ic-teal { background: var(--teal-bg); color: var(--teal-text); }
+.ic-blue { background: var(--blue-bg); color: var(--blue-text); }
+.ic-purple { background: var(--purple-bg); color: var(--purple-text); }
+.ic-gray { background: var(--gray-bg); color: var(--gray-text); }
+
+/* UTILITY */
+.mt8 { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.ul { list-style: none; margin: 5px 0; }
+.ul li { padding: 3px 0 3px 14px; font-size: 13px; color: #666; position: relative; line-height: 1.5; }
+@media (prefers-color-scheme: dark) { .ul li { color: #888; } }
+.ul li::before { content: '·'; position: absolute; left: 4px; color: #bbb; }
+.ul.arrow li::before { content: '→'; color: var(--teal); font-size: 11px; top: 4px; }
+.ul.q li::before { content: 'Q'; font-family: monospace; font-size: 9px; font-weight: 600; color: #bbb; top: 3px; left: 0; }
+.sep { border: none; border-top: 0.5px solid rgba(0,0,0,0.07); margin: 11px 0; }
+@media (prefers-color-scheme: dark) { .sep { border-top-color: rgba(255,255,255,0.06); } }
+b.a { color: var(--amber); font-weight: 600; }
+b.t { color: var(--teal); font-weight: 600; }
+b.b { color: var(--blue); font-weight: 600; }
+b.s { font-weight: 600; }
+
+/* Keep a clean white aesthetic even when OS/browser prefers dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --amber: #BA7517;
+    --amber-bg: #FAEEDA;
+    --amber-text: #854F0B;
+    --teal: #0F6E56;
+    --teal-bg: #E1F5EE;
+    --teal-text: #085041;
+    --blue: #185FA5;
+    --blue-bg: #E6F1FB;
+    --blue-text: #0C447C;
+    --purple: #3C3489;
+    --purple-bg: #EEEDFE;
+    --purple-text: #26215C;
+    --gray-bg: #F1EFE8;
+    --gray-text: #444441;
+  }
+
+  body {
+    color: #1f2937;
+    background: #fdfcf9;
+  }
+
+  .nav { border-bottom-color: rgba(0,0,0,0.1); }
+  .nav-item { color: #6b7280; }
+  .nav-item:hover { color: #4b5563; }
+  .nav-item.active { color: #111827; }
+
+  .sec { border-bottom-color: rgba(0,0,0,0.08); }
+  .sec-sub, .bar-label, .acc-bd, .round-body, .ul li { color: #4b5563; }
+  .acc-sub, .bar-pct, .round-dur, .round-preview { color: #6b7280; }
+  .rh3 { color: #374151; }
+
+  .bar-track { background: rgba(0,0,0,0.06); }
+  .acc { border-color: rgba(0,0,0,0.1); }
+  .acc-item { border-bottom-color: rgba(0,0,0,0.07); }
+  .acc-hd:hover { background: rgba(0,0,0,0.025); }
+
+  .code {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.08);
+    color: #374151;
+  }
+
+  .round-card { border-color: rgba(0,0,0,0.1); }
+  .round-card:hover { border-color: rgba(0,0,0,0.25); }
+  .round-body { border-top-color: rgba(0,0,0,0.07); }
+
+  .sep { border-top-color: rgba(0,0,0,0.07); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-item active" data-sec="s1">01 · Landscape</div>
+  <div class="nav-item" data-sec="s2">02 · Mental Models</div>
+  <div class="nav-item" data-sec="s3">03 · Rounds</div>
+  <div class="nav-item" data-sec="s4">04 · Concepts</div>
+  <div class="nav-item" data-sec="s5">05 · Frameworks</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ S1: LANDSCAPE -->
+<section class="sec" id="s1">
+  <div class="sec-label">01 · the landscape</div>
+  <h2 class="sec-title">What you're actually being evaluated on</h2>
+  <p class="sec-sub">At Series A–B AI startups (10–80 engineers), the evaluation weight is fundamentally different from FAANG. Most candidates prepare for the wrong round. Here's the real distribution.</p>
+
+  <div id="barsContainer"></div>
+
+  <div class="tip mt16">
+    <b>The 80/20 of prep time:</b> 55% should go to ML System Design + ML Fundamentals. Most candidates grind LeetCode. At AI startups, that's the wrong bet — they care far more about whether you can design and reason about production ML systems.
+  </div>
+  <div class="edge">
+    <b>Your specific edge:</b> Bangla Speech AI + Audio ML + live production system (Toolly.tech) + Kaggle Master. That combination puts you in a category of ~200 people globally. Three of the seven rounds will reward this heavily if you frame it right.
+  </div>
+  <div class="danger">
+    <b>The one trap to avoid:</b> Reciting definitions instead of reasoning. The moment you say "L1 is Lasso and L2 is Ridge" without explaining <i>why</i> — you've lost them. Derive it. Always derive it.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S2: MENTAL MODELS -->
+<section class="sec" id="s2">
+  <div class="sec-label">02 · mental models</div>
+  <h2 class="sec-title">5 models that unlock 80% of every question</h2>
+  <p class="sec-sub">You don't memorize answers. You derive them from first principles. These 5 mental models are the foundation. Internalize them and you can answer questions you've never seen before — because you understand the underlying machinery.</p>
+
+  <div class="acc" id="modelsAcc">
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-amber">M1</div>
+        <div style="flex:1">
+          <div class="acc-title">The Optimization Engine</div>
+          <div style="font-size:12px;color:#999;">Loss → Gradient → Update → Repeat. That's all of ML.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <b class="s">Core insight:</b> Every ML model is an optimization problem. You define what "wrong" looks like, measure how wrong you are, and take a step to be less wrong. Repeat.
+        <div class="code">θ* = argmin L(f(x; θ), y)
+Update: θ ← θ − α · ∂L/∂θ
+That's it. Everything else is an implementation detail.</div>
+        <b class="s">What you can derive from this:</b>
+        <ul class="ul arrow mt8">
+          <li>Why learning rate matters → step size. Too large = diverge. Too small = takes forever.</li>
+          <li>Why mini-batches work → noisy gradient estimate that actually generalizes better.</li>
+          <li>Why Adam outperforms SGD → it adapts the step size per-parameter using running estimates of gradient mean and variance.</li>
+          <li>Why overfitting happens → training loss → 0, but the model memorized noise instead of signal.</li>
+          <li>Why regularization works → it adds a penalty term to the loss, so the optimizer is penalized for complexity.</li>
+          <li>Why early stopping works → stop before the model has time to memorize the training noise.</li>
+        </ul>
+        <div class="tip"><b>Interview move:</b> When asked "why does X work?", start with "The optimization objective is..." — shows you understand the mathematical foundation, not just the outcome.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-teal">M2</div>
+        <div style="flex:1">
+          <div class="acc-title">The Complexity Dial</div>
+          <div style="font-size:12px;color:#999;">Bias–variance. All of model selection lives here.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <b class="s">Core insight:</b> Every model has a capacity dial. Turn it too far left (too simple) = underfitting, high bias. Too far right (too complex) = overfitting, high variance. The game is always: find the right setting for your data volume.
+        <div class="code">Expected test error = Bias² + Variance + Irreducible noise
+
+Bias = systematic error (model too simple, wrong assumptions)
+Variance = sensitivity to training data (model too complex)
+Adding capacity: Bias ↓, Variance ↑
+Adding data:    Variance ↓, Bias unchanged</div>
+        <b class="s">What you can derive from this:</b>
+        <ul class="ul arrow mt8">
+          <li>L1/L2 regularization → penalizes complexity, moves the dial left.</li>
+          <li>Dropout → randomly zeros neurons during training, prevents co-adaptation, reduces variance.</li>
+          <li>Bagging (Random Forest) → averages many high-variance trees → lowers variance.</li>
+          <li>Boosting (XGBoost) → sequentially corrects high-bias weak learners → lowers bias.</li>
+          <li>Why cross-validation works → unbiased estimate of generalization by rotating the validation set.</li>
+          <li>Why you need more data to train a larger model → larger model = higher variance.</li>
+        </ul>
+        <div class="tip"><b>Interview move:</b> When asked "model is overfitting, what do you do?" — walk through the dial: get more data, add regularization, reduce capacity, use dropout. Show you understand the root cause, not just a list of techniques.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-blue">M3</div>
+        <div style="flex:1">
+          <div class="acc-title">The Attention Mechanism</div>
+          <div style="font-size:12px;color:#999;">Q·Kᵀ/√d → softmax → ×V. Modern AI in one equation.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <b class="s">Core insight:</b> Modern AI is about dynamically routing information. "Given what I'm looking for (Query), which of the available information (Keys) is most relevant, and what information (Values) should I extract?"
+        <div class="code">Attention(Q, K, V) = softmax(Q·Kᵀ / √d) · V
+
+Q = "what am I looking for?"  (linear projection of current token)
+K = "what does each token offer?"  (key labels on stored info)
+V = "what is each token's actual content?"  (the info itself)
+√d = scale factor to prevent softmax saturation in high dims</div>
+        <b class="s">What you can derive from this:</b>
+        <ul class="ul arrow mt8">
+          <li>Why transformers replaced RNNs → parallel computation (no sequential dependency) + global context in one step.</li>
+          <li>Why multi-head attention? → Multiple Q/K/V projections = multiple "what to look for" simultaneously.</li>
+          <li>BERT vs GPT → BERT: Q can attend to future tokens (masked bidirectional). GPT: Q can only attend to past tokens (causal mask).</li>
+          <li>Why RAG works → Retrieved chunks become the K/V. Your query becomes Q. Cross-attention routes the right information.</li>
+          <li>Why positional encoding is needed → dot-product attention is permutation-invariant; we need to inject sequence order explicitly.</li>
+        </ul>
+        <div class="edge"><b>Your edge:</b> Your Bangla ASR system uses Whisper (transformer-based). You can ground attention questions in your own production experience — e.g., explaining how the encoder-decoder cross-attention routes audio features to transcript tokens.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-purple">M4</div>
+        <div style="flex:1">
+          <div class="acc-title">The Data Trust Chain</div>
+          <div style="font-size:12px;color:#999;">Your model is only as good as your weakest data link.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <b class="s">Core insight:</b> Model quality = f(Data quality × Feature quality × Architecture × Evaluation). If any link breaks, the whole chain fails — and it almost always fails silently, which makes it dangerous.
+        <div class="code">Production ML quality chain:
+Raw Data → Preprocessing → Feature Engineering → Model → Evaluation
+    ↑           ↑                ↑                 ↑          ↑
+ Noise?    Leakage?         Domain logic?    Architecture?  Right metric?
+
+Every node is a potential failure point.
+Most ML failures happen in the first 3 nodes, not the model.</div>
+        <b class="s">Key failure modes to know:</b>
+        <ul class="ul arrow mt8">
+          <li><b class="s">Data leakage</b> → training data contains future information. Silently achieves 99% accuracy that collapses in production. Always use temporal splits for time-series data.</li>
+          <li><b class="s">Distribution shift</b> → training distribution ≠ serving distribution. Your Bangla model trained on clean audio fails on phone calls with noise.</li>
+          <li><b class="s">Label noise</b> → wrong labels teach the model wrong things. Hard to detect without auditing samples manually.</li>
+          <li><b class="s">Wrong metric</b> → optimizing AUC-ROC when the business cares about precision at top-10 results.</li>
+        </ul>
+        <div class="tip"><b>Interview move:</b> When asked "our model works in training but fails in production", walk the Trust Chain. Likely culprit is leakage or distribution shift — not the model architecture.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-amber">M5</div>
+        <div style="flex:1">
+          <div class="acc-title">The 6-Question System Template</div>
+          <div style="font-size:12px;color:#999;">Every ML system ever built answers these 6 questions.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <b class="s">Core insight:</b> No matter how complex the ML system — a recommendation engine, a fraud detector, a voice assistant — it always answers 6 questions in sequence. Skip a question = build the wrong thing.
+        <div class="code">1. PREDICT WHAT?   → Task formulation (classification? ranking? generation?)
+2. WHAT DATA?      → Sources, size, freshness, labeling cost
+3. WHAT METRIC?    → Business KPI ↔ ML proxy metric (not always aligned)
+4. HOW TO TRAIN?   → Architecture, features, training pipeline
+5. HOW TO SERVE?   → Online vs batch, latency, scale, cost
+6. HOW TO MONITOR? → Data drift, model drift, business KPI alerts</div>
+        <b class="s">What this unlocks:</b>
+        <ul class="ul arrow mt8">
+          <li>Any ML system design interview — apply this template in order.</li>
+          <li>Why 90% of ML projects fail → usually wrong metric (Q3) or no monitoring (Q6).</li>
+          <li>Why production ML is harder than research → Q5 and Q6 don't exist in research.</li>
+          <li>How to structure your answer → 2 min on Q1 (most interviewers want to see you clarify first), then methodically through the rest.</li>
+        </ul>
+        <div class="edge"><b>Your edge:</b> Toolly.tech is a production ML serving system. You've answered Q5 (how to serve) and Q6 (how to monitor) with real infrastructure — not theory.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S3: ROUNDS -->
+<section class="sec" id="s3">
+  <div class="sec-label">03 · interview rounds</div>
+  <h2 class="sec-title">Seven rounds. One playbook each.</h2>
+  <p class="sec-sub">Each round tests something different and requires a different strategy. Click any card to open the full playbook — what they're testing, the 80/20 topics, common questions, and your specific edge.</p>
+  <div class="rounds-grid" id="roundsGrid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S4: CONCEPTS -->
+<section class="sec" id="s4">
+  <div class="sec-label">04 · concept library</div>
+  <h2 class="sec-title">25 concepts — derived, not memorized</h2>
+  <p class="sec-sub">For each concept: understand the problem it solves, derive how it works, know when to use it. Never define from memory — derive from the problem. The derivation is the understanding.</p>
+
+  <div class="acc" id="conceptsAcc"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S5: FRAMEWORKS -->
+<section class="sec" id="s5">
+  <div class="sec-label">05 · answer frameworks</div>
+  <h2 class="sec-title">How to structure any interview answer</h2>
+  <p class="sec-sub">Four universal templates for the four types of questions you'll face. Apply these and you'll never blank in an interview again.</p>
+
+  <div class="acc" id="frameworksAcc">
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-amber">F1</div>
+        <div style="flex:1">
+          <div class="acc-title">Explaining a concept</div>
+          <div style="font-size:12px;color:#999;">"What is backprop / attention / regularization?"</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        Use the <b class="a">PDIC framework</b> — Problem → Derivation → Intuition → Consequence:
+        <ul class="ul arrow mt8">
+          <li><b class="s">P — Problem it solves</b> → "Before X existed, we had problem Y. X solves that by..."</li>
+          <li><b class="s">D — Derivation</b> → Walk through the math or logic from first principles. Even if approximate. Shows you understand the mechanism.</li>
+          <li><b class="s">I — Intuition</b> → Give an analogy. "Think of it like a ball rolling down a hill..." The intuition proves you're not just reciting.</li>
+          <li><b class="s">C — Consequence</b> → "So when would you use this? When would it fail? What are the trade-offs?"</li>
+        </ul>
+        <div class="code">Example: "Explain dropout"
+
+P: Overfitting problem — model memorizes training data, fails on new data.
+D: During training, randomly zero out each neuron with prob p. 
+   Forces the network to learn redundant representations — no single 
+   neuron can be relied upon. At test time, scale by (1-p).
+I: Imagine a sports team where any player might be absent tomorrow.
+   Each player learns to play multiple positions. The team is resilient.
+C: Reduces variance. Most effective in large networks with limited data.
+   Usually p=0.5 for hidden layers. Not used during inference.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-teal">F2</div>
+        <div style="flex:1">
+          <div class="acc-title">Comparing two approaches</div>
+          <div style="font-size:12px;color:#999;">"Why Adam over SGD? Random Forest vs XGBoost?"</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        Use the <b class="t">TADS framework</b> — Tradeoff → Assumption → Data → Scale:
+        <ul class="ul arrow mt8">
+          <li><b class="s">T — Core tradeoff</b> → What does each approach optimize for? What does it sacrifice?</li>
+          <li><b class="s">A — Assumption difference</b> → What is each approach assuming about the problem?</li>
+          <li><b class="s">D — Data dependency</b> → When does the data distribution favor each approach?</li>
+          <li><b class="s">S — Scale behavior</b> → What happens at small vs large data? Low vs high dimensions?</li>
+        </ul>
+        <div class="code">Example: "Adam vs SGD"
+
+T: SGD: simple, consistent steps. Adam: adaptive per-parameter steps.
+   Adam converges faster; SGD sometimes finds better final minima.
+A: SGD assumes all parameters need similar learning rate.
+   Adam assumes each parameter benefits from its own adaptive rate.
+D: Adam shines with sparse gradients (NLP embeddings) and noisy data.
+   SGD + momentum sometimes generalizes better for vision (less noise).
+S: Adam's memory overhead = 2× parameters (m and v vectors).
+   At massive scale, SGD + learning rate schedule is often preferred.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-blue">F3</div>
+        <div style="flex:1">
+          <div class="acc-title">ML System Design</div>
+          <div style="font-size:12px;color:#999;">"Design a recommendation / fraud detection / search system"</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        Always use the <b class="b">6-Question Template</b> (Mental Model 5). Here's how to time-box it in a 45-min session:
+        <ul class="ul mt8">
+          <li style="padding-left:20px"><b class="s">0–5 min:</b> Clarify scope. "What scale? What latency? What's the business metric?" Never skip this.</li>
+          <li style="padding-left:20px"><b class="s">5–15 min:</b> Q1 + Q2 + Q3. Task formulation, data, metric.</li>
+          <li style="padding-left:20px"><b class="s">15–30 min:</b> Q4. Architecture. Features, training pipeline. Draw the data flow.</li>
+          <li style="padding-left:20px"><b class="s">30–40 min:</b> Q5. Serving design. Online vs batch? Two-stage retrieval? Latency budget?</li>
+          <li style="padding-left:20px"><b class="s">40–45 min:</b> Q6. Monitoring. Data drift, model drift, business KPI alerts.</li>
+        </ul>
+        <div class="tip"><b>The most common mistake:</b> Jumping to "I would use a transformer with..." at minute 2. The interviewer wants to see you clarify, structure, and reason — not recite architectures. Spend 5 min on Q1 even if it feels obvious.</div>
+        <div class="edge"><b>Your Bangla Diarizz angle:</b> In any audio or speech system design, you can speak authoritatively about speaker embeddings, pyannote-audio pipeline architecture, and real production latency constraints. This is rare knowledge.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-purple">F4</div>
+        <div style="flex:1">
+          <div class="acc-title">Behavioral questions</div>
+          <div style="font-size:12px;color:#999;">"Tell me about a failure / tough decision / impact"</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        Use <b class="a">STAR-E</b> — Situation → Task → Action → Result → Engineering Depth:
+        <ul class="ul arrow mt8">
+          <li><b class="s">S (1 sentence):</b> Set the scene. "During DL Sprint 4.0 at BUET CSE Fest..."</li>
+          <li><b class="s">T (1 sentence):</b> Your specific role. "I was responsible for the inference pipeline..."</li>
+          <li><b class="s">A (3-4 sentences):</b> What you specifically did. Use "I", not "we". Be concrete about decisions.</li>
+          <li><b class="s">R (1-2 sentences):</b> Measurable result. Always have a number. DER 0.28625, Rank #19, 56% speedup.</li>
+          <li><b class="s">E (1 sentence):</b> The engineering lesson. This is the "+1" that shows you think deeply.</li>
+        </ul>
+        <b class="s mt12" style="display:block">Your 5 pre-built stories:</b>
+        <ul class="ul mt8">
+          <li style="padding-left:14px"><b class="s">1. Failure:</b> DL Sprint memory leak → cost ranking. Learning: profiling before submission at scale.</li>
+          <li style="padding-left:14px"><b class="s">2. Technical decision under uncertainty:</b> Choosing WeSpeaker ResNet34-LM over ECAPA-TDNN for embedding. Trade-off reasoning.</li>
+          <li style="padding-left:14px"><b class="s">3. Impact with metrics:</b> Freelance recommendation system → +10% client sales in 90 days.</li>
+          <li style="padding-left:14px"><b class="s">4. Building under constraints:</b> Toolly.tech — 400+ tools, 206+ commits, solo. Prioritization under resource constraint.</li>
+          <li style="padding-left:14px"><b class="s">5. Learning fast:</b> GSoC proposals across 3 orgs — MoFA, MLLAM, MalariaGEN. Cross-domain technical writing in 2 weeks.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────
+
+const bars = [
+  { label: 'ML System Design', pct: 30, color: '#EF9F27' },
+  { label: 'ML Fundamentals',  pct: 22, color: '#1D9E75' },
+  { label: 'Coding Round',     pct: 18, color: '#378ADD' },
+  { label: 'Take-home / Portfolio', pct: 10, color: '#7F77DD' },
+  { label: 'Behavioral',       pct: 10, color: '#D85A30' },
+  { label: 'Final / CTO',      pct: 5,  color: '#639922' },
+  { label: 'Recruiter Screen', pct: 5,  color: '#888780' },
+];
+
+const rounds = [
+  {
+    num:'R1', ic:'ic-gray', name:'Recruiter Screen', dur:'15 min', wt:'5%',
+    preview:'Filter round. They need 3 things: you can communicate, you understand your own work, and you are a fit.',
+    content:`<div class="rh3">WHAT THEY'RE TESTING</div>
+Communication clarity. Self-awareness. Basic motivation fit. This is a filter — pass it by not failing it.
+
+<div class="rh3">80/20 PREP (3 things)</div>
+<ul class="ul arrow">
+<li>3-sentence version of each project with one concrete metric: "I built X, which achieves Y metric, by doing Z."</li>
+<li>Your "why this company" answer — 2 sentences, specific to their product.</li>
+<li>One genuine question that shows you've read their engineering blog or used their product.</li>
+</ul>
+
+<div class="rh3">COMMON QUESTIONS</div>
+<ul class="ul q">
+<li>Tell me about yourself. (30 sec: current work → most relevant project → what you want next)</li>
+<li>Why [company]? (Be specific. Generic answers kill recruiter rounds.)</li>
+<li>What's your most impactful project? (Have your DER 0.28625 / Rank #19 ready.)</li>
+<li>Are you open to [location / timezone / salary]?</li>
+</ul>
+
+<div class="sep"></div>
+<div class="edge"><b>Your Adil-specific framing:</b> "I'm an ML engineer who has built and shipped production audio AI. My most recent work — Bangla Diarizz — achieved DER 0.286 at a national competition. I'm now looking to apply that depth to [company's problem]."</div>`
+  },
+  {
+    num:'R2', ic:'ic-teal', name:'ML Fundamentals', dur:'45–60 min', wt:'22%',
+    preview:'Do you understand ML deeply enough to debug, improve, and reason about models you have never seen before?',
+    content:`<div class="rh3">WHAT THEY'RE TESTING</div>
+Depth of understanding. Not definitions — reasoning. Can you trace a bug to its mathematical root cause?
+
+<div class="rh3">80/20 TOPICS (in priority order)</div>
+<ul class="ul arrow">
+<li>Loss functions + gradients (the optimization engine — derive, don't recite)</li>
+<li>Bias-variance tradeoff + all regularization techniques (L1/L2/Dropout/BN)</li>
+<li>Backpropagation = chain rule on a computation graph</li>
+<li>Transformer architecture + attention mechanism (Q·Kᵀ/√d → softmax → V)</li>
+<li>Evaluation metrics — precision/recall/F1/AUC-ROC — when to use which and why</li>
+<li>Ensemble methods — Bagging (Random Forest, reduces variance) vs Boosting (XGBoost, reduces bias)</li>
+<li>Activations — why ReLU replaced sigmoid (vanishing gradient: sigmoid squashes gradient to ~0; ReLU gradient is 1 or 0)</li>
+<li>Normalization — BatchNorm (normalize per feature over batch) vs LayerNorm (normalize per sample over features)</li>
+</ul>
+
+<div class="rh3">COMMON QUESTIONS</div>
+<ul class="ul q">
+<li>What's the difference between L1 and L2 regularization?</li>
+<li>Why does Adam work better than SGD in most cases?</li>
+<li>Explain backpropagation from first principles.</li>
+<li>What is the vanishing gradient problem and how do you fix it?</li>
+<li>When would you use precision vs recall vs F1?</li>
+<li>What's the difference between bagging and boosting?</li>
+<li>How does self-attention work in a transformer?</li>
+</ul>
+
+<div class="sep"></div>
+<div class="tip"><b>The pattern that kills candidates:</b> Giving the right answer with the wrong reasoning. If you say "L1 creates sparse weights" without explaining WHY (subgradient of |w| is ±1, so small weights get pushed to exactly 0), they know you memorized it.</div>`
+  },
+  {
+    num:'R3', ic:'ic-blue', name:'Coding Round', dur:'60–90 min', wt:'18%',
+    preview:'DSA + ML coding + data manipulation. At AI startups, the ML coding is often harder than the DSA.',
+    content:`<div class="rh3">DSA 80/20 (these cover ~80% of questions)</div>
+<ul class="ul arrow">
+<li><b class="s">Arrays + Hash Maps</b> → covers ~40% of DSA questions. Two Sum family, frequency counting, sliding window.</li>
+<li><b class="s">Two Pointers</b> → covers ~15%. Sorted arrays, linked list cycle, container with most water.</li>
+<li><b class="s">BFS/DFS</b> → covers ~15%. Graph traversal, shortest path, tree problems.</li>
+<li><b class="s">Binary Search</b> → covers ~10%. Any sorted array problem. Search in rotated array.</li>
+<li><b class="s">DP (basic)</b> → covers ~10%. Memoization pattern, 1D DP. Don't need to master 2D grid DP for most startups.</li>
+</ul>
+
+<div class="rh3">ML CODING 80/20 (know these cold)</div>
+<ul class="ul arrow">
+<li>Implement linear regression with gradient descent from scratch (numpy only)</li>
+<li>Implement k-means clustering from scratch</li>
+<li>Calculate precision, recall, F1, confusion matrix manually</li>
+<li>Train/val/test split with stratification</li>
+<li>Feature normalization (StandardScaler logic)</li>
+<li>Cosine similarity for embeddings</li>
+</ul>
+
+<div class="rh3">DATA MANIPULATION (pandas + numpy + SQL)</div>
+<ul class="ul arrow">
+<li>Pandas: groupby, merge, apply, pivot_table, fillna strategies</li>
+<li>NumPy: broadcasting, vectorized ops (no Python loops), axis operations</li>
+<li>SQL: SELECT/WHERE/GROUP BY/HAVING, JOIN types, window functions (ROW_NUMBER, LAG)</li>
+</ul>
+
+<div class="sep"></div>
+<div class="edge"><b>Your edge:</b> Your production ML background means you naturally think about edge cases. Mention it when relevant: "In production I'd also handle class imbalance here by..."</div>`
+  },
+  {
+    num:'R4', ic:'ic-amber', name:'ML System Design', dur:'45–60 min', wt:'30%',
+    preview:'The highest-leverage round at AI startups. This is where you win or lose the offer.',
+    content:`<div class="rh3">WHAT THEY'RE TESTING</div>
+Can you think end-to-end about a real ML system? Not just "I would use a transformer" — but what data, what metric, how to serve it, how to know when it's broken.
+
+<div class="rh3">THE 6-QUESTION TEMPLATE (mandatory structure)</div>
+<ul class="ul arrow">
+<li><b class="s">Q1 — Predict what?</b> Task type (classification, ranking, generation), output format, latency constraint</li>
+<li><b class="s">Q2 — What data?</b> Sources, volume, freshness, labeling cost, class balance</li>
+<li><b class="s">Q3 — What metric?</b> Business KPI (revenue, CTR, DAU) ↔ ML proxy (AUC, NDCG, BLEU)</li>
+<li><b class="s">Q4 — How to train?</b> Architecture, feature engineering, training pipeline, evaluation</li>
+<li><b class="s">Q5 — How to serve?</b> Online vs batch, latency budget, two-stage retrieval, caching</li>
+<li><b class="s">Q6 — How to monitor?</b> Data drift, model drift, alerting thresholds, retraining triggers</li>
+</ul>
+
+<div class="rh3">COMMON SYSTEM DESIGNS (know all 6)</div>
+<ul class="ul q">
+<li>Recommendation system (YouTube / Spotify) — two-stage: retrieval → ranking</li>
+<li>Fraud detection (Stripe) — online inference, class imbalance, feature recency</li>
+<li>Search ranking (LinkedIn) — BM25 + neural reranking, query understanding</li>
+<li>Content moderation (Twitter) — real-time, human-in-the-loop, false positive cost</li>
+<li>RAG system (LLM + knowledge base) — embedding retrieval, context window, hallucination handling</li>
+<li>Real-time pricing (Uber surge) — feature freshness, latency, feedback loops</li>
+</ul>
+
+<div class="sep"></div>
+<div class="tip"><b>The #1 mistake:</b> Jumping to architecture at minute 2. Spend 5 minutes on clarification. Ask: "What's the scale? What's the latency requirement? What does the business metric look like today?" This signals engineering maturity.</div>
+<div class="edge"><b>Your Toolly.tech edge:</b> You've designed and shipped ML serving infrastructure. Speak to specific decisions: "On Toolly.tech, I serve models behind a FastAPI endpoint and monitor for latency spikes and error rates. The same pattern applies here..."</div>`
+  },
+  {
+    num:'R5', ic:'ic-purple', name:'Behavioral Round', dur:'30–45 min', wt:'10%',
+    preview:"Culture fit, leadership, and how you handle failure and ambiguity. Have 5 pre-built stories with specific metrics.",
+    content:`<div class="rh3">USE STAR-E (see Framework F4)</div>
+Situation → Task → Action → Result (with numbers) → Engineering lesson (+1 that shows depth)
+
+<div class="rh3">YOUR 5 PRE-BUILT STORIES</div>
+<ul class="ul arrow">
+<li><b class="s">Technical failure:</b> DL Sprint 4.0 memory leak → cost team ranking. Lesson: profiling before large-scale inference submission.</li>
+<li><b class="s">Decision under uncertainty:</b> Chose WeSpeaker ResNet34-LM over ECAPA-TDNN for speaker embeddings — reasoning from DER tradeoffs with limited labelled Bangla data.</li>
+<li><b class="s">Measurable impact:</b> Freelance recommendation system → +10% client sales in 90 days with ALS + TF-IDF hybrid.</li>
+<li><b class="s">Ownership + execution:</b> Toolly.tech — 400+ AI tools, 206+ solo commits, live production system from scratch.</li>
+<li><b class="s">Ambition + initiative:</b> GSoC 2026 proposals across 3 orgs (MoFA, MLLAM, MalariaGEN) in parallel — self-directed research in 2 weeks.</li>
+</ul>
+
+<div class="rh3">COMMON QUESTIONS</div>
+<ul class="ul q">
+<li>Tell me about a time you failed and what you learned.</li>
+<li>Tell me about a technical decision you made under uncertainty.</li>
+<li>How do you handle disagreement with a senior engineer?</li>
+<li>What's the project you're most proud of? Why?</li>
+<li>Where do you want to be in 3 years?</li>
+</ul>
+
+<div class="sep"></div>
+<div class="danger"><b>The trap:</b> Generic answers without numbers. "I worked on a recommendation system and it improved performance" is a failed answer. "I improved CTR by 18% using a hybrid ALS + TF-IDF approach over 6 weeks" is a strong answer.</div>`
+  },
+  {
+    num:'R6', ic:'ic-teal', name:'Take-home / Portfolio', dur:'2–7 days', wt:'10%',
+    preview:"Can you build end-to-end? Can you make good engineering decisions under time pressure?",
+    content:`<div class="rh3">WHAT THEY'RE EVALUATING</div>
+<ul class="ul arrow">
+<li>Code quality — is this production-grade or notebook-grade?</li>
+<li>Decision clarity — do you explain why you made each choice?</li>
+<li>Engineering maturity — do you consider edge cases, failure modes, scale?</li>
+<li>Communication — is the README clear enough that a new engineer can onboard?</li>
+</ul>
+
+<div class="rh3">THE 5-STEP TAKE-HOME PROTOCOL</div>
+<ul class="ul mt8">
+<li style="padding-left:20px"><b class="s">1.</b> Read the problem twice before writing a single line of code.</li>
+<li style="padding-left:20px"><b class="s">2.</b> State your assumptions explicitly in the README before you start.</li>
+<li style="padding-left:20px"><b class="s">3.</b> Start with the simplest thing that could work. Get it running.</li>
+<li style="padding-left:20px"><b class="s">4.</b> Add complexity only where justified. Always explain why.</li>
+<li style="padding-left:20px"><b class="s">5.</b> Write a README section: "What I'd do with more time." Shows self-awareness.</li>
+</ul>
+
+<div class="rh3">YOUR README STRUCTURE</div>
+<div class="code">1. Problem Statement (their problem, in your own words)
+2. Approach (why this architecture/method?)
+3. Key trade-offs considered (what you chose NOT to do and why)
+4. Results (with numbers — accuracy, latency, etc.)
+5. How to run (copy-paste-able commands)
+6. What I'd improve with more time</div>
+
+<div class="sep"></div>
+<div class="edge"><b>Your live advantage:</b> Bangla Diarizz (HuggingFace Space) and Toolly.tech are live, usable systems. Offer to demo them. A candidate who can demo a running system beats a candidate who can only show notebooks.</div>`
+  },
+  {
+    num:'R7', ic:'ic-gray', name:'Final / CTO Round', dur:'30–45 min', wt:'5%',
+    preview:"Vision, curiosity, depth. They're deciding if you'll grow with the company.",
+    content:`<div class="rh3">WHAT THEY'RE TESTING</div>
+Are you intellectually curious? Do you think at a systems level? Will you grow into more responsibility?
+
+<div class="rh3">HOW TO PREPARE</div>
+<ul class="ul arrow">
+<li>Read their engineering blog. Know 1–2 specific technical decisions they've made publicly.</li>
+<li>Use their product. Have a specific opinion about it.</li>
+<li>Prepare 3 genuine questions that show you've thought about their technical future.</li>
+<li>Be honest about what you don't know. CTOs respect "I don't know, but here's how I'd find out."</li>
+</ul>
+
+<div class="rh3">5 GREAT QUESTIONS TO ASK</div>
+<ul class="ul q">
+<li>What's the hardest ML engineering problem you're working on right now?</li>
+<li>How do you think about the build vs buy decision for ML infrastructure?</li>
+<li>What does success look like for this role in the first 90 days?</li>
+<li>Where do you see the biggest technical risk in your ML stack?</li>
+<li>What's one thing your current team does really well that surprised you?</li>
+</ul>
+
+<div class="sep"></div>
+<div class="tip"><b>The mindset shift:</b> Stop trying to impress them. Start trying to have a genuine technical conversation. The candidates who get offers at this stage are the ones who seem like a peer, not an applicant.</div>`
+  },
+];
+
+const concepts = [
+  { name:'Loss functions', ic:'ic-amber',
+    body:`<b class="s">Problem it solves:</b> We need a single number that measures "how wrong" our model is, in a way that's differentiable (so we can take gradients).<div class="code">MSE: L = (1/n)Σ(y - ŷ)²   → penalizes large errors heavily (squared)
+Cross-entropy: L = -Σ y·log(ŷ)   → information-theoretic loss for classification
+Huber: combines MSE + MAE   → robust to outliers
+The choice of loss IS the choice of what "wrong" means.</div>Key insight: Cross-entropy loss + sigmoid output = maximum likelihood estimation of a Bernoulli distribution. You're not just "using a loss function" — you're choosing a probabilistic model.`},
+  { name:'Gradient descent', ic:'ic-amber',
+    body:`<b class="s">Problem it solves:</b> How do we find the parameters that minimize a loss function when we can't solve analytically?<div class="code">θ ← θ − α · ∂L/∂θ
+α = learning rate (step size)
+∂L/∂θ = direction of steepest ascent → we go opposite
+
+SGD: one sample at a time (noisy but fast)
+Mini-batch: small batches (balance of noise + efficiency)
+Full-batch: entire dataset (expensive, smooth gradients)</div>The noise in SGD isn't purely bad — it helps escape sharp minima that don't generalize. This is a key insight interviewers test.`},
+  { name:'Backpropagation', ic:'ic-amber',
+    body:`<b class="s">Problem it solves:</b> How do we compute ∂L/∂θ for every parameter in a deep network efficiently?<div class="code">Forward pass: compute activations layer by layer, store them
+Backward pass: apply chain rule in reverse
+
+∂L/∂w¹ = ∂L/∂y · ∂y/∂h · ∂h/∂w¹
+
+Chain rule: the gradient of L with respect to an early 
+weight = (product of all gradients in the path from that 
+weight to the loss output)</div>The key insight: we reuse computations from the forward pass. Backprop is O(1) backward passes for all parameters — not O(n) separate passes.`},
+  { name:'Bias-variance tradeoff', ic:'ic-teal',
+    body:`<div class="code">Expected test error = Bias² + Variance + Irreducible noise
+
+Bias = (E[ŷ] - y)²       high when model too simple
+Variance = E[(ŷ - E[ŷ])²]  high when model too sensitive to training data</div><b class="s">The key moves:</b> To reduce bias: larger model, more features, less regularization. To reduce variance: more data, more regularization, simpler model, ensembles.`},
+  { name:'L1 vs L2 regularization', ic:'ic-teal',
+    body:`<b class="s">Both add a penalty to the loss. The shape of the penalty determines the behavior.</b><div class="code">L2: L_new = L + λΣwᵢ²    gradient: -2λw
+  → weights shrink toward 0 but never reach it
+  → smooth, differentiable, weights all stay small
+
+L1: L_new = L + λΣ|wᵢ|   gradient: -λ·sign(w)
+  → constant pull toward 0 regardless of weight magnitude
+  → small weights get pushed all the way to exactly 0
+  → produces sparse solutions (feature selection!)</div>Derive: L1 creates sparsity because the subgradient is ±λ regardless of weight magnitude. A weight at 0.001 gets the same pull as a weight at 1.0 — so small weights get zeroed out.`},
+  { name:'Dropout', ic:'ic-teal',
+    body:`<b class="s">Problem it solves:</b> Neurons co-adapt (rely on each other) → overfitting. Force each neuron to be independently useful.<div class="code">Training: zero each neuron with probability p (usually 0.5)
+Inference: scale all weights by (1-p), no dropout
+
+Effect: equivalent to training an ensemble of 2^n networks
+and averaging their predictions at test time.</div>The intuition: like a sports team where any player might be absent tomorrow. Each player learns to cover multiple roles. The team is more robust.`},
+  { name:'Batch normalization', ic:'ic-teal',
+    body:`<b class="s">Problem it solves:</b> Internal covariate shift — as parameters change, the distribution of each layer's inputs shifts, making training unstable.<div class="code">For each mini-batch:
+μ_B = (1/m)Σxᵢ           (batch mean)
+σ²_B = (1/m)Σ(xᵢ-μ_B)²   (batch variance)
+x̂ᵢ = (xᵢ-μ_B)/√(σ²_B+ε)  (normalize)
+yᵢ = γx̂ᵢ + β              (learnable scale + shift)</div>Side effect: acts as mild regularization (noise from batch statistics). The γ and β parameters allow the model to learn to "un-normalize" if needed.`},
+  { name:'Attention mechanism', ic:'ic-blue',
+    body:`<div class="code">Attention(Q, K, V) = softmax(QKᵀ / √dₖ) · V
+
+Q (query):  what this token is looking for
+K (key):    what each token advertises
+V (value):  what each token contains
+√dₖ:        scale to prevent softmax saturation in high dims</div><b class="s">Intuition:</b> A database lookup, but soft. Instead of retrieving one exact record, you retrieve a weighted combination of all records, where the weights are learned dot-product similarity scores.`},
+  { name:'Transformer architecture', ic:'ic-blue',
+    body:`<div class="code">Input → Embedding + Positional Encoding
+  ↓
+[× N layers]:
+  Multi-Head Self-Attention → residual + LayerNorm
+  Feed-Forward Network (2 linear + ReLU) → residual + LayerNorm
+  ↓
+Output head (classification / generation)</div><b class="s">Why residual connections?</b> They create gradient highways — gradients flow directly from loss to early layers without vanishing. This enables depth (100+ layers). <b class="s">Why LayerNorm (not BatchNorm)?</b> In NLP, sequences have variable length and batch statistics are less meaningful; LayerNorm normalizes per-token.`},
+  { name:'BERT vs GPT', ic:'ic-blue',
+    body:`<div class="code">BERT: Bidirectional Encoder (masked language modeling)
+  → can attend to both left and right context
+  → trained to predict masked tokens
+  → best for: classification, NER, Q&A, embeddings
+  → NOT autoregressive (can't generate text left-to-right)
+
+GPT: Autoregressive Decoder (causal language modeling)
+  → can only attend to left context (causal mask)
+  → trained to predict next token
+  → best for: text generation, completion, chat, coding</div>Derive this from architecture: BERT uses a non-causal attention mask (full attention matrix). GPT uses a causal mask (upper triangle = -∞ before softmax).`},
+  { name:'Embeddings', ic:'ic-blue',
+    body:`<b class="s">Problem it solves:</b> Discrete objects (words, users, products) can't be fed directly to neural networks. We need dense, continuous representations.<div class="code">Word2Vec insight: words with similar contexts get similar vectors.
+king - man + woman ≈ queen  (vector arithmetic encodes semantics)
+
+Embedding = a learned lookup table
+  Input: discrete token ID (integer)
+  Output: dense vector in ℝ^d
+
+Semantic similarity = geometric proximity in embedding space</div>The key insight: the embedding is not hand-crafted — it's learned from co-occurrence patterns in data. The geometry of the space reflects the semantics of the domain.`},
+  { name:'Precision, Recall, F1', ic:'ic-purple',
+    body:`<div class="code">TP = true positive, FP = false positive, FN = false negative
+
+Precision = TP / (TP + FP)   → of what I called positive, how many were?
+Recall    = TP / (TP + FN)   → of all actual positives, how many did I find?
+F1 = 2 · (P · R) / (P + R)  → harmonic mean (penalizes imbalance)
+
+When to use which:
+Precision → when false positives are costly (spam filter, ad fraud)
+Recall    → when false negatives are costly (cancer detection, fraud)
+F1        → balanced tradeoff when both matter</div>`},
+  { name:'AUC-ROC', ic:'ic-purple',
+    body:`<b class="s">Problem it solves:</b> F1 depends on a threshold choice. AUC-ROC measures performance across ALL thresholds.<div class="code">ROC curve: TPR (recall) on Y vs FPR (1-specificity) on X
+AUC = area under this curve ∈ [0.5, 1.0]
+
+Interpretation: probability that the model ranks a random 
+positive example higher than a random negative example.
+AUC = 0.5 → random. AUC = 1.0 → perfect.</div>Use AUC when: you care about ranking/ordering, not a specific threshold. Use F1 when: you have a specific operating point (precision-recall tradeoff) in mind.`},
+  { name:'Class imbalance', ic:'ic-purple',
+    body:`<b class="s">The problem:</b> 99% negative class → model predicts "all negative" and gets 99% accuracy. That's not useful.<div class="code">Solutions (in order of preference):
+1. Threshold adjustment → lower decision boundary to recall more positives
+2. Class weights → penalize misclassification of minority class more
+   (sklearn: class_weight='balanced')
+3. Oversampling (SMOTE) → synthesize minority class examples
+4. Undersampling → reduce majority class (loses information)
+5. Change metric → don't use accuracy; use F1, AUC, or precision@K</div>`},
+  { name:'Random Forest', ic:'ic-green',
+    body:`<b class="s">Problem it solves:</b> A single decision tree has high variance (sensitive to training data). Average many trees to reduce variance.<div class="code">Algorithm:
+1. Bootstrap: sample N training examples with replacement
+2. Random features: at each split, only consider √p features
+3. Build a full, unpruned decision tree on each bootstrap sample
+4. Prediction: majority vote (classification) or mean (regression)
+
+Effect: Bagging + random features → decorrelated trees
+        Averaging decorrelated trees → variance ↓ with no bias increase</div>The random feature selection is critical — it prevents all trees from splitting on the same dominant feature, ensuring diversity.`},
+  { name:'XGBoost / Gradient Boosting', ic:'ic-green',
+    body:`<b class="s">Contrast with Random Forest:</b> Bagging = parallel, variance reduction. Boosting = sequential, bias reduction.<div class="code">Algorithm:
+1. Fit a weak learner h₁(x) to training data
+2. Compute residuals: rᵢ = yᵢ - ŷᵢ (what we got wrong)
+3. Fit next learner h₂(x) to the residuals
+4. Add: F(x) = h₁(x) + η·h₂(x) + η·h₃(x) + ...
+
+XGBoost adds: L2 regularization on leaf weights,
+second-order Taylor expansion of loss → faster convergence</div>Gradient boosting literally fits each new tree to the gradient of the loss — hence the name. The "residuals" are just the negative gradient of MSE.`},
+  { name:'Data leakage', ic:'ic-amber',
+    body:`<b class="s">The silent killer of ML projects.</b><div class="code">Leakage types:
+1. Target leakage → feature created using the label
+   Example: "was_refunded" predicting fraud (it IS the fraud)
+2. Temporal leakage → using future data to predict the past
+   Example: fitting scaler on entire dataset before train/test split
+3. Train/test contamination → test data included in preprocessing fit
+
+Canonical mistake:
+  scaler = StandardScaler()
+  X_scaled = scaler.fit_transform(X)       ← LEAKAGE: uses test stats
+  X_train, X_test = train_test_split(X_scaled)
+
+Correct:
+  X_train, X_test = train_test_split(X)
+  scaler.fit(X_train)
+  X_train = scaler.transform(X_train)      ← no leakage
+  X_test  = scaler.transform(X_test)</div>`},
+  { name:'Distribution shift', ic:'ic-teal',
+    body:`<b class="s">The most common reason production models fail silently.</b><div class="code">Covariate shift: P(X) changes, P(Y|X) stays the same
+  → feature distribution changes (e.g., seasonal patterns)
+  → fix: reweight training samples, retrain periodically
+
+Label shift: P(Y) changes, P(X|Y) stays the same
+  → base rate of positive class changes (e.g., fraud spike)
+  → fix: monitor prediction distribution, recalibrate
+
+Concept drift: P(Y|X) changes
+  → the relationship itself changes (e.g., new fraud pattern)
+  → fix: detect with holdout monitoring, trigger retraining</div>`},
+  { name:'Cross-validation', ic:'ic-teal',
+    body:`<b class="s">Problem it solves:</b> A single train/val split gives a noisy estimate of generalization. Use all the data for both training and validation.<div class="code">K-Fold CV:
+1. Split data into K equal folds
+2. For i in 1..K: train on K-1 folds, validate on fold i
+3. Report: mean ± std of validation metric
+
+Result: lower-variance estimate of test performance.
+Standard: K=5 or K=10.
+
+For time-series: use TimeSeriesSplit (no shuffling, 
+always train on past, validate on future)</div>The std across folds tells you something important: high variance across folds = model is sensitive to data composition = high variance model.`},
+  { name:'Feature engineering', ic:'ic-green',
+    body:`<b class="s">Often more impactful than model choice.</b><div class="code">Principles:
+1. Domain knowledge → what relationships does the expert know exist?
+2. Interactions → multiply two features to capture non-linear relationships
+3. Temporal features → hour of day, day of week, recency, frequency
+4. Aggregations → mean/max/std of a user's historical behavior
+5. Embeddings → dense representations of categorical variables
+
+Example (fraud detection):
+Raw features: transaction amount, time, merchant category
+Engineered: transactions_last_hour, deviation_from_user_mean, 
+            is_new_merchant, amount_z_score_per_category</div>`},
+  { name:'LoRA / fine-tuning', ic:'ic-blue',
+    body:`<b class="s">Problem it solves:</b> Full fine-tuning of a 70B LLM requires 280GB+ of GPU memory. LoRA reduces this by >99%.<div class="code">Idea: the weight update ΔW has low intrinsic rank.
+Instead of updating W directly:
+  W_new = W + ΔW
+Approximate ΔW with two low-rank matrices:
+  ΔW ≈ B · A  where A ∈ ℝ^(d×r), B ∈ ℝ^(r×k), r << d,k
+  
+Parameters: d×k → 2×d×r  (if r=8, d=1024, k=1024: 2M → 16K params)
+
+Only A and B are trained. W is frozen.
+At inference: merge W + BA back into one matrix (no overhead).</div>LoRA works because LLMs are overparameterized — the task-specific update lives in a much lower-dimensional subspace than the full weight matrix.`},
+  { name:'RAG (Retrieval-Augmented Generation)', ic:'ic-blue',
+    body:`<b class="s">Problem it solves:</b> LLMs hallucinate and have a knowledge cutoff. RAG grounds generation in retrieved facts.<div class="code">Pipeline:
+1. Offline: embed all documents → store in vector DB (FAISS, Pinecone)
+2. Online: 
+   a. Embed the user query
+   b. ANN search → retrieve top-K relevant chunks (by cosine similarity)
+   c. Augment prompt: "Given these documents: [...], answer: [query]"
+   d. LLM generates answer grounded in retrieved context
+
+Key components:
+- Chunking strategy (how to split documents)
+- Embedding model (OpenAI ada, BGE, E5)
+- Vector store + ANN algorithm
+- Reranking (cross-encoder on top-K results)</div>The retrieval step is cross-attention in disguise: query embedding = Q, document embeddings = K, document content = V.`},
+  { name:'MLOps: serving patterns', ic:'ic-amber',
+    body:`<div class="code">Serving patterns and when to use each:
+
+1. Online inference (real-time)
+   → REST/gRPC endpoint, model loaded in memory
+   → latency: ~10–200ms
+   → use: search ranking, fraud detection, chatbots
+
+2. Batch inference
+   → schedule job to score all examples offline
+   → latency: hours (but throughput is massive)
+   → use: recommendation pre-computation, risk scoring
+
+3. Two-stage retrieval (ANN → reranking)
+   → Stage 1: fast approximate nearest neighbor (ANN) search
+   → Stage 2: expensive cross-encoder reranking of top-K
+   → use: recommendation, search, RAG
+
+4. Shadow mode
+   → run new model in parallel with production, log predictions
+   → validate before cutover; zero production risk</div>`},
+  { name:'Monitoring + drift detection', ic:'ic-amber',
+    body:`<b class="s">The most neglected part of ML systems. Production models decay silently without it.</b><div class="code">What to monitor:
+1. Data drift: P(X) changed? → KL divergence, PSI, KS test on features
+2. Label shift: P(Y) changed? → monitor prediction distribution
+3. Concept drift: P(Y|X) changed? → holdout set performance over time
+4. Infrastructure: latency, error rate, throughput
+
+Alerting pattern:
+- Set a baseline from first 2 weeks of production
+- Alert if PSI > 0.2 on key features
+- Alert if prediction distribution shifts by >5% in 24h
+- Trigger retraining pipeline automatically when drift detected</div>`},
+  { name:'Embeddings for retrieval (ANN)', ic:'ic-blue',
+    body:`<b class="s">Problem it solves:</b> How to find the K most similar vectors out of millions in milliseconds?<div class="code">Brute force: compute cosine similarity with all vectors → O(n·d)
+Too slow for production (n=10M, d=768).
+
+Approximate Nearest Neighbor (ANN) algorithms:
+- HNSW (Hierarchical Navigable Small World): graph-based, fast, memory-heavy
+- IVF (Inverted File Index): cluster vectors, search only relevant clusters
+- Product Quantization: compress vectors → trade accuracy for speed
+
+Libraries: FAISS (Meta), ScaNN (Google), Annoy (Spotify)
+
+Tradeoff: recall vs latency. Choose based on application:
+- Search: 95%+ recall → HNSW
+- Recommendation at scale: 85% recall ok → IVF with compression</div>`},
+];
+
+// ─── RENDER BARS ─────────────────────────────────────────────────────────
+
+const bc = document.getElementById('barsContainer');
+bars.forEach(b => {
+  bc.innerHTML += `<div class="bar-row">
+    <div class="bar-label">${b.label}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:0;background:${b.color}" data-w="${b.pct}%"></div></div>
+    <div class="bar-pct">${b.pct}%</div>
+  </div>`;
+});
+setTimeout(() => {
+  document.querySelectorAll('.bar-fill').forEach(f => f.style.width = f.dataset.w);
+}, 100);
+
+// ─── RENDER ROUNDS ────────────────────────────────────────────────────────
+
+const rg = document.getElementById('roundsGrid');
+rounds.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'round-card';
+  card.innerHTML = `
+    <div class="round-top">
+      <div class="round-badge ${r.ic}">${r.num}</div>
+      <div class="round-info">
+        <div class="round-name">${r.name}</div>
+        <div class="round-dur">${r.dur}</div>
+      </div>
+      <div class="round-wt">${r.wt}</div>
+    </div>
+    <div class="round-preview">${r.preview}</div>
+    <div class="round-body">${r.content}</div>`;
+  card.addEventListener('click', () => card.classList.toggle('open'));
+  rg.appendChild(card);
+});
+
+// ─── RENDER CONCEPTS ──────────────────────────────────────────────────────
+
+const ca = document.getElementById('conceptsAcc');
+concepts.forEach((c, i) => {
+  const item = document.createElement('div');
+  item.className = 'acc-item';
+  item.innerHTML = `
+    <div class="acc-hd">
+      <div class="acc-icon ${c.ic}" style="font-size:10px">${String(i+1).padStart(2,'0')}</div>
+      <div class="acc-title">${c.name}</div>
+      <div class="acc-ch">▼</div>
+    </div>
+    <div class="acc-bd">${c.body}</div>`;
+  item.querySelector('.acc-hd').addEventListener('click', () => item.classList.toggle('open'));
+  ca.appendChild(item);
+});
+
+// ─── ACCORDION BEHAVIOR ───────────────────────────────────────────────────
+
+document.querySelectorAll('#modelsAcc .acc-hd, #frameworksAcc .acc-hd').forEach(hd => {
+  hd.addEventListener('click', () => hd.closest('.acc-item').classList.toggle('open'));
+});
+
+// ─── NAV BEHAVIOR ─────────────────────────────────────────────────────────
+
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const sec = document.getElementById(item.dataset.sec);
+    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    navItems.forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navItems.forEach(n => n.classList.toggle('active', n.dataset.sec === e.target.id));
+    }
+  });
+}, { threshold: 0.3 });
+
+['s1','s2','s3','s4','s5'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>
