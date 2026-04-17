@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adil Shamim — 4-Month Job Crack Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Mono:wght@400;500;700&family=Literata:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#FFFFFF; --bg:#F7F6F3; --bg2:#EEECE7;
+  --navy:#0F1923; --navy2:#1C2B3A;
+  --ink:#1A1A2E; --ink2:#3D3D5C; --ink3:#6B6B8A; --ink4:#A0A0B8;
+  --amber:#D4770A; --amber-l:#FFF3E0; --amber-b:#F5C578;
+  --green:#1A7A4A; --green-l:#E8F5EE; --green-b:#6FCB9A;
+  --red:#C0392B; --red-l:#FEF0EE;
+  --blue:#1756A9; --blue-l:#EBF2FF;
+  --purple:#6B21A8; --purple-l:#F3E8FF;
+  --teal:#0E7490; --teal-l:#E0F7FA;
+  --border:#E2DDD5; --border2:#CCC7BC;
+  --sh:0 1px 3px rgba(15,25,35,.06),0 4px 12px rgba(15,25,35,.04);
+  --sh-lg:0 4px 16px rgba(15,25,35,.1),0 12px 40px rgba(15,25,35,.06);
+  --sidebar:256px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--ink);font-family:'Literata',Georgia,serif;font-size:14px;line-height:1.65;}
+a{color:var(--blue);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar);position:fixed;top:0;left:0;bottom:0;
+  background:var(--navy);overflow-y:auto;z-index:200;
+  display:flex;flex-direction:column;
+}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);}
+.sb-brand{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sb-logo{width:40px;height:40px;background:var(--amber);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:#fff;margin-bottom:12px;}
+.sb-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;line-height:1.2;}
+.sb-sub{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);margin-top:4px;letter-spacing:.06em;}
+
+.sb-progress{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sb-prog-label{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;}
+.sb-prog-bar{height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;margin-bottom:5px;}
+.sb-prog-fill{height:100%;background:var(--amber);border-radius:3px;transition:width .4s;}
+.sb-prog-pct{font-family:'DM Mono',monospace;font-size:11px;color:var(--amber);}
+
+.sb-section{padding:12px 12px 4px;}
+.sb-sec-label{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.14em;text-transform:uppercase;padding:0 8px 8px;}
+.sb-part{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;border-radius:7px;cursor:pointer;
+  transition:all .15s;margin-bottom:1px;
+}
+.sb-part:hover{background:rgba(255,255,255,.06);}
+.sb-part.active{background:rgba(212,119,10,.2);}
+.sb-part-num{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);width:16px;flex-shrink:0;}
+.sb-part.active .sb-part-num{color:var(--amber);}
+.sb-part-text{font-size:11px;color:rgba(255,255,255,.5);font-family:'Literata',serif;}
+.sb-part.active .sb-part-text{color:#fff;font-weight:600;}
+
+.sb-week{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 10px 6px 26px;border-radius:6px;cursor:pointer;
+  transition:all .15s;margin-bottom:1px;
+}
+.sb-week:hover{background:rgba(255,255,255,.04);}
+.sb-week.active{background:rgba(212,119,10,.12);}
+.sb-week-num{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);width:20px;flex-shrink:0;}
+.sb-week.active .sb-week-num{color:var(--amber);}
+.sb-week-text{font-size:10px;color:rgba(255,255,255,.4);}
+.sb-week.active .sb-week-text{color:rgba(255,255,255,.85);}
+
+.sb-footer{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);}
+.live-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(26,122,74,.2);border:1px solid rgba(26,122,74,.3);padding:4px 10px;border-radius:16px;font-family:'DM Mono',monospace;font-size:9px;color:#6FCB9A;margin-bottom:8px;}
+.live-dot{width:5px;height:5px;background:#6FCB9A;border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.sb-date{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);min-height:100vh;}
+.page{display:none;padding:40px 48px 80px;max-width:1160px;}
+.page.active{display:block;}
+
+/* ── PAGE HEADER ── */
+.ph{border-bottom:2px solid var(--navy);padding-bottom:20px;margin-bottom:32px;}
+.ph-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;}
+.ph-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--navy);line-height:1.15;}
+.ph-desc{font-size:13px;color:var(--ink3);margin-top:8px;font-style:italic;max-width:700px;}
+
+/* ── OVERVIEW STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px;}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 20px;text-align:center;box-shadow:var(--sh);}
+.stat-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--amber);line-height:1;}
+.stat-l{font-size:10px;color:var(--ink3);margin-top:5px;font-family:'DM Mono',monospace;letter-spacing:.04em;}
+
+/* ── PART HEADER ── */
+.part-header{
+  padding:24px 28px;border-radius:14px;margin-bottom:24px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+.ph-p1{background:linear-gradient(135deg,#0F1923 0%,#1C2B3A 100%);}
+.ph-p2{background:linear-gradient(135deg,#1A4A2A 0%,#1A7A4A 100%);}
+.ph-p3{background:linear-gradient(135deg,#1a2a5e 0%,#1756A9 100%);}
+.ph-p4{background:linear-gradient(135deg,#5B1A8A 0%,#6B21A8 100%);}
+.part-num{font-family:'DM Mono',monospace;font-size:42px;font-weight:700;color:rgba(255,255,255,.12);line-height:1;flex-shrink:0;}
+.part-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;line-height:1.2;}
+.part-sub{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;}
+
+/* ── WEEK CARD ── */
+.week-card{background:var(--white);border:1px solid var(--border);border-radius:14px;margin-bottom:20px;overflow:hidden;box-shadow:var(--sh);}
+.week-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 24px;cursor:pointer;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.week-header:hover{background:var(--bg);}
+.week-header-left{display:flex;align-items:center;gap:14px;}
+.week-num-badge{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:20px;
+  background:var(--navy);color:#fff;
+}
+.week-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy);}
+.week-header-right{display:flex;align-items:center;gap:10px;}
+.week-progress{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);}
+.week-chevron{font-size:16px;color:var(--ink4);transition:transform .2s;}
+.week-card.open .week-chevron{transform:rotate(180deg);}
+
+.week-body{display:none;padding:0;}
+.week-card.open .week-body{display:block;}
+
+/* ── DAY ITEM ── */
+.day-item{border-bottom:1px solid var(--border);padding:0;}
+.day-item:last-child{border-bottom:none;}
+.day-header{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 24px;cursor:pointer;transition:background .15s;
+}
+.day-header:hover{background:var(--bg);}
+.day-check{
+  width:22px;height:22px;border-radius:6px;
+  border:2px solid var(--border2);flex-shrink:0;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;transition:all .15s;cursor:pointer;
+}
+.day-check.done{background:var(--amber);border-color:var(--amber);color:#fff;}
+.day-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);font-weight:700;flex-shrink:0;padding-top:3px;min-width:46px;}
+.day-title{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;flex:1;}
+.day-expand-btn{font-size:11px;color:var(--ink4);flex-shrink:0;padding-top:3px;transition:transform .2s;}
+.day-item.open .day-expand-btn{transform:rotate(180deg);}
+.milestone-badge{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px;background:var(--amber-l);color:var(--amber);border:1px solid var(--amber-b);margin-left:8px;flex-shrink:0;}
+
+/* ── DAY RESOURCES ── */
+.day-body{display:none;padding:0 24px 18px 82px;}
+.day-item.open .day-body{display:block;}
+
+.concepts-row{margin-bottom:14px;}
+.concepts-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.concept-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.concept-tag{padding:3px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;font-size:11px;color:var(--ink2);}
+
+.resources-section{margin-bottom:10px;}
+.res-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.res-list{display:flex;flex-direction:column;gap:5px;}
+.res-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 12px;background:var(--bg);border:1px solid var(--border);
+  border-radius:9px;transition:all .15s;
+}
+.res-item:hover{background:var(--white);box-shadow:var(--sh);border-color:var(--border2);}
+.res-type{
+  font-family:'DM Mono',monospace;font-size:9px;
+  padding:2px 7px;border-radius:8px;flex-shrink:0;margin-top:1px;
+  font-weight:700;letter-spacing:.04em;
+}
+.rt-video{background:#FFEBEE;color:#C62828;}
+.rt-book{background:#E8F5E9;color:#2E7D32;}
+.rt-article{background:#E3F2FD;color:#1565C0;}
+.rt-course{background:#F3E5F5;color:#6A1B9A;}
+.rt-doc{background:#FFF3E0;color:#E65100;}
+.rt-practice{background:#E0F7FA;color:#006064;}
+.res-content{flex:1;}
+.res-title{font-size:12px;font-weight:500;color:var(--ink);line-height:1.3;}
+.res-url{font-size:10px;color:var(--ink4);margin-top:1px;font-family:'DM Mono',monospace;}
+.res-note{font-size:11px;color:var(--ink3);margin-top:3px;font-style:italic;}
+
+.practice-note{
+  margin-top:10px;padding:10px 14px;
+  background:var(--amber-l);border:1px solid var(--amber-b);border-radius:9px;
+  font-size:12px;color:var(--amber);font-style:italic;
+}
+.milestone-note{
+  padding:12px 16px;background:var(--amber-l);border:1px solid var(--amber-b);
+  border-radius:10px;margin-bottom:12px;
+}
+.milestone-note-title{font-family:'DM Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:.1em;margin-bottom:5px;}
+.milestone-note-text{font-size:12px;color:var(--ink2);}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:11px;font-family:'DM Mono',monospace;font-size:10px;}
+.badge-amber{background:var(--amber-l);color:var(--amber);border:1px solid var(--amber-b);}
+.badge-green{background:var(--green-l);color:var(--green);border:1px solid var(--green-b);}
+.badge-navy{background:var(--navy);color:#fff;}
+.badge-blue{background:var(--blue-l);color:var(--blue);border:1px solid #93C5FD;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  :root{--sidebar:200px;}
+  .page{padding:24px 20px 60px;}
+  .stats-row{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:640px){
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-logo">AS</div>
+    <div class="sb-name">Adil Shamim</div>
+    <div class="sb-sub">4-MONTH JOB CRACK CHALLENGE</div>
+  </div>
+
+  <div class="sb-progress">
+    <div class="sb-prog-label">OVERALL PROGRESS</div>
+    <div class="sb-prog-bar"><div class="sb-prog-fill" id="overall-bar" style="width:0%"></div></div>
+    <div class="sb-prog-pct"><span id="done-count">0</span>/112 days · <span id="overall-pct">0</span>%</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-sec-label">Navigation</div>
+    <div class="sb-part active" onclick="showPage('overview')">
+      <div class="sb-part-num">–</div>
+      <div class="sb-part-text">Overview Dashboard</div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-sec-label">Part I · Math Bedrock</div>
+    <div class="sb-part" onclick="showPage('p1')">
+      <div class="sb-part-num">I</div>
+      <div class="sb-part-text">All 4 Weeks</div>
+    </div>
+    <div class="sb-week" onclick="showPage('p1');scrollToWeek('w1')"><div class="sb-week-num">W1</div><div class="sb-week-text">Linear Algebra &amp; Calculus</div></div>
+    <div class="sb-week" onclick="showPage('p1');scrollToWeek('w2')"><div class="sb-week-num">W2</div><div class="sb-week-text">Probability &amp; Bayesian</div></div>
+    <div class="sb-week" onclick="showPage('p1');scrollToWeek('w3')"><div class="sb-week-num">W3</div><div class="sb-week-text">Optimization &amp; Linear Models</div></div>
+    <div class="sb-week" onclick="showPage('p1');scrollToWeek('w4')"><div class="sb-week-num">W4</div><div class="sb-week-text">Python for Data Science</div></div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-sec-label">Part II · Core ML</div>
+    <div class="sb-part" onclick="showPage('p2')">
+      <div class="sb-part-num">II</div>
+      <div class="sb-part-text">All 4 Weeks</div>
+    </div>
+    <div class="sb-week" onclick="showPage('p2');scrollToWeek('w5')"><div class="sb-week-num">W5</div><div class="sb-week-text">Supervised Learning I</div></div>
+    <div class="sb-week" onclick="showPage('p2');scrollToWeek('w6')"><div class="sb-week-num">W6</div><div class="sb-week-text">Ensembles &amp; Interpretability</div></div>
+    <div class="sb-week" onclick="showPage('p2');scrollToWeek('w7')"><div class="sb-week-num">W7</div><div class="sb-week-text">Unsupervised &amp; Dim Reduction</div></div>
+    <div class="sb-week" onclick="showPage('p2');scrollToWeek('w8')"><div class="sb-week-num">W8</div><div class="sb-week-text">SQL, Big Data &amp; Feature Eng.</div></div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-sec-label">Part III · Deep Learning</div>
+    <div class="sb-part" onclick="showPage('p3')">
+      <div class="sb-part-num">III</div>
+      <div class="sb-part-text">All 4 Weeks</div>
+    </div>
+    <div class="sb-week" onclick="showPage('p3');scrollToWeek('w9')"><div class="sb-week-num">W9</div><div class="sb-week-text">Neural Network Foundations</div></div>
+    <div class="sb-week" onclick="showPage('p3');scrollToWeek('w10')"><div class="sb-week-num">W10</div><div class="sb-week-text">Computer Vision</div></div>
+    <div class="sb-week" onclick="showPage('p3');scrollToWeek('w11')"><div class="sb-week-num">W11</div><div class="sb-week-text">NLP &amp; GenAI</div></div>
+    <div class="sb-week" onclick="showPage('p3');scrollToWeek('w12')"><div class="sb-week-num">W12</div><div class="sb-week-text">Time Series &amp; RecSys</div></div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-sec-label">Part IV · MLOps &amp; Career</div>
+    <div class="sb-part" onclick="showPage('p4')">
+      <div class="sb-part-num">IV</div>
+      <div class="sb-part-text">All 4 Weeks</div>
+    </div>
+    <div class="sb-week" onclick="showPage('p4');scrollToWeek('w13')"><div class="sb-week-num">W13</div><div class="sb-week-text">MLOps &amp; Deployment</div></div>
+    <div class="sb-week" onclick="showPage('p4');scrollToWeek('w14')"><div class="sb-week-num">W14</div><div class="sb-week-text">DSA &amp; System Design</div></div>
+    <div class="sb-week" onclick="showPage('p4');scrollToWeek('w15')"><div class="sb-week-num">W15</div><div class="sb-week-text">Capstone Portfolio</div></div>
+    <div class="sb-week" onclick="showPage('p4');scrollToWeek('w16')"><div class="sb-week-num">W16</div><div class="sb-week-text">Job Hunt &amp; Interview</div></div>
+  </div>
+
+  <div class="sb-footer">
+    <div class="live-pill"><div class="live-dot"></div>ML ENGINEER TRACK</div>
+    <div class="sb-date" id="sb-date">Loading…</div>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main class="main" id="main">
+
+<!-- ══════════════ OVERVIEW ══════════════ -->
+<div class="page active" id="page-overview">
+  <div class="ph">
+    <div class="ph-label">4-MONTH JOB CRACK CHALLENGE · FOR ML ENGINEER</div>
+    <div class="ph-title">112 Days. 16 Weeks. One Goal: Land the Job.</div>
+    <div class="ph-desc">"You don't build an ML career by watching courses. You build it by going through this plan, building every project, and shipping proof of your work publicly."</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Parts / Months</div></div>
+    <div class="stat"><div class="stat-n">16</div><div class="stat-l">Weeks</div></div>
+    <div class="stat"><div class="stat-n">112</div><div class="stat-l">Study Days</div></div>
+    <div class="stat"><div class="stat-n">4</div><div class="stat-l">Milestone Projects</div></div>
+    <div class="stat"><div class="stat-n" id="ov-done" style="color:var(--green)">0</div><div class="stat-l">Days Completed</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px 26px;box-shadow:var(--sh);">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.1em;margin-bottom:16px;">PART PROGRESS</div>
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:12px;font-weight:500;">Part I · Math &amp; Computation</span><span class="badge badge-amber" id="p1-badge">0/28</span></div>
+        <div style="height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;"><div id="p1-bar" style="height:100%;background:linear-gradient(90deg,#B8620A,var(--amber));border-radius:3px;width:0%;transition:width .4s;"></div></div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:12px;font-weight:500;">Part II · Core ML &amp; Algorithms</span><span class="badge badge-green" id="p2-badge">0/28</span></div>
+        <div style="height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;"><div id="p2-bar" style="height:100%;background:linear-gradient(90deg,#127A3A,var(--green));border-radius:3px;width:0%;transition:width .4s;"></div></div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:12px;font-weight:500;">Part III · Deep Learning &amp; Specialized</span><span class="badge badge-blue" id="p3-badge">0/28</span></div>
+        <div style="height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;"><div id="p3-bar" style="height:100%;background:linear-gradient(90deg,#0F3E80,var(--blue));border-radius:3px;width:0%;transition:width .4s;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:12px;font-weight:500;">Part IV · MLOps, System Design &amp; Career</span><span class="badge" style="background:var(--purple-l);color:var(--purple);border:1px solid #D8B4FE;" id="p4-badge">0/28</span></div>
+        <div style="height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;"><div id="p4-bar" style="height:100%;background:linear-gradient(90deg,#5B1A8A,var(--purple));border-radius:3px;width:0%;transition:width .4s;"></div></div>
+      </div>
+    </div>
+
+    <div style="background:var(--navy);border-radius:14px;padding:22px 26px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:14px;">4 MILESTONE PROJECTS</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--amber);margin-bottom:4px;">WEEK 4 · MILESTONE 01</div>
+          <div style="font-size:12px;color:#fff;font-weight:500;">End-to-End EDA and Statistical Report on a Real-World Dataset</div>
+        </div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:4px;">WEEK 7 · MILESTONE 02</div>
+          <div style="font-size:12px;color:#fff;font-weight:500;">Customer Segmentation and Fraud Detection Pipeline</div>
+        </div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);margin-bottom:4px;">WEEK 12 · MILESTONE 03</div>
+          <div style="font-size:12px;color:#fff;font-weight:500;">Movie Recommender System or Stock Price Predictor</div>
+        </div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:#C4B5FD;margin-bottom:4px;">WEEK 15 · CAPSTONE</div>
+          <div style="font-size:12px;color:#fff;font-weight:500;">Job-Winner Portfolio: Live Dashboard or API + Technical Blog Post</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px 26px;box-shadow:var(--sh);">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.1em;margin-bottom:14px;">HOW TO USE THIS SYSTEM · SENIOR ENGINEER RULES</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+      <div style="padding:14px;background:var(--bg);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;border:1px solid var(--border);border-left:3px solid var(--amber);">
+        <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;">One Day = One Deep Topic</div>
+        <div style="font-size:11px;color:var(--ink3);">Read the resources listed. Take handwritten notes. Then implement the concept in code — no resource implementation without code output.</div>
+      </div>
+      <div style="padding:14px;background:var(--bg);border-left:3px solid var(--green);border-radius:0 10px 10px 0;border:1px solid var(--border);border-left:3px solid var(--green);">
+        <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;">Check = Proof of Work</div>
+        <div style="font-size:11px;color:var(--ink3);">Click the checkbox ONLY after you can explain the concept to a friend without notes AND you've written code for it. Not just watched a video.</div>
+      </div>
+      <div style="padding:14px;background:var(--bg);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;border:1px solid var(--border);border-left:3px solid var(--blue);">
+        <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;">Milestones Are Non-Negotiable</div>
+        <div style="font-size:11px;color:var(--ink3);">The 4 🏆 projects must be pushed to GitHub with a proper README before moving to the next week. No skipping.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PAGES P1–P4 ══════════════ -->
+<div class="page" id="page-p1">
+  <div class="ph">
+    <div class="ph-label">PART I · WEEKS 1–4 · MONTH 1</div>
+    <div class="ph-title">The Mathematical &amp; Computational Bedrock</div>
+    <div class="ph-desc">"You cannot debug what you don't understand. Every algorithm you'll ever use is built on these 4 weeks. Don't rush them — they compound forever."</div>
+  </div>
+  <div class="part-header ph-p1">
+    <div class="part-num">I</div>
+    <div><div class="part-title">Mathematical &amp; Computational Bedrock</div><div class="part-sub">Linear Algebra · Probability · Optimization · Python · 4 Weeks · 28 Days</div></div>
+  </div>
+  <div id="weeks-p1"></div>
+</div>
+
+<div class="page" id="page-p2">
+  <div class="ph">
+    <div class="ph-label">PART II · WEEKS 5–8 · MONTH 2</div>
+    <div class="ph-title">Core Machine Learning &amp; Algorithms</div>
+    <div class="ph-desc">"This is where most people stop at tutorials. You will implement every algorithm from scratch and understand when each one breaks."</div>
+  </div>
+  <div class="part-header ph-p2">
+    <div class="part-num">II</div>
+    <div><div class="part-title">Core Machine Learning &amp; Algorithms</div><div class="part-sub">Supervised · Ensembles · Unsupervised · SQL · Feature Engineering · 4 Weeks · 28 Days</div></div>
+  </div>
+  <div id="weeks-p2"></div>
+</div>
+
+<div class="page" id="page-p3">
+  <div class="ph">
+    <div class="ph-label">PART III · WEEKS 9–12 · MONTH 3</div>
+    <div class="ph-title">Deep Learning &amp; Specialized Domains</div>
+    <div class="ph-desc">"Neural networks are not magic. They are matrix multiplications with carefully chosen non-linearities. By Week 12, you will have proven this with code."</div>
+  </div>
+  <div class="part-header ph-p3">
+    <div class="part-num">III</div>
+    <div><div class="part-title">Deep Learning &amp; Specialized Domains</div><div class="part-sub">Neural Nets · Computer Vision · NLP · GenAI · Time Series · RecSys · 4 Weeks · 28 Days</div></div>
+  </div>
+  <div id="weeks-p3"></div>
+</div>
+
+<div class="page" id="page-p4">
+  <div class="ph">
+    <div class="ph-label">PART IV · WEEKS 13–16 · MONTH 4</div>
+    <div class="ph-title">MLOps, System Design &amp; Career Cracking</div>
+    <div class="ph-desc">"This month separates the 0.1%. Anyone can train a model. You will deploy it, monitor it, and explain it to a hiring manager in 60 seconds."</div>
+  </div>
+  <div class="part-header ph-p4">
+    <div class="part-num">IV</div>
+    <div><div class="part-title">MLOps, System Design &amp; Career Cracking</div><div class="part-sub">MLOps · DSA · Capstone Portfolio · Job Hunt · 4 Weeks · 28 Days</div></div>
+  </div>
+  <div id="weeks-p4"></div>
+</div>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA: ALL 16 WEEKS × 7 DAYS
+═══════════════════════════════════════ */
+const WEEKS = [
+  // ── PART I ──
+  {
+    id:'w1', part:1, num:'Week 01', title:'Linear Algebra & Vector Calculus for ML',
+    days:[
+      {
+        num:'Day 01',
+        title:'Vector Spaces, Subspaces, and Basis: The Geometry of Data',
+        concepts:['Vector Space','Subspace','Basis','Span','Linear Independence','Dimension','Column Space','Null Space'],
+        resources:[
+          {type:'video',title:'Essence of Linear Algebra – 3Blue1Brown (Full Series)',url:'https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab',note:'Best visual intuition for all LA concepts. Watch before reading.'},
+          {type:'book',title:'Introduction to Linear Algebra – Gilbert Strang (MIT, Ch. 1–2)',url:'https://math.mit.edu/~gs/linearalgebra/',note:'Free MIT OCW version available. The gold standard textbook.'},
+          {type:'course',title:'MIT 18.06 Linear Algebra – Gilbert Strang (OCW)',url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/',note:'Full free MIT course with lecture videos and problem sets.'},
+          {type:'practice',title:'Khan Academy – Vectors and spaces',url:'https://khanacademy.org/math/linear-algebra',note:'Use for warm-up and verification of understanding.'},
+        ],
+        practice:'Implement: create a vector, find basis of R², verify linear independence in NumPy.'
+      },
+      {
+        num:'Day 02',
+        title:'Linear Transformations, Matrices, and Systems of Equations',
+        concepts:['Matrix Multiplication','Linear Transformation','Invertibility','Gaussian Elimination','Row Reduction','Rank','LU Decomposition'],
+        resources:[
+          {type:'video',title:'3Blue1Brown – Linear transformations and matrices',url:'https://youtu.be/kYB8IZa5AuE',note:'Watch this first — builds the right mental model.'},
+          {type:'book',title:'Strang – Chapter 2: Solving Linear Equations',url:'https://math.mit.edu/~gs/linearalgebra/',note:'Covers Gaussian elimination and back-substitution rigorously.'},
+          {type:'article',title:'Towards Data Science – Matrix Multiplication for ML',url:'https://towardsdatascience.com',note:'Applied perspective connecting theory to ML.'},
+          {type:'practice',title:'NumPy linalg: np.linalg.solve, np.linalg.inv, np.linalg.matrix_rank',url:'https://numpy.org/doc/stable/reference/routines.linalg.html',note:'Implement from scratch then verify with NumPy.'},
+        ]
+      },
+      {
+        num:'Day 03',
+        title:'Eigenvalues, Eigenvectors, and Eigendecomposition',
+        concepts:['Eigenvalue','Eigenvector','Eigendecomposition','Characteristic Polynomial','Diagonalization','Spectral Theorem','Positive Definite Matrices'],
+        resources:[
+          {type:'video',title:'3Blue1Brown – Eigenvectors and eigenvalues',url:'https://youtu.be/PFDu9oVAE-g',note:'The visual explanation is essential before the math.'},
+          {type:'book',title:'Strang – Chapter 6: Eigenvalues and Eigenvectors',url:'https://math.mit.edu/~gs/linearalgebra/',note:'Complete treatment with proofs.'},
+          {type:'article',title:'Distill.pub – Understanding Eigenvalues',url:'https://distill.pub',note:'Interactive visual explanations.'},
+          {type:'practice',title:'Implement power iteration from scratch in NumPy',url:'https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html',note:'Build eigen-solver manually, then compare with np.linalg.eig.'},
+        ]
+      },
+      {
+        num:'Day 04',
+        title:'Singular Value Decomposition (SVD) and Principal Component Analysis Foundations',
+        concepts:['SVD','Singular Values','U/Σ/V matrices','Low-rank approximation','PCA intuition','Variance explained','Frobenius norm'],
+        resources:[
+          {type:'video',title:'Steve Brunton – SVD: Mathematical Overview (YouTube)',url:'https://youtu.be/nbBvuuNVfco',note:'Best technical series on SVD for ML. Watch all 5 parts.'},
+          {type:'video',title:'3Blue1Brown – Intro to PCA via SVD',url:'https://youtu.be/DQ_BkPHIl-g',note:'Visual connection between SVD and PCA.'},
+          {type:'book',title:'ISLR – Chapter 12: Unsupervised Learning (PCA section)',url:'https://www.statlearning.com/',note:'Free PDF. Practical ML-focused PCA explanation.'},
+          {type:'practice',title:'Implement image compression using SVD in NumPy',url:'https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html',note:'Compress a real image by keeping top-k singular values.'},
+        ]
+      },
+      {
+        num:'Day 05',
+        title:'Multivariable Calculus: Partial Derivatives and the Gradient Vector',
+        concepts:['Partial Derivatives','Gradient','Directional Derivative','Chain Rule (multivariate)','Level Sets','Steepest Ascent/Descent'],
+        resources:[
+          {type:'video',title:'Khan Academy – Multivariable Calculus (full)',url:'https://khanacademy.org/math/multivariable-calculus',note:'Free, complete. Start from partial derivatives section.'},
+          {type:'video',title:'3Blue1Brown – What is a neural network? (gradient intuition)',url:'https://youtu.be/aircAruvnKk',note:'Motivation for why gradients matter in ML.'},
+          {type:'book',title:'Mathematics for Machine Learning (Deisenroth, Faisal, Ong) – Ch 5',url:'https://mml-book.github.io/',note:'Free PDF. Chapter 5 covers vector calculus rigorously for ML.'},
+          {type:'practice',title:'Compute gradients manually and verify with autograd (PyTorch)',url:'https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html',note:'Compute ∂L/∂w manually for a 2-variable loss function.'},
+        ]
+      },
+      {
+        num:'Day 06',
+        title:'The Jacobian and Hessian Matrices: Understanding Curvature in Optimization',
+        concepts:['Jacobian','Hessian','Second-Order Optimization','Convexity','Saddle Points','Newton\'s Method','Curvature'],
+        resources:[
+          {type:'video',title:'Steve Brunton – Hessian Matrix and Curvature',url:'https://youtu.be/LbBcuZukCAw',note:'Precise, technical, short. Watch before reading.'},
+          {type:'book',title:'MML Book – Chapter 7: Continuous Optimization',url:'https://mml-book.github.io/',note:'Full coverage of second-order methods and their use in ML.'},
+          {type:'article',title:'Colah\'s Blog – Calculus on Computational Graphs',url:'https://colah.github.io/posts/2015-08-Backprop/',note:'Essential reading. Connects Hessian to neural network training.'},
+          {type:'practice',title:'Compute Jacobian of a simple neural network layer in PyTorch',url:'https://pytorch.org/docs/stable/generated/torch.autograd.functional.jacobian.html',note:'Use torch.autograd.functional.jacobian on a 2-layer network.'},
+        ]
+      },
+      {
+        num:'Day 07',
+        title:'Matrix Calculus Notation Rigor & Backpropagation Foundations',
+        concepts:['Matrix Calculus','Denominator Layout','Numerator Layout','Backprop Chain Rule','Computational Graph','Automatic Differentiation'],
+        resources:[
+          {type:'article',title:'Explained.ai – Matrix Calculus You Need For Deep Learning',url:'https://explained.ai/matrix-calculus/',note:'THE reference. Read this carefully and take notes.'},
+          {type:'video',title:'Andrej Karpathy – Micrograd: Building backprop from scratch',url:'https://youtu.be/VMj-3S1tku0',note:'Legendary 2-hour video. Best practical backprop tutorial ever made.'},
+          {type:'practice',title:'Build micrograd from scratch following Karpathy\'s tutorial',url:'https://github.com/karpathy/micrograd',note:'Implement your own Value class with backward() — no PyTorch.'},
+          {type:'book',title:'Deep Learning (Goodfellow) – Chapter 6: Deep Feedforward Networks',url:'https://www.deeplearningbook.org/',note:'Free online. Chapter 6 covers backprop derivation rigorously.'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'w2', part:1, num:'Week 02', title:'Probability, Statistics & Bayesian Inference',
+    days:[
+      {
+        num:'Day 01',
+        title:'Probability Theory: Axioms, Conditional Probability, and Bayes\' Theorem',
+        concepts:['Kolmogorov Axioms','Sample Space','Events','Conditional Probability','Independence','Bayes Theorem','Total Probability'],
+        resources:[
+          {type:'course',title:'Harvard Statistics 110: Probability – Joe Blitzstein (free)',url:'https://projects.iq.harvard.edu/stat110/home',note:'The best probability course. Lecture 1 covers Bayes theorem deeply.'},
+          {type:'video',title:'3Blue1Brown – Bayes Theorem (visual)',url:'https://youtu.be/HZGCoVF3YvM',note:'10-minute visual proof. Watch before the lecture.'},
+          {type:'book',title:'Pattern Recognition and Machine Learning (Bishop) – Appendix B',url:'https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf',note:'Free PDF. Appendix B is a concise probability reference for ML.'},
+          {type:'practice',title:'Implement naive Bayes spam classifier from scratch',url:'https://youtu.be/O2L2Uv9pdDA',note:'Compute P(spam|words) manually with Laplace smoothing.'},
+        ]
+      },
+      {
+        num:'Day 02',
+        title:'Random Variables: Discrete vs. Continuous Distributions',
+        concepts:['PMF','PDF','CDF','Bernoulli','Binomial','Poisson','Gaussian','Uniform','Exponential','Beta','Dirichlet'],
+        resources:[
+          {type:'video',title:'StatQuest – Probability Distributions (full playlist)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9',note:'Josh Starmer explains every distribution with clear visuals.'},
+          {type:'book',title:'All of Statistics – Larry Wasserman (Ch 1–3)',url:'https://www.stat.cmu.edu/~larry/all-of-statistics/',note:'Dense but complete. Used in top PhD programs.'},
+          {type:'practice',title:'scipy.stats: sample from 5 distributions, plot PDF/CDF',url:'https://docs.scipy.org/doc/scipy/reference/stats.html',note:'Visualize each distribution — understand shape and parameters.'},
+          {type:'article',title:'Seeing Theory – Chapter 3: Probability Distributions',url:'https://seeing-theory.brown.edu',note:'Beautiful interactive visualizations.'},
+        ]
+      },
+      {
+        num:'Day 03',
+        title:'Expectation, Variance, and Moments of a Distribution',
+        concepts:['Expected Value','Variance','Standard Deviation','Covariance','Correlation','Moment Generating Functions','Skewness','Kurtosis'],
+        resources:[
+          {type:'video',title:'StatQuest – Expected Value, Variance, Covariance',url:'https://youtube.com/c/joshstarmer',note:'Watch the 3 videos on moments sequentially.'},
+          {type:'book',title:'MML Book – Chapter 6: Probability and Distributions',url:'https://mml-book.github.io/',note:'ML-focused. Covers moments and their role in ML algorithms.'},
+          {type:'practice',title:'Compute mean, variance, covariance matrix for a real dataset (NumPy only)',url:'https://numpy.org/doc/stable/reference/generated/numpy.cov.html',note:'No sklearn. Implement from formulas. Verify against numpy.'},
+          {type:'article',title:'Towards Data Science – Covariance Matrix in PCA',url:'https://towardsdatascience.com',note:'Connects covariance to PCA — critical link for Week 7.'},
+        ]
+      },
+      {
+        num:'Day 04',
+        title:'Inferential Statistics: Central Limit Theorem and Sampling Distributions',
+        concepts:['CLT','Sampling Distribution','Standard Error','Point Estimation','Confidence Intervals','Bootstrap','Law of Large Numbers'],
+        resources:[
+          {type:'video',title:'StatQuest – Central Limit Theorem clearly explained',url:'https://youtu.be/YAlJCEDH2uY',note:'Best explanation of CLT anywhere.'},
+          {type:'course',title:'Khan Academy – Inference for Numerical Data',url:'https://khanacademy.org/math/statistics-probability',note:'Free. Clear progression from CLT to confidence intervals.'},
+          {type:'practice',title:'Simulate CLT: draw samples from Poisson distribution, plot mean distributions',url:'https://numpy.org/doc/stable/reference/random/index.html',note:'Show CLT empirically: n=5, 30, 100, 1000 samples.'},
+          {type:'article',title:'Bootstrap confidence intervals in Python from scratch',url:'https://machinelearningmastery.com/calculate-bootstrap-confidence-intervals-machine-learning-results-python/',note:'Implement bootstrap without scipy. Essential for ML evaluation.'},
+        ]
+      },
+      {
+        num:'Day 05',
+        title:'Hypothesis Testing: P-values, Type I/II Errors, and Z/T-tests',
+        concepts:['Null Hypothesis','Alternative Hypothesis','P-value','Significance Level','Type I Error','Type II Error','Power','Z-test','T-test','Chi-squared','Bonferroni'],
+        resources:[
+          {type:'video',title:'StatQuest – Hypothesis Testing and p-values',url:'https://youtu.be/vemZtEM63GY',note:'Crystal clear. Watch before touching scipy.stats.'},
+          {type:'article',title:'Colah\'s Blog – P-values and Bayes Factors',url:'https://colah.github.io',note:'Deeper look at what p-values actually mean.'},
+          {type:'practice',title:'scipy.stats: run t-test, chi-squared test on real datasets',url:'https://docs.scipy.org/doc/scipy/reference/stats.html',note:'Use at least 2 real datasets. Interpret every output.'},
+          {type:'book',title:'Practical Statistics for Data Scientists – Ch 3',url:'https://www.oreilly.com/library/view/practical-statistics-for/9781492072935/',note:'Applied focus. Python code included.'},
+        ]
+      },
+      {
+        num:'Day 06',
+        title:'Maximum Likelihood Estimation (MLE) vs. Maximum A Posteriori (MAP)',
+        concepts:['Likelihood Function','Log-likelihood','MLE Derivation','Prior','Posterior','MAP Estimate','Regularization as MAP','KL Divergence'],
+        resources:[
+          {type:'video',title:'StatQuest – MLE explained clearly',url:'https://youtu.be/XepXtl9YKwc',note:'Start here. StatQuest makes MLE intuitive.'},
+          {type:'video',title:'Mathematical Monk – Bayesian Inference Playlist',url:'https://youtube.com/playlist?list=PLD0F06AA0D2E8FFBA',note:'The deepest free treatment of MLE vs MAP.'},
+          {type:'book',title:'Bishop PRML – Chapter 1.2: Probability Theory',url:'https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf',note:'Formal derivation of MLE and MAP for ML models.'},
+          {type:'practice',title:'Derive MLE for Gaussian: estimate μ and σ² manually in NumPy',url:'https://numpy.org',note:'Implement gradient ascent on log-likelihood without scipy.'},
+        ]
+      },
+      {
+        num:'Day 07',
+        title:'Statistical Significance in A/B Testing for Product Data Science',
+        concepts:['A/B Testing','Control/Treatment','Type I/II Errors in Practice','Sample Size Calculation','Conversion Rate','Two-proportion Z-test','Multiple Testing Problem'],
+        resources:[
+          {type:'article',title:'Evan Miller – How Not to Run an A/B Test',url:'https://www.evanmiller.org/how-not-to-run-an-ab-test.html',note:'Most important article on A/B testing. Read before anything else.'},
+          {type:'article',title:'Netflix Tech Blog – Experimentation Platform',url:'https://netflixtechblog.com/its-all-a-slice-of-pie-f31cd3649ef3',note:'Real-world A/B at scale.'},
+          {type:'practice',title:'Build A/B test simulator: power analysis and p-value calculation',url:'https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.proportions_ztest.html',note:'Simulate 1000 A/B tests — see false positive rate empirically.'},
+          {type:'video',title:'Udacity – A/B Testing (full free course)',url:'https://udacity.com/course/ab-testing--ud257',note:'Made by Google. Covers everything including sample size.'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'w3', part:1, num:'Week 03', title:'Optimization & Linear Models',
+    days:[
+      {num:'Day 01',title:'Convex Optimization: Global vs. Local Minima and KKT Conditions',concepts:['Convex Set','Convex Function','Global Minimum','Local Minimum','KKT Conditions','Lagrange Multipliers','Duality','Constrained Optimization'],resources:[{type:'video',title:'Stanford EE364 – Convex Optimization (Boyd, free lectures)',url:'https://stanford.edu/class/ee364a/',note:'The gold standard. Lecture 1 covers convexity clearly.'},{type:'book',title:'Convex Optimization – Boyd & Vandenberghe (free PDF)',url:'https://web.stanford.edu/~boyd/cvxbook/',note:'Reference book. Read Chapter 2 (Convex Sets) and Chapter 3.'},{type:'video',title:'3Blue1Brown – Gradient descent optimization landscape',url:'https://youtu.be/IHZwWFHWa-w',note:'Visual intuition for why convexity matters.'},{type:'practice',title:'Visualize loss landscape: plot contour of MSE vs. weight space',url:'https://matplotlib.org/stable/gallery/index.html',note:'Plot 2D loss surface — find the global minimum visually.'}]},
+      {num:'Day 02',title:'Simple Linear Regression: OLS Derivation & The Bias-Variance Decomposition Proof',concepts:['OLS Estimator','Normal Equations','Bias-Variance Tradeoff','Underfitting','Overfitting','Training vs. Test Error','Irreducible Error'],resources:[{type:'video',title:'StatQuest – Linear Regression (3-part series)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU',note:'Watch all 3 before implementing.'},{type:'book',title:'ISLR – Chapter 3: Linear Regression',url:'https://www.statlearning.com/',note:'Free. Best applied ML explanation of OLS with clear bias-variance proof.'},{type:'practice',title:'Derive and implement OLS from scratch: β = (XᵀX)⁻¹Xᵀy',url:'https://numpy.org',note:'No sklearn. Matrix inversion by hand, verify predictions.'},{type:'article',title:'Scott Fortmann-Roe – Understanding the Bias-Variance Tradeoff',url:'http://scott.fortmann-roe.com/docs/BiasVariance.html',note:'The clearest explanation of bias-variance with animated visualization.'}]},
+      {num:'Day 03',title:'Multiple Linear Regression and Multi-collinearity Diagnostics',concepts:['Multiple Regression','Adjusted R²','VIF (Variance Inflation Factor)','Multicollinearity','Condition Number','Feature Correlation','Standardization'],resources:[{type:'book',title:'ISLR – Chapter 3.3: Multiple Linear Regression',url:'https://www.statlearning.com/',note:'Free PDF. Covers multicollinearity diagnostics clearly.'},{type:'video',title:'StatQuest – Multiple Linear Regression',url:'https://youtu.be/EkAQAi3a4js',note:'Visual walk-through with real data.'},{type:'practice',title:'Run multiple regression on a real dataset: check VIF, drop collinear features',url:'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html',note:'Use statsmodels.variance_inflation_factor — drop VIF > 10.'},{type:'article',title:'Towards DS – Diagnosing multicollinearity with heatmaps and VIF',url:'https://towardsdatascience.com',note:'Practical walkthrough with code.'}]},
+      {num:'Day 04',title:'Gradient Descent Variants: Batch, Stochastic (SGD), and Mini-batch',concepts:['Gradient Descent','Batch GD','SGD','Mini-batch GD','Learning Rate','Convergence','Learning Rate Schedules','Momentum'],resources:[{type:'video',title:'Andrej Karpathy – Makemore: training loop from scratch',url:'https://youtu.be/TCH_1BHY58I',note:'Best practical SGD tutorial. Implements training loop from scratch.'},{type:'article',title:'Sebastian Ruder – An overview of gradient descent optimization algorithms',url:'https://ruder.io/optimizing-gradient-descent/',note:'The most cited blog post on optimizers. Read before touching Adam.'},{type:'video',title:'Andrew Ng – Gradient Descent (Week 1 ML course)',url:'https://coursera.org/learn/machine-learning',note:'Classic but still the clearest intuition for GD mechanics.'},{type:'practice',title:'Implement batch, SGD, mini-batch GD from scratch on linear regression',url:'https://numpy.org',note:'Track loss per iteration. Compare convergence curves for all 3.'}]},
+      {num:'Day 05',title:'Regularization: Ridge (L2), Lasso (L1), and Elastic Net',concepts:['L1 Regularization','L2 Regularization','Elastic Net','Sparsity','Weight Decay','Feature Selection via Lasso','Regularization Path','Lambda Tuning'],resources:[{type:'video',title:'StatQuest – Ridge and Lasso Regression',url:'https://youtu.be/Q81RR3yKn30',note:'Best intuition for why L1 creates sparsity and L2 does not.'},{type:'book',title:'ISLR – Chapter 6.2: Shrinkage Methods',url:'https://www.statlearning.com/',note:'Rigorous proof of why Lasso does feature selection.'},{type:'practice',title:'sklearn: compare OLS vs Ridge vs Lasso vs ElasticNet on high-dimensional data',url:'https://scikit-learn.org/stable/modules/linear_model.html',note:'Plot regularization path. Show feature coefficients shrinking to 0.'},{type:'article',title:'Towards DS – Regularization in ML: complete guide',url:'https://towardsdatascience.com',note:'Connects regularization to MAP estimation (Week 2 Day 6).'}]},
+      {num:'Day 06',title:'Logistic Regression: The Sigmoid Function and Cross-Entropy Loss',concepts:['Sigmoid Function','Log-odds','Cross-Entropy Loss','Binary Classification','Gradient of CE','Decision Boundary','Softmax (multiclass)'],resources:[{type:'video',title:'StatQuest – Logistic Regression in detail',url:'https://youtu.be/yIYKR4sgzI8',note:'Watch the whole 19-minute video — it covers derivation.'},{type:'video',title:'Andrej Karpathy – micrograd (logistic regression section)',url:'https://youtu.be/VMj-3S1tku0',note:'Implement cross-entropy backprop by hand.'},{type:'practice',title:'Implement logistic regression from scratch with gradient descent',url:'https://numpy.org',note:'No sklearn. Use sigmoid + BCE loss. Train on breast cancer dataset.'},{type:'book',title:'ISLR – Chapter 4.3: Logistic Regression',url:'https://www.statlearning.com/',note:'Free. Mathematical derivation plus interpretation of coefficients.'}]},
+      {num:'Day 07',title:'Coding Workshop: Building Regression Models from Scratch in NumPy',concepts:['NumPy Implementation','End-to-End Pipeline','Train/Test Split','MSE/MAE/RMSE','R²','Cross-validation from scratch'],resources:[{type:'practice',title:'Build complete regression pipeline: OLS + Ridge + Logistic from scratch',url:'https://numpy.org',note:'ONLY NumPy. Implement: preprocessing → model → evaluation → visualization.'},{type:'video',title:'Sentdex – ML from scratch in Python (playlist)',url:'https://youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v',note:'Builds every algorithm with no sklearn.'},{type:'article',title:'Real Python – Linear Regression in Python from scratch',url:'https://realpython.com/linear-regression-in-python/',note:'Complete walkthrough with NumPy implementation.'},{type:'practice',title:'Kaggle: California Housing dataset — implement all models from Day 2–6',url:'https://kaggle.com/datasets/camnugent/california-housing-prices',note:'Real data. Evaluate with cross-validation. Write a 200-word README.'}]},
+    ]
+  },
+  {
+    id:'w4', part:1, num:'Week 04', title:'Python for High-Performance Data Science',
+    days:[
+      {num:'Day 01',title:'Advanced Python: Generators, Decorators, and Context Managers',concepts:['Generators','yield','Decorators','functools.wraps','Context Managers','__enter__/__exit__','Closures','Lambda Functions'],resources:[{type:'book',title:'Fluent Python – Luciano Ramalho (Ch 7, 14, 15)',url:'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/',note:'The definitive advanced Python book.'},{type:'video',title:'Corey Schafer – Python Decorators (YouTube)',url:'https://youtu.be/FsAPt_9Bf3U',note:'Best Python decorator tutorial. Watch for generators too.'},{type:'practice',title:'Write 3 decorators: timer, logger, retry. Build a streaming data generator.',url:'https://realpython.com',note:'These patterns appear in every ML engineering codebase.'},{type:'article',title:'Real Python – Advanced Python features',url:'https://realpython.com/tutorials/advanced/',note:'Use as reference. Pick topics relevant to ML engineering.'}]},
+      {num:'Day 02',title:'NumPy Mastery: Vectorization, Broadcasting, and Memory Efficiency',concepts:['Vectorization','Broadcasting Rules','Fancy Indexing','Memory Layout (C vs F order)','Stride Tricks','np.einsum','Array Views vs Copies'],resources:[{type:'book',title:'From Python to NumPy – Nicolas Rougier (free online)',url:'https://www.labri.fr/perso/nrougier/from-python-to-numpy/',note:'The best NumPy deep-dive. Read Chapters 3–5 on vectorization.'},{type:'video',title:'Jake VanderPlas – NumPy in under 30 minutes',url:'https://youtu.be/lKcwuPnSHIQ',note:'Dense, fast, practical.'},{type:'article',title:'NumPy Broadcasting – official documentation',url:'https://numpy.org/doc/stable/user/basics.broadcasting.html',note:'Read the official docs carefully. Broadcasting causes 50% of ML bugs.'},{type:'practice',title:'Rewrite a slow for-loop image processing function using broadcasting',url:'https://numpy.org',note:'Measure speedup with timeit. Target: 10x–100x faster.'}]},
+      {num:'Day 03',title:'Pandas Deep Dive: Multi-indexing, GroupBy Mechanics, and Pivot Tables',concepts:['MultiIndex','GroupBy split-apply-combine','Pivot Tables','merge/join/concat','apply vs transform vs agg','Memory optimization','Chaining'],resources:[{type:'book',title:'Python for Data Analysis – Wes McKinney (Pandas creator, 3rd ed)',url:'https://wesmckinney.com/book/',note:'Free online. Read chapters 8–10 on aggregation and groupby.'},{type:'video',title:'Corey Schafer – Pandas Tutorial Series',url:'https://youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS',note:'Best systematic Pandas tutorial series.'},{type:'practice',title:'GroupBy analysis on NYC Taxi dataset: aggregations + pivot tables',url:'https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page',note:'No shortcuts. Implement every aggregation manually first.'},{type:'article',title:'Real Python – Pandas GroupBy: Your Guide to Grouping Data',url:'https://realpython.com/pandas-groupby/',note:'Explains split-apply-combine pattern with diagrams.'}]},
+      {num:'Day 04',title:'Exploratory Data Analysis (EDA): Outliers and Distribution Shifts',concepts:['EDA Framework','IQR Method','Z-score Outliers','Distribution Shift','Covariate Shift','Label Shift','KDE Plots','Box Plots','Correlation Matrices'],resources:[{type:'video',title:'Krish Naik – Complete EDA Tutorial',url:'https://youtu.be/fHFas6Q7kJk',note:'Practical, covers all major EDA steps.'},{type:'article',title:'Towards DS – Exploratory Data Analysis: A Practical Guide',url:'https://towardsdatascience.com',note:'Step-by-step EDA framework for ML projects.'},{type:'practice',title:'Full EDA on Titanic dataset: outliers, distributions, correlations, missing values',url:'https://kaggle.com/competitions/titanic',note:'Write a Jupyter notebook with narrative explaining every finding.'},{type:'article',title:'Detect Distribution Shift in Production – Chip Huyen blog',url:'https://huyenchip.com',note:'Connect EDA skills to production monitoring (Preview of Week 13).'}]},
+      {num:'Day 05',title:'Data Visualization Theory: Matplotlib, Seaborn, and Plotly',concepts:['Viz Principles','Chart Types','Color Theory','Matplotlib Figure/Axes API','Seaborn Statistical Plots','Plotly Interactive','Storytelling with Data'],resources:[{type:'book',title:'Storytelling with Data – Cole Nussbaumer Knaflic',url:'https://www.storytellingwithdata.com/book',note:'Non-technical. Changes how you think about visualization forever.'},{type:'video',title:'Kaggle Learn – Data Visualization (free mini-course)',url:'https://kaggle.com/learn/data-visualization',note:'Hands-on seaborn course. 4 hours to complete.'},{type:'practice',title:'Recreate 5 visualizations from a published research paper',url:'https://matplotlib.org/stable/gallery/index.html',note:'Use matplotlib only. Recreating trains attention to detail.'},{type:'article',title:'Fundamentals of Data Visualization – Claus Wilke (free online)',url:'https://clauswilke.com/dataviz/',note:'Free textbook. Best coverage of when to use which chart type.'}]},
+      {num:'Day 06',title:'Data Cleaning Pipelines: Missingness Mechanisms and Categorical Encoding',concepts:['MCAR/MAR/MNAR','Imputation Strategies','One-hot Encoding','Ordinal Encoding','Target Encoding','Label Encoding','sklearn Pipeline API'],resources:[{type:'book',title:'Feature Engineering and Selection – Kuhn & Johnson (free online)',url:'http://www.feat.engineering/',note:'The best book on feature engineering. Read Chapters 1–3.'},{type:'article',title:'Missing Data Mechanisms – explained with examples',url:'https://stefvanbuuren.name/fimd/',note:'Deep reference on MCAR/MAR/MNAR with Python examples.'},{type:'practice',title:'Build sklearn Pipeline: imputer + encoder + scaler on Ames Housing dataset',url:'https://kaggle.com/c/house-prices-advanced-regression-techniques',note:'Use Pipeline + ColumnTransformer. Zero manual preprocessing outside the pipeline.'},{type:'video',title:'sklearn Pipelines Tutorial – Krish Naik',url:'https://youtu.be/wTMnFZVomHs',note:'Practical pipeline construction with mixed data types.'}]},
+      {
+        num:'Day 07',
+        title:'🏆 Milestone Project 01: End-to-End EDA and Statistical Report on a Real-World Dataset',
+        concepts:['End-to-End Pipeline','EDA Report','Statistical Tests','Visualization','Hypothesis Testing','Feature Insights','README Writing'],
+        isMilestone: true,
+        milestoneNote:'Use Days 1–6 skills together. Pick a dataset you care about. The report must be publishable — someone reading your GitHub should learn something from it.',
+        resources:[
+          {type:'practice',title:'Kaggle: Pick any tabular dataset — do full EDA + statistical report',url:'https://kaggle.com/datasets',note:'EDA + 5 statistical tests + 8+ visualizations + hypothesis + conclusions.'},
+          {type:'practice',title:'Write a professional README: problem statement, findings, methodology',url:'https://github.com',note:'Push to GitHub. This is portfolio item #1 of 4.'},
+          {type:'article',title:'How to write a great data science report – Towards DS',url:'https://towardsdatascience.com',note:'Template for professional data science write-ups.'},
+          {type:'video',title:'Kaggle: Example winning EDA notebooks',url:'https://kaggle.com',note:'Study the most-voted EDA notebooks for structure inspiration.'},
+        ]
+      },
+    ]
+  },
+  // ── PART II ──
+  {
+    id:'w5', part:2, num:'Week 05', title:'Supervised Learning I (Classification & Trees)',
+    days:[
+      {num:'Day 01',title:'K-Nearest Neighbors (KNN) and the Curse of Dimensionality',concepts:['KNN Algorithm','Distance Metrics','Euclidean/Manhattan/Cosine','Curse of Dimensionality','K selection','Cross-validation for K','Weighted KNN'],resources:[{type:'video',title:'StatQuest – K-Nearest Neighbors clearly explained',url:'https://youtu.be/HVXime0nQeI',note:'Watch before reading. Builds solid intuition.'},{type:'article',title:'The Curse of Dimensionality – explained visually',url:'https://builtin.com/data-science/curse-dimensionality',note:'Essential. Understand why KNN fails in high dimensions.'},{type:'practice',title:'Implement KNN from scratch using only NumPy and Euclidean distance',url:'https://numpy.org',note:'No sklearn. Manual distance matrix. Test on Iris dataset.'},{type:'video',title:'Sentdex – KNN from scratch',url:'https://youtu.be/1i0zu9jHN6U',note:'Code walk-through for raw implementation.'}]},
+      {num:'Day 02',title:'Decision Trees: Information Gain, Gini Impurity, and Entropy',concepts:['Entropy','Information Gain','Gini Impurity','Gini vs Entropy','Tree Depth','Leaf Nodes','Recursive Partitioning','CART Algorithm'],resources:[{type:'video',title:'StatQuest – Decision Trees (full 3-part series)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUKAtDViTvRGFpphEc24M-QH',note:'Best decision tree tutorial series anywhere.'},{type:'book',title:'ISLR – Chapter 8.1: Decision Trees',url:'https://www.statlearning.com/',note:'Free. Mathematical treatment of information gain and Gini.'},{type:'practice',title:'Implement CART decision tree from scratch (no sklearn)',url:'https://numpy.org',note:'Implement recursive splitting with Gini impurity. Visualize splits.'},{type:'article',title:'Machine Learning Mastery – Classification and Regression Trees',url:'https://machinelearningmastery.com/implement-decision-tree-algorithm-scratch-python/',note:'Step-by-step from-scratch implementation tutorial.'}]},
+      {num:'Day 03',title:'Tree Pruning and Handling Overfitting',concepts:['Pre-pruning (max_depth)','Post-pruning','Cost Complexity Pruning','min_samples_split','min_samples_leaf','Cross-validation for pruning','Validation curve'],resources:[{type:'video',title:'StatQuest – Pruning Regression Trees',url:'https://youtu.be/D0efHEJsfHo',note:'Clear explanation of cost-complexity pruning.'},{type:'article',title:'sklearn Decision Tree Pruning documentation',url:'https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning',note:'ccp_alpha parameter. Read the official docs with examples.'},{type:'practice',title:'Plot validation curve: tree depth vs. train/test accuracy — find optimal depth',url:'https://scikit-learn.org/stable/modules/learning_curve.html',note:'Visualize overfitting. Use 5-fold cross-validation.'},{type:'book',title:'Hands-On ML (Aurélien Géron) – Chapter 6: Decision Trees',url:'https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/',note:'Practical. Best implementation-focused chapter on trees.'}]},
+      {num:'Day 04',title:'Support Vector Machines (SVM): Hyperplanes and the Kernel Trick',concepts:['Maximum Margin Hyperplane','Support Vectors','Hard Margin SVM','Soft Margin (C parameter)','Kernel Trick','RBF Kernel','Polynomial Kernel','Dual Problem'],resources:[{type:'video',title:'StatQuest – Support Vector Machines (3-part)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUL3IJ4-yor0HzkqDQ3JmJkc',note:'Watch all 3. Best SVM intuition series.'},{type:'video',title:'MIT 6.034 – SVM lecture (Patrick Winston)',url:'https://youtu.be/_PwhiWxHK8o',note:'Rigorous mathematical derivation of the dual problem.'},{type:'practice',title:'sklearn SVC: compare linear vs RBF kernel on nonlinear datasets',url:'https://scikit-learn.org/stable/modules/svm.html',note:'Plot decision boundaries. Show how kernel trick enables nonlinear separation.'},{type:'book',title:'ISLR – Chapter 9: Support Vector Machines',url:'https://www.statlearning.com/',note:'Free. Excellent coverage of the kernel trick proof.'}]},
+      {num:'Day 05',title:'Naive Bayes: Geometric vs. Probabilistic Classification',concepts:['Conditional Independence Assumption','Gaussian Naive Bayes','Multinomial NB','Bernoulli NB','Laplace Smoothing','Log-probability','Text Classification'],resources:[{type:'video',title:'StatQuest – Naive Bayes clearly explained',url:'https://youtu.be/O2L2Uv9pdDA',note:'20 minutes. Complete and clear.'},{type:'article',title:'Implement Naive Bayes spam filter from scratch',url:'https://machinelearningmastery.com/naive-bayes-for-machine-learning/',note:'Full implementation guide. Build Gaussian and Multinomial versions.'},{type:'practice',title:'Build email spam classifier with Multinomial NB (no sklearn)',url:'https://spamassassin.apache.org/publiccorpus/',note:'Use the SpamAssassin public corpus. Implement Laplace smoothing manually.'},{type:'book',title:'ISLR – Chapter 4.4: Naive Bayes',url:'https://www.statlearning.com/',note:'Free. Mathematical derivation and comparison to LDA.'}]},
+      {num:'Day 06',title:'Evaluation Metrics: Precision, Recall, F1-Score, ROC-AUC, and Model Calibration',concepts:['Confusion Matrix','Precision','Recall','F1-Score','ROC Curve','AUC','Precision-Recall Curve','Calibration','Platt Scaling','Brier Score'],resources:[{type:'video',title:'StatQuest – ROC and AUC clearly explained',url:'https://youtu.be/4jRBRDbJemM',note:'Best explanation of ROC curve and AUC anywhere.'},{type:'article',title:'Google Developers – Classification: ROC Curve and AUC',url:'https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc',note:'Interactive visualization of ROC curve with threshold slider.'},{type:'practice',title:'Compute all 6 metrics from scratch (no sklearn.metrics) on imbalanced dataset',url:'https://numpy.org',note:'Implement precision, recall, F1, ROC from confusion matrix manually.'},{type:'article',title:'Towards DS – Model Calibration: understanding Platt Scaling',url:'https://towardsdatascience.com',note:'Connect calibration to probability outputs — critical for production.'}]},
+      {num:'Day 07',title:'Imbalanced Data Techniques: SMOTE, Weighted Loss, and Precision-Recall Curves',concepts:['Class Imbalance','SMOTE','ADASYN','Oversampling','Undersampling','Class Weights','Threshold Moving','PR Curve','F1 vs AUC for imbalance'],resources:[{type:'article',title:'imbalanced-learn documentation – SMOTE and variants',url:'https://imbalanced-learn.org/stable/',note:'Official docs for the imbalanced-learn library.'},{type:'video',title:'StatQuest – Imbalanced data and precision-recall tradeoff',url:'https://youtube.com/c/joshstarmer',note:'Watch the ROC vs PR curve comparison video.'},{type:'practice',title:'Credit card fraud detection: compare SMOTE vs class_weight on sklearn',url:'https://kaggle.com/datasets/mlg-ulb/creditcardfraud',note:'Real imbalanced dataset. Compare PR-AUC before and after SMOTE.'},{type:'article',title:'Towards DS – SMOTE explained with Python implementation',url:'https://towardsdatascience.com',note:'Walk through SMOTE algorithm step-by-step.'}]},
+    ]
+  },
+  {
+    id:'w6', part:2, num:'Week 06', title:'Supervised Learning II (Ensemble & Interpretability)',
+    days:[
+      {num:'Day 01',title:'Introduction to Ensemble Thinking: Wisdom of the Crowd',concepts:['Bias-Variance in Ensembles','Ensemble Types','Diversity Requirement','Voting Classifier','Averaging','Weak Learners','Strong Learners'],resources:[{type:'video',title:'StatQuest – Introduction to Ensemble Methods',url:'https://youtu.be/2Mg8QD0F1dQ',note:'Watch before touching any ensemble code.'},{type:'book',title:'ISLR – Chapter 8: Tree-Based Methods (ensemble intro)',url:'https://www.statlearning.com/',note:'Free. The foundational text on random forests and boosting.'},{type:'practice',title:'Build a majority-vote ensemble of 3 classifiers from scratch',url:'https://scikit-learn.org/stable/modules/ensemble.html',note:'Combine KNN + Logistic Regression + Decision Tree manually.'},{type:'article',title:'Towards DS – Ensemble methods: an introduction',url:'https://towardsdatascience.com',note:'Overview of bagging, boosting, and stacking.'}]},
+      {num:'Day 02',title:'Bagging: Bootstrapping and Random Forests',concepts:['Bootstrap Sampling','Out-of-Bag Error','Random Feature Subsampling','n_estimators','max_features','Feature Importance','Parallel Training'],resources:[{type:'video',title:'StatQuest – Random Forests clearly explained (2-part)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUIE96dI3247e-8DLilSI1fM',note:'Best Random Forest explanation. Watch both parts.'},{type:'practice',title:'Implement Random Forest from scratch using your Day 02 Decision Tree',url:'https://numpy.org',note:'Build 10 trees. Use bootstrap sampling + random feature subsets.'},{type:'book',title:'Hands-On ML (Géron) – Chapter 7: Ensemble Learning',url:'https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/',note:'Practical. Covers bagging and pasting clearly.'},{type:'article',title:'Random Forest Feature Importance explained – sklearn',url:'https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html',note:'Understand impurity-based vs permutation importance.'}]},
+      {num:'Day 03',title:'Boosting Theory: AdaBoost and Weighted Weak Learners',concepts:['AdaBoost Algorithm','Sample Weights','Stump Classifiers','Weak Learner Combination','Exponential Loss','Sequential Training','Boosting Theory'],resources:[{type:'video',title:'StatQuest – AdaBoost clearly explained',url:'https://youtu.be/LsK-xG1cLYA',note:'Watch before reading any paper.'},{type:'article',title:'Original AdaBoost paper – Freund & Schapire (1997)',url:'https://www.cs.princeton.edu/~schapire/papers/Schapire99c.pdf',note:'Read the abstract + algorithm section. This is the real thing.'},{type:'practice',title:'Implement AdaBoost from scratch: 5 stumps on Iris dataset',url:'https://numpy.org',note:'Update weights manually. Show each stump\'s contribution to final prediction.'},{type:'book',title:'ISLR – Chapter 8.2.2: Boosting',url:'https://www.statlearning.com/',note:'Free. Rigorous derivation of the boosting update rule.'}]},
+      {num:'Day 04',title:'Gradient Boosting Machines (GBM) and XGBoost Architecture',concepts:['Gradient Boosting','Pseudo-residuals','Shrinkage (learning rate)','Tree depth in boosting','XGBoost regularization','Column subsampling','Sparse-aware training'],resources:[{type:'video',title:'StatQuest – Gradient Boost (4-part series)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUJjeXUvUE0maghNuY2_5fY6',note:'Watch all 4 parts before touching XGBoost.'},{type:'article',title:'XGBoost paper – Chen & Guestrin (2016)',url:'https://arxiv.org/abs/1603.02754',note:'Read Sections 1–3. Understand the system design, not just the API.'},{type:'practice',title:'Kaggle: Titanic survival prediction with XGBoost + SHAP',url:'https://kaggle.com/competitions/titanic',note:'Tune n_estimators, learning_rate, max_depth. Document every decision.'},{type:'video',title:'Andrei Burkov – XGBoost implementation internals',url:'https://youtu.be/8b1JEDvenQU',note:'Good technical deep-dive on XGBoost internals.'}]},
+      {num:'Day 05',title:'LightGBM and CatBoost: Handling Categorical Data and Execution Speed',concepts:['Histogram-based boosting','Leaf-wise growth','GOSS','EFB (Exclusive Feature Bundling)','CatBoost ordered boosting','Target statistics','GPU training'],resources:[{type:'article',title:'LightGBM documentation: Key Features',url:'https://lightgbm.readthedocs.io/en/latest/Features.html',note:'Read the official features page — explains GOSS and EFB clearly.'},{type:'article',title:'CatBoost documentation: How it works',url:'https://catboost.ai/en/docs/concepts/algorithm-main-stages',note:'Understand ordered boosting and why it handles categoricals differently.'},{type:'practice',title:'Benchmark XGBoost vs LightGBM vs CatBoost on identical dataset',url:'https://kaggle.com',note:'Compare: training time, AUC, memory usage. Write a comparison table.'},{type:'video',title:'Krish Naik – LightGBM vs XGBoost comparison',url:'https://youtube.com/c/KrishNaik',note:'Practical comparison with code.'}]},
+      {num:'Day 06',title:'Explainable AI (XAI): SHAP Values, LIME, and Global vs. Local Interpretability',concepts:['SHAP Values','Shapley Values','LIME','Global Interpretability','Local Interpretability','Partial Dependence Plots','ICE Plots','Feature Importance Types'],resources:[{type:'article',title:'SHAP documentation – Scott Lundberg (author)',url:'https://shap.readthedocs.io/en/latest/',note:'Official docs. Start with the tabular example notebooks.'},{type:'video',title:'Scott Lundberg – Understanding AI with SHAP (PyData talk)',url:'https://youtu.be/ngOBhhINWb8',note:'Author of SHAP explaining the key concepts.'},{type:'article',title:'Original LIME paper – Ribeiro et al. (2016)',url:'https://arxiv.org/abs/1602.04938',note:'Read Sections 1–3. Understand the approximation strategy.'},{type:'practice',title:'Apply SHAP to XGBoost model: summary plot, waterfall plot, dependence plot',url:'https://shap.readthedocs.io',note:'Use the credit card fraud dataset. Explain top 5 features to a non-engineer.'}]},
+      {num:'Day 07',title:'Hyperparameter Tuning: GridSearch, RandomSearch, and Bayesian Optimization (Optuna)',concepts:['Grid Search','Randomized Search','Bayesian Optimization','Optuna TPE Sampler','Cross-validation strategy','Search Space Design','Early Stopping'],resources:[{type:'video',title:'Krish Naik – Hyperparameter tuning with Optuna',url:'https://youtu.be/P6NwZVl8ttc',note:'Practical Optuna tutorial from scratch.'},{type:'article',title:'Optuna documentation – Getting Started',url:'https://optuna.readthedocs.io/en/stable/tutorial/10_key_features/001_first.html',note:'Read the official quickstart and visualization docs.'},{type:'practice',title:'Tune XGBoost with Optuna on a Kaggle dataset: compare to GridSearch speed',url:'https://optuna.org',note:'Show that Optuna finds better hyperparameters in fewer trials.'},{type:'article',title:'Towards DS – Bayesian Optimization explained',url:'https://towardsdatascience.com',note:'How acquisition functions work — understand why Bayesian > random.'}]},
+    ]
+  },
+  {
+    id:'w7', part:2, num:'Week 07', title:'Unsupervised Learning & Dimensionality Reduction',
+    days:[
+      {num:'Day 01',title:'Clustering: K-Means, K-Medoids, and the Silhouette Score',concepts:['K-Means Algorithm','Lloyd\'s Algorithm','Inertia','Elbow Method','K-Medoids (PAM)','Silhouette Score','Cluster Initialization (K-Means++)'],resources:[{type:'video',title:'StatQuest – K-Means Clustering',url:'https://youtu.be/4b5d3muPQmA',note:'Watch before implementing.'},{type:'practice',title:'Implement K-Means from scratch (no sklearn): random init + Lloyd\'s iterations',url:'https://numpy.org',note:'Visualize cluster assignments at each iteration. Compare with K-Means++.'},{type:'article',title:'sklearn – Clustering algorithms comparison',url:'https://scikit-learn.org/stable/modules/clustering.html',note:'Run all clustering algorithms on the same dataset. Compare silhouette scores.'},{type:'video',title:'Krish Naik – K-Means with Elbow Method',url:'https://youtube.com/c/KrishNaik',note:'Practical elbow method with code.'}]},
+      {num:'Day 02',title:'Hierarchical Clustering and Dendrograms',concepts:['Agglomerative Clustering','Divisive Clustering','Linkage Criteria (single/complete/average/Ward)','Dendrogram','Cophenetic Correlation','Cutting the Dendrogram'],resources:[{type:'video',title:'StatQuest – Hierarchical Clustering',url:'https://youtu.be/7xHsRkOdVwo',note:'Watch both the conceptual and the Ward linkage videos.'},{type:'practice',title:'scipy.cluster.hierarchy: cluster gene expression data, plot dendrogram',url:'https://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html',note:'Compare Ward vs complete linkage — show the dendrogram difference.'},{type:'book',title:'ISLR – Chapter 12.4: Hierarchical Clustering',url:'https://www.statlearning.com/',note:'Free. Mathematical treatment of linkage criteria.'},{type:'article',title:'Towards DS – Hierarchical Clustering explained step by step',url:'https://towardsdatascience.com',note:'Visual walkthrough with code.'}]},
+      {num:'Day 03',title:'Density-Based Clustering (DBSCAN) and Anomaly Detection',concepts:['DBSCAN','Core Points','Border Points','Noise Points','epsilon/min_samples','Isolation Forest','LOF (Local Outlier Factor)','One-Class SVM'],resources:[{type:'video',title:'StatQuest – DBSCAN clearly explained',url:'https://youtu.be/RDZUdRSDOok',note:'Best visual explanation of DBSCAN parameters.'},{type:'article',title:'Original DBSCAN paper – Ester et al. (1996)',url:'https://www.dbs.ifi.lmu.de/Publikationen/Papers/KDD-96.final.frame.pdf',note:'Read Algorithm 1 and 2. Simple and elegant.'},{type:'practice',title:'Compare K-Means vs DBSCAN on non-spherical cluster shapes (moons, circles)',url:'https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html',note:'Show where K-Means fails and DBSCAN succeeds.'},{type:'practice',title:'Isolation Forest on credit card fraud dataset',url:'https://kaggle.com/datasets/mlg-ulb/creditcardfraud',note:'Tune contamination parameter. Compare F1 with supervised methods.'}]},
+      {num:'Day 04',title:'Dimensionality Reduction: PCA (Principal Component Analysis) Deep Dive',concepts:['Covariance Matrix Eigendecomposition','Variance Explained','Scree Plot','Cumulative Variance','PCA for Visualization','Whitening','Kernel PCA'],resources:[{type:'video',title:'StatQuest – PCA Step-by-Step (2-part)',url:'https://youtube.com/playlist?list=PLblh5JKOoLUJo2TCaqEarB6P3bEHNRBhm',note:'Watch both parts. Best PCA series for ML.'},{type:'practice',title:'Implement PCA from scratch: covariance → eigendecomposition → projection',url:'https://numpy.org',note:'No sklearn.decomposition.PCA. Use numpy.linalg.eigh. Verify against sklearn.'},{type:'book',title:'MML Book – Chapter 10: Dimensionality Reduction with PCA',url:'https://mml-book.github.io/',note:'Free. Mathematical PCA derivation with clear ML connection.'},{type:'article',title:'Distill.pub – How to Use t-SNE Effectively (PCA preprocessing section)',url:'https://distill.pub/2016/misread-tsne/',note:'Why you should PCA before t-SNE.'}]},
+      {num:'Day 05',title:'t-SNE and UMAP for High-Dimensional Visualization',concepts:['t-SNE','Perplexity','KL Divergence','Student t-distribution','UMAP','Manifold Learning','Dimensionality Reduction for Visualization','Neighbors Graph'],resources:[{type:'article',title:'Distill.pub – How to Use t-SNE Effectively',url:'https://distill.pub/2016/misread-tsne/',note:'THE reference for t-SNE. Interactive. Read before running any t-SNE.'},{type:'article',title:'UMAP documentation – Understanding UMAP',url:'https://umap-learn.readthedocs.io/en/latest/how_umap_works.html',note:'Official explanation of UMAP theory. Clear and visual.'},{type:'practice',title:'Compare PCA vs t-SNE vs UMAP on MNIST: visualize digit clusters',url:'https://openml.org/d/554',note:'Show all 3 side-by-side. Explain why t-SNE and UMAP reveal cluster structure.'},{type:'video',title:'UMAP paper author (Leland McInnes) – UMAP talk',url:'https://youtu.be/nq6iPZVUxZU',note:'Theory behind UMAP from the creator. 30 minutes.'}]},
+      {num:'Day 06',title:'Association Rule Learning: Apriori and FP-Growth',concepts:['Market Basket Analysis','Support','Confidence','Lift','Apriori Algorithm','FP-Growth','Candidate Generation','Frequent Itemsets'],resources:[{type:'video',title:'Krish Naik – Association Rule Learning tutorial',url:'https://youtu.be/guVvtZ7ZClw',note:'Practical walk-through with market basket data.'},{type:'article',title:'mlxtend documentation – Association Rules',url:'http://rasbt.github.io/mlxtend/user_guide/frequent_patterns/association_rules/',note:'Official mlxtend docs. Best library for Apriori in Python.'},{type:'practice',title:'Find association rules in Online Retail dataset (UCI)',url:'https://archive.ics.uci.edu/dataset/352/online+retail',note:'Use mlxtend. Find top 10 rules by lift. Interpret business meaning.'},{type:'book',title:'Mining of Massive Datasets – Leskovec et al. (Ch. 6, free)',url:'http://www.mmds.org/',note:'Free. Rigorous treatment of Apriori and FP-Growth algorithms.'}]},
+      {
+        num:'Day 07',
+        title:'🏆 Milestone Project 02: Customer Segmentation and Fraud Detection Pipeline',
+        isMilestone: true,
+        concepts:['K-Means Segmentation','RFM Analysis','DBSCAN Anomaly Detection','Isolation Forest','Pipeline Integration','Visualization','Business Interpretation'],
+        milestoneNote:'This is Milestone 02. It must solve a real business problem: segment customers AND detect fraud. Push to GitHub with README, visualizations, and business interpretation.',
+        resources:[
+          {type:'practice',title:'Customer Segmentation: K-Means + PCA on Online Retail dataset',url:'https://archive.ics.uci.edu/dataset/352/online+retail',note:'RFM features → PCA → K-Means → profile each segment.'},
+          {type:'practice',title:'Fraud Detection: Isolation Forest + DBSCAN on Credit Card dataset',url:'https://kaggle.com/datasets/mlg-ulb/creditcardfraud',note:'Unsupervised fraud detection. Compare with Week 5 supervised approach.'},
+          {type:'article',title:'How to write a great ML project README',url:'https://github.com',note:'Must include: problem → data → methodology → results → insights → limitations.'},
+          {type:'practice',title:'Streamlit dashboard (optional +): visualize customer segments interactively',url:'https://streamlit.io',note:'3-hour build. Preview of Week 15 deployment skills.'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'w8', part:2, num:'Week 08', title:'SQL, Big Data & Feature Engineering',
+    days:[
+      {num:'Day 01',title:'Advanced SQL: Joins, Subqueries, and CTEs (Common Table Expressions)',concepts:['INNER/LEFT/RIGHT/FULL JOIN','Self-Joins','Correlated Subqueries','CTEs (WITH clause)','Recursive CTEs','EXISTS vs IN','Query Optimization'],resources:[{type:'course',title:'Mode Analytics – The SQL Tutorial for Data Analysis',url:'https://mode.com/sql-tutorial/',note:'Free. Best SQL resource for data analysts and ML engineers.'},{type:'practice',title:'LeetCode SQL – Easy & Medium problems (50 problems)',url:'https://leetcode.com/problemset/database/',note:'Do 50 SQL problems. At least 10 must involve CTEs.'},{type:'article',title:'Use the Index, Luke – SQL Performance Explained (free)',url:'https://use-the-index-luke.com/',note:'Understand query execution plans and index usage.'},{type:'video',title:'Alex The Analyst – Advanced SQL full course',url:'https://youtu.be/7mz73uXD9DA',note:'Practical focus. Covers CTE, subquery patterns used in interviews.'}]},
+      {num:'Day 02',title:'Window Functions: RANK, LEAD/LAG, and Partitioning',concepts:['OVER clause','PARTITION BY','ORDER BY in window','ROW_NUMBER','RANK','DENSE_RANK','LEAD/LAG','FIRST_VALUE','Running Totals','Moving Averages'],resources:[{type:'article',title:'Mode Analytics – Window Functions tutorial',url:'https://mode.com/sql-tutorial/sql-window-functions/',note:'Best free resource for window functions.'},{type:'practice',title:'LeetCode SQL window function problems: "Rank Scores", "Department Top 3 Salaries"',url:'https://leetcode.com/problems/rank-scores/',note:'Classic interview questions. Solve without DENSE_RANK workarounds.'},{type:'video',title:'Alex The Analyst – Window Functions in SQL',url:'https://youtu.be/Ww71knvhQ-s',note:'Practical walk-through with real business examples.'},{type:'practice',title:'Build a moving average and rolling metric dashboard query in SQLite',url:'https://sqlite.org',note:'Apply to a time-series dataset. Preview of Week 12 time series.'}]},
+      {num:'Day 03',title:'Feature Engineering: Polynomial Features, Binning, and Interaction Terms',concepts:['Polynomial Features','Interaction Terms','Binning (equal-width/equal-frequency)','Log Transform','Box-Cox Transform','Feature Crosses','Date Features'],resources:[{type:'book',title:'Feature Engineering and Selection – Kuhn & Johnson (free)',url:'http://www.feat.engineering/',note:'The canonical book on feature engineering. Read Chapters 4–6.'},{type:'article',title:'Towards DS – Feature Engineering techniques for ML',url:'https://towardsdatascience.com',note:'Comprehensive list with code for every technique.'},{type:'practice',title:'Ames Housing: engineer 20+ new features, show model improvement',url:'https://kaggle.com/c/house-prices-advanced-regression-techniques',note:'Track RMSE before/after each feature. Only keep features that help.'},{type:'video',title:'Rob Mulla – Feature Engineering for Kaggle competitions',url:'https://youtu.be/gXtdFOjqKDU',note:'Competition-grade feature engineering walk-through.'}]},
+      {num:'Day 04',title:'Scaling Data: StandardScaler vs. RobustScaler vs. MinMaxScaler',concepts:['StandardScaler','MinMaxScaler','RobustScaler','MaxAbsScaler','Quantile Transformer','When scaling matters','Effect on algorithms'],resources:[{type:'article',title:'sklearn Preprocessing documentation',url:'https://scikit-learn.org/stable/modules/preprocessing.html',note:'Read the official comparison of all scalers.'},{type:'practice',title:'Show: KNN + SVM require scaling, Random Forest does not — empirically prove',url:'https://scikit-learn.org',note:'Compare model performance with and without scaling on 3 algorithms.'},{type:'article',title:'Towards DS – Feature Scaling: Why and How to Normalize and Standardize',url:'https://towardsdatascience.com',note:'Clear explanation with when-to-use matrix.'},{type:'video',title:'StatQuest – Normalizing and Standardizing Data',url:'https://youtube.com/c/joshstarmer',note:'Short visual explanation.'}]},
+      {num:'Day 05',title:'Working with NoSQL (MongoDB) and Large Scale Data (Spark Basics)',concepts:['NoSQL vs SQL','MongoDB Document Model','Aggregation Pipeline','PySpark RDD/DataFrame','Spark SQL','Lazy Evaluation','Spark Architecture','Partitioning'],resources:[{type:'course',title:'MongoDB University – MongoDB Basics (M001) free',url:'https://learn.mongodb.com/',note:'Free. Official MongoDB course. 3 hours.'},{type:'course',title:'DataBricks – Apache Spark for Data Science (free community edition)',url:'https://community.cloud.databricks.com',note:'Free Spark environment. Official tutorials.'},{type:'video',title:'Frank Kane – Apache PySpark tutorial (YouTube)',url:'https://youtu.be/IQfG0faDrzE',note:'Best practical PySpark intro. 2 hours.'},{type:'practice',title:'Process 1GB+ dataset with PySpark: group-by, filter, window function',url:'https://databricks-datasets.s3.amazonaws.com/news20.binary/',note:'Use free Databricks Community Edition. Time vs pandas.'}]},
+      {num:'Day 06',title:'Feature Selection: Recursive Feature Elimination (RFE) and Variance Inflation Factor (VIF)',concepts:['Filter Methods','Wrapper Methods (RFE)','Embedded Methods (Lasso)','VIF','SelectKBest','Mutual Information','Permutation Importance'],resources:[{type:'article',title:'sklearn Feature Selection documentation',url:'https://scikit-learn.org/stable/modules/feature_selection.html',note:'Read all methods. Implement at least 3 different approaches.'},{type:'video',title:'Krish Naik – Feature Selection techniques',url:'https://youtube.com/c/KrishNaik',note:'Covers all major feature selection methods with code.'},{type:'practice',title:'Compare: SelectKBest vs RFE vs Lasso vs SHAP importance on same dataset',url:'https://scikit-learn.org',note:'Show which methods agree. Identify stable vs unstable features.'},{type:'article',title:'Variance Inflation Factor (VIF) explained',url:'https://www.statsmodels.org/stable/generated/statsmodels.stats.outliers_influence.variance_inflation_factor.html',note:'Critical for linear models. Drop features with VIF > 10.'}]},
+      {num:'Day 07',title:'Data Leakage: How to Identify and Prevent It in Production',concepts:['Target Leakage','Train-Test Leakage','Time-series leakage','Group leakage','Pipeline-based prevention','Proper CV strategies','Temporal cross-validation'],resources:[{type:'video',title:'Kaggle Learn – Data Leakage (15 min micro-course)',url:'https://kaggle.com/learn/intermediate-machine-learning',note:'Best short introduction to data leakage.'},{type:'article',title:'Towards DS – Data Leakage in ML: How to Detect and Prevent It',url:'https://towardsdatascience.com',note:'Covers all 5 types of leakage with examples.'},{type:'article',title:'The Leakage problem in ML – Kaufman et al.',url:'https://dl.acm.org/doi/10.1145/2382577.2382579',note:'Academic paper. Real-world examples of leakage causing failures.'},{type:'practice',title:'Deliberately introduce and then fix 3 types of leakage in a classification problem',url:'https://scikit-learn.org/stable/modules/cross_validation.html',note:'Target leakage + temporal leakage + preprocessing leakage. Fix all with Pipeline.'}]},
+    ]
+  },
+  // ── PART III ──
+  {
+    id:'w9', part:3, num:'Week 09', title:'Neural Network Foundations & Scale',
+    days:[
+      {num:'Day 01',title:'The Biological Neuron vs. Artificial Perceptron',concepts:['Biological Neuron','Axon/Dendrite','Perceptron','McCulloch-Pitts Model','Threshold Logic Unit','Perceptron Learning Rule','Linear Separability','XOR Problem'],resources:[{type:'video',title:'3Blue1Brown – But what is a neural network?',url:'https://youtu.be/aircAruvnKk',note:'Watch first. Best visual motivation for neural networks ever made.'},{type:'book',title:'Deep Learning (Goodfellow) – Chapter 1 & 6',url:'https://www.deeplearningbook.org/',note:'Free. Chapter 1 is history. Chapter 6 is feedforward networks.'},{type:'practice',title:'Implement a perceptron from scratch: learn AND, OR, NAND gates',url:'https://numpy.org',note:'Show it fails on XOR. This motivates multi-layer networks.'},{type:'article',title:'Colah\'s Blog – A Visual and Intuitive Understanding of Deep Learning',url:'https://colah.github.io',note:'Beautiful visual explanations.'}]},
+      {num:'Day 02',title:'Multi-Layer Perceptron (MLP) and Architecture Design',concepts:['Hidden Layers','Universal Approximation Theorem','Layer Width vs Depth','Weight Initialization','Forward Pass','Network Architecture Choices','Parameter Count'],resources:[{type:'video',title:'Andrej Karpathy – Building makemore: MLP (Part 3)',url:'https://youtu.be/TCH_1BHY58I',note:'The single best resource for building MLP from scratch. Watch fully.'},{type:'video',title:'3Blue1Brown – Neural networks series (all 4 videos)',url:'https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi',note:'Foundational visual understanding. Cannot skip this.'},{type:'practice',title:'Build 2-layer MLP from scratch in NumPy: forward + backward pass',url:'https://numpy.org',note:'No PyTorch. Implement matrix mult → activation → output → loss → gradients.'},{type:'book',title:'Nielsen – Neural Networks and Deep Learning (free online)',url:'http://neuralnetworksanddeeplearning.com/',note:'Free. Best introductory book on neural networks.'}]},
+      {num:'Day 03',title:'Activation Functions: ReLU, Tanh, Softmax, and Swish',concepts:['Sigmoid','Tanh','ReLU','Leaky ReLU','ELU','GELU','Swish','Softmax','Vanishing Gradient Problem','Dead Neurons'],resources:[{type:'article',title:'Comparison of activation functions – Wikipedia + derivations',url:'https://en.wikipedia.org/wiki/Activation_function',note:'Start here for the full comparison. Then derive each gradient.'},{type:'article',title:'Towards DS – Activation Functions: Understanding their Effect on Neural Networks',url:'https://towardsdatascience.com',note:'Practical comparison with training curves.'},{type:'practice',title:'Plot all 6 activation functions and their derivatives. Show dead ReLU empirically.',url:'https://matplotlib.org',note:'Initialize weights poorly → show ReLU neurons dying. Fix with He init.'},{type:'article',title:'Swish paper – Google Brain (2017)',url:'https://arxiv.org/abs/1710.05941',note:'2-page paper. Read it. Understand why smooth activations help deep nets.'}]},
+      {num:'Day 04',title:'Deep Dive: Backpropagation and the Chain Rule in Code',concepts:['Computational Graph','Forward Pass','Loss Computation','Chain Rule Backward','Gradient Accumulation','torch.autograd','Manual vs Auto differentiation'],resources:[{type:'video',title:'Andrej Karpathy – Backpropagation from scratch (micrograd)',url:'https://youtu.be/VMj-3S1tku0',note:'2-hour masterclass. The single most important video in this course.'},{type:'article',title:'Colah\'s Blog – Backpropagation through time (BPTT)',url:'https://colah.github.io/posts/2015-08-Backprop/',note:'Connects the computational graph to the math cleanly.'},{type:'practice',title:'Implement backprop for 3-layer net in NumPy: no PyTorch autograd',url:'https://numpy.org',note:'Derive ALL gradients by hand. Verify with PyTorch gradients.'},{type:'book',title:'Deep Learning – Goodfellow Ch. 6.5: Back-Propagation',url:'https://www.deeplearningbook.org/',note:'Free. Mathematical derivation with notation that matches code.'}]},
+      {num:'Day 05',title:'Optimization for DL: Adam, RMSProp, and Momentum',concepts:['SGD with Momentum','Nesterov Momentum','AdaGrad','RMSProp','Adam','AdamW','Learning Rate Warmup','Cosine Annealing','Weight Decay vs L2'],resources:[{type:'article',title:'Sebastian Ruder – An overview of gradient descent optimization algorithms',url:'https://ruder.io/optimizing-gradient-descent/',note:'The most comprehensive optimizer comparison. Read fully.'},{type:'practice',title:'Implement Adam from scratch: m, v, beta1, beta2, epsilon — no PyTorch',url:'https://numpy.org',note:'Implement Adam on MNIST. Compare convergence with SGD and RMSProp.'},{type:'article',title:'Decoupled Weight Decay (AdamW) paper – Loshchilov & Hutter',url:'https://arxiv.org/abs/1711.05101',note:'3 pages. Understand why AdamW ≠ Adam + L2 regularization.'},{type:'video',title:'Andrej Karpathy – training neural nets (learning rate section)',url:'https://youtu.be/P6NwZVl8ttc',note:'Practical advice on learning rate selection and scheduling.'}]},
+      {num:'Day 06',title:'Overfitting in DL: Dropout, Batch Normalization, and Early Stopping',concepts:['Overfitting in DL','Dropout','Inverted Dropout','Batch Normalization','Layer Normalization','Early Stopping','Data Augmentation','Weight Decay'],resources:[{type:'video',title:'Andrej Karpathy – Building makemore (BatchNorm)',url:'https://youtu.be/q8SA3rM6ckI',note:'Implements BatchNorm from scratch with detailed explanation.'},{type:'article',title:'Dropout paper – Hinton et al. (2014)',url:'https://jmlr.org/papers/v15/srivastava14a.html',note:'Original paper. Section 2 explains the ensemble interpretation.'},{type:'article',title:'Batch Normalization paper – Ioffe & Szegedy (2015)',url:'https://arxiv.org/abs/1502.03167',note:'Read Sections 1–3. Understand why BN accelerates training.'},{type:'practice',title:'Show: network overfits without dropout/BN on CIFAR-10; add both and fix',url:'https://pytorch.org/tutorials/',note:'Train without regularization → plot overfitting → add dropout + BN.'}]},
+      {num:'Day 07',title:'PyTorch Basics & Distributed Machine Learning',concepts:['PyTorch Tensors','Autograd','nn.Module','DataLoader','Custom Dataset','Device Management (CUDA)','DataParallel','DistributedDataParallel'],resources:[{type:'course',title:'PyTorch official tutorials – Learning the Basics',url:'https://pytorch.org/tutorials/beginner/basics/intro.html',note:'Official. Complete in order: tensors → autograd → models → training.'},{type:'video',title:'Andrej Karpathy – Neural Networks: Zero to Hero (full series)',url:'https://youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ',note:'The best PyTorch deep learning course ever made. Free.'},{type:'practice',title:'Build PyTorch training loop: Dataset, DataLoader, Model, Optimizer, Scheduler',url:'https://pytorch.org',note:'Train on MNIST to 99%+. Use GPU if available. Add TensorBoard logging.'},{type:'article',title:'PyTorch DDP tutorial – DistributedDataParallel',url:'https://pytorch.org/tutorials/intermediate/ddp_tutorial.html',note:'Read conceptually. Understand how multi-GPU training works.'}]},
+    ]
+  },
+  {
+    id:'w10', part:3, num:'Week 10', title:'Computer Vision (CV)',
+    days:[
+      {num:'Day 01',title:'Convolutional Neural Networks (CNN) Architecture',concepts:['Convolution Operation','Feature Maps','Receptive Field','CNN vs MLP','Local Connectivity','Weight Sharing','Translation Invariance','Depth in CNNs'],resources:[{type:'video',title:'Andrej Karpathy – CS231n Lecture 5: CNNs (Stanford)',url:'https://youtu.be/bNb2fEVKeEo',note:'The original and best CNN lecture. Takes notes carefully.'},{type:'course',title:'Stanford CS231n – Convolutional Neural Networks for Visual Recognition',url:'https://cs231n.github.io/',note:'Free. The best computer vision course in the world. Read all notes.'},{type:'practice',title:'Implement convolution from scratch in NumPy: 3×3 filter on image',url:'https://numpy.org',note:'Manual sliding window — no PyTorch or scipy.signal. Time vs FFT convolution.'},{type:'video',title:'3Blue1Brown – But what is a convolution?',url:'https://youtu.be/KuXjwB4LzSA',note:'Visual proof of why convolution captures local patterns.'}]},
+      {num:'Day 02',title:'Pooling, Strides, and Padding Mechanics',concepts:['Max Pooling','Average Pooling','Global Average Pooling','Stride','Padding (valid/same)','Feature Map Size Formula','Spatial Reduction'],resources:[{type:'article',title:'CS231n – Convolutional Networks: notes on pooling and padding',url:'https://cs231n.github.io/convolutional-networks/',note:'Read the "Spatial arrangement" and "Pooling layer" sections.'},{type:'practice',title:'Write the output size formula: compute W_out for any combination of params',url:'https://cs231n.github.io',note:'⌊(W + 2P - F)/S + 1⌋ — verify with PyTorch for 10 different configs.'},{type:'video',title:'DeepLearning.AI – CNN architecture mechanics (Week 1 CNN course)',url:'https://coursera.org/learn/convolutional-neural-networks',note:'Andrew Ng explains pooling and stride mechanics clearly.'},{type:'practice',title:'PyTorch: build a 3-layer CNN for CIFAR-10 and visualize feature maps',url:'https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html',note:'Visualize 10 filter activations on a real image using matplotlib.'}]},
+      {num:'Day 03',title:'Classic Architectures: LeNet, AlexNet, VGG',concepts:['LeNet-5','AlexNet','VGG16/19','Architectural evolution','GPU training','ReLU (AlexNet innovation)','Depth scaling','Dropout in CNNs'],resources:[{type:'article',title:'LeNet-5 paper – LeCun et al. (1998)',url:'http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf',note:'Original paper. Read sections 1–3. 6 pages.'},{type:'article',title:'AlexNet paper – Krizhevsky et al. (2012) – ImageNet',url:'https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf',note:'8-page landmark paper. Read it fully. Changed the field forever.'},{type:'practice',title:'Implement VGG16 in PyTorch from scratch (match architecture exactly)',url:'https://arxiv.org/abs/1409.1556',note:'Count parameters. Verify output shapes at each layer.'},{type:'video',title:'Yannic Kilcher – AlexNet paper explained',url:'https://youtu.be/Nks3zfQybeM',note:'Best paper walkthrough for AlexNet.'}]},
+      {num:'Day 04',title:'Modern CV: ResNet (Residual Connections) and Inception',concepts:['Residual Connection','Skip Connection','Identity Mapping','Gradient Highway','ResNet-18/34/50','Inception Modules','1×1 Convolutions','Depthwise Separable Convolutions'],resources:[{type:'article',title:'ResNet paper – He et al. (2015) "Deep Residual Learning"',url:'https://arxiv.org/abs/1512.03385',note:'Read Sections 1–3. Understand WHY skip connections solve vanishing gradients.'},{type:'video',title:'Yannic Kilcher – ResNet paper explained',url:'https://youtu.be/GWt6Fu05voI',note:'Best ResNet paper walk-through.'},{type:'practice',title:'Implement ResNet-18 in PyTorch from scratch: implement the residual block',url:'https://pytorch.org',note:'Build BasicBlock and Bottleneck classes. Compare with torchvision.models.resnet18.'},{type:'article',title:'Inception paper – Szegedy et al. (GoogLeNet)',url:'https://arxiv.org/abs/1409.4842',note:'Read Section 3 on the Inception module. Understand 1×1 convolution bottleneck.'}]},
+      {num:'Day 05',title:'Transfer Learning: Fine-tuning ImageNet Models',concepts:['Transfer Learning','Feature Extraction','Fine-tuning','Frozen Layers','Learning Rate for Fine-tuning','ImageNet pretraining','Domain Adaptation'],resources:[{type:'video',title:'fast.ai – Transfer Learning (Practical DL for Coders, Lesson 1)',url:'https://course.fast.ai/',note:'Best practical intro to transfer learning. Free. Real dataset from lesson 1.'},{type:'article',title:'PyTorch Transfer Learning Tutorial',url:'https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html',note:'Official tutorial. Implement fine-tuning of ResNet18.'},{type:'practice',title:'Fine-tune ResNet50 on a custom 5-class dataset in PyTorch',url:'https://pytorch.org/vision/stable/models.html',note:'Use any small real dataset. Freeze early layers. Achieve 90%+ with < 10 epochs.'},{type:'article',title:'Towards DS – A Comprehensive Guide to Transfer Learning',url:'https://towardsdatascience.com',note:'When to use feature extraction vs fine-tuning — decision tree.'}]},
+      {num:'Day 06',title:'Object Detection: YOLO (You Only Look Once) and R-CNN Concepts',concepts:['Sliding Window','Anchor Boxes','Region Proposal','R-CNN / Fast R-CNN / Faster R-CNN','YOLO grid','IoU','NMS (Non-Maximum Suppression)','mAP'],resources:[{type:'video',title:'Andrej Karpathy – CS231n Lecture 11: Detection',url:'https://youtu.be/nDPWywWRIRo',note:'Stanford lecture on detection architectures. Best overview.'},{type:'article',title:'YOLO v1 paper – Redmon et al. (2016)',url:'https://arxiv.org/abs/1506.02640',note:'Read Sections 1–3. YOLO is conceptually simple — understand the grid.'},{type:'video',title:'Roboflow – YOLOv8 tutorial from scratch',url:'https://youtu.be/wuZtUMEiKmg',note:'Modern YOLOv8 implementation with real dataset.'},{type:'practice',title:'Run YOLOv8 on a real video: implement NMS from scratch',url:'https://github.com/ultralytics/ultralytics',note:'Calculate IoU manually. Implement greedy NMS in NumPy.'}]},
+      {num:'Day 07',title:'Image Augmentation Strategies for Small Datasets',concepts:['Horizontal/Vertical Flip','Rotation','Color Jitter','Random Crop','CutOut','Mixup','CutMix','Albumentations','torchvision.transforms','Test-Time Augmentation (TTA)'],resources:[{type:'article',title:'Albumentations documentation – transforms guide',url:'https://albumentations.ai/docs/',note:'Best augmentation library. Read the transforms catalog.'},{type:'article',title:'Mixup paper – Zhang et al. (2017)',url:'https://arxiv.org/abs/1710.09412',note:'4-page paper. Implement Mixup in 10 lines of code.'},{type:'practice',title:'Compare: 5 augmentation strategies on small dataset (500 images)',url:'https://albumentations.ai',note:'Plot accuracy curves for no aug, basic aug, heavy aug, Mixup, CutMix.'},{type:'video',title:'PyImageSearch – Data Augmentation tutorial',url:'https://pyimagesearch.com',note:'Practical guide to augmentation pipelines for small datasets.'}]},
+    ]
+  },
+  {
+    id:'w11', part:3, num:'Week 11', title:'Natural Language Processing (NLP) & GenAI',
+    days:[
+      {num:'Day 01',title:'Text Preprocessing: Tokenization, Stemming, and Lemmatization',concepts:['Tokenization','Byte-Pair Encoding (BPE)','WordPiece','Stemming','Lemmatization','Stop Words','N-grams','Vocabulary Building','TF-IDF'],resources:[{type:'course',title:'Hugging Face NLP Course – Chapter 1–3 (free)',url:'https://huggingface.co/learn/nlp-course/chapter1/1',note:'THE resource for NLP in 2026. Free, comprehensive, practical.'},{type:'video',title:'Andrej Karpathy – Building a Tokenizer from Scratch',url:'https://youtu.be/zduSFxRajkE',note:'2-hour video implementing BPE tokenizer. Essential for understanding LLMs.'},{type:'practice',title:'Implement BPE tokenizer from scratch in Python',url:'https://github.com/karpathy/minbpe',note:'Follow Karpathy\'s minbpe. No tiktoken. Build the merge rules manually.'},{type:'article',title:'Google Developers – Text Classification Guide (preprocessing section)',url:'https://developers.google.com/machine-learning/guides/text-classification',note:'Practical preprocessing pipeline for classification.'}]},
+      {num:'Day 02',title:'Word Embeddings: Word2Vec, GloVe, and FastText',concepts:['Distributional Semantics','Word2Vec (CBOW/Skip-gram)','Negative Sampling','Semantic Similarity','GloVe (Global Vectors)','FastText (subword)','Embedding Space','Analogy Tasks'],resources:[{type:'article',title:'Word2Vec paper – Mikolov et al. (2013)',url:'https://arxiv.org/abs/1301.3781',note:'Original paper. Read Sections 1–3. Understand skip-gram objective.'},{type:'video',title:'Stanford CS224N – Word Vectors (Lecture 1)',url:'https://youtu.be/rmVRLeJRkl4',note:'Best lecture on word embeddings. Stanford NLP course, free on YouTube.'},{type:'practice',title:'Train Word2Vec on a Wikipedia corpus using gensim',url:'https://radimrehurek.com/gensim/models/word2vec.html',note:'Find analogies: king - man + woman = queen. Visualize with t-SNE.'},{type:'article',title:'GloVe paper – Pennington et al. (Stanford)',url:'https://nlp.stanford.edu/pubs/glove.pdf',note:'Read Sections 1–3. Understand the matrix factorization objective.'}]},
+      {num:'Day 03',title:'Sequence Modeling & Attention Mechanism: Why "Attention is All You Need"',concepts:['RNN','LSTM','GRU','Vanishing Gradient in RNNs','Seq2Seq','Encoder-Decoder','Attention Mechanism','Bahdanau Attention','Self-Attention'],resources:[{type:'video',title:'Andrej Karpathy – Building makemore: RNN/LSTM from scratch',url:'https://youtu.be/PaCmpygFfXo',note:'Implements character-level language model with LSTM from scratch.'},{type:'article',title:'Colah\'s Blog – Understanding LSTM Networks',url:'https://colah.github.io/posts/2015-08-Understanding-LSTMs/',note:'The most-read deep learning article ever written. Essential.'},{type:'article',title:'Attention paper – Bahdanau et al. (2014)',url:'https://arxiv.org/abs/1409.0473',note:'The original attention paper. Read before transformers.'},{type:'practice',title:'Implement character-level LSTM from scratch in PyTorch: train on Shakespeare',url:'https://pytorch.org',note:'Generate text after training. Understand vanishing gradient via gradient norms.'}]},
+      {num:'Day 04',title:'Transformers: BERT, GPT, and Encoder-Decoder Architectures',concepts:['Multi-head Self-Attention','Positional Encoding','Layer Normalization','Feed-forward Sublayer','BERT (Encoder)','GPT (Decoder)','T5 (Encoder-Decoder)','Masked Language Modeling','Causal LM'],resources:[{type:'article',title:'"Attention is All You Need" – Vaswani et al. (2017)',url:'https://arxiv.org/abs/1706.03762',note:'Read Sections 1–4 carefully. This paper defines the architecture.'},{type:'video',title:'Andrej Karpathy – Let\'s build GPT from scratch',url:'https://youtu.be/kCc8FmEb1nY',note:'1.5-hour video building GPT from scratch in PyTorch. Legendary.'},{type:'video',title:'Yannic Kilcher – Attention is All You Need (paper explained)',url:'https://youtu.be/iDulhoQ2pro',note:'Best paper walk-through for the transformer architecture.'},{type:'practice',title:'Implement Scaled Dot-Product Attention from scratch in PyTorch',url:'https://pytorch.org',note:'Write the formula: softmax(QKᵀ/√d_k)V — no F.scaled_dot_product_attention.'}]},
+      {num:'Day 05',title:'Large Language Models (LLMs) & Prompt Engineering Basics',concepts:['LLM Architecture','Scaling Laws','In-context Learning','Emergent Abilities','Chain-of-Thought','Zero/Few-shot Prompting','System Prompts','Temperature/Top-P'],resources:[{type:'article',title:'Lilian Weng – Large Language Models',url:'https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/',note:'The best LLM overview blog. Read fully.'},{type:'video',title:'Andrej Karpathy – Intro to LLMs (1-hour talk)',url:'https://youtu.be/zjkBMFhNj_g',note:'Best 1-hour overview of how LLMs work. Watch this first.'},{type:'course',title:'DeepLearning.AI – ChatGPT Prompt Engineering (free)',url:'https://learn.deeplearning.ai/courses/chatgpt-prompt-eng',note:'2-hour course. Official. Best prompt engineering fundamentals.'},{type:'practice',title:'Build a structured output extractor using OpenAI/Anthropic API + few-shot prompting',url:'https://platform.openai.com/docs',note:'Parse JSON from unstructured text. Test 5 different prompting strategies.'}]},
+      {num:'Day 06',title:'Parameter-Efficient Fine-Tuning (PEFT): LoRA and QLoRA for LLMs',concepts:['Fine-tuning vs PEFT','LoRA (Low-Rank Adaptation)','QLoRA (4-bit quantization)','Adapter layers','Rank decomposition','Trainable parameters','GGUF format','Merging adapters'],resources:[{type:'article',title:'LoRA paper – Hu et al. (2021)',url:'https://arxiv.org/abs/2106.09685',note:'Read Sections 1–4. Understand the rank decomposition ΔW = BA.'},{type:'article',title:'QLoRA paper – Dettmers et al. (2023)',url:'https://arxiv.org/abs/2305.14314',note:'Read Sections 1–3. Understand 4-bit NormalFloat quantization.'},{type:'course',title:'Hugging Face PEFT documentation + examples',url:'https://huggingface.co/docs/peft/en/index',note:'Official docs. Run the LoRA example on Llama 3 or Mistral.'},{type:'practice',title:'Fine-tune Llama 3 8B on a custom dataset using QLoRA on free GPU (Colab)',url:'https://colab.research.google.com',note:'Use unsloth for 2× speed. Train on domain data. Evaluate with ROUGE.'}]},
+      {num:'Day 07',title:'Retrieval-Augmented Generation (RAG) & Vector Databases (Pinecone/Milvus)',concepts:['RAG Architecture','Chunking Strategies','Embedding Models','FAISS','Pinecone','Milvus','Cosine Similarity','Reranking','RAGAS Evaluation'],resources:[{type:'article',title:'RAG paper – Lewis et al. (2020) "Retrieval-Augmented Generation"',url:'https://arxiv.org/abs/2005.11401',note:'Original RAG paper. Read Sections 1–3.'},{type:'course',title:'LangChain – RAG from scratch (official tutorial series)',url:'https://langchain.com/docs',note:'Official LangChain RAG tutorial. Build complete pipeline.'},{type:'practice',title:'Build RAG pipeline from scratch: PyMuPDF → chunk → embed → FAISS → query',url:'https://github.com/facebookresearch/faiss',note:'No LangChain. Implement every component manually. Test with real PDFs.'},{type:'article',title:'RAGAS paper – Evaluation framework for RAG',url:'https://arxiv.org/abs/2309.15217',note:'Implement faithfulness and answer relevance scores on your pipeline.'}]},
+    ]
+  },
+  {
+    id:'w12', part:3, num:'Week 12', title:'Time Series & Recommendation Systems',
+    days:[
+      {num:'Day 01',title:'Time Series Basics: Trend, Seasonality, and Noise',concepts:['Trend','Seasonality','Cyclic Patterns','Irregular Noise','Stationarity','Decomposition (additive/multiplicative)','Rolling Statistics','Autocorrelation (ACF/PACF)'],resources:[{type:'video',title:'StatQuest – Time Series Analysis',url:'https://youtube.com/c/joshstarmer',note:'Watch the time series playlist (5 videos).'},{type:'article',title:'Pandas Time Series documentation',url:'https://pandas.pydata.org/docs/user_guide/timeseries.html',note:'Read resample, rolling, shift operations.'},{type:'practice',title:'Decompose AirPassengers time series: trend + seasonality + residual',url:'https://statsmodels.org',note:'Use statsmodels seasonal_decompose. Plot ACF and PACF. Check stationarity.'},{type:'book',title:'Forecasting: Principles and Practice – Hyndman & Athanasopoulos (free)',url:'https://otexts.com/fpp3/',note:'Free online. Best forecasting book. Read Chapters 2–3.'}]},
+      {num:'Day 02',title:'Classical Models: AR, MA, ARIMA, and SARIMA',concepts:['Autoregressive (AR)','Moving Average (MA)','ARIMA (p,d,q)','Differencing','AIC/BIC model selection','SARIMA','Box-Jenkins Methodology'],resources:[{type:'book',title:'Forecasting: Principles and Practice – Chapters 8–9',url:'https://otexts.com/fpp3/',note:'Free. Chapter 8 covers ARIMA; Chapter 9 covers SARIMA.'},{type:'video',title:'Rob Hyndman – ARIMA models (YouTube)',url:'https://youtube.com/c/statscast',note:'Author of the FPP3 book teaching his own content.'},{type:'practice',title:'Fit SARIMA to monthly airline passengers: ACF → differencing → fit → forecast',url:'https://statsmodels.org/stable/examples/notebooks/generated/statespace_sarimax_stata.html',note:'Use Box-Jenkins: identify → estimate → diagnose → forecast.'},{type:'article',title:'Towards DS – Complete ARIMA Tutorial in Python',url:'https://towardsdatascience.com',note:'Step-by-step with code and ADF test.'}]},
+      {num:'Day 03',title:'Modern Forecasting: Facebook Prophet and DeepAR',concepts:['Prophet Model','Trend Components','Changepoints','Holiday Effects','DeepAR (Amazon)','Autoregressive RNN','Probabilistic Forecasting','Quantile Forecasting'],resources:[{type:'article',title:'Prophet documentation – Quick Start',url:'https://facebook.github.io/prophet/docs/quick_start.html',note:'Official docs. Build a forecast in 10 lines.'},{type:'article',title:'Prophet paper – Taylor & Letham (2018)',url:'https://peerj.com/preprints/3190.pdf',note:'Read Sections 2–3. Understand the additive component model.'},{type:'practice',title:'Forecast Bitcoin or stock prices with Prophet: add custom seasonalities',url:'https://pypi.org/project/prophet/',note:'Add US holidays + cryptocurrency-specific seasonality. Evaluate with MAPE.'},{type:'video',title:'DeepAR paper walkthrough – GluonTS tutorial',url:'https://ts.gluon.ai/stable/tutorials/forecasting/quick_start_tutorial.html',note:'Amazon\'s probabilistic forecasting framework.'}]},
+      {num:'Day 04',title:'Recommendation Systems: Collaborative Filtering (User/Item-based)',concepts:['Collaborative Filtering','User-based CF','Item-based CF','Cosine Similarity','Pearson Correlation','Cold Start Problem','Memory-based vs Model-based'],resources:[{type:'article',title:'Netflix Prize – What it taught us about recommendations',url:'https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429',note:'Read before building anything. Context for all recommendation techniques.'},{type:'video',title:'Stanford CS246 – Recommendation Systems (lecture slides)',url:'https://web.stanford.edu/class/cs246/slides/09-recsys1.pdf',note:'Academic foundation. Clear derivation of CF similarity metrics.'},{type:'practice',title:'Build user-based and item-based CF from scratch on MovieLens 100K',url:'https://grouplens.org/datasets/movielens/',note:'No surprise/sklearn. Pure NumPy. Compute similarity matrix manually.'},{type:'article',title:'surpriselib documentation – CF algorithms',url:'https://surpriselib.com/',note:'Then verify your implementation against surpriselib.'}]},
+      {num:'Day 05',title:'Matrix Factorization: ALS and SVD for Recommendations',concepts:['Matrix Factorization','Latent Factors','ALS (Alternating Least Squares)','SVD for Recommendations','Funk SVD','Regularization in MF','Implicit Feedback','Confidence Levels'],resources:[{type:'article',title:'Matrix Factorization Techniques for Recommender Systems – Koren et al. (2009)',url:'https://datajobs.com/data-science-repo/Recommender-Systems-[Netflix].pdf',note:'The paper from the Netflix Prize winners. Read fully.'},{type:'practice',title:'Implement ALS matrix factorization from scratch on MovieLens',url:'https://numpy.org',note:'Alternate between user factors and item factors. Visualize latent space.'},{type:'article',title:'Implicit Feedback CF – Hu et al. (2008)',url:'http://yifanhu.net/PUB/cf.pdf',note:'How to handle implicit (click, play) vs explicit (rating) feedback.'},{type:'video',title:'Recommender Systems: Simon Funk\'s SVD blog post',url:'https://sifter.org/simon/journal/20061211.html',note:'Original Funk SVD explanation. 10 minute read. Historic.'}]},
+      {num:'Day 06',title:'Content-Based Filtering and Hybrid Systems',concepts:['Content-Based Filtering','TF-IDF for recommendations','Item Profiles','User Profiles','Hybrid Recommendation','Two-Tower Model','Embedding Similarity'],resources:[{type:'article',title:'Google – Deep Neural Networks for YouTube Recommendations',url:'https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45530.pdf',note:'The two-tower model paper. 8 pages. Read how YouTube actually works.'},{type:'practice',title:'Build content-based movie recommender using TF-IDF on movie descriptions',url:'https://kaggle.com/datasets/tmdb/tmdb-movie-metadata',note:'Compute cosine similarity between movie TF-IDF vectors.'},{type:'article',title:'Building a Hybrid Recommender with CF + CBF',url:'https://towardsdatascience.com',note:'Combine collaborative and content-based with weighted hybrid.'},{type:'video',title:'Two-Tower Model for RecSys – PyTorch implementation',url:'https://youtu.be/9Z2W-qHi85A',note:'Modern production recommendation architecture.'}]},
+      {
+        num:'Day 07',
+        title:'🏆 Milestone Project 03: Build a Movie Recommender or Stock Price Predictor',
+        isMilestone: true,
+        concepts:['End-to-End Pipeline','Model Training','Evaluation','Deployment','Technical Documentation','GitHub README','Streamlit Dashboard'],
+        milestoneNote:'This is Milestone 03. Build a system that a user can actually interact with — not a notebook. Deploy it, make it accessible, write a professional README.',
+        resources:[
+          {type:'practice',title:'Option A: Movie Recommender — CF + CBF hybrid with Streamlit frontend',url:'https://grouplens.org/datasets/movielens/',note:'Precision@K and Recall@K evaluation. Deploy with Streamlit.'},
+          {type:'practice',title:'Option B: Stock Price Predictor — ARIMA + Prophet + LSTM ensemble',url:'https://finance.yahoo.com/news/',note:'Use yfinance. Evaluate with MAPE and Directional Accuracy.'},
+          {type:'practice',title:'Deploy to Streamlit Cloud (free)',url:'https://streamlit.io/cloud',note:'Free deployment. Add GitHub Actions for auto-deploy on push.'},
+          {type:'article',title:'How to write a great ML model README',url:'https://github.com',note:'Include: problem → dataset → architecture → results → demo link → limitations.'},
+        ]
+      },
+    ]
+  },
+  // ── PART IV ──
+  {
+    id:'w13', part:4, num:'Week 13', title:'MLOps & Model Deployment',
+    days:[
+      {num:'Day 01',title:'The ML Lifecycle: Experiment Tracking with MLflow or W&B',concepts:['ML Lifecycle','Experiment Tracking','MLflow Tracking Server','Runs and Experiments','Artifacts','W&B (Weights & Biases)','Model Registry','Reproducibility'],resources:[{type:'course',title:'MLflow documentation – Quickstart',url:'https://mlflow.org/docs/latest/quickstart.html',note:'Official quickstart. Track your first experiment in 10 minutes.'},{type:'video',title:'W&B – Experiment Tracking Tutorial (free course)',url:'https://course.wandb.ai/courses/effective-mlops',note:'Official W&B course. 4 hours. Best practical experiment tracking course.'},{type:'practice',title:'Refactor a previous ML project: add MLflow tracking for all experiments',url:'https://mlflow.org',note:'Log: params, metrics, artifacts, model. Run 10 experiments. Compare in UI.'},{type:'article',title:'Chip Huyen – ML Engineering (experiment tracking chapter)',url:'https://huyenchip.com/mlops/',note:'Production-grade perspective on experiment tracking.'}]},
+      {num:'Day 02',title:'Containerization: Docker for Data Scientists',concepts:['Dockerfile','Docker Image','Container','Layers','docker build/run/push','Port Mapping','Volume Mounting','docker-compose','Multi-stage builds'],resources:[{type:'course',title:'Docker Official Tutorial – Get Started',url:'https://docs.docker.com/get-started/',note:'Official docs. Complete all 9 parts.'},{type:'video',title:'TechWorld with Nana – Docker Crash Course for Beginners',url:'https://youtu.be/pg19Z8LL06w',note:'Best practical Docker tutorial for engineers. 3 hours.'},{type:'practice',title:'Containerize a PyTorch model with FastAPI: Dockerfile → build → run → test',url:'https://docs.docker.com',note:'Your /predict endpoint must work inside Docker. Write a docker-compose.yml.'},{type:'article',title:'Full Stack Deep Learning – Docker for ML (Lecture 6)',url:'https://fullstackdeeplearning.com/course/2022/',note:'Free course. Most relevant section for ML Docker workflows.'}]},
+      {num:'Day 03',title:'Model APIs: Building REST APIs with FastAPI',concepts:['REST API','FastAPI','Pydantic','HTTP Methods','Request/Response Models','Async Endpoints','API Testing (httpx)','Swagger UI','Middleware'],resources:[{type:'course',title:'FastAPI official documentation – Tutorial',url:'https://fastapi.tiangolo.com/tutorial/',note:'Read Chapters 1–10. FastAPI docs are exceptionally good.'},{type:'video',title:'TechWorld with Nana – FastAPI Tutorial',url:'https://youtu.be/0sOvCWFmrtA',note:'Practical. Builds a real FastAPI app with database.'},{type:'practice',title:'Build a model serving API: POST /predict → load model → return JSON predictions',url:'https://fastapi.tiangolo.com',note:'Add: input validation, error handling, health check endpoint, API key auth.'},{type:'article',title:'Towards DS – Deploying ML Models with FastAPI',url:'https://towardsdatascience.com',note:'ML-specific FastAPI patterns: batch prediction, async, model caching.'}]},
+      {num:'Day 04',title:'Cloud Deployment: AWS SageMaker or GCP Vertex AI + Cost Optimization',concepts:['AWS SageMaker','Vertex AI','Model Endpoint','Auto-scaling','Instance Types','Spot Instances','Inference Cost Optimization','Model Compression'],resources:[{type:'course',title:'AWS SageMaker Studio Lab (free)',url:'https://studiolab.sagemaker.aws/',note:'Free GPU compute. No credit card. Official AWS environment.'},{type:'article',title:'GCP Vertex AI documentation – Deploying a model',url:'https://cloud.google.com/vertex-ai/docs/start/introduction-unified-platform',note:'Official docs. Read the "Deploy a model to an endpoint" guide.'},{type:'video',title:'AWS – SageMaker full tutorial (YouTube)',url:'https://youtu.be/g3W1hX8sGSQ',note:'End-to-end SageMaker workflow.'},{type:'practice',title:'Deploy your FastAPI model to AWS with Docker: build → push ECR → run on EC2',url:'https://aws.amazon.com',note:'Free tier. Log total cost. Write cost optimization notes.'}]},
+      {num:'Day 05',title:'CI/CD for ML: GitHub Actions and Automated Testing',concepts:['CI/CD Pipeline','GitHub Actions Workflow','YAML Syntax','pytest for ML','Model Testing','Data Validation Tests','Automated Docker Build','Semantic Versioning'],resources:[{type:'course',title:'GitHub Actions documentation – Quickstart',url:'https://docs.github.com/en/actions/quickstart',note:'Official docs. Build your first workflow in 10 minutes.'},{type:'article',title:'Made With ML – CI/CD for Machine Learning',url:'https://madewithml.com/courses/mlops/cicd/',note:'Best ML-specific CI/CD guide. Full workflow with testing.'},{type:'practice',title:'Add GitHub Actions to your ML project: lint → test → build Docker → push',url:'https://github.com/features/actions',note:'Trigger on push to main. Run pytest. Build Docker image. All automated.'},{type:'video',title:'TechWorld with Nana – CI/CD Pipeline with GitHub Actions',url:'https://youtu.be/R8_veQiYBjI',note:'Complete CI/CD tutorial.'}]},
+      {num:'Day 06',title:'Model Monitoring: Detecting Data Drift, Concept Drift, and System Failures',concepts:['Data Drift','Concept Drift','Covariate Shift','PSI (Population Stability Index)','KL Divergence for drift','Evidently AI','Prometheus','Grafana','Alerting'],resources:[{type:'course',title:'Evidently AI documentation – Getting Started',url:'https://docs.evidentlyai.com/',note:'Best open-source model monitoring library. Read the quickstart.'},{type:'article',title:'Chip Huyen – Data Distribution Shifts and Monitoring',url:'https://huyenchip.com/2022/02/07/data-distribution-shifts-and-monitoring.html',note:'The definitive guide to production ML monitoring.'},{type:'practice',title:'Add Evidently AI monitoring to your deployed model: track 5 drift metrics',url:'https://evidentlyai.com',note:'Simulate drift by injecting noise. Alert when PSI > 0.2.'},{type:'video',title:'MLflow Model Monitoring tutorial',url:'https://youtu.be/nML7aOoVRnE',note:'End-to-end monitoring setup with MLflow.'}]},
+      {num:'Day 07',title:'Scalable Serving: Kubernetes and TorchServe Basics',concepts:['Kubernetes','Pods','Deployments','Services','Horizontal Pod Autoscaling','TorchServe','Model Archiver','Batch Inference','Load Balancing'],resources:[{type:'course',title:'Kubernetes official tutorial – Learn Kubernetes Basics',url:'https://kubernetes.io/docs/tutorials/kubernetes-basics/',note:'Official interactive tutorial. 6 modules. 2 hours.'},{type:'video',title:'TechWorld with Nana – Kubernetes Crash Course',url:'https://youtu.be/s_o8dwzRlu4',note:'Best K8s intro. 4 hours. Covers everything needed for ML deployment.'},{type:'practice',title:'Deploy your Docker ML model to Kubernetes (local): minikube → kubectl → service',url:'https://minikube.sigs.k8s.io/docs/',note:'Use minikube locally. Create Deployment + Service + HPA. Simulate load.'},{type:'article',title:'TorchServe documentation – Getting Started',url:'https://pytorch.org/serve/',note:'Official PyTorch model server. Read the image_classifier example.'}]},
+    ]
+  },
+  {
+    id:'w14', part:4, num:'Week 14', title:'Data Structures, Algorithms & ML System Design',
+    days:[
+      {num:'Day 01',title:'Big O Notation and Time/Space Complexity',concepts:['Big O','Time Complexity','Space Complexity','Best/Worst/Average Case','Amortized Analysis','Common Complexities','Recurrence Relations','Master Theorem'],resources:[{type:'course',title:'NeetCode.io – Algorithms & Data Structures (free)',url:'https://neetcode.io/roadmap',note:'Best structured DSA course. Use the roadmap. Free videos.'},{type:'book',title:'Grokking Algorithms – Aditya Bhargava (illustrated)',url:'https://www.manning.com/books/grokking-algorithms',note:'Visual. Best intro for people who want to understand, not memorize.'},{type:'practice',title:'Solve 10 LeetCode Easy problems: analyze Big O for each solution',url:'https://leetcode.com',note:'Write the time + space complexity for every solution you write.'},{type:'video',title:'CS Dojo – Big O Notation for Beginners',url:'https://youtu.be/D6xkbGLQesk',note:'Clear 20-minute visual explanation.'}]},
+      {num:'Day 02',title:'Arrays, Strings, and Hash Maps (Interview Essentials)',concepts:['Array Operations','Two Pointers','Sliding Window','Prefix Sum','String Manipulation','HashMap','HashSet','Frequency Counting','Anagram Detection'],resources:[{type:'course',title:'NeetCode – Arrays & Hashing section',url:'https://neetcode.io/roadmap',note:'Complete this section first. Contains all the patterns.'},{type:'practice',title:'LeetCode: Two Sum, Group Anagrams, Top K Frequent, Product of Array Except Self',url:'https://leetcode.com/problems/two-sum/',note:'These 4 problems cover all array/hashmap patterns for ML interviews.'},{type:'article',title:'14 Patterns to Ace Any Coding Interview Question',url:'https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed',note:'Pattern-based approach. Read before grinding LeetCode.'},{type:'video',title:'NeetCode – Array & Hashing (YouTube playlist)',url:'https://youtube.com/c/NeetCode',note:'Video solutions for every problem with pattern explanation.'}]},
+      {num:'Day 03',title:'Linked Lists, Stacks, Trees, and Queues',concepts:['Singly/Doubly Linked List','Stack (LIFO)','Queue (FIFO)','Deque','Binary Tree','BST','Tree Traversal (BFS/DFS)','Heap'],resources:[{type:'course',title:'NeetCode – Trees and Linked List sections',url:'https://neetcode.io/roadmap',note:'Complete Trees section fully. Essential for ML system design.'},{type:'practice',title:'LeetCode: Reverse Linked List, Valid Parentheses, Invert Binary Tree, BFS Level Order',url:'https://leetcode.com',note:'Classic problems. Solve without looking at solutions.'},{type:'article',title:'Visualgo – Data Structure Visualizations',url:'https://visualgo.net/',note:'Visual animations of all data structures. Use to understand before coding.'},{type:'video',title:'NeetCode – Tree problems (YouTube)',url:'https://youtube.com/c/NeetCode',note:'Clear solutions with pattern analysis.'}]},
+      {num:'Day 04',title:'Sorting and Searching (Binary Search)',concepts:['Merge Sort','Quick Sort','Heap Sort','Counting Sort','Binary Search','Search in Rotated Array','Divide and Conquer','Two Pointers for sorted arrays'],resources:[{type:'video',title:'NeetCode – Binary Search section (YouTube)',url:'https://youtube.com/c/NeetCode',note:'Binary search has one pattern. Master it here.'},{type:'practice',title:'Implement Merge Sort, Quick Sort, and Binary Search from scratch',url:'https://numpy.org',note:'No sort(). Write recursive merge sort. Analyze Big O for each.'},{type:'practice',title:'LeetCode: Binary Search, Search in Rotated Array, Find Min in Rotated Array',url:'https://leetcode.com/problems/binary-search/',note:'3 binary search problems that cover all variants.'},{type:'article',title:'Algorithms 4th Edition – Sedgewick (Chapter 2: Sorting)',url:'https://algs4.cs.princeton.edu/home/',note:'Free online reference. Princeton quality.'}]},
+      {num:'Day 05',title:'Scalable System Architecture: Load Balancers, Latency vs. Throughput',concepts:['Load Balancer','Horizontal vs Vertical Scaling','Latency','Throughput','CAP Theorem','Caching (Redis)','Message Queues (Kafka)','API Gateway','Rate Limiting'],resources:[{type:'book',title:'Designing Data-Intensive Applications – Martin Kleppmann (DDIA)',url:'https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/',note:'The best system design book. Read Chapters 1, 5, 9.'},{type:'article',title:'System Design Primer – Donne Martin (GitHub, free)',url:'https://github.com/donnemartin/system-design-primer',note:'Most starred system design resource. Read fully for interviews.'},{type:'video',title:'Grokking the System Design Interview – key concepts',url:'https://youtu.be/i53Gi_K3o7I',note:'Top interview system design concepts in 30 minutes.'},{type:'practice',title:'Design the system architecture for a real-time recommendation engine',url:'https://github.com/donnemartin/system-design-primer',note:'Draw the architecture: ingestion → feature store → model → serving → caching.'}]},
+      {num:'Day 06',title:'ML System Design Case Studies: Netflix Recommendation Engine & Uber ETA Prediction',concepts:['Feature Store','Online/Offline Features','Model Serving Architecture','A/B Testing Infrastructure','Real-time Feature Engineering','Two-Tower Model','ETA Prediction','Embeddings at Scale'],resources:[{type:'article',title:'Netflix Tech Blog – How Netflix Recommendations Work',url:'https://netflixtechblog.com/system-architectures-for-personalization-and-recommendation-e081aa94b5d8',note:'Official Netflix engineering blog. 15-minute read.'},{type:'article',title:'Uber Engineering – The Architecture of UberEATS Suggestion',url:'https://eng.uber.com/food-discovery/',note:'Real ML system design. Read for ETA and recommendations.'},{type:'video',title:'ML System Design – Chip Huyen course (free)',url:'https://huyenchip.com/mlops/',note:'Best ML system design course. Free. Used at Stanford.'},{type:'practice',title:'Design: Real-time fraud detection system that handles 10K transactions/sec',url:'https://github.com',note:'Architecture: Kafka → feature engineering → model serving → alerting. Draw it.'}]},
+      {num:'Day 07',title:'Coding Mock Interview: LeetCode Easy/Medium for Data Science',concepts:['Interview Patterns','Time Management','Communication while coding','Clarifying Questions','Brute Force → Optimize','Edge Cases','Testing your solution'],resources:[{type:'practice',title:'Timed mock: 2 LeetCode problems in 45 minutes (Blind 75 list)',url:'https://neetcode.io/practice',note:'Use the Blind 75 list. Time yourself. Talk aloud while solving.'},{type:'article',title:'Blind 75 LeetCode Problems – must-do list',url:'https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions',note:'75 essential interview problems. Solve all before Week 16.'},{type:'video',title:'Clement Mihailescu – How to approach coding interviews',url:'https://youtu.be/rw4s4M3hFfs',note:'From AlgoExpert founder. Covers communication + approach.'},{type:'practice',title:'Pramp.com – Free mock coding interview with a real partner',url:'https://pramp.com',note:'Free peer-to-peer mock interviews. Do at least 3 before real interviews.'}]},
+    ]
+  },
+  {
+    id:'w15', part:4, num:'Week 15', title:'Capstone Project — The "Job-Winner" Portfolio',
+    days:[
+      {num:'Day 01',title:'Project Ideation: Solving a Real Business Problem',concepts:['Problem Framing','Business Impact','Dataset Availability','Feasibility Assessment','Unique Angle','Target Audience','Success Metrics','Project Scope'],resources:[{type:'article',title:'How to pick a great ML portfolio project',url:'https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c',note:'Read before deciding what to build.'},{type:'article',title:'Kaggle – Active competitions with real business problems',url:'https://kaggle.com/competitions',note:'Live competitions mean you can benchmark against thousands of models.'},{type:'practice',title:'Write a 1-page project proposal: problem + business value + dataset + success metric',url:'https://github.com',note:'Share on LinkedIn and ask for feedback. Iterate before coding.'},{type:'video',title:'Chip Huyen – How to pick ML projects',url:'https://youtu.be/zmYIW4_4aUo',note:'Practical framework for choosing impactful projects.'}]},
+      {num:'Day 02',title:'Data Acquisition: Web Scraping or API Data Extraction',concepts:['Web Scraping (Beautiful Soup/Scrapy)','REST API Data Extraction','Rate Limiting','robots.txt','Data Versioning (DVC)','Data Quality Checks','API Authentication'],resources:[{type:'article',title:'Real Python – Web Scraping with Python',url:'https://realpython.com/python-web-scraping-practical-introduction/',note:'Complete BeautifulSoup tutorial.'},{type:'video',title:'Tech With Tim – Scrapy Tutorial (YouTube)',url:'https://youtu.be/s4jtkzHhLzY',note:'Best Scrapy tutorial for production scraping.'},{type:'article',title:'DVC documentation – Getting Started',url:'https://dvc.org/doc/start',note:'Version your datasets like code. Essential for reproducible ML.'},{type:'practice',title:'Scrape a real website (with permission) OR pull data via a public API',url:'https://publicapis.dev',note:'publicapis.dev has 1000+ free APIs. Pick one relevant to your project.'}]},
+      {num:'Day 03',title:'Robust Data Pipeline and Feature Store Creation',concepts:['ETL Pipeline','Data Validation','Feature Store (Feast/Hopsworks)','Online vs Offline Features','Point-in-time Correctness','Data Versioning','Schema Validation (Great Expectations)'],resources:[{type:'article',title:'Feast documentation – Getting Started',url:'https://feast.dev/docs',note:'Open-source feature store. Read the architecture docs.'},{type:'article',title:'Great Expectations documentation',url:'https://greatexpectations.io/docs/oss/tutorials/quickstart/',note:'Data validation library. Set up expectations on your dataset.'},{type:'practice',title:'Build a complete data pipeline: scrape → clean → validate → feature store → serve',url:'https://feast.dev',note:'Use Great Expectations for validation. Document every pipeline step.'},{type:'video',title:'Hopsworks – Feature Store Tutorial',url:'https://youtu.be/feGIkaMxBCM',note:'Full feature store implementation walkthrough.'}]},
+      {num:'Day 04',title:'Model Training, Tuning, Experimentation, and SHAP Interpretation',concepts:['Experiment Design','Baseline Model','Iterative Improvement','Optuna Hyperparameter Search','SHAP for Model Explanation','Learning Curves','Model Comparison'],resources:[{type:'practice',title:'Run 20+ experiments with MLflow tracking. Document every change.',url:'https://mlflow.org',note:'Track: dataset version + hyperparams + metrics + SHAP plots for top model.'},{type:'article',title:'Building a Machine Learning Benchmark – Towards DS',url:'https://towardsdatascience.com',note:'How to properly benchmark and compare models.'},{type:'practice',title:'Create a SHAP model explanation report: summary + waterfall + dependence plots',url:'https://shap.readthedocs.io',note:'Write 3 bullet points explaining each top SHAP feature in plain English.'},{type:'video',title:'Optuna + MLflow integration tutorial',url:'https://optuna.org/tutorials',note:'Automate hyperparameter search and log results.'}]},
+      {num:'Day 05',title:'Deployment: Creating a Live Dashboard (Streamlit) or API',concepts:['Streamlit','Gradio','FastAPI deployment','Docker + Streamlit','Hugging Face Spaces (free)','Render.com (free)','Environment Variables','Health Checks'],resources:[{type:'course',title:'Streamlit documentation – Get Started',url:'https://docs.streamlit.io/library/get-started',note:'Official docs. Build a working app in 1 hour.'},{type:'article',title:'Deploy Streamlit to Hugging Face Spaces (free)',url:'https://huggingface.co/docs/hub/en/spaces-sdks-streamlit',note:'Free deployment with GPU. No AWS account needed.'},{type:'practice',title:'Deploy your model as a Streamlit app with Docker to HF Spaces or Render.com',url:'https://render.com',note:'App must be publicly accessible. Add error handling and input validation.'},{type:'video',title:'Nicholas Renotte – Deploy ML App with Streamlit',url:'https://youtu.be/FOULV9Xij_8',note:'Complete deployment walkthrough.'}]},
+      {num:'Day 06',title:'Documentation: Writing a Professional README and Technical Blog Post',concepts:['README Structure','Technical Blog Writing','Architecture Diagrams','Results Tables','Demo GIFs','Blog SEO','LinkedIn Post','Medium vs Personal Blog'],resources:[{type:'article',title:'makeareadme.com – README templates and standards',url:'https://makeareadme.com/',note:'Start here for README structure.'},{type:'article',title:'How to Write a Blog Post That Gets Read – Eugene Yan',url:'https://eugeneyan.com/writing/how-to-write/',note:'Applied ML engineer writing guide. Clear and practical.'},{type:'practice',title:'Write a 800-word technical blog post about your capstone project',url:'https://hashnode.com',note:'Publish on Medium, Hashnode, or your blog. Share on LinkedIn.'},{type:'practice',title:'Record a 30-second demo GIF of your app using LICEcap or Gyroflow',url:'https://www.cockos.com/licecap/',note:'GIFs make your GitHub README 5× more impressive.'}]},
+      {
+        num:'Day 07',
+        title:'🏆 Project Presentation: Recording a 5-Minute Technical Demo',
+        isMilestone: true,
+        concepts:['Demo Script','Technical Communication','Problem Statement','Architecture Walk-through','Results Presentation','Trade-off Explanation','Next Steps'],
+        milestoneNote:'This is your Capstone. Record a 5-minute demo. This video can go on LinkedIn, in cover letters, and as a portfolio piece. Treat it like you\'re presenting to a CTO.',
+        resources:[
+          {type:'practice',title:'Record: Problem → Dataset → Architecture → Demo → Results → Limitations',url:'https://www.loom.com',note:'Use Loom (free). 5 minutes max. Script it first.'},
+          {type:'article',title:'How to present a data science project to non-technical stakeholders',url:'https://towardsdatascience.com',note:'Lead with business impact, not model accuracy.'},
+          {type:'practice',title:'Post the demo link on LinkedIn with a 200-word write-up',url:'https://linkedin.com',note:'Tag 3 people who influenced you. This is your public proof of work.'},
+          {type:'article',title:'Checklist: GitHub repo quality before sharing',url:'https://github.com',note:'README + requirements.txt + Dockerfile + tests + .gitignore + LICENSE.'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'w16', part:4, num:'Week 16', title:'The Job Hunt — Cracking the Interview',
+    days:[
+      {num:'Day 01',title:'Resume Surgery: Keyword Optimization for ATS',concepts:['ATS (Applicant Tracking Systems)','Keyword Density','Action Verbs','Quantified Achievements','One-page Rule','Resume Format','Skills Section','Tailoring per Role'],resources:[{type:'article',title:'How to Beat ATS with Your Data Science Resume – Towards DS',url:'https://towardsdatascience.com',note:'Specific to ML/DS roles. Keyword strategy included.'},{type:'article',title:'Resume tips from a Meta recruiter – thread',url:'https://linkedin.com',note:'Search LinkedIn for "#MLresume tips from recruiters".'},{type:'practice',title:'Run your resume through Jobscan against 3 ML job descriptions',url:'https://jobscan.co',note:'Aim for 80%+ match score. Rewrite bullets to match job language.'},{type:'article',title:'Jake\'s Resume Template (LaTeX, free)',url:'https://github.com/jakegut/resume',note:'The most-cloned resume template for software/ML engineers.'}]},
+      {num:'Day 02',title:'LinkedIn Branding: Networking and Cold Outreach Strategies',concepts:['LinkedIn Profile Optimization','Connection Strategy','Cold Outreach Templates','Alumni Network','LinkedIn Content','Open to Work','Second Degree Connections','Recruiter InMail'],resources:[{type:'article',title:'ANTERN Framework for LinkedIn profiles',url:'https://linkedin.com',note:'Headline + About + Skills + Experience all optimized for ML roles.'},{type:'article',title:'Cold Email Framework – Soham Parekh Method',url:'https://linkedin.com',note:'The exact cold outreach framework used by engineers who get remote roles.'},{type:'practice',title:'Send 5 cold messages today using the SPEAR framework (no mass messaging)',url:'https://linkedin.com',note:'Personalized, specific, short. Reference one specific thing about their work.'},{type:'video',title:'Jeff Su – LinkedIn Profile Tips (YouTube)',url:'https://youtu.be/bPPtCzIpBjE',note:'Practical LinkedIn optimization. 15 minutes.'}]},
+      {num:'Day 03',title:'Behavioral Interviews: STAR Method for "Tell me about a time..."',concepts:['STAR Method (Situation/Task/Action/Result)','Leadership','Conflict Resolution','Failure Stories','Cross-functional Collaboration','ML Project Storytelling','Weakness Framing'],resources:[{type:'article',title:'STAR Method – complete guide for engineers',url:'https://www.themuse.com/advice/star-interview-method',note:'Most complete STAR guide with examples.'},{type:'practice',title:'Write 10 STAR stories covering: leadership, failure, technical challenge, collaboration',url:'https://notion.so',note:'Write them in Notion. Memorize the structure, not the words.'},{type:'video',title:'Jeff H Sipe – Behavioral Interview Questions for Data Science',url:'https://youtu.be/OcOeEoMbw10',note:'DS-specific behavioral question patterns.'},{type:'practice',title:'Mock behavioral interview with a peer: record yourself answering 5 STAR questions',url:'https://pramp.com',note:'Watch the recording. It reveals filler words and unclear narratives.'}]},
+      {num:'Day 04',title:'Technical Case Studies: Translating Business Problems to ML Metrics',concepts:['Problem Framing','KPI to ML Metric Translation','Metric Choice','Success Definition','Baseline Model','A/B Testing Design','Production Considerations','Stakeholder Communication'],resources:[{type:'article',title:'Chip Huyen – ML Interviews Book (free chapters)',url:'https://huyenchip.com/ml-interviews-book/',note:'Free chapters on ML system design and problem framing.'},{type:'practice',title:'Solve 5 case studies: "How would you build Netflix recommendations?"',url:'https://github.com/khangich/machine-learning-interview',note:'Use this GitHub repo for ML case study questions.'},{type:'article',title:'ML system design interview framework',url:'https://towardsdatascience.com',note:'Problem clarification → constraints → data → model → evaluation → deployment.'},{type:'video',title:'Exponent – ML System Design Interview (YouTube)',url:'https://youtu.be/GJoBMQCKUqY',note:'Real mock ML system design interviews.'}]},
+      {num:'Day 05',title:'Mock Technical Interview: ML Theory, Math, and Model Trade-offs',concepts:['Bias-Variance','Gradient Descent Variants','Cross-validation','Regularization','CNN vs Transformer','Precision vs Recall Trade-off','Handling Imbalanced Data','Feature Selection'],resources:[{type:'article',title:'141 ML interview questions – Chip Huyen book',url:'https://huyenchip.com/ml-interviews-book/',note:'Free. 141 questions with hints. Review all before Week 16 Day 7.'},{type:'practice',title:'Record yourself answering: "Explain backpropagation to a non-technical person"',url:'https://loom.com',note:'If you can\'t explain it simply, you don\'t understand it yet.'},{type:'practice',title:'LeetCode: do 5 ML-adjacent problems (matrix ops, graph traversal)',url:'https://leetcode.com',note:'Final push. Focus on graphs and dynamic programming.'},{type:'article',title:'ML interview prep – Eugene Yan\'s reading list',url:'https://eugeneyan.com/writing/ml-interviews/',note:'Curated prep list from a senior ML engineer at Amazon.'}]},
+      {num:'Day 06',title:'Negotiation Skills: Salary, Benefits, and Equity',concepts:['BATNA','Salary Range Research','Equity (Options vs RSUs)','Cliff Vesting','Benefits Comparison','Competing Offers','Counter-offer Strategy','Total Compensation'],resources:[{type:'article',title:'levels.fyi – ML Engineer compensation data',url:'https://levels.fyi',note:'Real compensation data for ML roles at top companies.'},{type:'article',title:'Haseeb Qureshi – Ten Rules for Negotiating a Job Offer',url:'https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/',note:'Most linked negotiation guide in tech. Read before any offer.'},{type:'video',title:'Jeff H Sipe – How to negotiate a job offer (YouTube)',url:'https://youtu.be/JFxYHVJ4CKk',note:'Practical. Covers email + phone negotiation.'},{type:'practice',title:'Research 3 target companies on levels.fyi + Glassdoor: know your number',url:'https://glassdoor.com',note:'Know: base + bonus + equity + vesting schedule. Enter every negotiation prepared.'}]},
+      {num:'Day 07',title:'🏁 Final Review: Revisit Week 01–03 Math (The Most Common Trap)',concepts:['Backpropagation','Gradient Descent','Bias-Variance','MLE vs MAP','Regularization','Eigenvalues','Probability Review'],resources:[{type:'practice',title:'Derive: backpropagation for a 2-layer network from scratch on paper',url:'https://youtu.be/VMj-3S1tku0',note:'No code. Derive every gradient with pen and paper in 30 minutes.'},{type:'practice',title:'Explain: Bias-Variance tradeoff, L1 vs L2, MLE vs MAP — aloud, no notes',url:'https://youtu.be/EkAQAi3a4js',note:'Record yourself. 2 minutes each. Ship it or re-study.'},{type:'practice',title:'Final Blind 75 review: solve 10 remaining problems you skipped',url:'https://neetcode.io/practice',note:'Focus on: binary search, trees, graphs, dynamic programming.'},{type:'article',title:'141 ML interview questions – final review',url:'https://huyenchip.com/ml-interviews-book/',note:'Read all 141. Mark the ones you can\'t answer. Study those tonight.'},],
+      },
+    ]
+  },
+];
+
+/* ═══════════════════════════════════════
+   PROGRESS STATE
+═══════════════════════════════════════ */
+const STORAGE_KEY = 'adil_jcc_progress';
+let checkedDays = new Set();
+
+async function loadProgress() {
+  try {
+    const r = await window.storage.get(STORAGE_KEY);
+    if (r && r.value) checkedDays = new Set(JSON.parse(r.value));
+  } catch(e) {}
+}
+async function saveProgress() {
+  try { await window.storage.set(STORAGE_KEY, JSON.stringify([...checkedDays])); } catch(e) {}
+}
+
+/* ═══════════════════════════════════════
+   RENDER
+═══════════════════════════════════════ */
+const typeLabel = {video:'VIDEO',book:'BOOK',article:'ARTICLE',course:'COURSE',doc:'DOCS',practice:'PRACTICE'};
+const typeCls   = {video:'rt-video',book:'rt-book',article:'rt-article',course:'rt-course',doc:'rt-doc',practice:'rt-practice'};
+
+function renderWeeks(weeks, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  weeks.forEach(week => {
+    const totalDays = week.days.length;
+    const doneCount = week.days.filter((d,i) => checkedDays.has(week.id+'-'+i)).length;
+    const el = document.createElement('div');
+    el.className = 'week-card';
+    el.id = week.id;
+    el.innerHTML = `
+      <div class="week-header" onclick="toggleWeek('${week.id}')">
+        <div class="week-header-left">
+          <span class="week-num-badge">${week.num}</span>
+          <span class="week-title">${week.title}</span>
+        </div>
+        <div class="week-header-right">
+          <span class="week-progress" id="wp-${week.id}">${doneCount}/${totalDays}</span>
+          <span class="week-chevron">▼</span>
+        </div>
+      </div>
+      <div class="week-body" id="wb-${week.id}">
+        ${week.days.map((day,i) => renderDay(day, week.id, i)).join('')}
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+function renderDay(day, weekId, idx) {
+  const dayId = weekId + '-' + idx;
+  const isDone = checkedDays.has(dayId);
+  const checkMark = isDone ? '✓' : '';
+  const doneClass = isDone ? ' done' : '';
+  const mileBadge = day.isMilestone ? '<span class="milestone-badge">🏆 MILESTONE</span>' : '';
+  const mileNote = day.isMilestone && day.milestoneNote
+    ? `<div class="milestone-note"><div class="milestone-note-title">🏆 MILESTONE PROJECT</div><div class="milestone-note-text">${day.milestoneNote}</div></div>` : '';
+
+  const conceptsHtml = day.concepts && day.concepts.length
+    ? `<div class="concepts-row"><div class="concepts-label">Key Concepts</div><div class="concept-tags">${day.concepts.map(c=>`<span class="concept-tag">${c}</span>`).join('')}</div></div>` : '';
+
+  const resHtml = day.resources && day.resources.length
+    ? `<div class="resources-section"><div class="res-label">Learning Resources</div><div class="res-list">${day.resources.map(r=>`
+        <a class="res-item" href="${r.url}" target="_blank" rel="noopener">
+          <span class="res-type ${typeCls[r.type] || 'rt-article'}">${typeLabel[r.type]||r.type.toUpperCase()}</span>
+          <div class="res-content">
+            <div class="res-title">${r.title}</div>
+            ${r.note ? `<div class="res-note">${r.note}</div>` : ''}
+          </div>
+        </a>`).join('')}</div></div>` : '';
+
+  return `<div class="day-item${doneClass}" id="di-${dayId}">
+    <div class="day-header" onclick="toggleDayExpand('${dayId}')">
+      <div class="day-check ${isDone?'done':''}" id="dc-${dayId}" onclick="event.stopPropagation();checkDay('${dayId}')">${checkMark}</div>
+      <span class="day-num">${day.num}</span>
+      <span class="day-title">${day.title}${mileBadge}</span>
+      <span class="day-expand-btn">▼</span>
+    </div>
+    <div class="day-body" id="db-${dayId}">
+      ${mileNote}
+      ${conceptsHtml}
+      ${resHtml}
+    </div>
+  </div>`;
+}
+
+function toggleWeek(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+function toggleDayExpand(id) {
+  const item = document.getElementById('di-'+id);
+  item.classList.toggle('open');
+}
+
+function checkDay(dayId) {
+  if (checkedDays.has(dayId)) checkedDays.delete(dayId);
+  else checkedDays.add(dayId);
+  saveProgress();
+  // Update check UI
+  const dc = document.getElementById('dc-'+dayId);
+  const di = document.getElementById('di-'+dayId);
+  if (checkedDays.has(dayId)) { dc.classList.add('done'); dc.textContent='✓'; di.classList.add('done'); }
+  else { dc.classList.remove('done'); dc.textContent=''; di.classList.remove('done'); }
+  updateAllProgress();
+}
+
+function updateAllProgress() {
+  const total = WEEKS.reduce((s,w)=>s+w.days.length,0);
+  const done = checkedDays.size;
+  // Overall
+  document.getElementById('overall-bar').style.width = (done/total*100)+'%';
+  document.getElementById('done-count').textContent = done;
+  document.getElementById('overall-pct').textContent = Math.round(done/total*100);
+  document.getElementById('ov-done').textContent = done;
+  // Per part
+  [1,2,3,4].forEach(p => {
+    const weeks = WEEKS.filter(w=>w.part===p);
+    const pTotal = weeks.reduce((s,w)=>s+w.days.length,0);
+    const pDone = weeks.reduce((s,w)=>s+w.days.filter((_,i)=>checkedDays.has(w.id+'-'+i)).length,0);
+    const pPct = pTotal>0?Math.round(pDone/pTotal*100):0;
+    const bar = document.getElementById('p'+p+'-bar');
+    const badge = document.getElementById('p'+p+'-badge');
+    if (bar) bar.style.width = pPct+'%';
+    if (badge) badge.textContent = pDone+'/'+pTotal;
+  });
+  // Per week
+  WEEKS.forEach(week => {
+    const wTotal = week.days.length;
+    const wDone = week.days.filter((_,i)=>checkedDays.has(week.id+'-'+i)).length;
+    const el = document.getElementById('wp-'+week.id);
+    if (el) el.textContent = wDone+'/'+wTotal;
+  });
+}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-part').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id)?.classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function scrollToWeek(wId) {
+  setTimeout(()=>{
+    const el = document.getElementById(wId);
+    if (el) { el.scrollIntoView({behavior:'smooth',block:'start'}); el.classList.add('open'); }
+  },100);
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+(async function init() {
+  await loadProgress();
+  const p1Weeks = WEEKS.filter(w=>w.part===1);
+  const p2Weeks = WEEKS.filter(w=>w.part===2);
+  const p3Weeks = WEEKS.filter(w=>w.part===3);
+  const p4Weeks = WEEKS.filter(w=>w.part===4);
+  renderWeeks(p1Weeks,'weeks-p1');
+  renderWeeks(p2Weeks,'weeks-p2');
+  renderWeeks(p3Weeks,'weeks-p3');
+  renderWeeks(p4Weeks,'weeks-p4');
+  updateAllProgress();
+  // Date
+  const d = new Date();
+  document.getElementById('sb-date').textContent =
+    d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+})();
+</script>
+</body>
+</html>
