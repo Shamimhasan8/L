@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Preparation Masterplan</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --amber: #BA7517;
+  --amber-bg: #FAEEDA;
+  --amber-text: #854F0B;
+  --teal: #0F6E56;
+  --teal-bg: #E1F5EE;
+  --teal-text: #085041;
+  --blue: #185FA5;
+  --blue-bg: #E6F1FB;
+  --blue-text: #0C447C;
+  --purple: #3C3489;
+  --purple-bg: #EEEDFE;
+  --purple-text: #26215C;
+  --gray-bg: #F1EFE8;
+  --gray-text: #444441;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --amber: #FAC775;
+    --amber-bg: #412402;
+    --amber-text: #FAC775;
+    --teal: #9FE1CB;
+    --teal-bg: #04342C;
+    --teal-text: #9FE1CB;
+    --blue: #B5D4F4;
+    --blue-bg: #042C53;
+    --blue-text: #B5D4F4;
+    --purple: #CCC8F2;
+    --purple-bg: #26215C;
+    --purple-text: #CCC8F2;
+    --gray-bg: #2C2C2A;
+    --gray-text: #D3D1C7;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.6;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { color: #e4e2d8; background: #1a1a18; }
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: inherit;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .nav { border-bottom-color: rgba(255,255,255,0.08); }
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  user-select: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-item:hover { color: #555; }
+.nav-item.active { color: #1a1a1a; border-bottom-color: var(--amber); }
+@media (prefers-color-scheme: dark) {
+  .nav-item { color: #666; }
+  .nav-item:hover { color: #999; }
+  .nav-item.active { color: #e4e2d8; }
+}
+
+/* SECTIONS */
+.sec { padding: 32px 20px; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+@media (prefers-color-scheme: dark) { .sec { border-bottom-color: rgba(255,255,255,0.06); } }
+
+.sec-label {
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.sec-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+.sec-sub { font-size: 13px; color: #666; margin-bottom: 22px; line-height: 1.65; max-width: 640px; }
+@media (prefers-color-scheme: dark) { .sec-sub { color: #888; } }
+
+/* CALLOUTS */
+.tip { border-left: 3px solid #EF9F27; padding: 10px 14px; background: rgba(239,159,39,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.edge { border-left: 3px solid #1D9E75; padding: 10px 14px; background: rgba(29,158,117,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.danger { border-left: 3px solid #E24B4A; padding: 10px 14px; background: rgba(226,75,74,0.08); border-radius: 0 6px 6px 0; margin: 12px 0; font-size: 13px; line-height: 1.55; }
+.tip b, .edge b, .danger b { font-weight: 600; }
+
+/* ACCORDION */
+.acc { border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; margin-top: 16px;}
+@media (prefers-color-scheme: dark) { .acc { border-color: rgba(255,255,255,0.08); } }
+.acc-item { border-bottom: 0.5px solid rgba(0,0,0,0.07); }
+@media (prefers-color-scheme: dark) { .acc-item { border-bottom-color: rgba(255,255,255,0.06); } }
+.acc-item:last-child { border-bottom: none; }
+.acc-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.acc-hd:hover { background: rgba(0,0,0,0.025); }
+@media (prefers-color-scheme: dark) { .acc-hd:hover { background: rgba(255,255,255,0.03); } }
+.acc-icon {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: monospace; font-size: 11px; font-weight: 600; flex-shrink: 0;
+}
+.acc-title { font-size: 14px; font-weight: 500; flex: 1; line-height: 1.35; }
+.acc-sub { font-size: 11px; color: #999; flex-shrink: 0; font-family: monospace; }
+.acc-ch { font-size: 9px; color: #bbb; flex-shrink: 0; transition: transform 0.2s; }
+.acc-item.open .acc-ch { transform: rotate(180deg); }
+.acc-bd { display: none; padding: 2px 15px 16px 51px; font-size: 13px; color: #666; line-height: 1.65; }
+@media (prefers-color-scheme: dark) { .acc-bd { color: #888; } }
+.acc-item.open .acc-bd { display: block; }
+
+/* CODE BLOCK */
+.code {
+  font-family: monospace; font-size: 12px;
+  background: rgba(0,0,0,0.04); border: 0.5px solid rgba(0,0,0,0.08);
+  padding: 10px 14px; border-radius: 6px; margin: 8px 0;
+  color: #333; overflow-x: auto; white-space: pre; display: block;
+}
+@media (prefers-color-scheme: dark) {
+  .code { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.07); color: #ccc; }
+}
+
+/* ICON COLORS */
+.ic-amber { background: var(--amber-bg); color: var(--amber-text); }
+.ic-teal { background: var(--teal-bg); color: var(--teal-text); }
+.ic-blue { background: var(--blue-bg); color: var(--blue-text); }
+.ic-purple { background: var(--purple-bg); color: var(--purple-text); }
+.ic-gray { background: var(--gray-bg); color: var(--gray-text); }
+
+/* UTILITY */
+.mt8 { margin-top: 8px; }
+.mt12 { margin-top: 12px; }
+.mt16 { margin-top: 16px; }
+.ul { list-style: none; margin: 5px 0; }
+.ul li { padding: 3px 0 3px 14px; font-size: 13px; color: #666; position: relative; line-height: 1.5; }
+@media (prefers-color-scheme: dark) { .ul li { color: #888; } }
+.ul li::before { content: '·'; position: absolute; left: 4px; color: #bbb; }
+.ul.arrow li::before { content: '→'; color: var(--teal); font-size: 11px; top: 4px; }
+.sep { border: none; border-top: 0.5px solid rgba(0,0,0,0.07); margin: 11px 0; }
+@media (prefers-color-scheme: dark) { .sep { border-top-color: rgba(255,255,255,0.06); } }
+b.a { color: var(--amber); font-weight: 600; }
+b.t { color: var(--teal); font-weight: 600; }
+b.b { color: var(--blue); font-weight: 600; }
+b.s { font-weight: 600; }
+
+@media (prefers-color-scheme: dark) {
+  body { color: #1f2937; background: #fdfcf9; }
+  .nav { border-bottom-color: rgba(0,0,0,0.1); }
+  .nav-item { color: #6b7280; }
+  .nav-item:hover { color: #4b5563; }
+  .nav-item.active { color: #111827; }
+  .sec { border-bottom-color: rgba(0,0,0,0.08); }
+  .sec-sub, .acc-bd, .ul li { color: #4b5563; }
+  .acc-sub { color: #6b7280; }
+  .acc { border-color: rgba(0,0,0,0.1); }
+  .acc-item { border-bottom-color: rgba(0,0,0,0.07); }
+  .acc-hd:hover { background: rgba(0,0,0,0.025); }
+  .code { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); color: #374151; }
+  .sep { border-top-color: rgba(0,0,0,0.07); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-item active" data-sec="s1">01 · Mindset</div>
+  <div class="nav-item" data-sec="s2">02 · Roadmap</div>
+  <div class="nav-item" data-sec="s3">03 · Mistakes</div>
+  <div class="nav-item" data-sec="s4">04 · Strategy</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ S1: MINDSET -->
+<section class="sec" id="s1">
+  <div class="sec-label">01 · the senior mindset</div>
+  <h2 class="sec-title">What separates an expert from a junior</h2>
+  <p class="sec-sub">At the senior and staff levels, companies are not just looking for people who can build an AI feature; they want engineers who understand production lifecycles, cost-optimization, trade-offs, and failure modes.</p>
+
+  <ul class="ul arrow">
+    <li><b class="s">Trade-off Fluency over Rote Implementation:</b> Instead of asking "What is RAG?", interviewers will ask "When would you NOT use RAG?" You must be fluent in the trade-offs between retrieval speed vs. context length, fine-tuning vs. prompting, and GPU cost vs. latency.</li>
+    <li><b class="s">Cost & Latency Reasoning:</b> You must think in terms of token budgets and per-query costs. (e.g., <em>"100K daily users x 10 interactions x ~2K tokens = 2B tokens/day = $13K/day on GPT-4 Turbo"</em>).</li>
+    <li><b class="s">Systems Thinking:</b> Shift your perspective from building pipelines to managing lifecycles. Generative AI system design requires thinking in loops: retrieval, generation, evaluation, and feedback.</li>
+  </ul>
+
+  <div class="tip mt16">
+    <b>Honest Uncertainty:</b> Knowing what you <i>don't</i> know and admitting it ("I need a hint" or "I haven't used that tool, but...") is a feature of real production experience. It outperforms bluffing every time.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S2: ROADMAP -->
+<section class="sec" id="s2">
+  <div class="sec-label">02 · 12-week roadmap</div>
+  <h2 class="sec-title">The Preparation Masterplan</h2>
+  <p class="sec-sub">Based on patterns from 100+ candidates, hiring managers, and top-tier AI labs. This is the timeline.</p>
+
+  <div class="acc" id="roadmapAcc">
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-amber">P1</div>
+        <div style="flex:1">
+          <div class="acc-title">Weeks 1-3: Deep Conceptual Foundations</div>
+          <div style="font-size:12px;color:#999;">Solidify algorithmic intuition and math foundations.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <ul class="ul arrow">
+          <li><b class="s">Data Structures & Algorithms:</b> Complete NeetCode 250 using spaced repetition. Focus on the problem-solving intuition rather than memorization.</li>
+          <li><b class="s">Deep Python Mastery:</b> Be prepared to discuss race conditions, the Global Interpreter Lock (GIL), async patterns, and concurrency vs. parallelism.</li>
+          <li><b class="s">ML Mechanics from Scratch:</b> Be able to implement Multi-Head Attention, Transformer layers, LoRA, and a KV cache from memory using NumPy or PyTorch.</li>
+          <li><b class="s">Theory:</b> Read Simon Prince's "Understanding Deep Learning".</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-teal">P2</div>
+        <div style="flex:1">
+          <div class="acc-title">Weeks 4-6: Production Architecture & System Design</div>
+          <div style="font-size:12px;color:#999;">Transition to web-scale, resilient AI systems.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <ul class="ul arrow">
+          <li><b class="s">Traditional System Design:</b> Read Alex Xu's "System Design Interview" and skim DDIA.</li>
+          <li><b class="s">GenAI Patterns:</b> Master the 7 core patterns: evals, RAG, fine-tuning, caching, guardrails, defensive UX, and the data flywheel.</li>
+          <li><b class="s">Agentic AI Design:</b> Explain orchestrator vs. LLM responsibility splits and agent termination conditions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-blue">P3</div>
+        <div style="flex:1">
+          <div class="acc-title">Weeks 7-8: Evaluation, Observability & Safety</div>
+          <div style="font-size:12px;color:#999;">Mastering real-world model deployment constraints.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <ul class="ul arrow">
+          <li><b class="s">Evaluation Frameworks:</b> Learn Ragas, DeepEval, or LLM-as-judge. Every RAG system must have an eval harness.</li>
+          <li><b class="s">Metrics:</b> Track TTFT (Time to First Token), TBT (Time Between Tokens), and hallucination drift.</li>
+          <li><b class="s">Safety:</b> Master protections against prompt injection, data leakage, and unsafe tool execution.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-purple">P4</div>
+        <div style="flex:1">
+          <div class="acc-title">Weeks 9-10: High-Impact Portfolio & Take-Homes</div>
+          <div style="font-size:12px;color:#999;">Prove capability through metric-driven projects.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <ul class="ul arrow">
+          <li><b class="s">End-to-End Projects:</b> Build 2-3 polished, deployed projects with Docker, CI/CD, and monitoring.</li>
+          <li><b class="s">Focus on Impact:</b> Frame achievements in metrics. "Reduced support response time by 40%" beats "Experience with LangChain".</li>
+          <li><b class="s">Take-Home Excellence:</b> Document decisions, test edge cases, and submit code alongside a Loom architectural video.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd">
+        <div class="acc-icon ic-gray">P5</div>
+        <div style="flex:1">
+          <div class="acc-title">Weeks 11-12: Storytelling & Interview Polish</div>
+          <div style="font-size:12px;color:#999;">Secure the optimal offer.</div>
+        </div>
+        <div class="acc-ch">▼</div>
+      </div>
+      <div class="acc-bd">
+        <ul class="ul arrow">
+          <li><b class="s">The SAIL Framework:</b> Situation, Action, Impact, Learning. Map stories explicitly to target company values.</li>
+          <li><b class="s">Verbalize Trade-offs:</b> Practice explaining complex trade-offs aloud without hesitation.</li>
+          <li><b class="s">Strategic Networking:</b> Reach out directly to founders via LinkedIn. Referrals bypass crowded ATS systems.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S3: MISTAKES -->
+<section class="sec" id="s3">
+  <div class="sec-label">03 · critical mistakes</div>
+  <h2 class="sec-title">Common pitfalls in the interview</h2>
+  <p class="sec-sub">Avoid these traps that signal a lack of production experience to hiring managers.</p>
+
+  <div class="danger">
+    <b>Jumping to Fine-tuning:</b> Default to prompt engineering and hybrid RAG. Only suggest fine-tuning if extreme specialization or latency strictness demands it.
+  </div>
+  <div class="danger">
+    <b>Name-dropping without Trade-offs:</b> If you say "I'd use LangChain" or "I'd use Redis," you must explain why and know exactly when it is the <i>wrong</i> choice.
+  </div>
+  <div class="danger">
+    <b>Treating the LLM as Truth:</b> Always ground model outputs with retrieval, tools, or citations.
+  </div>
+  <div class="edge">
+    <b>The Anti-Mistake:</b> Over-engineering. Start by getting a working implementation, discuss the simplest MVP, then optimize on the follow-ups.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ S4: STRATEGY -->
+<section class="sec" id="s4">
+  <div class="sec-label">04 · job search strategy</div>
+  <h2 class="sec-title">Negotiation & Job Search Tactics</h2>
+  
+  <ul class="ul arrow">
+    <li><b class="s">Market Categorization:</b> Focus your search on one of three segments: Product companies (Cursor), Infrastructure companies (Pinecone), or Model companies (OpenAI).</li>
+    <li><b class="s">Compensation Benchmarking:</b> Always benchmark by Total Compensation (Base + Equity + Bonuses). AI engineers command a 10-20% premium.</li>
+    <li><b class="s">Leverage Equity:</b> Direct your negotiation leverage toward equity grant sizes, as base salary bands are usually rigid. Your strongest negotiation move is always a competing offer.</li>
+    <li><b class="s">Startup Due Diligence:</b> If moving to a startup, act like an investor. Evaluate revenue growth and market size. Red flag: Refusal to share financials post-offer.</li>
+    <li><b class="s">Move Quickly:</b> Top candidates accept offers within 2-3 weeks. Cluster your onsites together so you can negotiate competing offers simultaneously.</li>
+  </ul>
+</section>
+
+<script>
+// Navigation smooth scroll & active state
+const navItems = document.querySelectorAll('.nav-item');
+navItems.forEach(el => {
+  el.addEventListener('click', () => {
+    navItems.forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+    const secId = el.getAttribute('data-sec');
+    const sec = document.getElementById(secId);
+    if (sec) {
+      const yOffset = -50; // offset for sticky nav
+      const y = sec.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+  });
+});
+
+// Update active nav on scroll
+window.addEventListener('scroll', () => {
+  let current = '';
+  document.querySelectorAll('.sec').forEach(sec => {
+    const sectionTop = sec.offsetTop;
+    if (pageYOffset >= sectionTop - 60) {
+      current = sec.getAttribute('id');
+    }
+  });
+  navItems.forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('data-sec') === current) {
+      n.classList.add('active');
+    }
+  });
+});
+
+// Accordion toggle
+document.querySelectorAll('.acc-hd').forEach(hd => {
+  hd.addEventListener('click', () => {
+    const item = hd.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Close others if desired, or keep independent
+    // document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) {
+      item.classList.add('open');
+    } else {
+      item.classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
